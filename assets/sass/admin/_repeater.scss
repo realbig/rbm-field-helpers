@@ -1,0 +1,37 @@
+@import "global";
+
+.rbm-field-repeater-label {
+  font-weight: bold;
+}
+
+.rbm-field-repeater-row {
+  @include clearfix;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border: 1px solid #ddd;
+  background: #fff;
+
+  &.dummy {
+    display: none;
+  }
+
+  &.ui-sortable-placeholder {
+    visibility: visible !important;
+    border: 3px dashed #ddd;
+  }
+
+  &.ui-sortable-helper {
+    opacity: 0.5;
+  }
+
+  .rbm-field-repeater-handle {
+    height: 20px;
+    cursor: move;
+    margin-bottom: 10px;
+    background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-size: 3px 3px;
+  }
+}

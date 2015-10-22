@@ -1,0 +1,16 @@
+@import "global";
+
+// Columns
+@for $i from 1 through 5 {
+
+  .rbm-col-#{$i} {
+    width: #{100 / $i}%;
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+
+    @media only screen and (max-width: $small) {
+      width: 100%;
+    }
+  }
+}
