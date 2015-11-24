@@ -197,7 +197,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 				<textarea name="<?php echo $name; ?>"
 				          class="<?php echo $args['input_class']; ?>"
 				          rows="<?php echo $args['rows']; ?>"
-					><?php echo $value; ?></textarea>
+				><?php echo $value; ?></textarea>
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
@@ -341,6 +341,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 			'opt_groups'    => false,
 			'multiple'      => false,
 			'description'   => false,
+			'no_options'    => 'No options available',
 			'input_class'   => 'widefat',
 			'wrapper_class' => '',
 		) );
@@ -403,7 +404,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 
 					</select>
 				<?php else: ?>
-					No select options.
+					<?php echo $args['no_options']; ?>
 				<?php endif; ?>
 			</label>
 
@@ -875,7 +876,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 			'input_class' => 'rbm-select2',
 		) );
 		rbm_do_field_text( "${name}_external_link", 'Link (external)', false, array(
-			'description' => 'Overrides the Post Link',
+			'description'  => 'Overrides the Post Link',
 			'sanitization' => 'esc_url_raw',
 		) );
 		rbm_do_field_checkbox( "${name}_new_tab", false, false, array(
