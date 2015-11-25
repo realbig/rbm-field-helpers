@@ -4,8 +4,8 @@
  *
  * @version 1.3.2
  *
- * @package    CPTAnimal
- * @subpackage CPTAnimal/core
+ * @package    RBMFieldHelpers
+ * @subpackage RBMFieldHelpers/core
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,12 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Only load once
-if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
+if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
-	define( 'DZOO_HELPER_FUNCTIONS', true );
-	define( 'DZS_FIELD_HELPERS_VER', '1.3.2' );
+	define( 'RBM_HELPER_FUNCTIONS', true );
+	define( 'RBM_FIELD_HELPERS_VER', '1.3.2' );
 
 	require_once __DIR__ . '/vendor/select2/select2-load.php';
+	require_once __DIR__ . '/vendor/parsley/parsley-load.php';
 
 	add_action( 'init', '_rbm_shared_fields_register_scripts' );
 	add_action( 'admin_enqueue_scripts', '_rbm_shared_fields_enqueue_admin_scripts' );
@@ -31,7 +32,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 			'DZS-field-helpers-admin',
 			plugins_url( '/rbm-field-helpers-admin.css', __FILE__ ),
 			array(),
-			DZS_FIELD_HELPERS_VER
+			RBM_FIELD_HELPERS_VER
 		);
 
 		// Admin script
@@ -39,7 +40,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 			'DZS-field-helpers-admin',
 			plugins_url( '/rbm-field-helpers-admin.js', __FILE__ ),
 			array( 'jquery', 'DZS-jquery-repeater', 'wp-color-picker', 'jquery-ui-sortable' ),
-			DZS_FIELD_HELPERS_VER,
+			RBM_FIELD_HELPERS_VER,
 			true
 		);
 
