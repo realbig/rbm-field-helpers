@@ -74,6 +74,12 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		}
 
 		foreach ( $_POST['_rbm_fields'] as $field ) {
+
+			// Re-index if array
+			if ( is_array( $_POST[ $field ] ) ) {
+				$_POST[ $field ] = array_values( $_POST[ $field ] );
+			}
+
 			update_post_meta( $post_ID, $field, $_POST[ $field ] );
 		}
 	}

@@ -20,7 +20,7 @@
                         $(this).slideUp(400, function () {
                             $(this).remove();
                         });
-                        $(document).trigger('rbm-repeater-delete');
+                        $(document).trigger('rbm-repeater-delete', [$(this)]);
                     }
                 },
                 isFirstItemUndeletable: true
@@ -49,6 +49,8 @@
             });
 
             $(this).find('.rbm-field-repeater-row.dummy').remove();
+
+            $(document).trigger('rbm-repeater-init', [$(this)]);
         });
     });
 })(jQuery);
