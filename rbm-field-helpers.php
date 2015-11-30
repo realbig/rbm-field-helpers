@@ -989,10 +989,17 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		}
 
 		if ( $sanitization && is_callable( $sanitization ) ) {
-			return call_user_func( $sanitization, get_post_meta( $post_ID, "_rbm_$field", true ) );
+			$value = call_user_func( $sanitization, get_post_meta( $post_ID, "_rbm_$field", true ) );
 		} else {
-			return get_post_meta( $post_ID, "_rbm_$field", true );
+			$value = get_post_meta( $post_ID, "_rbm_$field", true );
 		}
+
+		/**
+		 * Filters the return value.
+		 *
+		 * @since {{VERSION}}
+		 */
+		return apply_filters( 'rbm_get_field', $value );
 	}
 
 	function rbm_replace_taxonomy_mb( $taxonomy, $post_type = 'post', $input_type = 'checkbox' ) {
