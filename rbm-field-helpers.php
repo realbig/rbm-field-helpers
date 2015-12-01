@@ -291,7 +291,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 				<textarea name="<?php echo $name; ?>"
 				          class="<?php echo $args['input_class']; ?>"
-				          rows="<?php echo $args['rows']; ?>" <?php echo $validate; ?>
+				          rows="<?php echo $args['rows']; ?>" <?php echo $validation; ?>
 				><?php echo $value; ?></textarea>
 			</label>
 
@@ -357,7 +357,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="checkbox" name="<?php echo $name; ?>"
 				       value="<?php echo $args['check_value']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['check_value'], $value ); echo $validate; ?> />
+					<?php checked( $args['check_value'], $value ); echo $validation; ?> />
 
 				<?php echo $args['check_label']; ?>
 			</label>
@@ -418,7 +418,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="radio" name="<?php echo $name; ?>"
 				       value="<?php echo $args['radio_value']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['radio_value'], $value ); echo $validate; ?> />
+					<?php checked( $args['radio_value'], $value ); echo $validation; ?> />
 
 				<?php echo $args['radio_label']; ?>
 			</label>
