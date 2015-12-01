@@ -21,6 +21,20 @@ if ( ! class_exists( 'RBM_Parsley_Loader' ) ) {
 
 		function _register_scripts() {
 
+			wp_register_style(
+				'rbm-parsley',
+				plugins_url( '/rbm-parsley.css', __FILE__ ),
+				null,
+				RBM_FIELD_HELPERS_VER
+			);
+
+			wp_register_script(
+				'rbm-parsley',
+				plugins_url( '/rbm-parsley.js', __FILE__ ),
+				array( 'parsley', 'jquery' ),
+				RBM_FIELD_HELPERS_VER
+			);
+
 			wp_register_script(
 				'parsley',
 				plugins_url( '/parsley.min.js', __FILE__ ),
@@ -33,6 +47,8 @@ if ( ! class_exists( 'RBM_Parsley_Loader' ) ) {
 
 			if ( apply_filters( 'rbm_load_parsley', false ) ) {
 				wp_enqueue_script( 'parsley' );
+				wp_enqueue_script( 'rbm-parsley' );
+				wp_enqueue_style( 'rbm-parsley' );
 			}
 		}
 	}

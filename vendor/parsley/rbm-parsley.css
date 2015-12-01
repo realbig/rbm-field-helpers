@@ -1,0 +1,73 @@
+.rbm-validate {
+    position: relative;
+}
+
+.parsley-errors-list {
+    margin: 0;
+}
+
+.parsley-errors-list li {
+    position: absolute;
+    top: 100%;
+    padding: 0.5em;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid #aaa;
+}
+
+.parsley-errors-list li:before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 10%;
+    margin-left: -1px;
+    width: 0;
+    height: 0;
+    border-bottom: 6px solid #aaa;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}
+
+.parsley-errors-list li:after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 10%;
+    width: 0;
+    height: 0;
+    border-bottom: 5px solid #fff;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.parsley-errors-list li {
+    margin: 0;
+    white-space: nowrap;
+}
+
+/*.parsley-errors-list li.parsley-required:before {*/
+/*content: "!";*/
+/*display: inline-block;*/
+/*width: 20px;*/
+/*height: 20px;*/
+/*font-size: 18px;*/
+/*line-height: 1;*/
+/*text-decoration: inherit;*/
+/*vertical-align: top;*/
+/*text-align: center;*/
+/*background: #ffbb62;*/
+/*color: #89593c;*/
+/*font-weight: bold;*/
+/*margin-right: 0.3em;*/
+/*transition: color .1s ease-in 0s;*/
+/*}*/
+
+input.parsley-error {
+    background: #ff7a64;
+    color: #fff;
+}
+
+input.parsley-error:focus {
+    box-shadow: 0 0 2px rgb(255, 122, 100, 0.8);
+    border-color: #cb6552;
+}

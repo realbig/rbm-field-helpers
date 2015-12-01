@@ -125,6 +125,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			'default'       => '',
 			'description'   => false,
 			'sanitization'  => false,
+			'validation'    => false,
 			'input_class'   => 'widefat',
 			'input_atts'    => array(),
 			'wrapper_class' => '',
@@ -146,13 +147,22 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			$value = call_user_func( $args['sanitization'], $value );
 			update_post_meta( get_the_ID(), $name, $value );
 		}
+
+		$validation = '';
+		if ( $args['validation'] ) {
+			foreach ( $args['validation'] as $validation_name => $validation_value ) {
+				$validation .= " data-parsley-$validation_name=\"$validation_value\"";
+			}
+
+			$args['wrapper_class'] .= ' rbm-validate';
+		}
 		?>
 		<p class="rbm-field-text <?php echo $args['wrapper_class']; ?>">
 			<label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
 				       class="<?php echo isset( $args['input_class'] ) ? $args['input_class'] : 'regular-text'; ?>"
-					<?php echo $input_atts; ?> />
+					<?php echo $input_atts; echo $validation; ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
@@ -181,12 +191,12 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		}
 
 		$args = wp_parse_args( $args, array(
-				'default'       => '',
-				'description'   => false,
-				'sanitization'  => false,
-				'input_class'   => '',
-				'input_atts'    => array( 'style' => 'width: 3em' ),
-				'wrapper_class' => '',
+			'default'       => '',
+			'description'   => false,
+			'sanitization'  => false,
+			'input_class'   => '',
+			'input_atts'    => array( 'style' => 'width: 3em' ),
+			'wrapper_class' => '',
 		) );
 
 		$input_atts = array();
@@ -209,9 +219,10 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		<p class="rbm-field-number <?php echo $args['wrapper_class']; ?>">
 			<label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<input type="number" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
+				<input type="number" name="<?php echo $name; ?>"
+				       value="<?php echo $value ? $value : $args['default']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-						<?php echo $input_atts; ?> />
+					<?php echo $input_atts; ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
