@@ -215,6 +215,15 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			$value = call_user_func( $args['sanitization'], $value );
 			update_post_meta( get_the_ID(), $name, $value );
 		}
+
+		$validation = '';
+		if ( $args['validation'] ) {
+			foreach ( $args['validation'] as $validation_name => $validation_value ) {
+				$validation .= " data-parsley-$validation_name=\"$validation_value\"";
+			}
+
+			$args['wrapper_class'] .= ' rbm-validate';
+		}
 		?>
 		<p class="rbm-field-number <?php echo $args['wrapper_class']; ?>">
 			<label>
@@ -222,7 +231,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="number" name="<?php echo $name; ?>"
 				       value="<?php echo $value ? $value : $args['default']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php echo $input_atts; ?> />
+					<?php echo $input_atts; echo $validation; ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
@@ -267,13 +276,22 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
 			$value = call_user_func( $args['sanitization'], $value );
 		}
+
+		$validation = '';
+		if ( $args['validation'] ) {
+			foreach ( $args['validation'] as $validation_name => $validation_value ) {
+				$validation .= " data-parsley-$validation_name=\"$validation_value\"";
+			}
+
+			$args['wrapper_class'] .= ' rbm-validate';
+		}
 		?>
 		<p class="rbm-field-textarea <?php echo $args['wrapper_class']; ?>">
 			<label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 				<textarea name="<?php echo $name; ?>"
 				          class="<?php echo $args['input_class']; ?>"
-				          rows="<?php echo $args['rows']; ?>"
+				          rows="<?php echo $args['rows']; ?>" <?php echo $validate; ?>
 				><?php echo $value; ?></textarea>
 			</label>
 
@@ -320,6 +338,15 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		if ( is_array( $value ) ) {
 			$value = array_shift( $value );
 		}
+
+		$validation = '';
+		if ( $args['validation'] ) {
+			foreach ( $args['validation'] as $validation_name => $validation_value ) {
+				$validation .= " data-parsley-$validation_name=\"$validation_value\"";
+			}
+
+			$args['wrapper_class'] .= ' rbm-validate';
+		}
 		?>
 		<p class="rbm-field-checkbox <?php echo $args['wrapper_class']; ?>">
 			<input type="hidden" name="<?php echo $name; ?>" value="<?php echo $args['check_disabled_value']; ?>"/>
@@ -330,7 +357,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="checkbox" name="<?php echo $name; ?>"
 				       value="<?php echo $args['check_value']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['check_value'], $value ); ?> />
+					<?php checked( $args['check_value'], $value ); echo $validate; ?> />
 
 				<?php echo $args['check_label']; ?>
 			</label>
@@ -373,6 +400,15 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			$value = get_post_meta( $post->ID, $name, true );
 			$value = $value ? $value : $args['default'];
 		}
+
+		$validation = '';
+		if ( $args['validation'] ) {
+			foreach ( $args['validation'] as $validation_name => $validation_value ) {
+				$validation .= " data-parsley-$validation_name=\"$validation_value\"";
+			}
+
+			$args['wrapper_class'] .= ' rbm-validate';
+		}
 		?>
 		<p class="rbm-field-radio <?php echo $args['wrapper_class']; ?>">
 
@@ -382,7 +418,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="radio" name="<?php echo $name; ?>"
 				       value="<?php echo $args['radio_value']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['radio_value'], $value ); ?> />
+					<?php checked( $args['radio_value'], $value ); echo $validate; ?> />
 
 				<?php echo $args['radio_label']; ?>
 			</label>
