@@ -527,6 +527,71 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	}
 
 	/**
+	 * Outputs a datepicker field.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param string $name
+	 * @param string|bool $label
+	 * @param string|bool $value
+	 * @param array $args
+	 */
+	function rbm_do_field_datepicker( $name, $label = false, $value = false, $args = array() ) {
+
+		global $post;
+
+		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
+
+		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
+			_rbm_field_init( $name );
+		}
+
+		$args = wp_parse_args( $args, array(
+				'default'       => date( 'Y/m/d' ),
+				'description'   => false,
+				'sanitization'  => false,
+				'input_class'   => '',
+				'input_atts'    => array(),
+				'wrapper_class' => '',
+				'datepicker_args' => array(),
+		) );
+
+		$input_atts = array();
+		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
+			$input_atts[] = "$attr_name=\"$attr_value\"";
+		}
+		$input_atts = implode( ' ', $input_atts );
+
+		if ( $value === false ) {
+			$value = get_post_meta( $post->ID, $name, true );
+			$value = $value ? $value : $args['default'];
+		}
+
+		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
+
+			$value = call_user_func( $args['sanitization'], $value );
+			update_post_meta( get_the_ID(), $name, $value );
+		}
+
+		$data = '';
+		foreach ( $args['datepicker_args'] as $arg_name => $arg_value ) {
+			$data .= " data-$arg_name=\"$arg_value\"";
+		}
+		?>
+		<p class="rbm-field-datepicker <?php echo $args['wrapper_class']; ?>">
+			<label>
+				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
+				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
+				       class="<?php echo $args['input_class']; ?>" <?php echo $data; ?>
+						<?php echo $input_atts; ?> />
+			</label>
+
+			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
+		</p>
+		<?php
+	}
+
+	/**
 	 * Outputs an image field.
 	 *
 	 * @since 1.2.0
