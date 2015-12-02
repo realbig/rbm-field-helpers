@@ -1090,7 +1090,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 *
 	 * @return bool|mixed Post meta or false if can't get post.
 	 */
-	function rbm_get_field( $field, $post_ID = false, $sanitization = false ) {
+	function rbm_get_field( $field, $post_ID = false, $sanitization = 'esc_attr' ) {
 
 		global $post;
 
