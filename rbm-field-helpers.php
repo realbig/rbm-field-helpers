@@ -1086,11 +1086,11 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 *
 	 * @param string $field The fieldname to get.
 	 * @param bool|false $post_ID Supply post ID to get field from different post.
-	 * @param bool|string $sanitization Sanitization method.
+	 * @param mixed $sanitization Deprecated.
 	 *
 	 * @return bool|mixed Post meta or false if can't get post.
 	 */
-	function rbm_get_field( $field, $post_ID = false, $sanitization = 'esc_attr' ) {
+	function rbm_get_field( $field, $post_ID = false, $sanitization = false ) {
 
 		global $post;
 
@@ -1100,11 +1100,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			return false;
 		}
 
-		if ( $sanitization && is_callable( $sanitization ) ) {
-			$value = call_user_func( $sanitization, get_post_meta( $post_ID, "_rbm_$field", true ) );
-		} else {
-			$value = get_post_meta( $post_ID, "_rbm_$field", true );
-		}
+		$value = get_post_meta( $post_ID, "_rbm_$field", true );
 
 		/**
 		 * Filters the return value.
