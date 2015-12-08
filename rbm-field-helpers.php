@@ -650,7 +650,12 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			$value = get_post_meta( $post->ID, $name, true );
 			$value = $value ? $value : $args['default'];
 		}
-		$media_item_src = wp_get_attachment_image_src( $value, $args['preview_size'] );
+
+		if ( ! ( $media_item_src = wp_get_attachment_image_src( $value, $args['preview_size'] ) ) ) {
+			$media_item_url = wp_get_attachment_url( $value );
+		} else {
+			$media_item_url = $media_item_src[0];
+		}
 		?>
 		<div class="rbm-field-media <?php echo $args['wrapper_class']; ?>">
 			<div class="rbm-media-uploader" data-type="<?php echo $args['type']; ?>"
@@ -666,7 +671,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 						$args['placeholder'] = $args['placeholder'] != '&nbsp;' ? $args['placeholder'] : '';
 						?>
-						<img src="<?php echo $value ? $media_item_src[0] : $args['placeholder']; ?>"
+						<img src="<?php echo $value ? $media_item_url : $args['placeholder']; ?>"
 						     class="image-preview"
 						     data-placeholder="<?php echo $args['placeholder']; ?>"/>
 						<?php
@@ -675,7 +680,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 					default:
 						?>
 						<code class="media-url" data-placeholder="<?php echo $args['placeholder']; ?>">
-							<?php echo $value ? $media_item_src[0] : $args['placeholder']; ?>
+							<?php echo $value ? $media_item_url : $args['placeholder']; ?>
 						</code>
 						<?php
 				endswitch;
