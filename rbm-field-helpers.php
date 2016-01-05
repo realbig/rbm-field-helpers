@@ -162,7 +162,8 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
 				       class="<?php echo isset( $args['input_class'] ) ? $args['input_class'] : 'regular-text'; ?>"
-					<?php echo $input_atts; echo $validation; ?> />
+					<?php echo $input_atts;
+					echo $validation; ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
@@ -231,7 +232,8 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="number" name="<?php echo $name; ?>"
 				       value="<?php echo $value ? $value : $args['default']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php echo $input_atts; echo $validation; ?> />
+					<?php echo $input_atts;
+					echo $validation; ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
@@ -263,6 +265,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			'default'       => '',
 			'rows'          => 4,
 			'sanitization'  => 'esc_attr',
+			'validation'    => false,
 			'description'   => false,
 			'input_class'   => 'widefat',
 			'wrapper_class' => '',
@@ -357,7 +360,8 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="checkbox" name="<?php echo $name; ?>"
 				       value="<?php echo $args['check_value']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['check_value'], $value ); echo $validation; ?> />
+					<?php checked( $args['check_value'], $value );
+					echo $validation; ?> />
 
 				<?php echo $args['check_label']; ?>
 			</label>
@@ -418,7 +422,8 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<input type="radio" name="<?php echo $name; ?>"
 				       value="<?php echo $args['radio_value']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['radio_value'], $value ); echo $validation; ?> />
+					<?php checked( $args['radio_value'], $value );
+					echo $validation; ?> />
 
 				<?php echo $args['radio_label']; ?>
 			</label>
@@ -547,13 +552,13 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		}
 
 		$args = wp_parse_args( $args, array(
-				'default'       => date( 'Y/m/d' ),
-				'description'   => false,
-				'sanitization'  => false,
-				'input_class'   => '',
-				'input_atts'    => array(),
-				'wrapper_class' => '',
-				'datepicker_args' => array(),
+			'default'         => date( 'Y/m/d' ),
+			'description'     => false,
+			'sanitization'    => false,
+			'input_class'     => '',
+			'input_atts'      => array(),
+			'wrapper_class'   => '',
+			'datepicker_args' => array(),
 		) );
 
 		$input_atts = array();
@@ -583,7 +588,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
 				       class="<?php echo $args['input_class']; ?>" <?php echo $data; ?>
-						<?php echo $input_atts; ?> />
+					<?php echo $input_atts; ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
@@ -1117,7 +1122,9 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 	function rbm_replace_taxonomy_mb( $taxonomy, $post_type = 'post', $input_type = 'checkbox' ) {
 
-		$taxonomy_obj = get_taxonomy( $taxonomy );
+		if ( ! $taxonomy_obj = get_taxonomy( $taxonomy ) ) {
+			return;
+		}
 
 		// Remove default tax mb
 		remove_meta_box( "tagsdiv-$taxonomy", $post_type, 'side' );
