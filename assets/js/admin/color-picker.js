@@ -1,6 +1,7 @@
 (function ($) {
     'use strict';
 
+
     function color_picker_init() {
 
         var $fields = $('.rbm-field-colorpicker');

@@ -1,6 +1,6 @@
 <?php
 /**
- * Loads in Select2, if not yet loaded from DZS.
+ * Loads in Select2, if not yet loaded from RBM.
  *
  * @version 1.0.0
  */
@@ -9,9 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
-if ( ! class_exists( 'DZS_Select2_Loader' ) ) {
+if ( ! class_exists( 'RBM_Select2_Loader' ) ) {
 
-	class DZS_Select2_Loader {
+	class RBM_Select2_Loader {
 
 		function __construct() {
 
@@ -22,14 +22,14 @@ if ( ! class_exists( 'DZS_Select2_Loader' ) ) {
 		function _register_scripts() {
 
 			wp_register_script(
-				'DZS-select2',
+				'RBM-select2',
 				plugins_url( '/rbm-select2.js', __FILE__ ),
 				array( 'jquery', 'select2' ),
 				'1.0.0'
 			);
 
 			wp_register_style(
-				'DZS-select2',
+				'RBM-select2',
 				plugins_url( '/rbm-select2.css', __FILE__ ),
 				array( 'select2' ),
 				'1.0.0'
@@ -57,11 +57,11 @@ if ( ! class_exists( 'DZS_Select2_Loader' ) ) {
 				wp_enqueue_script( 'jquery-ui-sortable' );
 				wp_enqueue_script( 'select2' );
 				wp_enqueue_style( 'select2' );
-				wp_enqueue_script( 'DZS-select2' );
-				wp_enqueue_style( 'DZS-select2' );
+				wp_enqueue_script( 'RBM-select2' );
+				wp_enqueue_style( 'RBM-select2' );
 			}
 		}
 	}
 
-	$DZS_Select2 = new DZS_Select2_Loader();
+	$RBM_Select2 = new RBM_Select2_Loader();
 }

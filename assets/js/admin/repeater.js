@@ -12,6 +12,8 @@
                 show: function () {
 
                     $(this).slideDown();
+                    refresh_selects($(this));
+
                     $(document).trigger('rbm-repeater-add', [$(this)]);
                 },
                 hide: function () {
@@ -29,6 +31,8 @@
             $list.sortable({
                 axis: 'y',
                 handle: '.rbm-field-repeater-handle',
+                forcePlaceholderSize: true,
+                placeholder: 'rbm-sortable-placeholder',
                 update: function (e, ui) {
 
                     // Make sure the int in each attr name is the same as the row index
@@ -50,5 +54,21 @@
 
             $(this).find('.rbm-field-repeater-row.dummy').remove();
         });
+
+        function refresh_selects($e) {
+
+            var $select2s = $e.find('select.rbm-select2');
+
+            $select2s.each(function () {
+
+                var $vestige = $(this).siblings('.select2-container');
+
+                if ($vestige.length) {
+                    $vestige.remove();
+                }
+
+                $(this).show().select2();
+            });
+        }
     });
 })(jQuery);

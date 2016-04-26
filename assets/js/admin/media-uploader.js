@@ -9,90 +9,77 @@
 
     window['rbm_instantiate_media_uploaders'] = function () {
 
-        var $uploaders = $('.rbm-media-uploader');
+        var media_frame, $current_uploader;
 
-        if (!$uploaders.length) {
+        if (!wp.media) {
             return;
         }
 
-        $uploaders.each(function () {
+        media_frame = wp.media.frames.meta_image_frame = wp.media({
+            title: 'Choose Media'
+        });
 
-            // Skip if already instantiated
-            if ($(this).data('rbm_media_frame')) {
-                return true;
-            }
+        media_frame.on('select', function () {
 
-            // Sets up the image library frame
-            var $uploader = $(this),
-                args = {
-                    title: $uploader.data('title'),
-                    button: {text: $uploader.data('button-text')}
-                },
-                type = $uploader.data('type');
+            var media_attachment = media_frame.state().get('selection').first().toJSON();
 
-            if (type && type !== 'any') {
-                args.library = {type: type};
-            }
+            $current_uploader.find('.media-id').val(media_attachment.id);
 
-            $uploader.data('rbm_media_frame', wp.media.frames.meta_image_frame = wp.media(args));
-            $uploader.find('.remove-media').off();
-            $uploader.find('.upload-media').off();
+            $current_uploader.find('.upload-media').hide();
+            $current_uploader.find('.remove-media').show();
 
-            switch (type) {
-
+            // Preview
+            switch ($current_uploader.data('type')) {
                 case 'image':
-                    $uploader.data('rbm_media_frame').on('select', function () {
-
-                        var media_attachment = $uploader.data('rbm_media_frame').state().get('selection').first().toJSON();
-
-                        // Sends the attachment URL to our custom image input field.
-                        $uploader.find('.media-id').val(media_attachment.id);
-                        $uploader.find('.image-preview').attr('src', media_attachment.url);
-
-                        $uploader.find('.upload-media').hide();
-                        $uploader.find('.remove-media').show();
-                    });
-
-                    $uploader.find('.remove-media').click(function (e) {
-
-                        var $image_preview = $(this).siblings('.image-preview');
-                        $image_preview.attr('src', $image_preview.data('placeholder') || '');
-                    });
+                    $current_uploader.find('.image-preview').attr('src', media_attachment.url);
                     break;
 
                 default:
-                    $uploader.data('rbm_media_frame').on('select', function () {
+                    $uploader.find('.media-url').html(media_attachment.url);
+            }
+        });
 
-                        var media_attachment = $uploader.data('rbm_media_frame').state().get('selection').first().toJSON();
+        $(document).on('click', '.rbm-media-uploader .upload-media', function (e) {
 
-                        $uploader.find('.media-id').val(media_attachment.id);
-                        $uploader.find('.media-url').html(media_attachment.url);
+            e.preventDefault();
 
-                        $uploader.find('.upload-media').hide();
-                        $uploader.find('.remove-media').show();
-                    });
+            $current_uploader = $(this).closest('.rbm-media-uploader');
 
-                    $uploader.find('.remove-media').click(function (e) {
+            var type = $current_uploader.data('type');
 
-                        var $media_url = $(this).siblings('.media-url');
-                        $media_url.html($media_url.data('placeholder') || '&nbsp;');
-                    });
+            media_frame.open();
+
+            // TODO Not currently working
+            //media_frame.title = $current_uploader.data('title');
+            //media_frame.button = {text: $current_uploader.data('button-text')};
+            //
+            //if (type && type !== 'any') {
+            //    media_frame.library = {type: type};
+            //}
+        });
+
+        $(document).on('click', '.rbm-media-uploader .remove-media', function (e) {
+
+            $(this).siblings('.upload-media').show();
+            $(this).hide();
+            $(this).siblings('.media-id').val('');
+
+            // Reset preview
+            switch ($current_uploader.data('type')) {
+                case 'image':
+
+                    var $image_preview = $(this).siblings('.image-preview');
+                    $image_preview.attr('src', $image_preview.data('placeholder') || '');
+
+                    break;
+
+                default:
+
+                    var $media_url = $(this).siblings('.media-url');
+                    $media_url.html($media_url.data('placeholder') || '&nbsp;');
             }
 
-            // Runs when the image button is clicked.
-            $uploader.find('.upload-media').click(function (e) {
-
-                e.preventDefault();
-
-                $uploader.data('rbm_media_frame').open();
-            });
-
-            $uploader.find('.remove-media').click(function (e) {
-
-                $(this).siblings('.upload-media').show();
-                $(this).hide();
-                $(this).siblings('.media-id').val('');
-            });
+            $current_uploader = false;
         });
     };
 
@@ -108,6 +95,6 @@
     }
 
     $(rbm_instantiate_media_uploaders);
-    $(document).on('rbm-repeater-add', rbm_instantiate_media_uploaders);
-    $(document).on('rbm-repeater-add', repeater_reset_uploader);
+    //$(document).on('rbm-repeater-add', rbm_instantiate_media_uploaders);
+    //$(document).on('rbm-repeater-add', repeater_reset_uploader);
 })(jQuery);

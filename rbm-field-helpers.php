@@ -1,8 +1,8 @@
 <?php
 /**
- * Provides helper functions shared among all DZS plugins.
+ * Provides helper functions shared among all RBM plugins.
  *
- * @version 1.3.2
+ * @version 1.0.0
  *
  * @package    CPTAnimal
  * @subpackage CPTAnimal/core
@@ -13,12 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Only load once
-if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
+if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
-	define( 'DZOO_HELPER_FUNCTIONS', true );
-	define( 'DZS_FIELD_HELPERS_VER', '1.3.2' );
+	define( 'RBM_HELPER_FUNCTIONS', true );
+	define( 'RBM_FIELD_HELPERS_VER', '1.0.0' );
 
 	require_once __DIR__ . '/vendor/select2/select2-load.php';
+
+	require_once __DIR__ . '/includes/class-rbm-fh-field.php';
+	require_once __DIR__ . '/includes/class-rbm-fh-field-userkeys.php';
 
 	add_action( 'init', '_rbm_shared_fields_register_scripts' );
 	add_action( 'admin_enqueue_scripts', '_rbm_shared_fields_enqueue_admin_scripts' );
@@ -28,38 +31,45 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 
 		// Admin styles
 		wp_register_style(
-			'DZS-field-helpers-admin',
+			'RBM-field-helpers-admin',
 			plugins_url( '/rbm-field-helpers-admin.css', __FILE__ ),
 			array(),
-			DZS_FIELD_HELPERS_VER
+			RBM_FIELD_HELPERS_VER
 		);
 
 		// Admin script
 		wp_register_script(
-			'DZS-field-helpers-admin',
+			'RBM-field-helpers-admin',
 			plugins_url( '/rbm-field-helpers-admin.js', __FILE__ ),
-			array( 'jquery', 'DZS-jquery-repeater', 'wp-color-picker', 'jquery-ui-sortable' ),
-			DZS_FIELD_HELPERS_VER,
+			array( 'jquery', 'RBM-jquery-repeater', 'wp-color-picker', 'jquery-ui-sortable' ),
+			RBM_FIELD_HELPERS_VER,
 			true
 		);
 
 		// Repeater
 		wp_register_script(
-			'DZS-jquery-repeater',
+			'RBM-jquery-repeater',
 			plugins_url( '/vendor/jquery-repeater/jquery.repeater.min.js', __FILE__ ),
 			array( 'jquery' ),
 			'0.1.4',
 			true
 		);
+
+		// Localize data
+		$data = apply_filters( 'rbm_field_helpers_admin_data', array(
+			'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
+		) );
+
+		wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
 	}
 
 	function _rbm_shared_fields_enqueue_admin_scripts() {
 
-		wp_enqueue_script( 'DZS-jquery-repeater' );
+		wp_enqueue_script( 'RBM-jquery-repeater' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'DZS-field-helpers-admin' );
-		wp_enqueue_style( 'DZS-field-helpers-admin' );
+		wp_enqueue_script( 'RBM-field-helpers-admin' );
+		wp_enqueue_style( 'RBM-field-helpers-admin' );
 	}
 
 	function _rbm_save_meta( $post_ID ) {
@@ -197,7 +207,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 				<textarea name="<?php echo $name; ?>"
 				          class="<?php echo $args['input_class']; ?>"
 				          rows="<?php echo $args['rows']; ?>"
-					><?php echo $value; ?></textarea>
+				><?php echo $value; ?></textarea>
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
@@ -336,13 +346,15 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 		}
 
 		$args = wp_parse_args( $args, array(
-			'default'       => false,
-			'options'       => array(),
-			'opt_groups'    => false,
-			'multiple'      => false,
-			'description'   => false,
-			'input_class'   => 'widefat',
-			'wrapper_class' => '',
+			'default'           => false,
+			'options'           => array(),
+			'opt_groups'        => false,
+			'multiple'          => false,
+			'option_none'       => false,
+			'option_none_value' => '',
+			'description'       => false,
+			'input_class'       => 'widefat',
+			'wrapper_class'     => '',
 		) );
 
 		if ( $value === false ) {
@@ -358,6 +370,12 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 					<select name="<?php echo $name . ( $args['multiple'] ? '[]' : '' ); ?>"
 					        class="<?php echo $args['input_class']; ?>"
 						<?php echo $args['multiple'] ? 'multiple' : ''; ?>>
+
+						<?php if ( $args['option_none'] ) : ?>
+							<option value="<?php echo $args['option_none_value']; ?>">
+								<?php echo $args['option_none']; ?>
+							</option>
+						<?php endif; ?>
 
 						<?php if ( $args['opt_groups'] ) : ?>
 
@@ -515,6 +533,71 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
 		</div>
+		<?php
+	}
+
+	/**
+	 * Outputs a datepicker field.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @param string $name
+	 * @param string|bool $label
+	 * @param string|bool $value
+	 * @param array $args
+	 */
+	function rbm_do_field_datepicker( $name, $label = false, $value = false, $args = array() ) {
+
+		global $post;
+
+		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
+
+		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
+			_rbm_field_init( $name );
+		}
+
+		$args = wp_parse_args( $args, array(
+			'default'         => date( 'Y/m/d' ),
+			'description'     => false,
+			'sanitization'    => false,
+			'input_class'     => '',
+			'input_atts'      => array(),
+			'wrapper_class'   => '',
+			'datepicker_args' => array(),
+		) );
+
+		$input_atts = array();
+		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
+			$input_atts[] = "$attr_name=\"$attr_value\"";
+		}
+		$input_atts = implode( ' ', $input_atts );
+
+		if ( $value === false ) {
+			$value = get_post_meta( $post->ID, $name, true );
+			$value = $value ? $value : $args['default'];
+		}
+
+		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
+
+			$value = call_user_func( $args['sanitization'], $value );
+			update_post_meta( get_the_ID(), $name, $value );
+		}
+
+		$data = '';
+		foreach ( $args['datepicker_args'] as $arg_name => $arg_value ) {
+			$data .= " data-$arg_name=\"$arg_value\"";
+		}
+		?>
+		<p class="rbm-field-datepicker <?php echo $args['wrapper_class']; ?>">
+			<label>
+				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
+				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
+				       class="<?php echo $args['input_class']; ?>" <?php echo $data; ?>
+					<?php echo $input_atts; ?> />
+			</label>
+
+			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
+		</p>
 		<?php
 	}
 
@@ -849,6 +932,19 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 		<?php
 	}
 
+	/**
+	 * User Keys field.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @param bool $label
+	 * @param array $args
+	 * @param bool $value
+	 */
+	function rbm_do_field_user_keys( $label = false, $args = array(), $value = false ) {
+		new RBM_FH_Field_UserKeys( $label, $args, $value );
+	}
+
 	function rbm_do_helper_field_button( $name, $label = false, $args = array() ) {
 
 		echo '<fieldset class="rbm-fieldset rbm-field-button">';
@@ -875,7 +971,7 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 			'input_class' => 'rbm-select2',
 		) );
 		rbm_do_field_text( "${name}_external_link", 'Link (external)', false, array(
-			'description' => 'Overrides the Post Link',
+			'description'  => 'Overrides the Post Link',
 			'sanitization' => 'esc_url_raw',
 		) );
 		rbm_do_field_checkbox( "${name}_new_tab", false, false, array(
@@ -922,10 +1018,26 @@ if ( ! defined( 'DZOO_HELPER_FUNCTIONS' ) ) {
 		}
 
 		if ( $sanitization && is_callable( $sanitization ) ) {
-			return call_user_func( $sanitization, get_post_meta( $post_ID, "_rbm_$field", true ) );
+			$value = call_user_func( $sanitization, get_post_meta( $post_ID, "_rbm_$field", true ) );
 		} else {
-			return get_post_meta( $post_ID, "_rbm_$field", true );
+			$value = get_post_meta( $post_ID, "_rbm_$field", true );
 		}
+
+		/**
+		 * Allows filtering of the field value.
+		 *
+		 * @since 1.6.0
+		 */
+		$value = apply_filters( 'rbm_get_field', $value, $field, $post_ID );
+
+		/**
+		 * Allows filtering of the specific field value.
+		 *
+		 * @since 1.6.0
+		 */
+		$value = apply_filters( "rbm_get_field_$field", $value, $post_ID );
+
+		return $value;
 	}
 
 	function rbm_replace_taxonomy_mb( $taxonomy, $post_type = 'post', $input_type = 'checkbox' ) {

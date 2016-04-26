@@ -4,6 +4,12 @@
   font-weight: bold;
 }
 
+.rbm-field-repeater-list {
+  .rbm-sortable-placeholder {
+    border: 3px dashed #ddd;
+  }
+}
+
 .rbm-field-repeater-row {
   @include clearfix;
   padding: 0.5em;
@@ -13,11 +19,6 @@
 
   &.dummy {
     display: none;
-  }
-
-  &.ui-sortable-placeholder {
-    visibility: visible !important;
-    border: 3px dashed #ddd;
   }
 
   &.ui-sortable-helper {
