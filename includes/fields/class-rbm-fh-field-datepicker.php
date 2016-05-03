@@ -18,6 +18,18 @@ defined( 'ABSPATH' ) || die();
 class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 
 	/**
+	 * Field defaults.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'default'         => '',
+		'datepicker_args' => array(),
+	);
+
+	/**
 	 * RBM_FH_Field_DatePicker constructor.
 	 *
 	 * @since {{VERSION}}
@@ -28,6 +40,9 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	 * @var mixed $value
 	 */
 	function __construct( $name, $label = '', $args = array(), $value = false ) {
+
+		// Cannot use function in property declaration
+		$args['default'] = date( 'Y/m/d' );
 
 		parent::__construct( $name, $label, $args, $value );
 	}
@@ -43,13 +58,6 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
-
-		$args = wp_parse_args( $args, array(
-			'default'         => date( 'Y/m/d' ),
-			'input_class'     => '',
-			'input_atts'      => array(),
-			'datepicker_args' => array(),
-		) );
 
 		$input_atts = array();
 		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {

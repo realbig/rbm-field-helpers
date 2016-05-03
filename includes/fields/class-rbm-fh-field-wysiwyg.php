@@ -1,6 +1,6 @@
 <?php
 /**
- * Field: Color Picker
+ * Field: WYSIWYG
  *
  * @since {{VERSION}}
  *
@@ -11,11 +11,11 @@
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class RBM_FH_Field_ColorPicker
+ * Class RBM_FH_Field_WYSIWYG
  *
  * @since {{VERSION}}
  */
-class RBM_FH_Field_ColorPicker extends RBM_FH_Field {
+class RBM_FH_Field_WYSIWYG extends RBM_FH_Field {
 
 	/**
 	 * Field defaults.
@@ -25,11 +25,12 @@ class RBM_FH_Field_ColorPicker extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'default'       => '#fff',
+		'wysiwyg_args'  => array(),
+		'wysiwyg_id'    => '',
 	);
 
 	/**
-	 * RBM_FH_Field_ColorPicker constructor.
+	 * RBM_FH_Field_WYSIWYG constructor.
 	 *
 	 * @since {{VERSION}}
 	 *
@@ -39,6 +40,9 @@ class RBM_FH_Field_ColorPicker extends RBM_FH_Field {
 	 * @var mixed $value
 	 */
 	function __construct( $name, $label = '', $args = array(), $value = false ) {
+
+		// Can't do this on property declaration
+		$this->defaults['wysiwyg_id'] = $name;
 
 		parent::__construct( $name, $label, $args, $value );
 	}
@@ -55,23 +59,19 @@ class RBM_FH_Field_ColorPicker extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
-		?>
-		<p class="rbm-field-colorpicker <?php echo $args['wrapper_class']; ?>">
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
-				       class="<?php echo $args['input_class']; ?>"
-				       data-default-color="<?php echo $args['default']; ?>"
-					<?php echo $input_atts; ?> />
-			</label>
+		if ( $label ) : ?>
+			<p class="rbm-field-wysiwyg-label">
+				<?php echo $label; ?>
+			</p>
+		<?php endif; ?>
+
+		<div class="rbm-field-wysiwyg <?php echo $args['wrapper_class']; ?>"
+		     data-id="<?php echo $args['wysiwyg_id']; ?>">
+
+			<?php wp_editor( $value, "_rbm_$args[wysiwyg_id]", $args['wysiwyg_args'] ); ?>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
+		</div>
 		<?php
 	}
 }

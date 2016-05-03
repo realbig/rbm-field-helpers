@@ -23,6 +23,13 @@ add_action( 'wp_ajax_rbm_ajax_delete_user_key_all', array( 'RBM_FH_Field_UserKey
  */
 class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 
+	/**
+	 * Used to only allow the field to be called one time.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var bool
+	 */
 	private static $did_one = false;
 
 	/**

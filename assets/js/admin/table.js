@@ -3,14 +3,18 @@
 
     $(function () {
 
-        tables_init();
-        $(document).on('rbm-repeater-add', tables_init);
+        var $tables = $('.rbm-field-table');
 
-        function tables_init() {
+        if ($tables.length) {
+            tables_init($tables);
+        }
 
-            $('.rbm-field-table').each(function () {
+        function tables_init($tables) {
 
-                var $table = $(this).find('table');
+            $tables.each(function () {
+
+                var $this = $(this),
+                    $table = $(this).find('table');
 
                 $table.find('thead th').first().find('[data-table-delete-column]').prop('disabled', true);
                 $table.find('tbody tr').first().find('[data-table-delete-row]').prop('disabled', true);
@@ -18,7 +22,7 @@
                 $table.find('tbody').sortable({
                     axis: 'y',
                     handle: '.rbm-field-table-sort',
-                    update: table_reset
+                    update: table_sortable_update
                 });
 
                 $(this).find('[data-table-create-row]').click(function () {
@@ -31,7 +35,7 @@
 
                     $table.find('tbody').append($row);
 
-                    table_reset();
+                    table_reset($this);
                 });
 
                 $(this).find('[data-table-create-column]').click(function () {
@@ -48,14 +52,14 @@
                     $table.find('thead tr th:last-of-type').before($th);
                     $table.find('tbody tr td:last-of-type').before($td);
 
-                    table_reset();
+                    table_reset($this);
                 });
 
                 $(this).find('[data-table-delete-row]').click(function () {
 
                     $(this).closest('tr').remove();
 
-                    table_reset();
+                    table_reset($this);
                 });
 
                 $(this).find('[data-table-delete-column]').click(function () {
@@ -66,14 +70,14 @@
                     $table.find('th:nth-child(' + (index + 1) + ')').remove();
                     $table.find('td:nth-child(' + (index + 1) + ')').remove();
 
-                    table_reset();
+                    table_reset($this);
                 });
             });
         }
 
-        function table_reset() {
+        function table_reset($tables) {
 
-            $('.rbm-field-table').each(function () {
+            $tables.each(function () {
 
                 $(this).find('thead th').each(function () {
 
@@ -109,6 +113,11 @@
                     $(this).find('input[type="text"]').attr('name', name.replace(/\[\d]\[\d]/, id));
                 });
             });
+        }
+
+        function table_sortable_update(e, ui, a) {
+
+            table_reset(ui.item);
         }
     });
 })(jQuery);

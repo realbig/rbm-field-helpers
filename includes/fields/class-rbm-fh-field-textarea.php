@@ -18,6 +18,17 @@ defined( 'ABSPATH' ) || die();
 class RBM_FH_Field_TextArea extends RBM_FH_Field {
 
 	/**
+	 * Field defaults.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'rows'          => 4,
+	);
+
+	/**
 	 * RBM_FH_Field_TextArea constructor.
 	 *
 	 * @since {{VERSION}}
@@ -43,11 +54,6 @@ class RBM_FH_Field_TextArea extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
-
-		$args = wp_parse_args( $args, array(
-			'rows'          => 4,
-			'input_class'   => 'widefat',
-		) );
 		?>
 		<p class="rbm-field-textarea <?php echo $args['wrapper_class']; ?>">
 			<label>

@@ -18,6 +18,17 @@ defined( 'ABSPATH' ) || die();
 class RBM_FH_Field_Radio extends RBM_FH_Field {
 
 	/**
+	 * Field defaults.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'options' => false,
+	);
+
+	/**
 	 * RBM_FH_Field_Radio constructor.
 	 *
 	 * @since {{VERSION}}
@@ -45,12 +56,11 @@ class RBM_FH_Field_Radio extends RBM_FH_Field {
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
 		// Legacy
-		if ( ! isset( $args['options'] ) ) {
+		if ( ! $args['options'] ) {
 
 			$args = wp_parse_args( $args, array(
 				'radio_value' => 1,
 				'radio_label' => $label,
-				'input_class' => '',
 			) );
 
 			$args['options'] = array(
@@ -58,11 +68,6 @@ class RBM_FH_Field_Radio extends RBM_FH_Field {
 			);
 
 		} else {
-
-			$args = wp_parse_args( $args, array(
-				'input_class' => '',
-				'options'     => false,
-			) );
 
 			if ( $args['options'] === false ) {
 

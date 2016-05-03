@@ -1,26 +1,34 @@
 (function ($) {
     'use strict';
 
+    $(function () {
 
-    function color_picker_init() {
+        var $colorpickers = $('.rbm-field-colorpicker'),
+            $repeaters = $('.rbm-field-repeater');
 
-        var $fields = $('.rbm-field-colorpicker');
-
-        if (!$fields.length) {
-            return;
+        if ($colorpickers.length) {
+            colorpickers_init($colorpickers);
         }
 
-        $fields.each(function () {
+        if ($repeaters.length) {
+            $repeaters.on('add-item', colorpicker_repeater_add);
+        }
 
-            if ($(this).data('rbm-colorpicker-init')) {
-                return true;
-            }
+        function colorpicker_repeater_add(e, $item) {
 
-            $(this).data('rbm-colorpicker-init', 1);
-            $(this).find('input[type="text"]').wpColorPicker();
-        });
-    }
+            var $colorpickers = $item.find('.rbm-field-colorpicker');
 
-    $(color_picker_init);
-    $(document).on('rbm-repeater-add', color_picker_init);
+            // Reset them
+            $colorpickers.find('input[name^="_rbm_repeater"]').appendTo($item.find('label'));
+            $colorpickers.find('.wp-picker-container').remove();
+            colorpickers_init($colorpickers);
+        }
+
+        function colorpickers_init($colorpickers) {
+
+            $colorpickers.each(function () {
+                $(this).find('input[type="text"]').wpColorPicker($(this).data());
+            });
+        }
+    });
 })(jQuery);

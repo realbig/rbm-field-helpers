@@ -44,11 +44,6 @@ class RBM_FH_Field_Text extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		$args = wp_parse_args( $args, array(
-			'input_class'   => 'widefat',
-			'input_atts'    => array(),
-		) );
-
 		$input_atts = array();
 		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
 			$input_atts[] = "$attr_name=\"$attr_value\"";

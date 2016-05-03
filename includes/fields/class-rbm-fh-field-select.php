@@ -18,6 +18,21 @@ defined( 'ABSPATH' ) || die();
 class RBM_FH_Field_Select extends RBM_FH_Field {
 
 	/**
+	 * Field defaults.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'options'           => array(),
+		'opt_groups'        => false,
+		'multiple'          => false,
+		'option_none'       => false,
+		'option_none_value' => '',
+	);
+
+	/**
 	 * RBM_FH_Field_Select constructor.
 	 *
 	 * @since {{VERSION}}
@@ -43,15 +58,6 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
-
-		$args = wp_parse_args( $args, array(
-			'options'           => array(),
-			'opt_groups'        => false,
-			'multiple'          => false,
-			'option_none'       => false,
-			'option_none_value' => '',
-			'input_class'       => 'widefat',
-		) );
 		?>
 		<p class="rbm-field-select <?php echo $args['wrapper_class']; ?>">
 			<label>

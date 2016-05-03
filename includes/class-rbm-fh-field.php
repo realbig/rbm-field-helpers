@@ -65,12 +65,20 @@ abstract class RBM_FH_Field {
 	 */
 	function __construct( $name, $label = '', $args = array(), $value = false ) {
 
+		// Unique args
+		if ( isset( $this->defaults ) ) {
+			$args = wp_parse_args( $args, $this->defaults );
+		}
+
+		// Global args
 		$args = wp_parse_args( $args, array(
 			'default'       => '',
 			'description'   => false,
 			'wrapper_class' => '',
 			'no_init'       => false,
 			'sanitization'  => false,
+			'input_class'   => 'widefat',
+			'input_atts'    => array(),
 		) );
 
 		$this->name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";;

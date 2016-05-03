@@ -67,6 +67,12 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 
 						<?php foreach ( $fields as $field_name => $field ) : ?>
 							<?php
+
+							if ( in_array( $field['type'], array( 'table' ) ) ){
+								echo "<strong>ERROR:</strong> Field <strong>$field[type]</strong> not supported for repeaters.";
+								continue;
+							}
+
 							if ( is_callable( "rbm_do_field_$field[type]" ) ) {
 
 								$field = wp_parse_args( $field, array(

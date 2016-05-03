@@ -1,13 +1,18 @@
 (function ($) {
     'use strict';
 
-    function replace_wysiwygs(e, $field) {
+    $(function () {
 
-        var $wysiwygs = $field.find('.rbm-field-wysiwyg');
+        var $repeaters = $('.rbm-field-repeater');
 
-        if (!$wysiwygs.length) {
+        if (!$repeaters.length ) {
             return;
         }
+
+        $repeaters.on('add-item list-update', repeater_change);
+    });
+
+    function replace_wysiwygs($wysiwygs) {
 
         $wysiwygs.each(function () {
 
@@ -29,6 +34,12 @@
         });
     }
 
-    $(document).on('rbm-repeater-list-update', replace_wysiwygs);
-    $(document).on('rbm-repeater-add', replace_wysiwygs);
+    function repeater_change(e, $repeater ) {
+
+        var $wysiwygs = $repeater.find('.rbm-field-wysiwyg');
+
+        if ($wysiwygs.length) {
+            replace_wysiwygs($wysiwygs);
+        }
+    }
 })(jQuery);

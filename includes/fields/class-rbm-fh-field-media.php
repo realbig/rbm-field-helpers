@@ -18,6 +18,23 @@ defined( 'ABSPATH' ) || die();
 class RBM_FH_Field_Media extends RBM_FH_Field {
 
 	/**
+	 * Field defaults.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'preview_size'       => 'medium',
+		'button_text'        => 'Upload / Choose Media',
+		'button_remove_text' => 'Remove Media',
+		'type'               => 'any',
+		'window_title'       => 'Choose Media',
+		'window_button_text' => 'Use Media',
+		'placeholder'        => '&nbsp;',
+	);
+
+	/**
 	 * RBM_FH_Field_Media constructor.
 	 *
 	 * @since {{VERSION}}
@@ -43,17 +60,6 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
-
-		$args = wp_parse_args( $args, array(
-			'preview_size'       => 'medium',
-			'button_text'        => 'Upload / Choose Media',
-			'button_remove_text' => 'Remove Media',
-			'type'               => 'any',
-			'window_title'       => 'Choose Media',
-			'window_button_text' => 'Use Media',
-			'placeholder'        => '&nbsp;',
-			'input_class'        => 'widefat',
-		) );
 
 		$media_item_src = wp_get_attachment_image_src( $value, $args['preview_size'] );
 		?>
