@@ -14,7 +14,7 @@
                     $(this).slideDown();
                     refresh_selects($(this));
 
-                    $(document).trigger('rbm-repeater-add', [$(this)]);
+                    $(this).trigger('add-item', [$(this)]);
                 },
                 hide: function () {
 
@@ -22,7 +22,7 @@
                         $(this).slideUp(400, function () {
                             $(this).remove();
                         });
-                        $(document).trigger('rbm-repeater-delete');
+                        $(this).trigger('delete-item');
                     }
                 },
                 isFirstItemUndeletable: true

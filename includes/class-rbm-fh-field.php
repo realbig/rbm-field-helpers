@@ -18,15 +18,6 @@ defined( 'ABSPATH' ) || die();
 abstract class RBM_FH_Field {
 
 	/**
-	 * All registered fields.
-	 *
-	 * @since 1.6.0
-	 *
-	 * @var array
-	 */
-	static private $fields = array();
-
-	/**
 	 * Field name.
 	 *
 	 * @since 1.6.0
@@ -79,16 +70,22 @@ abstract class RBM_FH_Field {
 			'description'   => false,
 			'wrapper_class' => '',
 			'no_init'       => false,
+			'sanitization'  => false,
 		) );
 
-		$this->name  = $name;
+		$this->name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";;
 		$this->label = $label;
 		$this->args  = $args;
 		$this->value = $value;
 
-		$this->field_init();
+		// Init unless told otherwise
+		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
+			$this->field_init();
+		}
+
 		$this->get_value();
-		static::field( $this->value, $this->label, $this->args );
+
+		static::field( $this->name, $this->value, $this->label, $this->args );
 	}
 
 	/**
@@ -101,11 +98,11 @@ abstract class RBM_FH_Field {
 		static $i;
 		$i = $i === null ? 0 : $i + 1;
 
-		if ( empty( self::$fields ) ) {
+		if ( empty( RBMFH()->fields ) ) {
 			wp_nonce_field( 'rbm-save-meta', 'rbm-meta' );
 		}
 
-		self::$fields[] = $this->name;
+		RBMFH()->fields[] = $this->name;
 		?>
 		<input type="hidden" name="_rbm_fields[<?php echo $i; ?>]" value="<?php echo $this->name; ?>"/>
 		<?php
@@ -120,10 +117,16 @@ abstract class RBM_FH_Field {
 
 		global $post;
 
+		// Get value
 		$value = $this->value;
 		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, '_rbm_user_keys', true );
+			$value = get_post_meta( $post->ID, $this->name, true );
 			$value = $value ? $value : $this->args['default'];
+		}
+
+		// Sanitize
+		if ( $this->args['sanitization'] && is_callable( $this->args['sanitization'] ) ) {
+			$value = call_user_func( $this->args['sanitization'], $value );
 		}
 
 		/**
@@ -139,10 +142,11 @@ abstract class RBM_FH_Field {
 	 *
 	 * @since 1.6.0
 	 *
+	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
 	 * @param string $label Field label.
 	 * @param array $args Field arguments.
 	 */
-	public static function field( $value, $label = '', $args = array() ) {
+	public static function field( $name, $value, $label = '', $args = array() ) {
 	}
 }

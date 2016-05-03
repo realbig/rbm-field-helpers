@@ -5,7 +5,7 @@
  * @since 1.6.0
  *
  * @package RBMFieldHelpers
- * @subpackage RBMFieldHelpers/includes
+ * @subpackage RBMFieldHelpers/includes/fields
  */
 
 defined( 'ABSPATH' ) || die();
@@ -51,11 +51,12 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 	 *
 	 * @since 1.6.0
 	 *
+	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
 	 * @param string $label Field label.
 	 * @param array $args Field arguments.
 	 */
-	public static function field( $value, $label = '', $args = array() ) {
+	public static function field( $name, $value, $label = '', $args = array() ) {
 
 		$link_base = isset( $args['link_base'] ) ? $args['link_base'] : get_the_permalink();
 		?>

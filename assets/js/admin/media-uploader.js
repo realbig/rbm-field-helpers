@@ -35,7 +35,7 @@
                     break;
 
                 default:
-                    $uploader.find('.media-url').html(media_attachment.url);
+                    $current_uploader.find('.media-url').html(media_attachment.url);
             }
         });
 
@@ -63,6 +63,8 @@
             $(this).siblings('.upload-media').show();
             $(this).hide();
             $(this).siblings('.media-id').val('');
+
+            $current_uploader = $(this).closest('.rbm-media-uploader');
 
             // Reset preview
             switch ($current_uploader.data('type')) {

@@ -12,6 +12,83 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
+// REMOVE
+add_action( 'add_meta_boxes', function () {
+
+	add_meta_box(
+		'test',
+		'Test',
+		function () {
+
+			rbm_do_field_text( 'text_test', 'Text Test' );
+			rbm_do_field_textarea( 'textarea_test', 'Textarea Test' );
+			rbm_do_field_checkbox( 'checkbox_test', 'Checkbox Test' );
+			rbm_do_field_radio( 'radio_test', 'Radio Test', false, array(
+				'options' => array(
+					1 => 'One',
+					2 => 'Two',
+				),
+			) );
+			rbm_do_field_select( 'select_test', 'Select TEst', false, array(
+				'options' => array(
+					1 => 'One',
+					2 => 'Two',
+				),
+			) );
+			rbm_do_field_image( 'media_test', 'Media Test', false, array() );
+			rbm_do_field_datepicker( 'datepicker_test', 'Date Picker Test' );
+			rbm_do_field_colorpicker( 'colorpicker_test', 'Colorpicker Test' );
+			rbm_do_field_repeater( 'repeater_test', 'Repeater Test', array(
+				'one' => array(
+					'type' => 'text',
+					'label' => 'Text',
+				),
+				'two' => array(
+					'type' => 'textarea',
+					'label' => 'Textarea',
+				),
+				'three' => array(
+					'type' => 'checkbox',
+					'label' => 'Check Box',
+				),
+				'four' => array(
+					'type' => 'radio',
+					'label' => 'Radio',
+					'args' => array(
+						'options' => array(
+							1 => 'One',
+							2 => 'Two',
+						),
+					),
+				),
+				'five' => array(
+					'type' => 'select',
+					'label' => 'Select',
+					'args' => array(
+						'options' => array(
+							1 => 'One',
+							2 => 'Two',
+						),
+					),
+				),
+				'six' => array(
+					'type' => 'image',
+					'label' => 'Image',
+				),
+				'seven' => array(
+					'type' => 'datepicker',
+					'label' => 'Date Picker',
+				),
+				'eight' => array(
+					'type' => 'colorpicker',
+					'label' => 'Colorpicker',
+				),
+			) );
+		},
+		'post'
+	);
+} );
+
 // Only load once
 if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
@@ -21,55 +98,177 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	require_once __DIR__ . '/vendor/select2/select2-load.php';
 
 	require_once __DIR__ . '/includes/class-rbm-fh-field.php';
-	require_once __DIR__ . '/includes/class-rbm-fh-field-userkeys.php';
 
-	add_action( 'init', '_rbm_shared_fields_register_scripts' );
-	add_action( 'admin_enqueue_scripts', '_rbm_shared_fields_enqueue_admin_scripts' );
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-checkbox.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-colorpicker.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-datepicker.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-media.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-radio.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-repeater.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-select.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-text.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-textarea.php';
+	require_once __DIR__ . '/includes/fields/class-rbm-fh-field-userkeys.php';
+
 	add_action( 'save_post', '_rbm_save_meta' );
 
-	function _rbm_shared_fields_register_scripts() {
+	final class RBM_FieldHelpers {
 
-		// Admin styles
-		wp_register_style(
-			'RBM-field-helpers-admin',
-			plugins_url( '/rbm-field-helpers-admin.css', __FILE__ ),
-			array(),
-			RBM_FIELD_HELPERS_VER
-		);
+		/**
+		 * All registered fields.
+		 *
+		 * @since 1.6.0
+		 *
+		 * @var array
+		 */
+		public $fields = array();
 
-		// Admin script
-		wp_register_script(
-			'RBM-field-helpers-admin',
-			plugins_url( '/rbm-field-helpers-admin.js', __FILE__ ),
-			array( 'jquery', 'RBM-jquery-repeater', 'wp-color-picker', 'jquery-ui-sortable' ),
-			RBM_FIELD_HELPERS_VER,
-			true
-		);
+		/**
+		 * Loaded scripts.
+		 *
+		 * @since {{VERSION}}
+		 *
+		 * @var array
+		 */
+		public $scripts = array();
 
-		// Repeater
-		wp_register_script(
-			'RBM-jquery-repeater',
-			plugins_url( '/vendor/jquery-repeater/jquery.repeater.min.js', __FILE__ ),
-			array( 'jquery' ),
-			'0.1.4',
-			true
-		);
+		/**
+		 * Loaded styles.
+		 *
+		 * @since {{VERSION}}
+		 *
+		 * @var array
+		 */
+		public $styles = array();
 
-		// Localize data
-		$data = apply_filters( 'rbm_field_helpers_admin_data', array(
-			'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
-		) );
+		private function __clone() {
+		}
 
-		wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
+		private function __wakeup() {
+		}
+
+		/**
+		 * Returns the *Singleton* instance of this class.
+		 *
+		 * @since {{VERSION}}
+		 *
+		 * @staticvar Singleton $instance The *Singleton* instances of this class.
+		 *
+		 * @return RBM_FieldHelpers The *Singleton* instance.
+		 */
+		public static function getInstance() {
+
+			static $instance = null;
+
+			if ( null === $instance ) {
+				$instance = new static();
+			}
+
+			return $instance;
+		}
+
+		/**
+		 * RBM_FieldHelpers constructor.
+		 *
+		 * @since {{VERSION}}
+		 */
+		function __construct() {
+
+			add_action( 'admin_init', array( $this, 'register_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		}
+
+		/**
+		 * Registers all scripts.
+		 *
+		 * @since {{VERSION}}
+		 * @access private
+		 */
+		function register_scripts() {
+
+			global $wp_scripts;
+
+			// Admin styles
+			wp_register_style(
+				'RBM-field-helpers-admin',
+				plugins_url( '/rbm-field-helpers-admin.css', __FILE__ ),
+				array(),
+				RBM_FIELD_HELPERS_VER
+			);
+
+			// Admin script
+			wp_register_script(
+				'RBM-field-helpers-admin',
+				plugins_url( '/rbm-field-helpers-admin.js', __FILE__ ),
+				array( 'jquery', 'RBM-jquery-repeater', 'wp-color-picker', 'jquery-ui-sortable' ),
+				RBM_FIELD_HELPERS_VER,
+				true
+			);
+
+			// Repeater
+			wp_register_script(
+				'RBM-jquery-repeater',
+				plugins_url( '/vendor/jquery-repeater/jquery.repeater.min.js', __FILE__ ),
+				array( 'jquery' ),
+				'0.1.4',
+				true
+			);
+
+
+			// get registered script object for jquery-ui
+			$ui = $wp_scripts->query( 'jquery-ui-core' );
+
+			// tell WordPress to load the Smoothness theme from Google CDN
+			$url = "http://ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/smoothness/jquery-ui.min.css";
+			wp_register_style(
+				'jquery-ui-smoothness',
+				$url,
+				false,
+				null
+			);
+
+			// Localize data
+			$data = apply_filters( 'rbm_field_helpers_admin_data', array(
+				'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
+			) );
+
+			wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
+		}
+
+		/**
+		 * Enqueues common scripts.
+		 *
+		 * @since {{VERSION}}
+		 * @access private
+		 */
+		function enqueue_scripts() {
+
+			wp_enqueue_script( 'RBM-field-helpers-admin' );
+			wp_enqueue_script( 'RBM-jquery-repeater' );
+			wp_enqueue_script( 'jquery-ui-sortable' );
+			wp_enqueue_script( 'jquery-ui-datepicker');
+
+			wp_enqueue_style( 'jquery-ui-smoothness' );
+			wp_enqueue_style( 'RBM-field-helpers-admin' );
+			wp_enqueue_style( 'wp-color-picker' );
+		}
 	}
 
-	function _rbm_shared_fields_enqueue_admin_scripts() {
+	/**
+	 * Gets the main plugin instance.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @return RBM_FieldHelpers
+	 */
+	function RBMFH() {
+		return RBM_FieldHelpers::getInstance();
+	}
 
-		wp_enqueue_script( 'RBM-jquery-repeater' );
-		wp_enqueue_script( 'jquery-ui-sortable' );
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'RBM-field-helpers-admin' );
-		wp_enqueue_style( 'RBM-field-helpers-admin' );
+	new RBM_FieldHelpers();
+
+	// TODO get these wehre they need to go
+	function _rbm_shared_fields_enqueue_admin_scripts() {
 	}
 
 	function _rbm_save_meta( $post_ID ) {
@@ -116,51 +315,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 */
 	function rbm_do_field_text( $name, $label = false, $value = false, $args = array() ) {
 
-		global $post;
-
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'       => '',
-			'description'   => false,
-			'sanitization'  => false,
-			'input_class'   => 'widefat',
-			'input_atts'    => array(),
-			'wrapper_class' => '',
-		) );
-
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-
-		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
-
-			$value = call_user_func( $args['sanitization'], $value );
-			update_post_meta( get_the_ID(), $name, $value );
-		}
-		?>
-		<p class="rbm-field-text <?php echo $args['wrapper_class']; ?>">
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
-				       class="<?php echo isset( $args['input_class'] ) ? $args['input_class'] : 'regular-text'; ?>"
-					<?php echo $input_atts; ?> />
-			</label>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
-		<?php
+		new RBM_FH_Field_Text( $name, $label, $args, $value );
 	}
 
 	/**
@@ -175,44 +330,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 */
 	function rbm_do_field_textarea( $name, $label = false, $value = false, $args = array() ) {
 
-		global $post;
-
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'       => '',
-			'rows'          => 4,
-			'sanitization'  => 'esc_attr',
-			'description'   => false,
-			'input_class'   => 'widefat',
-			'wrapper_class' => '',
-		) );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-
-		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
-			$value = call_user_func( $args['sanitization'], $value );
-		}
-		?>
-		<p class="rbm-field-textarea <?php echo $args['wrapper_class']; ?>">
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<textarea name="<?php echo $name; ?>"
-				          class="<?php echo $args['input_class']; ?>"
-				          rows="<?php echo $args['rows']; ?>"
-				><?php echo $value; ?></textarea>
-			</label>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
-		<?php
+		new RBM_FH_Field_TextArea( $name, $label, $args, $value );
 	}
 
 	/**
@@ -227,50 +345,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 */
 	function rbm_do_field_checkbox( $name, $label = false, $value = false, $args = array() ) {
 
-		global $post;
-
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'              => 0,
-			'check_value'          => 1,
-			'check_disabled_value' => 0,
-			'check_label'          => '',
-			'description'          => false,
-			'input_class'          => '',
-			'wrapper_class'        => '',
-		) );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-
-		if ( is_array( $value ) ) {
-			$value = array_shift( $value );
-		}
-		?>
-		<p class="rbm-field-checkbox <?php echo $args['wrapper_class']; ?>">
-			<input type="hidden" name="<?php echo $name; ?>" value="<?php echo $args['check_disabled_value']; ?>"/>
-
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-
-				<input type="checkbox" name="<?php echo $name; ?>"
-				       value="<?php echo $args['check_value']; ?>"
-				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['check_value'], $value ); ?> />
-
-				<?php echo $args['check_label']; ?>
-			</label>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
-		<?php
+		new RBM_FH_Field_Checkbox( $name, $label, $args, $value );
 	}
 
 	/**
@@ -285,44 +360,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 */
 	function rbm_do_field_radio( $name, $label = false, $value = false, $args = array() ) {
 
-		global $post;
-
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'       => false,
-			'radio_value'   => 1,
-			'radio_label'   => '',
-			'description'   => false,
-			'input_class'   => '',
-			'wrapper_class' => '',
-		) );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-		?>
-		<p class="rbm-field-radio <?php echo $args['wrapper_class']; ?>">
-
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-
-				<input type="radio" name="<?php echo $name; ?>"
-				       value="<?php echo $args['radio_value']; ?>"
-				       class="<?php echo $args['input_class']; ?>"
-					<?php checked( $args['radio_value'], $value ); ?> />
-
-				<?php echo $args['radio_label']; ?>
-			</label>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
-		<?php
+		new RBM_FH_Field_Radio( $name, $label, $args, $value );
 	}
 
 	/**
@@ -337,97 +375,22 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 */
 	function rbm_do_field_select( $name, $label = false, $value = false, $args = array() ) {
 
-		global $post;
+		new RBM_FH_Field_Select( $name, $label, $args, $value );
+	}
 
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
+	/**
+	 * Outputs an image field.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param string $name
+	 * @param string|bool $label
+	 * @param string|bool $value
+	 * @param array $args
+	 */
+	function rbm_do_field_media( $name, $label = false, $value = false, $args = array() ) {
 
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'           => false,
-			'options'           => array(),
-			'opt_groups'        => false,
-			'multiple'          => false,
-			'option_none'       => false,
-			'option_none_value' => '',
-			'description'       => false,
-			'input_class'       => 'widefat',
-			'wrapper_class'     => '',
-		) );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-		?>
-		<p class="rbm-field-select <?php echo $args['wrapper_class']; ?>">
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-
-				<?php if ( ! empty( $args['options'] ) ) : ?>
-					<select name="<?php echo $name . ( $args['multiple'] ? '[]' : '' ); ?>"
-					        class="<?php echo $args['input_class']; ?>"
-						<?php echo $args['multiple'] ? 'multiple' : ''; ?>>
-
-						<?php if ( $args['option_none'] ) : ?>
-							<option value="<?php echo $args['option_none_value']; ?>">
-								<?php echo $args['option_none']; ?>
-							</option>
-						<?php endif; ?>
-
-						<?php if ( $args['opt_groups'] ) : ?>
-
-							<?php foreach ( $args['options'] as $opt_group_label => $options ) : ?>
-								<optgroup label="<?php echo $opt_group_label; ?>">
-
-									<?php
-									foreach ( $options as $option_value => $option_label ) :
-
-										if ( $args['multiple'] ) {
-											$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
-										} else {
-											$selected = selected( $option_value, $value, false ) ? 'selected' : '';
-										}
-										?>
-										<option value="<?php echo $option_value; ?>" <?php echo $selected; ?>>
-											<?php echo $option_label; ?>
-										</option>
-									<?php endforeach; ?>
-
-								</optgroup>
-								<?php
-							endforeach;
-
-						else:
-
-							foreach ( $args['options'] as $option_value => $option_label ) :
-
-								if ( $args['multiple'] ) {
-									$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
-								} else {
-									$selected = selected( $option_value, $value, false ) ? 'selected' : '';
-								}
-								?>
-								<option value="<?php echo $option_value; ?>" <?php echo $selected; ?>>
-									<?php echo $option_label; ?>
-								</option>
-
-								<?php
-							endforeach;
-						endif;
-						?>
-
-					</select>
-				<?php else: ?>
-					No select options.
-				<?php endif; ?>
-			</label>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
-		<?php
+		new RBM_FH_Field_Media( $name, $label, $args, $value );
 	}
 
 	/**
@@ -452,91 +415,6 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	}
 
 	/**
-	 * Outputs an image field.
-	 *
-	 * @since 1.2.0
-	 *
-	 * @param string $name
-	 * @param string|bool $label
-	 * @param string|bool $value
-	 * @param array $args
-	 */
-	function rbm_do_field_media( $name, $label = false, $value = false, $args = array() ) {
-
-		global $post;
-
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'            => '',
-			'preview_size'       => 'medium',
-			'button_text'        => 'Upload / Choose Media',
-			'button_remove_text' => 'Remove Media',
-			'type'               => 'any',
-			'window_title'       => 'Choose Media',
-			'window_button_text' => 'Use Media',
-			'placeholder'        => '&nbsp;',
-			'description'        => false,
-			'input_class'        => 'widefat',
-			'wrapper_class'      => '',
-		) );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-		$media_item_src = wp_get_attachment_image_src( $value, $args['preview_size'] );
-		?>
-		<div class="rbm-field-media <?php echo $args['wrapper_class']; ?>">
-			<div class="rbm-media-uploader" data-type="<?php echo $args['type']; ?>"
-			     data-title="<?php echo $args['window_title']; ?>"
-			     data-button-text="<?php echo $args['window_button_text']; ?>">
-
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-
-				<?php
-				switch ( $args['type'] ) :
-
-					case 'image':
-
-						$args['placeholder'] = $args['placeholder'] != '&nbsp;' ? $args['placeholder'] : '';
-						?>
-						<img src="<?php echo $value ? $media_item_src[0] : $args['placeholder']; ?>"
-						     class="image-preview"
-						     data-placeholder="<?php echo $args['placeholder']; ?>"/>
-						<?php
-						break;
-
-					default:
-						?>
-						<code class="media-url" data-placeholder="<?php echo $args['placeholder']; ?>">
-							<?php echo $value ? $media_item_src[0] : $args['placeholder']; ?>
-						</code>
-						<?php
-				endswitch;
-				?>
-
-				<br/>
-
-				<input type="button" class="button upload-media"
-				       value="<?php echo $args['button_text']; ?>" <?php echo $value ? 'style="display: none;"' : ''; ?> />
-				<input type="button" class="button remove-media"
-				       value="<?php echo $args['button_remove_text']; ?>" <?php echo ! $value ? 'style="display: none;"' : ''; ?> />
-
-				<input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>"
-				       class="media-id <?php echo isset( $args['input_class'] ) ? $args['input_class'] : ''; ?>"/>
-			</div>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</div>
-		<?php
-	}
-
-	/**
 	 * Outputs a datepicker field.
 	 *
 	 * @since 1.6.0
@@ -548,57 +426,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 */
 	function rbm_do_field_datepicker( $name, $label = false, $value = false, $args = array() ) {
 
-		global $post;
-
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'         => date( 'Y/m/d' ),
-			'description'     => false,
-			'sanitization'    => false,
-			'input_class'     => '',
-			'input_atts'      => array(),
-			'wrapper_class'   => '',
-			'datepicker_args' => array(),
-		) );
-
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-
-		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
-
-			$value = call_user_func( $args['sanitization'], $value );
-			update_post_meta( get_the_ID(), $name, $value );
-		}
-
-		$data = '';
-		foreach ( $args['datepicker_args'] as $arg_name => $arg_value ) {
-			$data .= " data-$arg_name=\"$arg_value\"";
-		}
-		?>
-		<p class="rbm-field-datepicker <?php echo $args['wrapper_class']; ?>">
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
-				       class="<?php echo $args['input_class']; ?>" <?php echo $data; ?>
-					<?php echo $input_atts; ?> />
-			</label>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
-		<?php
+		new RBM_FH_Field_DatePicker( $name, $label, $args, $value );
 	}
 
 	/**
@@ -613,45 +441,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 */
 	function rbm_do_field_colorpicker( $name, $label = false, $value = false, $args = array() ) {
 
-		global $post;
-
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		if ( ! isset( $args['no_init'] ) || $args['no_init'] === false ) {
-			_rbm_field_init( $name );
-		}
-
-		$args = wp_parse_args( $args, array(
-			'default'       => '#fff',
-			'description'   => false,
-			'input_class'   => 'widefat',
-			'input_atts'    => array(),
-			'wrapper_class' => '',
-		) );
-
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
-
-		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $name, true );
-			$value = $value ? $value : $args['default'];
-		}
-		?>
-		<p class="rbm-field-colorpicker <?php echo $args['wrapper_class']; ?>">
-			<label>
-				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
-				       class="<?php echo $args['input_class']; ?>"
-				       data-default-color="<?php echo $args['default']; ?>"
-					<?php echo $input_atts; ?> />
-			</label>
-
-			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
-		<?php
+		new RBM_FH_Field_ColorPicker( $name, $label, $args, $value );
 	}
 
 	/**
@@ -662,77 +452,13 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 	 * @param string $name
 	 * @param string|bool $label
 	 * @param array $fields
+	 * @param mixed $values
 	 */
 	function rbm_do_field_repeater( $name, $label = false, $fields, $values = false ) {
 
-		global $post;
+		$args = array( 'fields' => $fields );
 
-		$name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "_rbm_$name";
-
-		_rbm_field_init( $name );
-
-		if ( $values === false ) {
-			$values = get_post_meta( $post->ID, $name, true );
-		}
-
-		$empty = ! $values;
-
-		$row_count = count( $values ) >= 1 ? count( $values ) : 1;
-
-		if ( $label ) : ?>
-			<p class="rbm-field-repeater-label">
-				<?php echo $label; ?>
-			</p>
-		<?php endif; ?>
-
-		<div class="rbm-field-repeater repeater">
-			<div class="rbm-field-repeater-list" data-repeater-list="<?php echo $name; ?>">
-
-				<?php for ( $i = 0; $i < $row_count; $i ++ ) : ?>
-
-					<div class="rbm-field-repeater-row <?php echo $empty ? 'dummy' : ''; ?>" data-repeater-item>
-
-						<div class="rbm-field-repeater-handle"></div>
-
-						<?php foreach ( $fields as $field_name => $field ) : ?>
-							<?php
-							if ( is_callable( "rbm_do_field_$field[type]" ) ) {
-
-								$field = wp_parse_args( $field, array(
-									'label' => false,
-									'value' => isset( $values[ $i ][ $field_name ] ) ? $values[ $i ][ $field_name ] : false,
-									'args'  => array(),
-								) );
-
-								$field['args']['no_init'] = true;
-
-								if ( $field['type'] == 'wysiwyg' ) {
-
-									$field['args']['wysiwyg_id']   = "{$name}_{$i}_{$field_name}";
-									$field['args']['wysiwyg_args'] = array(
-										'textarea_name' => $field_name,
-										'teeny'         => true,
-										'textarea_rows' => 6,
-									);
-								}
-
-								call_user_func( "rbm_do_field_$field[type]", $field_name, $field['label'], $field['value'], $field['args'] );
-							}
-							?>
-						<?php endforeach; ?>
-
-						<div class="clearfix"></div>
-						<hr/>
-						<input data-repeater-delete type="button" class="button" value="Delete"/>
-					</div>
-
-				<?php endfor; ?>
-
-			</div>
-
-			<input data-repeater-create type="button" class="button button-primary" value="Add"/>
-		</div>
-		<?php
+		new RBM_FH_Field_Repeater( $name, $label, $args, $values );
 	}
 
 	function rbm_do_field_taxonomy( $post, $taxonomy, $type = 'checkbox' ) {

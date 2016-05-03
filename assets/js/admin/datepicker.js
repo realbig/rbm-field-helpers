@@ -3,18 +3,32 @@
 
     $(function () {
 
-        datepickers_init();
-        $(document).on('rbm-repeater-add', datepickers_init);
+        var $datepickers = $('.rbm-field-datepicker');
 
-        function datepickers_init() {
+        if (!$datepickers.length) {
+            return;
+        }
 
-            $('.rbm-field-datepicker').each(function () {
+        datepickers_init($datepickers);
 
-                if ($(this).data('rbm_datepicker_init')) {
-                    return;
-                }
+        $('.rbm-field-repeater').on('add-item', datepicker_repeater_add);
 
-                $(this).find('input[type="text"]').datepicker($(this).data()).data('rbm_datepicker_init', 1);
+        function datepicker_repeater_add(e, $item) {
+
+            var $datepickers = $item.find('.rbm-field-datepicker');
+
+            // Reset them
+            $datepickers.find('input[type="text"]').removeClass('hasDatepicker');
+            datepickers_init($datepickers);
+        }
+
+        // TODO Get this working... also make sure all other repeater items are firing on the new "add-item" trigger
+
+        function datepickers_init($datepickers) {
+
+            $datepickers.each(function (){
+                console.log($(this));
+                $(this).find('input[type="text"]').datepicker($(this).data());
             });
         }
     });
