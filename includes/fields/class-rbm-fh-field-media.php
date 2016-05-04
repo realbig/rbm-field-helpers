@@ -61,7 +61,11 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		$media_item_src = wp_get_attachment_image_src( $value, $args['preview_size'] );
+		if ( $media_item_src = wp_get_attachment_image_src( $value, $args['preview_size'] ) ) {
+			$media_preview_url = $media_item_src[0];
+		} else {
+			$media_preview_url = wp_get_attachment_url( $value );
+		}
 		?>
 		<div class="rbm-field-media <?php echo $args['wrapper_class']; ?>">
 			<div class="rbm-media-uploader" data-type="<?php echo $args['type']; ?>"
@@ -77,7 +81,7 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 
 						$args['placeholder'] = $args['placeholder'] != '&nbsp;' ? $args['placeholder'] : '';
 						?>
-						<img src="<?php echo $value ? $media_item_src[0] : $args['placeholder']; ?>"
+						<img src="<?php echo $value ? $media_preview_url : $args['placeholder']; ?>"
 						     class="image-preview"
 						     data-placeholder="<?php echo $args['placeholder']; ?>"/>
 						<?php
@@ -86,7 +90,7 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 					default:
 						?>
 						<code class="media-url" data-placeholder="<?php echo $args['placeholder']; ?>">
-							<?php echo $value ? $media_item_src[0] : $args['placeholder']; ?>
+							<?php echo $value ? $media_preview_url : $args['placeholder']; ?>
 						</code>
 						<?php
 				endswitch;
