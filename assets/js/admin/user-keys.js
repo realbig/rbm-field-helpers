@@ -33,7 +33,7 @@
      */
     function get_elements() {
 
-        $user_keys = $('#rbm-field-user-keys[data-init]');
+        $user_keys = $('#rbm-field-user-keys[data-ajax]');
 
         if (!$user_keys.length) {
             return;

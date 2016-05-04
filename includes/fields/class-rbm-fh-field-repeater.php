@@ -68,7 +68,7 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 						<?php foreach ( $fields as $field_name => $field ) : ?>
 							<?php
 
-							if ( in_array( $field['type'], array( 'table' ) ) ){
+							if ( in_array( $field['type'], array( 'table', 'user_keys' ) ) ){
 								echo "<strong>ERROR:</strong> Field <strong>$field[type]</strong> not supported for repeaters.";
 								continue;
 							}

@@ -24,6 +24,18 @@ add_action( 'wp_ajax_rbm_ajax_delete_user_key_all', array( 'RBM_FH_Field_UserKey
 class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 
 	/**
+	 * Field defaults.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'no_init' => true,
+		'ajax'    => true,
+	);
+
+	/**
 	 * Used to only allow the field to be called one time.
 	 *
 	 * @since {{VERSION}}
@@ -50,7 +62,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 			self::$did_one = true;
 		}
 
-		parent::__construct( 'user-keys', $label, $args, $value );
+		parent::__construct( '_rbm_user_keys', $label, $args, $value );
 	}
 
 	/**
@@ -69,6 +81,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 		?>
 		<div id="rbm-field-user-keys" class="<?php echo $args['wrapper_class']; ?>"
 			<?php echo ! $args['no_init'] ? 'data-init' : ''; ?>
+			<?php echo $args['ajax'] ? 'data-ajax' : ''; ?>
 			 data-post-id="<?php echo isset( $args['post_ID'] ) ? $args['post_ID'] : get_the_ID(); ?>">
 			<p>
 				<label>
@@ -112,25 +125,27 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 						</td>
 					</tr>
 
-					<?php foreach ( $value as $user_email => $user_key ) : ?>
-						<tr data-email="<?php echo esc_attr( $user_email ); ?>">
-							<td>
-								<?php echo $user_email; ?>
-							</td>
-							<td>
-								<a href="<?php echo  "$link_base?rbm_user_key=$user_key"; ?>">
-									<?php echo "$link_base?rbm_user_key=$user_key"; ?>
-								</a>
-							</td>
-							<td>
-								<a href="#" class="delete-user-key button"
-								   data-email="<?php echo esc_attr( $user_email ); ?>"
-								   data-user-key-delete>
-									Delete User Key
-								</a>
-							</td>
-						</tr>
-					<?php endforeach; ?>
+					<?php if ( ! empty( $value ) && is_array( $value ) ) : ?>
+						<?php foreach ( $value as $user_email => $user_key ) : ?>
+							<tr data-email="<?php echo esc_attr( $user_email ); ?>">
+								<td>
+									<?php echo $user_email; ?>
+								</td>
+								<td>
+									<a href="<?php echo "$link_base?rbm_user_key=$user_key"; ?>">
+										<?php echo "$link_base?rbm_user_key=$user_key"; ?>
+									</a>
+								</td>
+								<td>
+									<a href="#" class="delete-user-key button"
+									   data-email="<?php echo esc_attr( $user_email ); ?>"
+									   data-user-key-delete>
+										Delete User Key
+									</a>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					<?php endif; ?>
 					</tbody>
 				</table>
 
