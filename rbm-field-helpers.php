@@ -4,31 +4,12 @@
  *
  * @version 1.0.0
  *
- * @package    RBMFieldHelpers
+ * @package RBMFieldHelpers
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
-
-// REMOVE
-add_action( 'add_meta_boxes', function () {
-
-	add_meta_box(
-		'test',
-		'Test',
-		function () {
-
-			rbm_do_field_repeater( 'repeater_test', 'Repeater Test', array(
-				'datepicker' => array(
-					'type' => 'datepicker',
-					'label' => 'Date Picker',
-				),
-			) );
-		},
-		'post'
-	);
-} );
 
 // Only load once
 if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {

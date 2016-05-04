@@ -80,7 +80,6 @@ function rbm_field( $field, $post_ID = false ) {
 	echo rbm_get_field( $field, $post_ID );
 }
 
-
 /**
  * This one is used for replacing the taxonomy MB content.
  *
