@@ -2,7 +2,7 @@
 /**
  * Field: User Keys
  *
- * @since 1.6.0
+ * @since 1.1.0
  *
  * @package RBMFieldHelpers
  * @subpackage RBMFieldHelpers/includes/fields
@@ -19,14 +19,14 @@ add_action( 'wp_ajax_rbm_ajax_delete_user_key_all', array( 'RBM_FH_Field_UserKey
 /**
  * Class RBM_FH_Field_UserKeys
  *
- * @since 1.6.0
+ * @since 1.1.0
  */
 class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 
 	/**
 	 * Field defaults.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.1.0
 	 *
 	 * @var array
 	 */
@@ -38,7 +38,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 	/**
 	 * Used to only allow the field to be called one time.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.1.0
 	 *
 	 * @var bool
 	 */
@@ -47,7 +47,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 	/**
 	 * RBM_FH_Field_UserKeys constructor.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @var string $label
 	 * @var array $args
@@ -68,7 +68,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 	/**
 	 * Outputs the field.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
@@ -167,7 +167,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 	/**
 	 * Adds some data to localize.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.1.0
 	 * @access private
 	 *
 	 * @param array $data Data to localize.
@@ -212,14 +212,14 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 		/**
 		 * Allows filtering of the post ID.
 		 *
-		 * @since 1.6.0
+		 * @since 1.1.0
 		 */
 		apply_filters( 'rbm_user_key_post_ID_delete', $post_ID, $user_email );
 
 		/**
 		 * Allows filtering of the user email to be deleted.
 		 *
-		 * @since 1.6.0
+		 * @since 1.1.0
 		 */
 		apply_filters( 'rbm_user_key_email_delete', $user_email, $post_ID );
 
@@ -242,7 +242,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 		/**
 		 * Allows filtering ot the edit link sent via email to the new user.
 		 *
-		 * @since 1.6.0
+		 * @since 1.1.0
 		 */
 		apply_filters( 'rbm_user_key_mail_edit_link', $edit_link, $user_email, $user_key, $post_ID );
 
@@ -291,14 +291,14 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 		/**
 		 * Allows filtering of the new user post ID.
 		 *
-		 * @since 1.6.0
+		 * @since 1.1.0
 		 */
 		apply_filters( 'rbm_user_key_post_ID_delete', $post_ID, $user_email );
 
 		/**
 		 * Allows filtering of the new user email.
 		 *
-		 * @since 1.6.0
+		 * @since 1.1.0
 		 */
 		apply_filters( 'rbm_user_key_email_delete', $user_email, $post_ID );
 
@@ -347,7 +347,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 		/**
 		 * Allows filtering of the post ID.
 		 *
-		 * @since 1.6.0
+		 * @since 1.1.0
 		 */
 		apply_filters( 'rbm_user_key_post_ID_delete', $post_ID );
 

@@ -2,7 +2,7 @@
 /**
  * Provides functions for quick calling the field helpers.
  *
- * @since {{VERSION}}
+ * @since 1.1.0
  *
  * @package RBMFieldHelpers
  * @subpackage RBMFieldHelpers/includes
@@ -124,7 +124,7 @@ function rbm_do_field_image( $name, $label = false, $value = false, $args = arra
 /**
  * Outputs a datepicker field.
  *
- * @since 1.6.0
+ * @since 1.1.0
  *
  * @param string $name
  * @param string|bool $label
@@ -201,7 +201,7 @@ function rbm_do_field_wysiwyg( $name, $label = false, $value = false, $args = ar
 /**
  * User Keys field.
  *
- * @since 1.6.0
+ * @since 1.1.0
  *
  * @param bool $label
  * @param array $args

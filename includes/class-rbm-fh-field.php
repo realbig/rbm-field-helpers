@@ -2,7 +2,7 @@
 /**
  * Field framework.
  *
- * @since 1.6.0
+ * @since 1.1.0
  *
  * @package RBMFieldHelpers
  * @subpackage RBMFieldHelpers/includes
@@ -13,14 +13,14 @@ defined( 'ABSPATH' ) || die();
 /**
  * Class RBM_FH_Field
  *
- * @since 1.6.0
+ * @since 1.1.0
  */
 abstract class RBM_FH_Field {
 
 	/**
 	 * Field name.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @var string
 	 */
@@ -29,7 +29,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Field label.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @var string
 	 */
@@ -38,7 +38,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Field arguments.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @var array|null
 	 */
@@ -47,7 +47,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Field value.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @var string|bool|null
 	 */
@@ -56,7 +56,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * RBM_FH_Field constructor.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @var string $name
 	 * @var string $label
@@ -99,7 +99,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Initializes a field.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 */
 	private function field_init() {
 
@@ -119,7 +119,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Gets the field value.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 */
 	function get_value() {
 
@@ -140,7 +140,7 @@ abstract class RBM_FH_Field {
 		/**
 		 * Filter the set value.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 */
 		$this->value = apply_filters( "rbm_field_{$this->name}_value", $value, $this );
 	}
@@ -148,7 +148,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Outputs the field.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.

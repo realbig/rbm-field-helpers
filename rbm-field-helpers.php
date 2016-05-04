@@ -2,7 +2,7 @@
 /**
  * Provides helper functions shared among all RBM plugins.
  *
- * @version 1.0.0
+ * @version 1.1.0
  *
  * @package RBMFieldHelpers
  */
@@ -15,14 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 	define( 'RBM_HELPER_FUNCTIONS', true );
-	define( 'RBM_FIELD_HELPERS_VER', '1.0.0' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.1.0' );
 
 	final class RBM_FieldHelpers {
 
 		/**
 		 * All registered fields.
 		 *
-		 * @since 1.6.0
+		 * @since 1.1.0
 		 *
 		 * @var array
 		 */
@@ -31,7 +31,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * Loaded scripts.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 *
 		 * @var array
 		 */
@@ -40,7 +40,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * Loaded styles.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 *
 		 * @var array
 		 */
@@ -55,7 +55,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * Returns the *Singleton* instance of this class.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 *
 		 * @staticvar Singleton $instance The *Singleton* instances of this class.
 		 *
@@ -75,7 +75,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * RBM_FieldHelpers constructor.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 */
 		function __construct() {
 
@@ -90,7 +90,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * Loads all plugin required files.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 */
 		private function includes() {
 
@@ -119,7 +119,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * Registers all scripts.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 * @access private
 		 */
 		function register_scripts() {
@@ -175,7 +175,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * Enqueues common scripts.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 * @access private
 		 */
 		function enqueue_scripts() {
@@ -193,7 +193,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		/**
 		 * Saves the field helpers post meta.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.1.0
 		 * @access private
 		 *
 		 * @param $post_ID

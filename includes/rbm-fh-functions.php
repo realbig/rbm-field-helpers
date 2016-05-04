@@ -2,7 +2,7 @@
 /**
  * Provides global functions for the plugin.
  *
- * @since {{VERSION}}
+ * @since 1.1.0
  *
  * @package RBMFieldHelpers
  * @subpackage RBMFieldHelpers/includes
@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || die();
 /**
  * Gets the main plugin instance.
  *
- * @since {{VERSION}}
+ * @since 1.1.0
  *
  * @return RBM_FieldHelpers
  */
@@ -51,14 +51,14 @@ function rbm_get_field( $field, $post_ID = false, $sanitization = false ) {
 	/**
 	 * Allows filtering of the field value.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 */
 	$value = apply_filters( 'rbm_get_field', $value, $field, $post_ID );
 
 	/**
 	 * Allows filtering of the specific field value.
 	 *
-	 * @since 1.6.0
+	 * @since 1.1.0
 	 */
 	$value = apply_filters( "rbm_get_field_$field", $value, $post_ID );
 
@@ -83,7 +83,7 @@ function rbm_field( $field, $post_ID = false ) {
 /**
  * This one is used for replacing the taxonomy MB content.
  *
- * @since {{VERSION}}
+ * @since 1.1.0
  *
  * @param $post
  * @param $taxonomy
@@ -131,7 +131,7 @@ function rbm_do_field_taxonomy( $post, $taxonomy, $type = 'checkbox' ) {
 /**
  * Legacy.
  *
- * @since {{VERSION}}
+ * @since 1.1.0
  *
  * @deprecated
  *
@@ -146,7 +146,7 @@ function rbm_do_helper_field_button( $name, $label = false, $args = array() ) {
 /**
  * Provides an easy to use link.
  *
- * @since {{VERSION}}
+ * @since 1.1.0
  *
  * @param $name
  * @param bool $label

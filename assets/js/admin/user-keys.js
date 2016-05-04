@@ -1,7 +1,7 @@
 /**
  * Handles all functionality for the user keys system.
  *
- * @since 1.6.0
+ * @since 1.1.0
  */
 (function ($, data) {
     'use strict';
@@ -11,7 +11,7 @@
     /**
      * Initialize the user keys system.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      */
     function init() {
 
@@ -29,7 +29,7 @@
     /**
      * Gets the elements needed.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      */
     function get_elements() {
 
@@ -49,7 +49,7 @@
     /**
      * Sets up any handlers.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      */
     function setup_handlers() {
 
@@ -62,7 +62,7 @@
     /**
      * Adds a new user.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      */
     function add_user() {
 
@@ -103,7 +103,7 @@
     /**
      * Deletes a user.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      */
     function delete_user(e) {
 
@@ -141,7 +141,7 @@
     /**
      * Deletes all users.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      */
     function delete_users(e) {
 
@@ -178,7 +178,7 @@
     /**
      * Adds a row to the user keys table.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      *
      * @param email
      * @param key
@@ -206,7 +206,7 @@
     /**
      * Deletes a row from the user keys table.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      *
      * @param email
      */
@@ -225,7 +225,7 @@
     /**
      * Prevents submitting from input.
      *
-     * @since 1.6.0
+     * @since 1.1.0
      *
      * @param e
      */

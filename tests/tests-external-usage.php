@@ -6,21 +6,21 @@ defined( 'ABSPATH' ) || die();
  *
  * Tests expected usage from external sources (plugins, themes).
  *
- * @since {{VERSION}}
+ * @since 1.1.0
  */
 class Tests_ExternalUsage extends WP_UnitTestCase {
 
 	/**
 	 * Store created post ID for usage in tests.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.1.0
 	 *
 	 * @var int
 	 */
 	private $test_post_ID;
 
 	/**
-	 * @since {{VERSION}}
+	 * @since 1.1.0
 	 */
 	function setUp() {
 
@@ -39,7 +39,7 @@ class Tests_ExternalUsage extends WP_UnitTestCase {
 	/**
 	 * Test retrieval of a field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.1.0
 	 */
 	function test_get_field() {
 
