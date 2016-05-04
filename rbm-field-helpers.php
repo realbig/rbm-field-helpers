@@ -4,8 +4,7 @@
  *
  * @version 1.0.0
  *
- * @package    CPTAnimal
- * @subpackage CPTAnimal/core
+ * @package    RBMFieldHelpers
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
