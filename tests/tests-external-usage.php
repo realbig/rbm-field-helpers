@@ -68,7 +68,7 @@ class Tests_ExternalUsage extends WP_UnitTestCase {
 	/**
 	 * Test retrievel of a field value.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.1.1
 	 */
 	function test_field_value() {
 
