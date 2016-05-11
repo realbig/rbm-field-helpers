@@ -125,6 +125,18 @@ abstract class RBM_FH_Field {
 
 		global $post;
 
+		// Make sure something exists in post
+		if ( ! $post ) {
+			return false;
+		}
+
+		// If not a post object, try to get it
+		if ( ! $post instanceof WP_Post ) {
+			if ( ! ( $post = get_post( $post ) ) ) {
+				return false;
+			}
+		}
+
 		// Get value
 		$value = $this->value;
 		if ( $value === false ) {

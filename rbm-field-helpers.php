@@ -2,7 +2,7 @@
 /**
  * Provides helper functions shared among all RBM plugins.
  *
- * @version 1.1.0
+ * @version 1.1.1
  *
  * @package RBMFieldHelpers
  */
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 	define( 'RBM_HELPER_FUNCTIONS', true );
-	define( 'RBM_FIELD_HELPERS_VER', '1.1.0' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.1.1' );
 
 	final class RBM_FieldHelpers {
 
