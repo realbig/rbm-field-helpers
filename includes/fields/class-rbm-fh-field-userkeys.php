@@ -174,7 +174,7 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 	 *
 	 * @return mixed
 	 */
-	function add_data( $data ) {
+	static function add_data( $data ) {
 
 		$data['userkeys_ajax_delete_users_action'] = 'rbm_ajax_delete_user_key_all';
 		$data['userkeys_ajax_delete_user_action']  = 'rbm_ajax_delete_user_key';
