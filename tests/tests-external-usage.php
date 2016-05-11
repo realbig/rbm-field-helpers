@@ -64,5 +64,37 @@ class Tests_ExternalUsage extends WP_UnitTestCase {
 		$test_field = ob_get_clean();
 		$this->assertEquals( '1', $test_field );
 	}
+
+	/**
+	 * Test retrievel of a field value.
+	 *
+	 * @since {{VERSION}}
+	 */
+	function test_field_value() {
+
+		global $post, $rbm_fh_factory;
+
+		update_post_meta( $this->test_post_ID, '_rbm_test_text', '1' );
+
+		// Setup field
+		ob_start();
+		$field = new RBM_FH_Field_Text( 'test_text' );
+		ob_get_clean();
+
+		// Test normal usage
+		$this->assertEquals( '1', $field->value );
+
+		// Unset post to test failure
+		$_post = $post;
+		$post = null;
+
+		// Setup field again
+		ob_start();
+		$field = new RBM_FH_Field_Text( 'test_text' );
+		ob_get_clean();
+
+		// Test failure
+		$this->assertEquals( false, $field->value );
+	}
 }
 
