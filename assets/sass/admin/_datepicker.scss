@@ -138,19 +138,6 @@
   border: transparent;
 }
 
-.ui-datepicker td.ui-datepicker-week-end {
-  background-color: #f4f4f4;
-  border: 1px solid #f4f4f4;
-}
-
-.ui-datepicker td.ui-datepicker-today {
-  background-color: #feec83;
-}
-
-.ui-datepicker td.ui-datepicker-current-day {
-  background: #FED05D;
-}
-
 .ui-datepicker td .ui-state-default {
   background: transparent;
   border: none;
@@ -167,17 +154,38 @@
   opacity: 0.5;
 }
 
-/* Default Color Scheme */
-.ui-datepicker .ui-widget-header,
-.ui-datepicker .ui-datepicker-header {
-  background: #670140;
-}
+// Default Color Scheme
+.ui-datepicker {
+  .ui-widget-header, .ui-datepicker-header {
+    background: #52accc;
+  }
 
-.ui-datepicker thead {
-  background: #32373c;
-}
+  thead {
+    background: #096484;
+  }
 
-.ui-datepicker td .ui-state-hover {
-  background: #3D0125;
-  color: #fff;
+  td {
+    &.ui-datepicker-week-end {
+      background-color: #f4f4f4;
+      border: 1px solid #f4f4f4;
+    }
+
+    &.ui-datepicker-today {
+      background-color: #4796b3;
+    }
+
+    &.ui-datepicker-current-day {
+      background: #4796b3;
+      color: #fff;
+    }
+
+    .ui-state-hover {
+      background: #096484;
+      color: #fff;
+    }
+
+    a {
+      color: inherit;
+    }
+  }
 }
