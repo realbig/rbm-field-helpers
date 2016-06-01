@@ -2,7 +2,7 @@
 /**
  * Loads in Parsley, if not yet loaded from RBM.
  *
- * @version {{VERSION}}
+ * @version 1.1.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
