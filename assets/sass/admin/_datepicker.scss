@@ -1,5 +1,3 @@
-
-
 /* Date Picker Default Styles */
 .ui-datepicker {
   padding: 0;
@@ -179,13 +177,13 @@
       color: #fff;
     }
 
-    .ui-state-hover {
-      background: #096484;
-      color: #fff;
+    a.ui-state-default {
+      color: inherit;
     }
 
-    a {
-      color: inherit;
+    a.ui-state-hover {
+      background: #096484;
+      color: #fff;
     }
   }
 }

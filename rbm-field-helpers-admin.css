@@ -279,12 +279,12 @@
   background: #4796b3;
   color: #fff; }
 
-.ui-datepicker td .ui-state-hover {
+.ui-datepicker td a.ui-state-default {
+  color: inherit; }
+
+.ui-datepicker td a.ui-state-hover {
   background: #096484;
   color: #fff; }
-
-.ui-datepicker td a {
-  color: inherit; }
 
 .rbm-field-radio {
   margin-top: 0.2em;
