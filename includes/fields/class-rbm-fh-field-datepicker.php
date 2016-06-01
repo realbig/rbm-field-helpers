@@ -42,7 +42,7 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	function __construct( $name, $label = '', $args = array(), $value = false ) {
 
 		// Cannot use function in property declaration
-		$args['default'] = date( 'Y/m/d' );
+		$args['default'] = date( 'm/d/Y' );
 
 		parent::__construct( $name, $label, $args, $value );
 	}
@@ -65,16 +65,31 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 		}
 		$input_atts = implode( ' ', $input_atts );
 
-		$data = '';
-		foreach ( $args['datepicker_args'] as $arg_name => $arg_value ) {
-			$data .= " data-$arg_name=\"$arg_value\"";
+		// Get preview format
+		$preview = date( 'm/d/Y', strtotime( $value ? $value : $args['default'] ) );
+
+		// Datepicker args
+		if ( $args['datepicker_args'] ) {
+			add_filter( 'rbm_field_helpers_admin_data', function ( $data ) use ( $args, $name ) {
+
+				$data["datepicker_args_$name"] = $args['datepicker_args'];
+
+				return $data;
+			} );
 		}
 		?>
 		<p class="rbm-field-datepicker <?php echo $args['wrapper_class']; ?>">
+
 			<label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
-				       class="<?php echo $args['input_class']; ?>" <?php echo $data; ?>
+
+				<input type="text" class="rbm-field-datepicker-preview"
+				       value="<?php echo $preview; ?>"/>
+
+				<input type="hidden" name="<?php echo $name; ?>"
+				       value="<?php echo $value ? $value : $args['default']; ?>"
+				       id="rbm-field-datepicker-input-<?php echo $name; ?>"
+				       class="<?php echo $args['input_class']; ?>"
 					<?php echo $input_atts; ?> />
 			</label>
 

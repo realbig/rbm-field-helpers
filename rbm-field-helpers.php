@@ -83,6 +83,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			add_action( 'admin_footer', array( $this, 'localize_data'));
 
 			add_action( 'save_post', array( $this, 'save_meta' ) );
 		}
@@ -163,13 +164,6 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				false,
 				null
 			);
-
-			// Localize data
-			$data = apply_filters( 'rbm_field_helpers_admin_data', array(
-				'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
-			) );
-
-			wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
 		}
 
 		/**
@@ -188,6 +182,24 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			wp_enqueue_style( 'jquery-ui-smoothness' );
 			wp_enqueue_style( 'RBM-field-helpers-admin' );
 			wp_enqueue_style( 'wp-color-picker' );
+		}
+
+		/**
+		 * Localizes data.
+		 *
+		 * Fired in the footer so that fields can add data to this dynamically.
+		 *
+		 * @since {{VERSION}}
+		 * @access private
+		 */
+		function localize_data() {
+
+			// Localize data
+			$data = apply_filters( 'rbm_field_helpers_admin_data', array(
+				'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
+			) );
+
+			wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
 		}
 
 		/**

@@ -26,7 +26,27 @@
         function datepickers_init($datepickers) {
 
             $datepickers.each(function (){
-                $(this).find('input[type="text"]').datepicker($(this).data());
+
+                var name = $(this).find('input[type="hidden"]').attr('name'),
+                    input_ID = '#rbm-field-datepicker-input-' + name,
+                    option_functions = ['beforeShow', 'beforeShowDay', 'calculateWeek', 'onChangeMonthYear', 'onClose', 'onSelect'],
+                    options = {};
+
+                if (RBM_FieldHelpers['datepicker_args_' + name]) {
+                    options = RBM_FieldHelpers['datepicker_args_' + name];
+                }
+
+                // Function support
+                $.each(options, function (name, value ) {
+                    if (option_functions.indexOf(name) !== -1) {
+                        options[name] = window[value];
+                    }
+                });
+
+                options['altField'] = input_ID;
+                options['altFormat'] = 'yymmdd';
+
+                $(this).find('.rbm-field-datepicker-preview').datepicker(options);
             });
         }
     });
