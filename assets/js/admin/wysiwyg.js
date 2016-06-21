@@ -10,6 +10,7 @@
         }
 
         $repeaters.on('add-item list-update', repeater_change);
+        $repeaters.on('delete-item', repeater_row_removed);
 
     });
 
@@ -20,6 +21,17 @@
         var name = $( $wysiwygs[0] ).closest( '.rbm-field-repeater-list' ).data( 'repeater-list' );
 
         var re = new RegExp('(' + name + '_)\\d(_.*?)', 'i');
+        
+        // Destroy ALL tinyMCE instances for our repeater
+        // Otherwise when we delete and re-index, we will have an extra textarea that appears in some cases
+        var activeEditors = tinymce.editors;
+        for ( var index = 0; index < activeEditors.length; index++ ) {
+            
+            if ( tinymce.editors[index].id.toLowerCase().indexOf( name ) > -1 ) {
+                tinymce.get( activeEditors[index].id ).destroy();
+            }
+            
+        }
 
         $wysiwygs.each( function( index, element ) {
 
@@ -73,9 +85,6 @@
             }
 
             tinymce.init(tinymceArgs);
-            
-            // Remove any old instances of the editor to prevent weird bugs
-            tinymce.execCommand( 'mceRemoveEditor', false, $textarea.attr( 'id' ) );
 
             tinymce.execCommand( 'mceAddEditor', false, $textarea.attr( 'id' ) );
 
@@ -89,11 +98,21 @@
             QTags._buttonsInit();
 
         });
+        
     }
 
     function repeater_change(e, $repeaterRow ) {
 
         var $wysiwygs = $repeaterRow.parent().find('.rbm-field-wysiwyg');
+
+        if ($wysiwygs.length) {
+            replace_wysiwygs($wysiwygs);
+        }
+    }
+    
+    function repeater_row_removed(e, $repeater ) {
+
+        var $wysiwygs = $repeater.find('.rbm-field-wysiwyg');
 
         if ($wysiwygs.length) {
             replace_wysiwygs($wysiwygs);
