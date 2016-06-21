@@ -22,6 +22,9 @@
 
         var re = new RegExp('(' + name + '_)\\d(_.*?)', 'i');
         
+        // For deletion of rows, we need to ensure that the name is properly indexed as well.
+        var nameRe = new RegExp('(' + name + '\\[)\\d(\\]\\[.*?\\])', 'i');
+        
         // Destroy ALL tinyMCE instances for our repeater
         // Otherwise when we delete and re-index, we will have an extra textarea that appears in some cases
         var activeEditors = tinymce.editors;
@@ -64,6 +67,8 @@
             } );
 
             var $textarea = $( element ).find('textarea.wp-editor-area');
+            
+            $textarea.attr( 'name', $textarea.attr( 'name' ).replace( nameRe, "$1" + index + "$2" ) );
 
             var tinymceArgs = {
                 selector: $textarea.attr( 'id' ),  // change this value according to your HTML
