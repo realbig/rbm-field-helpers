@@ -69,8 +69,11 @@
             // Add our WYSIWYG to the Quicktags Instances
             quicktags( {
                 id: $textarea.attr( 'id' ),
-                buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,more,close"
+                buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,more,close,butts"
             } );
+            
+            // Add Quicktags buttons to our new instance
+            QTags._buttonsInit();
 
         });
     }
