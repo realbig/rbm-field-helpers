@@ -73,6 +73,9 @@
             }
 
             tinymce.init(tinymceArgs);
+            
+            // Remove any old instances of the editor to prevent weird bugs
+            tinymce.execCommand( 'mceRemoveEditor', false, $textarea.attr( 'id' ) );
 
             tinymce.execCommand( 'mceAddEditor', false, $textarea.attr( 'id' ) );
 
