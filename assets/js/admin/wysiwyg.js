@@ -53,17 +53,27 @@
 
             var $textarea = $( element ).find('textarea.wp-editor-area');
 
-            tinymce.init({
+            var tinymceArgs = {
                 selector: $textarea.attr( 'id' ),  // change this value according to your HTML
                 plugins: 'charmap,colorpicker,hr,lists,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpautoresize,wpeditimage,wpemoji,wpgallery,wplink,wpdialogs,wptextpattern,wpview,wpembed',
                 content_css: '/wp-includes/css/dashicons.css,/wp-includes/js/tinymce/skins/wordpress/wp-content.css',
                 menubar: false,
-                toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,unlink,fullscreen',
-                toolbar2: '',
+                toolbar1: 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,dfw,wp_adv,currentprojects,singleproject',
+                toolbar2: 'formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                 toolbar3: '',
                 toolbar4: '',
-            });
-            
+            };
+
+            // Load Teeny toolbar for the WYSIWYG if the "teeny" wysiwyg_arg is set to TRUE
+            if ( $( element ).hasClass( 'teeny' ) ) {
+
+                tinymceArgs.toolbar1 = 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,unlink,fullscreen';
+                tinymceArgs.toolbar2 = '';
+
+            }
+
+            tinymce.init(tinymceArgs);
+
             tinymce.execCommand( 'mceAddEditor', false, $textarea.attr( 'id' ) );
 
             // Add our WYSIWYG to the Quicktags Instances
@@ -71,7 +81,7 @@
                 id: $textarea.attr( 'id' ),
                 buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,more,close,butts"
             } );
-            
+
             // Add Quicktags buttons to our new instance
             QTags._buttonsInit();
 
