@@ -21,19 +21,19 @@
         var name = $( $wysiwygs[0] ).closest( '.rbm-field-repeater-list' ).data( 'repeater-list' );
 
         var re = new RegExp('(' + name + '_)\\d(_.*?)', 'i');
-        
+
         // For deletion of rows, we need to ensure that the name is properly indexed as well.
         var nameRe = new RegExp('(' + name + '\\[)\\d(\\]\\[.*?\\])', 'i');
-        
+
         // Destroy ALL tinyMCE instances for our repeater
         // Otherwise when we delete and re-index, we will have an extra textarea that appears in some cases
         var activeEditors = tinymce.editors;
         for ( var index = 0; index < activeEditors.length; index++ ) {
-            
+
             if ( tinymce.editors[index].id.toLowerCase().indexOf( name ) > -1 ) {
                 tinymce.get( activeEditors[index].id ).destroy();
             }
-            
+
         }
 
         $wysiwygs.each( function( index, element ) {
@@ -67,7 +67,7 @@
             } );
 
             var $textarea = $( element ).find('textarea.wp-editor-area');
-            
+
             $textarea.attr( 'name', $textarea.attr( 'name' ).replace( nameRe, "$1" + index + "$2" ) );
 
             var tinymceArgs = {
@@ -89,7 +89,10 @@
 
             }
 
-            tinymce.init(tinymceArgs);
+            // We need to store our settings in this global object. Just the way TinyMCE operates apparently.
+            tinyMCEPreInit.mceInit['_rbm_' + $textarea.attr( 'id' )] = tinymceArgs;
+
+            tinymce.init( tinymceArgs );
 
             tinymce.execCommand( 'mceAddEditor', false, $textarea.attr( 'id' ) );
 
@@ -99,11 +102,15 @@
                 buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,more,close,butts"
             } );
 
-            // Add Quicktags buttons to our new instance
+            // Add Quicktags buttons to our new editor instance
             QTags._buttonsInit();
 
+            // Switch to the appropriate tab per-editor and prevent weird graphical bugs if window.getUserSetting( 'editor' ) is set to 'html'
+            var mode = $( element ).find( '.wp-editor-wrap' ).hasClass( 'html-active' ) ? 'html' : 'tmce';
+            switchEditors.go( $textarea.attr( 'id' ), mode );
+
         });
-        
+
     }
 
     function repeater_change(e, $repeaterRow ) {
@@ -114,7 +121,7 @@
             replace_wysiwygs($wysiwygs);
         }
     }
-    
+
     function repeater_row_removed(e, $repeater ) {
 
         var $wysiwygs = $repeater.find('.rbm-field-wysiwyg');
