@@ -10,6 +10,7 @@
         }
 
         $repeaters.on('add-item list-update', repeater_change);
+        $repeaters.on('delete-item', repeater_row_removed);
 
     });
 
@@ -20,6 +21,20 @@
         var name = $( $wysiwygs[0] ).closest( '.rbm-field-repeater-list' ).data( 'repeater-list' );
 
         var re = new RegExp('(' + name + '_)\\d(_.*?)', 'i');
+        
+        // For deletion of rows, we need to ensure that the name is properly indexed as well.
+        var nameRe = new RegExp('(' + name + '\\[)\\d(\\]\\[.*?\\])', 'i');
+        
+        // Destroy ALL tinyMCE instances for our repeater
+        // Otherwise when we delete and re-index, we will have an extra textarea that appears in some cases
+        var activeEditors = tinymce.editors;
+        for ( var index = 0; index < activeEditors.length; index++ ) {
+            
+            if ( tinymce.editors[index].id.toLowerCase().indexOf( name ) > -1 ) {
+                tinymce.get( activeEditors[index].id ).destroy();
+            }
+            
+        }
 
         $wysiwygs.each( function( index, element ) {
 
@@ -52,32 +67,57 @@
             } );
 
             var $textarea = $( element ).find('textarea.wp-editor-area');
+            
+            $textarea.attr( 'name', $textarea.attr( 'name' ).replace( nameRe, "$1" + index + "$2" ) );
 
-            tinymce.init({
+            var tinymceArgs = {
                 selector: $textarea.attr( 'id' ),  // change this value according to your HTML
                 plugins: 'charmap,colorpicker,hr,lists,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpautoresize,wpeditimage,wpemoji,wpgallery,wplink,wpdialogs,wptextpattern,wpview,wpembed',
                 content_css: '/wp-includes/css/dashicons.css,/wp-includes/js/tinymce/skins/wordpress/wp-content.css',
                 menubar: false,
-                toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,unlink,fullscreen',
-                toolbar2: '',
+                toolbar1: 'bold,italic,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,wp_more,spellchecker,dfw,wp_adv,currentprojects,singleproject',
+                toolbar2: 'formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                 toolbar3: '',
                 toolbar4: '',
-            });
-            
+            };
+
+            // Load Teeny toolbar for the WYSIWYG if the "teeny" wysiwyg_arg is set to TRUE
+            if ( $( element ).hasClass( 'teeny' ) ) {
+
+                tinymceArgs.toolbar1 = 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,unlink,fullscreen';
+                tinymceArgs.toolbar2 = '';
+
+            }
+
+            tinymce.init(tinymceArgs);
+
             tinymce.execCommand( 'mceAddEditor', false, $textarea.attr( 'id' ) );
 
             // Add our WYSIWYG to the Quicktags Instances
             quicktags( {
                 id: $textarea.attr( 'id' ),
-                buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,more,close"
+                buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,more,close,butts"
             } );
 
+            // Add Quicktags buttons to our new instance
+            QTags._buttonsInit();
+
         });
+        
     }
 
     function repeater_change(e, $repeaterRow ) {
 
         var $wysiwygs = $repeaterRow.parent().find('.rbm-field-wysiwyg');
+
+        if ($wysiwygs.length) {
+            replace_wysiwygs($wysiwygs);
+        }
+    }
+    
+    function repeater_row_removed(e, $repeater ) {
+
+        var $wysiwygs = $repeater.find('.rbm-field-wysiwyg');
 
         if ($wysiwygs.length) {
             replace_wysiwygs($wysiwygs);
