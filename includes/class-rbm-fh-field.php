@@ -77,6 +77,7 @@ abstract class RBM_FH_Field {
 			'wrapper_class' => '',
 			'no_init'       => false,
 			'sanitization'  => false,
+			'multi_field'   => false,
 			'input_class'   => 'widefat',
 			'input_atts'    => array(),
 		) );
@@ -114,6 +115,12 @@ abstract class RBM_FH_Field {
 		?>
 		<input type="hidden" name="_rbm_fields[<?php echo $i; ?>]" value="<?php echo $this->name; ?>"/>
 		<?php
+
+		if ( $this->args['multi_field'] ) {
+			?>
+			<input type="hidden" name="_rbm_field_<?php echo $this->name; ?>_multi_field" value="1"/>
+			<?php
+		}
 	}
 
 	/**
@@ -140,7 +147,7 @@ abstract class RBM_FH_Field {
 		// Get value
 		$value = $this->value;
 		if ( $value === false ) {
-			$value = get_post_meta( $post->ID, $this->name, true );
+			$value = get_post_meta( $post->ID, $this->name, ! $this->args['multi_field'] );
 			$value = $value ? $value : $this->args['default'];
 		}
 

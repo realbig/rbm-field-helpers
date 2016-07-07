@@ -28,11 +28,11 @@ function RBMFH() {
  *
  * @param string $field The fieldname to get.
  * @param bool|false $post_ID Supply post ID to get field from different post.
- * @param bool|string $sanitization Sanitization method.
+ * @param array $args Arguments.
  *
  * @return bool|mixed Post meta or false if can't get post.
  */
-function rbm_get_field( $field, $post_ID = false, $sanitization = false ) {
+function rbm_get_field( $field, $post_ID = false, $args = array() ) {
 
 	global $post;
 
@@ -42,10 +42,15 @@ function rbm_get_field( $field, $post_ID = false, $sanitization = false ) {
 		return false;
 	}
 
-	if ( $sanitization && is_callable( $sanitization ) ) {
-		$value = call_user_func( $sanitization, get_post_meta( $post_ID, "_rbm_$field", true ) );
-	} else {
-		$value = get_post_meta( $post_ID, "_rbm_$field", true );
+	$args = wp_parse_args( array(
+		'sanitization' => false,
+		'single'       => true,
+	) );
+
+	$value = get_post_meta( $post_ID, "_rbm_$field", $args['single'] );
+
+	if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
+		$value = call_user_func( $args['sanitization'], $value );
 	}
 
 	/**

@@ -30,6 +30,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 		'multiple'          => false,
 		'option_none'       => false,
 		'option_none_value' => '',
+		'multi_field'       => false,
 	);
 
 	/**
