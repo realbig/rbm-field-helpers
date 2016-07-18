@@ -19,10 +19,15 @@
                 hide: function () {
 
                     if (confirm('Are you sure you want to delete this element?')) {
-                        $(this).slideUp(400, function () {
-                            $(this).remove();
-                        });
-                        $(this).trigger('delete-item', [$(this)]);
+                        $(this).slideUp( {
+                            duration: 400,
+                            complete: function () {
+                                // We can't call events on the removed item, so we will call it on the main Repeater
+                                var $repeater = $(this).closest('.rbm-field-repeater');
+                                $(this).remove();
+                                $repeater.trigger('delete-item', [$repeater]);
+                            },
+                        } );
                     }
                 },
                 isFirstItemUndeletable: true
