@@ -1,5 +1,13 @@
 <?php
 /**
+ * Plugin Name: RBM Field Helpers
+ * Description: Provides helper functions shared among all RBM plugins.
+ * Version: 1.2.0
+ * Author: Real Big Marketing
+ * Author URI: http://realbigmarketing.com
+ */
+
+/**
  * Provides helper functions shared among all RBM plugins.
  *
  * @version 1.2.0
