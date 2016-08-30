@@ -9,8 +9,7 @@
             return;
         }
 
-        $repeaters.on('add-item list-update', repeater_change);
-        $repeaters.on('delete-item', repeater_row_removed);
+        $repeaters.on('add-item list-update delete-item', repeater_change);
 
     });
 
@@ -27,15 +26,13 @@
 
         // Destroy ALL tinyMCE instances for our repeater
         // Otherwise when we delete and re-index, we will have an extra textarea that appears in some cases
-        var activeEditors = tinymce.editors;
+        var activeEditors = tinymce.editors.slice(0);
         for ( var index = 0; index < activeEditors.length; index++ ) {
-
-            if ( tinymce.editors[index].id.toLowerCase().indexOf( name ) > -1 ) {
-                tinymce.get( activeEditors[index].id ).destroy();
+            if ( activeEditors[index].id.indexOf( name ) > -1 ) {
+                tinymce.execCommand( 'mceRemoveEditor', true, activeEditors[index].id );
             }
-
         }
-
+        
         $wysiwygs.each( function( index, element ) {
 
             var editorID = $( element ).attr( 'data-id' ).replace( re, "$1" + index + "$2" );
@@ -116,15 +113,6 @@
     function repeater_change(e, $repeaterRow ) {
 
         var $wysiwygs = $repeaterRow.parent().find('.rbm-field-wysiwyg');
-
-        if ($wysiwygs.length) {
-            replace_wysiwygs($wysiwygs);
-        }
-    }
-
-    function repeater_row_removed(e, $repeater ) {
-
-        var $wysiwygs = $repeater.find('.rbm-field-wysiwyg');
 
         if ($wysiwygs.length) {
             replace_wysiwygs($wysiwygs);
