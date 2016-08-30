@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RBM Field Helpers
  * Description: Provides helper functions shared among all RBM plugins.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: Real Big Marketing
  * Author URI: http://realbigmarketing.com
  */
@@ -10,7 +10,7 @@
 /**
  * Provides helper functions shared among all RBM plugins.
  *
- * @version 1.2.0
+ * @version 1.2.1
  *
  * @package RBMFieldHelpers
  */
