@@ -1,8 +1,16 @@
 <?php
 /**
+ * Plugin Name: RBM Field Helpers
+ * Description: Provides helper functions shared among all RBM plugins.
+ * Version: 1.2.0
+ * Author: Real Big Marketing
+ * Author URI: http://realbigmarketing.com
+ */
+
+/**
  * Provides helper functions shared among all RBM plugins.
  *
- * @version 1.1.2
+ * @version 1.2.0
  *
  * @package RBMFieldHelpers
  */
@@ -15,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 	define( 'RBM_HELPER_FUNCTIONS', true );
-	define( 'RBM_FIELD_HELPERS_VER', '1.1.2' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.2.0' );
 
 	final class RBM_FieldHelpers {
 
@@ -221,7 +229,25 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			}
 
 			foreach ( $_POST['_rbm_fields'] as $field ) {
-				update_post_meta( $post_ID, $field, $_POST[ $field ] );
+
+				$value = $_POST[ $field ];
+
+				// If array, and told to do so, store in DB as a broken apart, non-unique meta field.
+				// Someday I'd like to remove the 3rd conditional and simply assume this, but for now, to be safe,
+				// it is manual.
+				if ( is_array( $value ) && isset( $value[0] ) && isset( $_POST[ "_rbm_field_{$field}_multi_field"] ) ) {
+
+					// Delete all instances of meta field first, as add_post_meta will simply continuously add, forever,
+					// even if the value already exists (like an indexed array)
+					delete_post_meta( $post_ID, $field );
+
+					foreach ( $value as $_value ) {
+						add_post_meta( $post_ID, $field, $_value );
+					}
+				} else {
+
+					update_post_meta( $post_ID, $field, $_POST[ $field ] );
+				}
 			}
 		}
 	}
