@@ -148,7 +148,7 @@ abstract class RBM_FH_Field {
 		$value = $this->value;
 		if ( $value === false ) {
 			$value = get_post_meta( $post->ID, $this->name, ! $this->args['multi_field'] );
-			$value = $value ? $value : $this->args['default'];
+			$value = $value !== '' ? $value : $this->args['default'];
 		}
 
 		// Sanitize
