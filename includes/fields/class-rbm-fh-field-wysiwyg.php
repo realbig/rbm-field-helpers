@@ -65,7 +65,7 @@ class RBM_FH_Field_WYSIWYG extends RBM_FH_Field {
 			</p>
 		<?php endif; ?>
 
-		<div class="rbm-field-wysiwyg<?php echo ( $args['wrapper_class'] !== '' ) ? ' ' . $args['wrapper_class'] : ''; ?><?php echo ( $args['wysiwyg_args']['teeny'] ) ? ' teeny' : ''; ?>"
+		<div class="rbm-field-wysiwyg<?php echo ( $args['wrapper_class'] !== '' ) ? ' ' . $args['wrapper_class'] : ''; ?><?php echo ( isset( $args['wysiwyg_args']['teeny'] ) && $args['wysiwyg_args']['teeny'] ) ? ' teeny' : ''; ?>"
 		     data-id="<?php echo $args['wysiwyg_id']; ?>">
 
 			<?php wp_editor( $value, "_rbm_$args[wysiwyg_id]", $args['wysiwyg_args'] ); ?>
