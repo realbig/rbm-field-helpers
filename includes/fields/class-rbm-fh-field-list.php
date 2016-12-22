@@ -2,7 +2,7 @@
 /**
  * Field: List
  *
- * @since {{VERSION}}
+ * @since 1.3.0
  *
  * @package RBMFieldHelpers
  * @subpackage RBMFieldHelpers/includes/fields
@@ -13,14 +13,14 @@ defined( 'ABSPATH' ) || die();
 /**
  * Class RBM_FH_Field_List
  *
- * @since {{VERSION}}
+ * @since 1.3.0
  */
 class RBM_FH_Field_List extends RBM_FH_Field {
 
 	/**
 	 * Data to localize for the list fields.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.0
 	 *
 	 * @var array
 	 */
@@ -29,7 +29,7 @@ class RBM_FH_Field_List extends RBM_FH_Field {
 	/**
 	 * Field defaults.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.0
 	 *
 	 * @var array
 	 */
@@ -43,7 +43,7 @@ class RBM_FH_Field_List extends RBM_FH_Field {
 	/**
 	 * RBM_FH_Field_List constructor.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.0
 	 *
 	 * @var string $name
 	 * @var string $label
@@ -65,7 +65,7 @@ class RBM_FH_Field_List extends RBM_FH_Field {
 	/**
 	 * Localizes data for the fields on the page.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.0
 	 * @access private
 	 *
 	 * @param array $data Data to be localized.
@@ -82,7 +82,7 @@ class RBM_FH_Field_List extends RBM_FH_Field {
 	/**
 	 * Outputs the field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.0
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.

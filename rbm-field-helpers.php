@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RBM Field Helpers
  * Description: Provides helper functions shared among all RBM plugins.
- * Version: 1.2.4
+ * Version: 1.3.0
  * Author: Real Big Marketing
  * Author URI: http://realbigmarketing.com
  */
@@ -10,7 +10,7 @@
 /**
  * Provides helper functions shared among all RBM plugins.
  *
- * @version 1.2.4
+ * @version 1.3.0
  *
  * @package RBMFieldHelpers
  */
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 	define( 'RBM_HELPER_FUNCTIONS', true );
-	define( 'RBM_FIELD_HELPERS_VER', '1.2.4' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.3.0' );
 
 	final class RBM_FieldHelpers {
 
@@ -237,7 +237,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			 *
 			 * Passing a value to this will cancel saving entirely.
 			 *
-			 * @since {{VERSION}}
+			 * @since 1.3.0
 			 */
 			$fields = apply_filters( 'rbm_fields_save', $_POST['_rbm_fields'], $post_ID );
 
@@ -248,7 +248,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				/**
 				 * Filters the value to save to the field.
 				 *
-				 * @since {{VERSION}}
+				 * @since 1.3.0
 				 */
 				$value = apply_filters( "rbm_fields_save_field_$field", $value, $post_ID );
 
@@ -273,7 +273,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			/**
 			 * Fires after fields have been saved.
 			 *
-			 * @since {{VERSION}}
+			 * @since 1.3.0
 			 */
 			do_action( 'rbm_fields_saved', $post_ID, $fields );
 		}

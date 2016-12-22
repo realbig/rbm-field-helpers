@@ -154,7 +154,7 @@ function rbm_do_field_colorpicker( $name, $label = false, $value = false, $args 
 /**
  * Outputs a list field.
  *
- * @since {{VERSION}}
+ * @since 1.3.0
  *
  * @param string $name
  * @param string|bool $label
