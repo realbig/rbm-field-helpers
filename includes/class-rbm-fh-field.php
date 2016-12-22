@@ -72,6 +72,7 @@ abstract class RBM_FH_Field {
 
 		// Global args
 		$args = wp_parse_args( $args, array(
+			'id'            => $name,
 			'default'       => '',
 			'description'   => false,
 			'wrapper_class' => '',

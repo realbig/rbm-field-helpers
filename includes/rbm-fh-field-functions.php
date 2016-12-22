@@ -152,6 +152,21 @@ function rbm_do_field_colorpicker( $name, $label = false, $value = false, $args 
 }
 
 /**
+ * Outputs a list field.
+ *
+ * @since {{VERSION}}
+ *
+ * @param string $name
+ * @param string|bool $label
+ * @param string|bool $value
+ * @param array $args
+ */
+function rbm_do_field_list( $name, $label = false, $value = false, $args = array() ) {
+
+	new RBM_FH_Field_List( $name, $label, $args, $value );
+}
+
+/**
  * Outputs a repeater field.
  *
  * @since 1.2.0
@@ -208,5 +223,6 @@ function rbm_do_field_wysiwyg( $name, $label = false, $value = false, $args = ar
  * @param bool $value
  */
 function rbm_do_field_user_keys( $label = false, $args = array(), $value = false ) {
+
 	new RBM_FH_Field_UserKeys( $label, $args, $value );
 }

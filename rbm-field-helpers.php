@@ -91,7 +91,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-			add_action( 'admin_footer', array( $this, 'localize_data'));
+			add_action( 'admin_footer', array( $this, 'localize_data' ) );
 
 			add_action( 'save_post', array( $this, 'save_meta' ) );
 		}
@@ -114,6 +114,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-checkbox.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-colorpicker.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-datepicker.php';
+			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-list.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-media.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-radio.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-repeater.php';
@@ -228,14 +229,33 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				return;
 			}
 
-			foreach ( $_POST['_rbm_fields'] as $field ) {
+			// Ensure it only fires ONCE
+			unset( $_POST['rbm-meta'] );
+
+			/**
+			 * Filters the fields to be saved
+			 *
+			 * Passing a value to this will cancel saving entirely.
+			 *
+			 * @since {{VERSION}}
+			 */
+			$fields = apply_filters( 'rbm_fields_save', $_POST['_rbm_fields'], $post_ID );
+
+			foreach ( $fields as $field ) {
 
 				$value = $_POST[ $field ];
+
+				/**
+				 * Filters the value to save to the field.
+				 *
+				 * @since {{VERSION}}
+				 */
+				$value = apply_filters( "rbm_fields_save_field_$field", $value, $post_ID );
 
 				// If array, and told to do so, store in DB as a broken apart, non-unique meta field.
 				// Someday I'd like to remove the 3rd conditional and simply assume this, but for now, to be safe,
 				// it is manual.
-				if ( is_array( $value ) && isset( $value[0] ) && isset( $_POST[ "_rbm_field_{$field}_multi_field"] ) ) {
+				if ( is_array( $value ) && isset( $value[0] ) && isset( $_POST["_rbm_field_{$field}_multi_field"] ) ) {
 
 					// Delete all instances of meta field first, as add_post_meta will simply continuously add, forever,
 					// even if the value already exists (like an indexed array)
@@ -249,6 +269,13 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 					update_post_meta( $post_ID, $field, $_POST[ $field ] );
 				}
 			}
+
+			/**
+			 * Fires after fields have been saved.
+			 *
+			 * @since {{VERSION}}
+			 */
+			do_action( 'rbm_fields_saved', $post_ID, $fields );
 		}
 	}
 
