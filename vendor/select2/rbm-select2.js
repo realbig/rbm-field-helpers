@@ -5,9 +5,7 @@
 
         $('select.rbm-select2').each(function () {
 
-            var data = $(this).data();
-
-            $(this).select2(data);
+            $(this).select2();
         });
     });
 
