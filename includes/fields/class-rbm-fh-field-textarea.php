@@ -61,6 +61,7 @@ class RBM_FH_Field_TextArea extends RBM_FH_Field {
 				<textarea name="<?php echo $name; ?>"
 				          class="<?php echo $args['input_class']; ?>"
 				          rows="<?php echo $args['rows']; ?>"
+					<?php self::input_atts( $args ); ?>
 				><?php echo $value; ?></textarea>
 			</label>
 

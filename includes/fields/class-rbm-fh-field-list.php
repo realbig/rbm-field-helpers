@@ -105,7 +105,8 @@ class RBM_FH_Field_List extends RBM_FH_Field {
 						<?php echo esc_attr( $label ); ?>
 
 						<input type="hidden" name="<?php echo esc_attr( $name ); ?>[]"
-						       value="<?php echo esc_attr( $value ); ?>"/>
+						       value="<?php echo esc_attr( $value ); ?>"
+							<?php self::input_atts( $args ); ?> />
 					</li>
 				<?php endforeach; ?>
 			</ul>

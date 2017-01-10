@@ -67,6 +67,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 				<?php if ( ! empty( $args['options'] ) ) : ?>
 					<select name="<?php echo $name . ( $args['multiple'] ? '[]' : '' ); ?>"
 					        class="<?php echo $args['input_class']; ?>"
+						<?php self::input_atts( $args ); ?>
 						<?php echo $args['multiple'] ? 'multiple' : ''; ?>>
 
 						<?php if ( $args['option_none'] ) : ?>

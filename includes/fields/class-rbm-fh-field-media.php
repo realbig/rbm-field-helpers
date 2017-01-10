@@ -104,7 +104,8 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 				       value="<?php echo $args['button_remove_text']; ?>" <?php echo ! $value ? 'style="display: none;"' : ''; ?> />
 
 				<input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>"
-				       class="media-id <?php echo isset( $args['input_class'] ) ? $args['input_class'] : ''; ?>"/>
+				       class="media-id <?php echo isset( $args['input_class'] ) ? $args['input_class'] : ''; ?>"
+					<?php self::input_atts( $args ); ?> />
 			</div>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>

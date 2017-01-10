@@ -59,12 +59,6 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
-
 		// Get preview format
 		$preview = date( 'm/d/Y', strtotime( $value ? $value : $args['default'] ) );
 
@@ -90,7 +84,7 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 				       value="<?php echo $value ? $value : $args['default']; ?>"
 				       id="rbm-field-datepicker-input-<?php echo $name; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-					<?php echo $input_atts; ?> />
+					<?php self::input_atts( $args ); ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>

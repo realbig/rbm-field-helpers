@@ -3,8 +3,11 @@
 
     $(function () {
 
-        $('select.rbm-select2:visible').each(function () {
-            $(this).select2();
+        $('select.rbm-select2').each(function () {
+
+            var data = $(this).data();
+
+            $(this).select2(data);
         });
     });
 

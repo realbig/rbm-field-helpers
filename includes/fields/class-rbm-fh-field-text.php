@@ -44,13 +44,9 @@ class RBM_FH_Field_Text extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
+
 		?>
-		<p class="rbm-field-text <?php echo $args['wrapper_class']; ?>">
+		<p class="rbm-field-text <?php echo $args['wrapper_class']; ?>" <?php self::input_atts( $args ); ?>>
 			<label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"

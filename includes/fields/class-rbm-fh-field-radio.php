@@ -89,7 +89,8 @@ class RBM_FH_Field_Radio extends RBM_FH_Field {
 					<input type="radio" name="<?php echo $name; ?>"
 					       value="<?php echo $radio_value; ?>"
 					       class="<?php echo $args['input_class']; ?>"
-						<?php checked( $radio_value, $value ); ?> />
+						<?php checked( $radio_value, $value ); ?>
+						<?php self::input_atts( $args ); ?> />
 
 					<span class="rbm-field-radio-label"><?php echo $radio_label; ?></span>
 

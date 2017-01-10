@@ -25,7 +25,7 @@ class RBM_FH_Field_ColorPicker extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'default'       => '#fff',
+		'default' => '#fff',
 	);
 
 	/**
@@ -55,19 +55,14 @@ class RBM_FH_Field_ColorPicker extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
 		?>
 		<p class="rbm-field-colorpicker <?php echo $args['wrapper_class']; ?>">
 			<label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
-				       data-default-color="<?php echo $args['default']; ?>"
-					<?php echo $input_atts; ?> />
+					   data-default-color="<?php echo $args['default']; ?>"
+					<?php self::input_atts( $args ); ?> />
 			</label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>

@@ -166,6 +166,41 @@ abstract class RBM_FH_Field {
 	}
 
 	/**
+	 * Returns the input atts, if set.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param array $args Field args
+	 */
+	public static function get_input_atts( $args ) {
+
+		if ( ! isset( $args['input_atts'] ) || ! $args['input_atts'] ) {
+
+			return '';
+		}
+
+		$input_atts = array();
+		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
+			$input_atts[] = "$attr_name=\"$attr_value\"";
+		}
+		$input_atts = implode( ' ', $input_atts );
+
+		return $input_atts;
+	}
+
+	/**
+	 * Echoes the input atts, if set.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param array $args Field args
+	 */
+	public static function input_atts( $args ) {
+
+		echo self::input_atts( $args );
+	}
+
+	/**
 	 * Outputs the field.
 	 *
 	 * @since 1.1.0

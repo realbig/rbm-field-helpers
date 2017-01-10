@@ -64,6 +64,7 @@ class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 				<input type="checkbox" name="<?php echo $name; ?>"
 				       value="<?php echo $args['check_value']; ?>"
 				       class="<?php echo $args['input_class']; ?>"
+					<?php self::input_atts( $args ); ?>
 					<?php checked( $args['check_value'], $value ); ?> />
 
 				<?php echo $args['check_label']; ?>

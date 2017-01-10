@@ -61,11 +61,6 @@ class RBM_FH_Field_Number extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		$input_atts = array();
-		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
-		}
-		$input_atts = implode( ' ', $input_atts );
 		?>
 		<div class="rbm-field-number <?php echo $args['wrapper_class']; ?>">
 			<label>
@@ -75,7 +70,8 @@ class RBM_FH_Field_Number extends RBM_FH_Field {
 			<div class="rbm-field-number-container"
 				<?php echo $args['postfix'] ? 'data-postfix="' . esc_attr( $args['postfix'] ) . '"' : ''; ?>>
 				<input type="text" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>"
-				       class="rbm-field-input" value="<?php echo $value; ?>"/>
+				       class="rbm-field-input" value="<?php echo $value; ?>"
+					<?php self::input_atts( $args ); ?> />
 
 				<button type="button" class="rbm-field-number-increase rbm-button" data-number-increase
 				        data-number-interval="<?php echo esc_attr( $args['increase_interval'] ); ?>"
