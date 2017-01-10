@@ -197,7 +197,7 @@ abstract class RBM_FH_Field {
 	 */
 	public static function input_atts( $args ) {
 
-		echo self::input_atts( $args );
+		echo self::get_input_atts( $args );
 	}
 
 	/**
