@@ -37,16 +37,16 @@ if ( ! class_exists( 'RBM_Select2_Loader' ) ) {
 
 			wp_register_script(
 				'select2',
-				plugins_url( '/select2.js', __FILE__ ),
+				plugins_url( '/select2.min.js', __FILE__ ),
 				array( 'jquery' ),
-				'4.0.0'
+				'4.0.3'
 			);
 
 			wp_register_style(
 				'select2',
-				plugins_url( '/select2.css', __FILE__ ),
+				plugins_url( '/select2.min.css', __FILE__ ),
 				array(),
-				'4.0.0'
+				'4.0.3'
 			);
 		}
 
