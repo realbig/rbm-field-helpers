@@ -86,6 +86,21 @@ function rbm_do_field_select( $name, $label = false, $value = false, $args = arr
 }
 
 /**
+ * Outputs a number field.
+ *
+ * @since {{VERSION}}
+ *
+ * @param string $name
+ * @param string|bool $label
+ * @param string|bool $value
+ * @param array $args
+ */
+function rbm_do_field_number( $name, $label = false, $value = false, $args = array() ) {
+
+	new RBM_FH_Field_Number( $name, $label, $args, $value );
+}
+
+/**
  * Outputs an image field.
  *
  * @since 1.2.0

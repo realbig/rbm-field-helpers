@@ -117,6 +117,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-list.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-media.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-radio.php';
+			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-number.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-repeater.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-select.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-table.php';
