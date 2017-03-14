@@ -88,7 +88,7 @@ function rbm_do_field_select( $name, $label = false, $value = false, $args = arr
 /**
  * Outputs a number field.
  *
- * @since {{VERSION}}
+ * @since 1.3.2
  *
  * @param string $name
  * @param string|bool $label

@@ -168,7 +168,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Returns the input atts, if set.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.2
 	 *
 	 * @param array $args Field args
 	 */
@@ -193,7 +193,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Echoes the input atts, if set.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.2
 	 *
 	 * @param array $args Field args
 	 */

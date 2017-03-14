@@ -2,7 +2,7 @@
 /**
  * Field: Number
  *
- * @since {{VERSION}}
+ * @since 1.3.2
  *
  * @package RBMFieldHelpers
  * @subpackage RBMFieldHelpers/includes/fields
@@ -13,14 +13,14 @@ defined( 'ABSPATH' ) || die();
 /**
  * Class RBM_FH_Field_Number
  *
- * @since {{VERSION}}
+ * @since 1.3.2
  */
 class RBM_FH_Field_Number extends RBM_FH_Field {
 
 	/**
 	 * Field defaults.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.2
 	 *
 	 * @var array
 	 */
@@ -37,7 +37,7 @@ class RBM_FH_Field_Number extends RBM_FH_Field {
 	/**
 	 * RBM_FH_Field_Number constructor.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.2
 	 *
 	 * @var string $name
 	 * @var string $label
@@ -52,7 +52,7 @@ class RBM_FH_Field_Number extends RBM_FH_Field {
 	/**
 	 * Outputs the field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.3.2
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
