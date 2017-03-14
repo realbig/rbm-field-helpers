@@ -46,16 +46,17 @@ class RBM_FH_Field_Text extends RBM_FH_Field {
 
 
 		?>
-		<p class="rbm-field-text <?php echo $args['wrapper_class']; ?>" <?php self::input_atts( $args ); ?>>
-			<label>
+        <p class="rbm-field-text <?php echo esc_attr( $args['wrapper_class'] ); ?>">
+            <label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<input type="text" name="<?php echo $name; ?>" value="<?php echo $value ? $value : $args['default']; ?>"
-				       class="<?php echo isset( $args['input_class'] ) ? $args['input_class'] : 'regular-text'; ?>"
-					<?php echo $input_atts; ?> />
-			</label>
+                <input type="text" name="<?php echo esc_attr( $name ); ?>"
+                       value="<?php echo $value ? esc_attr( $value ) : esc_attr( $args['default'] ); ?>"
+                       class="<?php echo isset( $args['input_class'] ) ? esc_attr( $args['input_class'] ) : 'regular-text'; ?>"
+					<?php self::input_atts( $args ); ?> />
+            </label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
+        </p>
 		<?php
 	}
 }

@@ -92,27 +92,28 @@ class RBM_FH_Field_List extends RBM_FH_Field {
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
 		?>
-		<div class="rbm-field-list <?php echo $args['wrapper_class']; ?>" data-name="<?php echo esc_attr( $name ); ?>">
-			<label>
+        <div class="rbm-field-list <?php echo esc_attr( $args['wrapper_class'] ); ?>"
+             data-name="<?php echo esc_attr( $name ); ?>">
+            <label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-			</label>
+            </label>
 
-			<ul class="rbm-field-list-items" data-rbm-list>
+            <ul class="rbm-field-list-items" data-rbm-list>
 				<?php foreach ( $args['items'] as $value => $label ) : ?>
-					<li class="rbm-field-list-item">
-						<span class="rbm-field-list-item-handle dashicons dashicons-menu"></span>
+                    <li class="rbm-field-list-item">
+                        <span class="rbm-field-list-item-handle dashicons dashicons-menu"></span>
 
 						<?php echo esc_attr( $label ); ?>
 
-						<input type="hidden" name="<?php echo esc_attr( $name ); ?>[]"
-						       value="<?php echo esc_attr( $value ); ?>"
+                        <input type="hidden" name="<?php echo esc_attr( $name ); ?>[]"
+                               value="<?php echo esc_attr( $value ); ?>"
 							<?php self::input_atts( $args ); ?> />
-					</li>
+                    </li>
 				<?php endforeach; ?>
-			</ul>
+            </ul>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</div>
+        </div>
 		<?php
 	}
 }

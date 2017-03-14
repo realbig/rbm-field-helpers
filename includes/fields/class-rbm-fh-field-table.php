@@ -25,7 +25,7 @@ class RBM_FH_Field_Table extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'default'       => array(
+		'default' => array(
 			'head' => array(
 				'',
 				'',
@@ -69,76 +69,76 @@ class RBM_FH_Field_Table extends RBM_FH_Field {
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
 		if ( $label ) : ?>
-			<p class="rbm-field-repeater-label">
+            <p class="rbm-field-repeater-label">
 				<?php echo $label; ?>
-			</p>
+            </p>
 		<?php endif; ?>
-		<div class="rbm-field-table <?php echo $args['wrapper_class']; ?>">
-			<table>
-				<thead>
-				<tr>
+        <div class="rbm-field-table <?php echo esc_attr( $args['wrapper_class'] ); ?>">
+            <table>
+                <thead>
+                <tr>
 					<?php
 					$tab_index = 1;
 					$i         = 0;
 					foreach ( $value['head'] as $cell_value ) :
 						?>
-						<th>
-							<p class="rbm-field-table-delete">
-								<input type="button" data-table-delete-column class="button" value="Delete"/>
-							</p>
+                        <th>
+                            <p class="rbm-field-table-delete">
+                                <input type="button" data-table-delete-column class="button" value="Delete"/>
+                            </p>
 
-							<input type="text" name="<?php echo $name; ?>[head][<?php echo $i; ?>]"
-							       value="<?php echo esc_attr( $cell_value ); ?>"
-							       tabindex="<?php echo $tab_index; ?>"/>
-						</th>
+                            <input type="text" name="<?php echo esc_attr( $name ); ?>[head][<?php echo $i; ?>]"
+                                   value="<?php echo esc_attr( $cell_value ); ?>"
+                                   tabindex="<?php echo $tab_index; ?>"/>
+                        </th>
 						<?php
 						$i ++;
 						$tab_index ++;
 					endforeach;
 					?>
-					<th class="actions">
-						<!-- Actions -->
-					</th>
-				</tr>
-				</thead>
+                    <th class="actions">
+                        <!-- Actions -->
+                    </th>
+                </tr>
+                </thead>
 
-				<tbody>
+                <tbody>
 				<?php
 				$row_i = 0;
 				foreach ( $value['body'] as $row => $cells ) :
 					?>
-					<tr>
+                    <tr>
 						<?php
 						$cell_i = 0;
 						foreach ( $cells as $cell_value ) :
 							?>
-							<td>
-								<input type="text"
-								       name="<?php echo $name; ?>[body][<?php echo $row_i; ?>][<?php echo $cell_i; ?>]"
-								       value="<?php echo esc_attr( $cell_value ); ?>"
-								       tabindex="<?php echo $tab_index; ?>"/>
-							</td>
+                            <td>
+                                <input type="text"
+                                       name="<?php echo esc_attr( $name ); ?>[body][<?php echo $row_i; ?>][<?php echo $cell_i; ?>]"
+                                       value="<?php echo esc_attr( $cell_value ); ?>"
+                                       tabindex="<?php echo $tab_index; ?>"/>
+                            </td>
 							<?php
 							$cell_i ++;
 							$tab_index ++;
 						endforeach;
 						?>
-						<td class="actions">
-							<input data-table-delete-row type="button" class="button" value="Delete"/>
-							<span class="rbm-field-table-sort dashicons dashicons-sort"></span>
-						</td>
-					</tr>
+                        <td class="actions">
+                            <input data-table-delete-row type="button" class="button" value="Delete"/>
+                            <span class="rbm-field-table-sort dashicons dashicons-sort"></span>
+                        </td>
+                    </tr>
 					<?php
 					$row_i ++;
 				endforeach;
 				?>
-				</tbody>
-			</table>
+                </tbody>
+            </table>
 
-			<input data-table-create-row type="button" class="button" value="Add Row"/>
-			<input data-table-create-column type="button" class="button" value="Add Column"/>
+            <input data-table-create-row type="button" class="button" value="Add Row"/>
+            <input data-table-create-column type="button" class="button" value="Add Column"/>
 
-		</div>
+        </div>
 		<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
 		<?php
 	}

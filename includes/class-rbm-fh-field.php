@@ -114,12 +114,12 @@ abstract class RBM_FH_Field {
 
 		RBMFH()->fields[] = $this->name;
 		?>
-		<input type="hidden" name="_rbm_fields[<?php echo $i; ?>]" value="<?php echo $this->name; ?>"/>
+        <input type="hidden" name="_rbm_fields[<?php echo $i; ?>]" value="<?php echo $this->name; ?>"/>
 		<?php
 
 		if ( $this->args['multi_field'] ) {
 			?>
-			<input type="hidden" name="_rbm_field_<?php echo $this->name; ?>_multi_field" value="1"/>
+            <input type="hidden" name="_rbm_field_<?php echo $this->name; ?>_multi_field" value="1"/>
 			<?php
 		}
 	}
@@ -181,8 +181,10 @@ abstract class RBM_FH_Field {
 
 		$input_atts = array();
 		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
-			$input_atts[] = "$attr_name=\"$attr_value\"";
+
+			$input_atts[] = esc_attr( "$attr_name=\"$attr_value\"" );
 		}
+
 		$input_atts = implode( ' ', $input_atts );
 
 		return $input_atts;

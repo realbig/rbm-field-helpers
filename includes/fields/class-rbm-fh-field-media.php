@@ -67,10 +67,10 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 			$media_preview_url = wp_get_attachment_url( $value );
 		}
 		?>
-		<div class="rbm-field-media <?php echo $args['wrapper_class']; ?>">
-			<div class="rbm-media-uploader" data-type="<?php echo $args['type']; ?>"
-			     data-title="<?php echo $args['window_title']; ?>"
-			     data-button-text="<?php echo $args['window_button_text']; ?>">
+        <div class="rbm-field-media <?php echo esc_attr( $args['wrapper_class'] ); ?>">
+            <div class="rbm-media-uploader" data-type="<?php echo esc_attr( $args['type'] ); ?>"
+                 data-title="<?php echo esc_attr( $args['window_title'] ); ?>"
+                 data-button-text="<?php echo esc_attr( $args['window_button_text'] ); ?>">
 
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
 
@@ -81,35 +81,37 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 
 						$args['placeholder'] = $args['placeholder'] != '&nbsp;' ? $args['placeholder'] : '';
 						?>
-						<img src="<?php echo $value ? $media_preview_url : $args['placeholder']; ?>"
-						     class="image-preview"
-						     data-placeholder="<?php echo $args['placeholder']; ?>"/>
+                        <img src="<?php echo $value ? esc_attr( $media_preview_url ) : esc_attr( $args['placeholder'] ); ?>"
+                             class="image-preview"
+                             data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"/>
 						<?php
 						break;
 
 					default:
 						?>
-						<code class="media-url" data-placeholder="<?php echo $args['placeholder']; ?>">
+                        <code class="media-url" data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>">
 							<?php echo $value ? $media_preview_url : $args['placeholder']; ?>
-						</code>
+                        </code>
 						<?php
 				endswitch;
 				?>
 
-				<br/>
+                <br/>
 
-				<input type="button" class="button upload-media"
-				       value="<?php echo $args['button_text']; ?>" <?php echo $value ? 'style="display: none;"' : ''; ?> />
-				<input type="button" class="button remove-media"
-				       value="<?php echo $args['button_remove_text']; ?>" <?php echo ! $value ? 'style="display: none;"' : ''; ?> />
+                <input type="button" class="button upload-media"
+                       value="<?php echo esc_attr( $args['button_text'] ); ?>"
+					<?php echo $value ? 'style="display: none;"' : ''; ?> />
+                <input type="button" class="button remove-media"
+                       value="<?php echo esc_attr( $args['button_remove_text'] ); ?>"
+					<?php echo ! $value ? 'style="display: none;"' : ''; ?> />
 
-				<input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>"
-				       class="media-id <?php echo isset( $args['input_class'] ) ? $args['input_class'] : ''; ?>"
+                <input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>"
+                       class="media-id <?php echo isset( $args['input_class'] ) ? esc_attr( $args['input_class'] ) : ''; ?>"
 					<?php self::input_atts( $args ); ?> />
-			</div>
+            </div>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</div>
+        </div>
 		<?php
 	}
 }

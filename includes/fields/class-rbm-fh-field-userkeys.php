@@ -79,10 +79,10 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 
 		$link_base = isset( $args['link_base'] ) ? $args['link_base'] : get_the_permalink();
 		?>
-		<div id="rbm-field-user-keys" class="<?php echo $args['wrapper_class']; ?>"
+		<div id="rbm-field-user-keys" class="<?php echo esc_attr( $args['wrapper_class']); ?>"
 			<?php echo ! $args['no_init'] ? 'data-init' : ''; ?>
 			<?php echo $args['ajax'] ? 'data-ajax' : ''; ?>
-			 data-post-id="<?php echo isset( $args['post_ID'] ) ? $args['post_ID'] : get_the_ID(); ?>">
+			 data-post-id="<?php echo isset( $args['post_ID'] ) ? esc_attr( $args['post_ID']) : get_the_ID(); ?>">
 			<p>
 				<label>
 					<strong>New User Email</strong><br/>
@@ -129,11 +129,11 @@ class RBM_FH_Field_UserKeys extends RBM_FH_Field {
 						<?php foreach ( $value as $user_email => $user_key ) : ?>
 							<tr data-email="<?php echo esc_attr( $user_email ); ?>">
 								<td>
-									<?php echo $user_email; ?>
+									<?php echo esc_attr( $user_email ); ?>
 								</td>
 								<td>
-									<a href="<?php echo "$link_base?rbm_user_key=$user_key"; ?>">
-										<?php echo "$link_base?rbm_user_key=$user_key"; ?>
+									<a href="<?php echo esc_attr( "$link_base?rbm_user_key=$user_key" ); ?>">
+										<?php echo esc_attr( "$link_base?rbm_user_key=$user_key" ); ?>
 									</a>
 								</td>
 								<td>

@@ -25,8 +25,8 @@ class RBM_FH_Field_WYSIWYG extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'wysiwyg_args'  => array(),
-		'wysiwyg_id'    => '',
+		'wysiwyg_args' => array(),
+		'wysiwyg_id'   => '',
 	);
 
 	/**
@@ -60,18 +60,18 @@ class RBM_FH_Field_WYSIWYG extends RBM_FH_Field {
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
 		if ( $label ) : ?>
-			<p class="rbm-field-wysiwyg-label">
+            <p class="rbm-field-wysiwyg-label">
 				<?php echo $label; ?>
-			</p>
+            </p>
 		<?php endif; ?>
 
-		<div class="rbm-field-wysiwyg<?php echo ( $args['wrapper_class'] !== '' ) ? ' ' . $args['wrapper_class'] : ''; ?><?php echo ( isset( $args['wysiwyg_args']['teeny'] ) && $args['wysiwyg_args']['teeny'] ) ? ' teeny' : ''; ?>"
-		     data-id="<?php echo $args['wysiwyg_id']; ?>">
+        <div class="rbm-field-wysiwyg<?php echo ( $args['wrapper_class'] !== '' ) ? ' ' . esc_attr( $args['wrapper_class'] ) : ''; ?><?php echo ( isset( $args['wysiwyg_args']['teeny'] ) && $args['wysiwyg_args']['teeny'] ) ? ' teeny' : ''; ?>"
+             data-id="<?php echo esc_attr( $args['wysiwyg_id'] ); ?>">
 
 			<?php wp_editor( $value, "_rbm_$args[wysiwyg_id]", $args['wysiwyg_args'] ); ?>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</div>
+        </div>
 		<?php
 	}
 }

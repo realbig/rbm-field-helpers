@@ -25,7 +25,7 @@ class RBM_FH_Field_TextArea extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'rows'          => 4,
+		'rows' => 4,
 	);
 
 	/**
@@ -55,18 +55,18 @@ class RBM_FH_Field_TextArea extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 		?>
-		<p class="rbm-field-textarea <?php echo $args['wrapper_class']; ?>">
-			<label>
+        <p class="rbm-field-textarea <?php echo esc_attr( $args['wrapper_class'] ); ?>">
+            <label>
 				<?php echo $label ? "<strong>$label</strong><br/>" : ''; ?>
-				<textarea name="<?php echo $name; ?>"
-				          class="<?php echo $args['input_class']; ?>"
-				          rows="<?php echo $args['rows']; ?>"
+                <textarea name="<?php echo esc_attr( $name ); ?>"
+                          class="<?php echo esc_attr( $args['input_class'] ); ?>"
+                          rows="<?php echo esc_attr( $args['rows'] ); ?>"
 					<?php self::input_atts( $args ); ?>
-				><?php echo $value; ?></textarea>
-			</label>
+                ><?php echo $value; ?></textarea>
+            </label>
 
 			<?php echo $args['description'] ? "<br/><span class=\"description\">$args[description]</span>" : ''; ?>
-		</p>
+        </p>
 		<?php
 	}
 }

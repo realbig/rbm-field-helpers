@@ -51,24 +51,24 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 		$row_count = count( $values ) >= 1 ? count( $values ) : 1;
 
 		if ( $label ) : ?>
-			<p class="rbm-field-repeater-label">
+            <p class="rbm-field-repeater-label">
 				<?php echo $label; ?>
-			</p>
+            </p>
 		<?php endif; ?>
 
-		<div class="rbm-field-repeater repeater">
-			<div class="rbm-field-repeater-list" data-repeater-list="<?php echo $name; ?>">
+        <div class="rbm-field-repeater repeater">
+            <div class="rbm-field-repeater-list" data-repeater-list="<?php echo esc_attr( $name ); ?>">
 
 				<?php for ( $i = 0; $i < $row_count; $i ++ ) : ?>
 
-					<div class="rbm-field-repeater-row <?php echo $empty ? 'dummy' : ''; ?>" data-repeater-item>
+                    <div class="rbm-field-repeater-row <?php echo $empty ? 'dummy' : ''; ?>" data-repeater-item>
 
-						<div class="rbm-field-repeater-handle"></div>
+                        <div class="rbm-field-repeater-handle"></div>
 
 						<?php foreach ( $fields as $field_name => $field ) : ?>
 							<?php
 
-							if ( in_array( $field['type'], array( 'table', 'user_keys' ) ) ){
+							if ( in_array( $field['type'], array( 'table', 'user_keys' ) ) ) {
 								echo "<strong>ERROR:</strong> Field <strong>$field[type]</strong> not supported for repeaters.";
 								continue;
 							}
@@ -98,17 +98,17 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 							?>
 						<?php endforeach; ?>
 
-						<div class="clearfix"></div>
-						<hr/>
-						<input data-repeater-delete type="button" class="button" value="Delete"/>
-					</div>
+                        <div class="clearfix"></div>
+                        <hr/>
+                        <input data-repeater-delete type="button" class="button" value="Delete"/>
+                    </div>
 
 				<?php endfor; ?>
 
-			</div>
+            </div>
 
-			<input data-repeater-create type="button" class="button button-primary" value="Add"/>
-		</div>
+            <input data-repeater-create type="button" class="button button-primary" value="Add"/>
+        </div>
 		<?php
 	}
 }
