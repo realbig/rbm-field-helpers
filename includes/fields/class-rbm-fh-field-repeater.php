@@ -85,12 +85,15 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 
 								if ( $field['type'] == 'wysiwyg' ) {
 
+									$wysiwyg_args = isset( $field['args']['wysiwyg_args'] ) ?
+										$field['args']['wysiwyg_args'] : array();
+
 									$field['args']['wysiwyg_id']   = "{$name}_{$i}_{$field_name}";
-									$field['args']['wysiwyg_args'] = array(
+									$field['args']['wysiwyg_args'] = wp_parse_args( $wysiwyg_args, array(
 										'textarea_name' => $field_name,
 										'teeny'         => true,
 										'textarea_rows' => 6,
-									);
+									) );
 								}
 
 								call_user_func( "rbm_do_field_$field[type]", $field_name, $field['label'], $field['value'], $field['args'] );
