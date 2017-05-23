@@ -152,6 +152,36 @@ function rbm_do_field_datepicker( $name, $label = false, $value = false, $args =
 }
 
 /**
+ * Outputs a timepicker field.
+ *
+ * @since {{VERSION}}
+ *
+ * @param string $name
+ * @param string|bool $label
+ * @param string|bool $value
+ * @param array $args
+ */
+function rbm_do_field_timepicker( $name, $label = false, $value = false, $args = array() ) {
+
+	new RBM_FH_Field_TimePicker( $name, $label, $args, $value );
+}
+
+/**
+ * Outputs a datetimepicker field.
+ *
+ * @since {{VERSION}}
+ *
+ * @param string $name
+ * @param string|bool $label
+ * @param string|bool $value
+ * @param array $args
+ */
+function rbm_do_field_datetimepicker( $name, $label = false, $value = false, $args = array() ) {
+
+	new RBM_FH_Field_DateTimePicker( $name, $label, $args, $value );
+}
+
+/**
  * Outputs a colorpicker field.
  *
  * @since 1.2.0
