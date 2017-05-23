@@ -116,6 +116,8 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-checkbox.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-colorpicker.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-datepicker.php';
+			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-timepicker.php';
+			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-datetimepicker.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-list.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-media.php';
 			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-radio.php';
@@ -143,6 +145,13 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			wp_register_style(
 				'RBM-field-helpers-admin',
 				plugins_url( '/rbm-field-helpers-admin.css', __FILE__ ),
+				array( 'RBM-jquery-ui-datetimepicker' ),
+				RBM_FIELD_HELPERS_VER
+			);
+			
+			wp_register_style(
+				'RBM-jquery-ui-datetimepicker',
+				plugins_url( '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css', __FILE__ ),
 				array(),
 				RBM_FIELD_HELPERS_VER
 			);
@@ -151,7 +160,7 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			wp_register_script(
 				'RBM-field-helpers-admin',
 				plugins_url( '/rbm-field-helpers-admin.js', __FILE__ ),
-				array( 'jquery', 'RBM-jquery-repeater', 'wp-color-picker', 'jquery-ui-sortable' ),
+				array( 'jquery', 'RBM-jquery-repeater', 'RBM-jquery-ui-datetimepicker', 'wp-color-picker', 'jquery-ui-sortable' ),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
@@ -161,6 +170,15 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 				'RBM-jquery-repeater',
 				plugins_url( '/vendor/jquery-repeater/jquery.repeater.min.js', __FILE__ ),
 				array( 'jquery' ),
+				'0.1.4',
+				true
+			);
+			
+			// jQuery UI Datetimepicker
+			wp_register_script(
+				'RBM-jquery-ui-datetimepicker',
+				plugins_url( '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js', __FILE__ ),
+				array( 'jquery', 'jquery-ui-datepicker' ),
 				'0.1.4',
 				true
 			);
@@ -190,9 +208,11 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 			wp_enqueue_script( 'RBM-jquery-repeater' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'jquery-ui-datepicker' );
+			wp_enqueue_script( 'RBM-jquery-ui-datetimepicker' );
 
 			wp_enqueue_style( 'jquery-ui-smoothness' );
 			wp_enqueue_style( 'RBM-field-helpers-admin' );
+			wp_enqueue_style( 'RBM-jquery-ui-datetimepicker' );
 			wp_enqueue_style( 'wp-color-picker' );
 		}
 
