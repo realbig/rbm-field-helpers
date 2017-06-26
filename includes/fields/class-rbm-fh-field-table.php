@@ -67,6 +67,8 @@ class RBM_FH_Field_Table extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
+		
+		if ( empty( $value ) ) $value = $args['default'];
 
 		if ( $label ) : ?>
             <p class="rbm-field-repeater-label">
