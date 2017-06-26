@@ -42,6 +42,8 @@
             });
 
             $(this).find('.rbm-field-repeater-row.dummy').remove();
+
+            $(this).trigger('repeater-init', [$(this)]);
         });
 
         function refresh_selects($e) {
