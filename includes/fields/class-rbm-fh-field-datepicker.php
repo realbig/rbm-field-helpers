@@ -26,6 +26,7 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	 */
 	public $defaults = array(
 		'default'         => '',
+		'format'		  => '',
 		'datepicker_args' => array(),
 	);
 
@@ -42,7 +43,9 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	function __construct( $name, $label = '', $args = array(), $value = false ) {
 
 		// Cannot use function in property declaration
-		$args['default'] = date( 'm/d/Y' );
+		$this->defaults['format'] = get_option( 'date_format', 'F j, Y' );
+		
+		$args['default'] = current_time( $this->defaults['format'] );
 
 		parent::__construct( $name, $label, $args, $value );
 	}
@@ -58,9 +61,11 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
+		
+		$format = ( isset( $args['format'] ) ) ? $args['format'] : $this->defaults['format'];
 
 		// Get preview format
-		$preview = date( 'm/d/Y', strtotime( $value ? $value : $args['default'] ) );
+		$preview = date( $format, strtotime( $value ? $value : $args['default'] ) );
 
 		// Datepicker args
 		if ( $args['datepicker_args'] ) {

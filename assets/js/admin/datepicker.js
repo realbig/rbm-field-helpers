@@ -20,7 +20,29 @@
 
             // Reset them
             $datepickers.find('input[type="text"]').removeClass('hasDatepicker').removeAttr('id');
+			
+			var $previewFields = $datepickers.find( '.rbm-field-datepicker-preview' );
+			
+			$previewFields.each( function() {
+				
+				var $altField = $( this ).parent().find( 'input[type="hidden"]' ),
+					htmlName = $altField.attr( 'name' ),
+					listName = htmlName.replace( /\[.*/g, '' ),
+					fieldNameRegex = new RegExp( listName + '\\[\\d\\]\\[(.*)\\]', 'gi' ),
+					match = fieldNameRegex.exec( htmlName ),
+					fieldName = match[1].replace( '][', '' ),
+					idRegex = new RegExp( fieldName + "$", 'gi' );
+				
+				if ( $altField.attr( 'id' ).indexOf( listName ) == -1 ) {
+					
+					$altField.attr( 'id', $altField.attr( 'id' ).replace( idRegex, htmlName ) );
+					
+				}
+				
+			} );
+			
             datepickers_init($datepickers);
+			
         }
 
         function datepickers_init($datepickers) {
