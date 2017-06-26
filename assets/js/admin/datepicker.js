@@ -20,29 +20,7 @@
 
             // Reset them
             $datepickers.find('input[type="text"]').removeClass('hasDatepicker').removeAttr('id');
-			
-			var $previewFields = $datepickers.find( '.rbm-field-datepicker-preview' );
-			
-			$previewFields.each( function() {
-				
-				var $altField = $( this ).parent().find( 'input[type="hidden"]' ),
-					htmlName = $altField.attr( 'name' ),
-					listName = htmlName.replace( /\[.*/g, '' ),
-					fieldNameRegex = new RegExp( listName + '\\[\\d\\]\\[(.*)\\]', 'gi' ),
-					match = fieldNameRegex.exec( htmlName ),
-					fieldName = match[1].replace( '][', '' ),
-					idRegex = new RegExp( fieldName + "$", 'gi' );
-				
-				if ( $altField.attr( 'id' ).indexOf( listName ) == -1 ) {
-					
-					$altField.attr( 'id', $altField.attr( 'id' ).replace( idRegex, htmlName ) );
-					
-				}
-				
-			} );
-			
             datepickers_init($datepickers);
-			
         }
 
         function datepickers_init($datepickers) {
@@ -50,7 +28,6 @@
             $datepickers.each(function (){
 
                 var name = $(this).find('input[type="hidden"]').attr('name'),
-                    input_ID = '#rbm-field-datepicker-input-' + name,
                     option_functions = ['beforeShow', 'beforeShowDay', 'calculateWeek', 'onChangeMonthYear', 'onClose', 'onSelect'],
                     options = {};
 
@@ -65,7 +42,7 @@
                     }
                 });
 
-                options['altField'] = input_ID;
+                options['altField'] = '[name="' + name + '"]';
                 options['altFormat'] = 'yymmdd';
 
                 $(this).find('.rbm-field-datepicker-preview').datepicker(options);

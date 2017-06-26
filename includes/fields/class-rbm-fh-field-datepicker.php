@@ -61,11 +61,9 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
-		
-		$format = ( isset( $args['format'] ) ) ? $args['format'] : $this->defaults['format'];
 
 		// Get preview format
-		$preview = date( $format, strtotime( $value ? $value : $args['default'] ) );
+		$preview = date( $args['format'], strtotime( $value ? $value : $args['default'] ) );
 
 		// Datepicker args
 		if ( $args['datepicker_args'] ) {
@@ -87,7 +85,6 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 
 				<input type="hidden" name="<?php echo $name; ?>"
 				       value="<?php echo $value ? $value : $args['default']; ?>"
-				       id="rbm-field-datepicker-input-<?php echo $name; ?>"
 				       class="<?php echo $args['input_class']; ?>"
 					<?php self::input_atts( $args ); ?> />
 			</label>
