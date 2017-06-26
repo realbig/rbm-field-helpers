@@ -11,10 +11,14 @@
         }
 
         if ($repeaters.length) {
-            $repeaters.on('add-item', timepicker_repeater_add);
+			
+            $repeaters.on('add-item', timepicker_repeater_reinitialize);
+			
+			// Reinitializes on init so that datepicker initializes with proper name attribute that the repeater sets.
+            $repeaters.on('repeater-init', timepicker_repeater_reinitialize);
         }
 
-        function timepicker_repeater_add(e, $item) {
+        function timepicker_repeater_reinitialize(e, $item) {
 
             var $timepickers = $('.rbm-field-timepicker');
 
@@ -28,7 +32,6 @@
             $timepickers.each(function (){
 
                 var name = $(this).find('input[type="hidden"]').attr('name'),
-                    input_ID = '#rbm-field-timepicker-input-' + name,
                     option_functions = ['beforeShow', 'beforeShowDay', 'calculateWeek', 'onChangeMonthYear', 'onClose', 'onSelect'],
                     options = {};
 
@@ -43,7 +46,7 @@
                     }
                 });
 				
-				options.altField = input_ID;
+				options.altField = '[name="' + name + '"]';
 				options.altTimeFormat = 'HH:mm';
 				options.altFieldTimeOnly = false;
 				options.timeFormat = 'hh:mm tt';

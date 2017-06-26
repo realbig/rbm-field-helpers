@@ -63,7 +63,6 @@
                     }
                 });
 
-                console.log('[name="' + name + '"]');
                 options['altField'] = '[name="' + name + '"]';
                 options['altFormat'] = 'yymmdd';
 
