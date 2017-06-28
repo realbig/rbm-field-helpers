@@ -6,7 +6,7 @@
  * Author: Real Big Marketing
  * Author URI: http://realbigmarketing.com
  * GitHub Plugin URI: realbig/rbm-field-helpers
- * GitHub Branch: develop
+ * GitHub Branch: issue/30/wysiwyg-repeater-4.8
  */
 
 /**
