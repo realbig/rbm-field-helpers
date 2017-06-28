@@ -225,10 +225,13 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		 * @access private
 		 */
 		function localize_data() {
+			
+			global $wp_version;
 
 			// Localize data
 			$data = apply_filters( 'rbm_field_helpers_admin_data', array(
 				'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
+				'wp_version' => $wp_version,
 			) );
 
 			wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
