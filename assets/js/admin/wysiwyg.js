@@ -85,6 +85,7 @@
                 toolbar2: 'formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                 toolbar3: '',
                 toolbar4: '',
+				skin: false,
             };
 			
 			// The wpembed plugin was removed in WP v4.8
