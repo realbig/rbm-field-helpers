@@ -20,6 +20,20 @@
   &.dummy {
     display: none;
   }
+	
+	.rbm-field-repeater-header-interior {
+		padding: 0 0.5em 0 0.5em;
+	}
+	
+	span.collapse-icon {
+		
+		transition: all 300ms ease-in 0s;
+		
+		&:hover {
+			cursor: pointer;
+		}
+		
+	}
 
   &.ui-sortable-helper {
     opacity: 0.5;

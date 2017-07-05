@@ -13,6 +13,17 @@
 
                     $(this).slideDown();
                     refresh_selects($(this));
+					
+					var $repeater = $( this ).closest( '.rbm-field-repeater' );
+					
+					if ( $repeater.hasClass( 'collapsable' ) ) {
+						
+						$( this ).addClass( 'opened' ).removeClass( 'closed' );
+						
+						// Hide current title for new item and show default title
+						$( this ).find( '.rbm-field-repeater-header span.collapsable-title' ).html( $( this ).find( '.rbm-field-repeater-header span.collapsable-title' ).data( 'collapsable-title-default' ) );
+						
+					}
 
                     $(this).trigger('add-item', [$(this)]);
                 },
@@ -42,9 +53,39 @@
             });
 
             $(this).find('.rbm-field-repeater-row.dummy').remove();
+			
+			// Collapsable
+			if ( $( this ).hasClass( 'collapsable' ) ) {
+				$( this ).find( '.rbm-field-repeater-content' ).hide();
+			}
 
             $(this).trigger('repeater-init', [$(this)]);
         });
+		
+		$( document ).on( 'click touchend', '.rbm-field-repeater.collapsable [data-repeater-collapsable-handle]', function () {
+
+			var $repeater_field = $( this ).closest( '.rbm-field-repeater-row' ),
+				$content = $repeater_field.find( '.rbm-field-repeater-content' ).first(),
+				status = $repeater_field.hasClass( 'opened' ) ? 'closing' : 'opening',
+				$collapse_icon = $( this ).find( '.collapse-icon' );
+
+			if ( status == 'opening' ) {
+
+				$content.stop().slideDown();
+				$collapse_icon.css({'transform' : 'rotate(-180deg)'});
+				$repeater_field.addClass( 'opened' );
+				$repeater_field.removeClass( 'closed' );
+
+			}
+			else {
+
+				$content.stop().slideUp();
+				$collapse_icon.css({'transform' : 'rotate(0deg)'});
+				$repeater_field.addClass( 'closed' );
+				$repeater_field.removeClass( 'opened' );
+			}
+
+		} );
 
         function refresh_selects($e) {
 
