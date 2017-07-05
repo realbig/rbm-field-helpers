@@ -57,10 +57,10 @@ module.exports = function (grunt) {
                 map: true
             },
             front: {
-                src: 'assets/css/rbm-field-helpers-front.css'
+                src: 'rbm-field-helpers-front.css'
             },
             admin: {
-                src: 'assets/css/rbm-field-helpers-admin.css'
+                src: 'rbm-field-helpers-admin.css'
             }
         },
 
