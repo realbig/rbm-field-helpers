@@ -23,6 +23,8 @@
 						// Hide current title for new item and show default title
 						$( this ).find( '.rbm-field-repeater-header span.collapsable-title' ).html( $( this ).find( '.rbm-field-repeater-header span.collapsable-title' ).data( 'collapsable-title-default' ) );
 						
+						$( this ).find( '.collapse-icon' ).css({'transform' : 'rotate(-180deg)'});
+						
 					}
 
                     $(this).trigger('add-item', [$(this)]);
