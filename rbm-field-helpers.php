@@ -6,7 +6,7 @@
  * Author: Real Big Marketing
  * Author URI: http://realbigmarketing.com
  * GitHub Plugin URI: realbig/rbm-field-helpers
- * GitHub Branch: develop
+ * GitHub Branch: issue/34/collapsable-repeaters
  */
 
 /**
