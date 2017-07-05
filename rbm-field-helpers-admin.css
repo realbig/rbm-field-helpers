@@ -279,6 +279,12 @@
     clear: both; }
   .rbm-field-repeater-row.dummy {
     display: none; }
+  .rbm-field-repeater-row .rbm-field-repeater-header-interior {
+    padding: 0 0.5em 0 0.5em; }
+  .rbm-field-repeater-row span.collapse-icon {
+    transition: all 300ms ease-in 0s; }
+    .rbm-field-repeater-row span.collapse-icon:hover {
+      cursor: pointer; }
   .rbm-field-repeater-row.ui-sortable-helper {
     opacity: 0.5; }
   .rbm-field-repeater-row .rbm-field-repeater-handle {
