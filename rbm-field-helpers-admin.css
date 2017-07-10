@@ -12,50 +12,241 @@
   border: 1px solid #ddd;
   padding: 0.5em; }
 
-.rbm-col-1 {
-  width: 100%;
+.rbm-col {
   box-sizing: border-box;
   padding: 0.5em;
   float: left; }
-  @media only screen and (max-width: 500px) {
+
+.rbm-col-1 {
+  box-sizing: border-box;
+  padding: 0.5em;
+  float: left;
+  width: 100%; }
+  @media only screen and (max-width: 40em) {
     .rbm-col-1 {
       width: 100%; } }
 
 .rbm-col-2 {
-  width: 50%;
   box-sizing: border-box;
   padding: 0.5em;
-  float: left; }
-  @media only screen and (max-width: 500px) {
+  float: left;
+  width: 50%; }
+  @media only screen and (max-width: 40em) {
     .rbm-col-2 {
       width: 100%; } }
 
 .rbm-col-3 {
-  width: 33.3333333333%;
   box-sizing: border-box;
   padding: 0.5em;
-  float: left; }
-  @media only screen and (max-width: 500px) {
+  float: left;
+  width: 33.3333333333%; }
+  @media only screen and (max-width: 40em) {
     .rbm-col-3 {
       width: 100%; } }
 
 .rbm-col-4 {
-  width: 25%;
   box-sizing: border-box;
   padding: 0.5em;
-  float: left; }
-  @media only screen and (max-width: 500px) {
+  float: left;
+  width: 25%; }
+  @media only screen and (max-width: 40em) {
     .rbm-col-4 {
       width: 100%; } }
 
 .rbm-col-5 {
-  width: 20%;
   box-sizing: border-box;
   padding: 0.5em;
-  float: left; }
-  @media only screen and (max-width: 500px) {
+  float: left;
+  width: 20%; }
+  @media only screen and (max-width: 40em) {
     .rbm-col-5 {
       width: 100%; } }
+
+@media only screen {
+  .rbm-col-small-1 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 8.3333333333%; }
+  .rbm-col-small-2 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 16.6666666667%; }
+  .rbm-col-small-3 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 25%; }
+  .rbm-col-small-4 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 33.3333333333%; }
+  .rbm-col-small-5 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 41.6666666667%; }
+  .rbm-col-small-6 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 50%; }
+  .rbm-col-small-7 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 58.3333333333%; }
+  .rbm-col-small-8 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 66.6666666667%; }
+  .rbm-col-small-9 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 75%; }
+  .rbm-col-small-10 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 83.3333333333%; }
+  .rbm-col-small-11 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 91.6666666667%; }
+  .rbm-col-small-12 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 100%; } }
+
+@media only screen and (min-width: 40.063em) {
+  .rbm-col-medium-1 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 8.3333333333%; }
+  .rbm-col-medium-2 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 16.6666666667%; }
+  .rbm-col-medium-3 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 25%; }
+  .rbm-col-medium-4 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 33.3333333333%; }
+  .rbm-col-medium-5 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 41.6666666667%; }
+  .rbm-col-medium-6 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 50%; }
+  .rbm-col-medium-7 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 58.3333333333%; }
+  .rbm-col-medium-8 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 66.6666666667%; }
+  .rbm-col-medium-9 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 75%; }
+  .rbm-col-medium-10 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 83.3333333333%; }
+  .rbm-col-medium-11 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 91.6666666667%; }
+  .rbm-col-medium-12 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 100%; } }
+
+@media only screen and (min-width: 64.063em) {
+  .rbm-col-large-1 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 8.3333333333%; }
+  .rbm-col-large-2 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 16.6666666667%; }
+  .rbm-col-large-3 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 25%; }
+  .rbm-col-large-4 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 33.3333333333%; }
+  .rbm-col-large-5 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 41.6666666667%; }
+  .rbm-col-large-6 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 50%; }
+  .rbm-col-large-7 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 58.3333333333%; }
+  .rbm-col-large-8 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 66.6666666667%; }
+  .rbm-col-large-9 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 75%; }
+  .rbm-col-large-10 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 83.3333333333%; }
+  .rbm-col-large-11 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 91.6666666667%; }
+  .rbm-col-large-12 {
+    box-sizing: border-box;
+    padding: 0.5em;
+    float: left;
+    width: 100%; } }
 
 .rbm-field-list .rbm-field-list-item {
   border: 1px solid #ddd;
@@ -88,6 +279,12 @@
     clear: both; }
   .rbm-field-repeater-row.dummy {
     display: none; }
+  .rbm-field-repeater-row .rbm-field-repeater-header-interior {
+    padding: 0 0.5em 0 0.5em; }
+  .rbm-field-repeater-row span.collapse-icon {
+    transition: all 300ms ease-in 0s; }
+    .rbm-field-repeater-row span.collapse-icon:hover {
+      cursor: pointer; }
   .rbm-field-repeater-row.ui-sortable-helper {
     opacity: 0.5; }
   .rbm-field-repeater-row .rbm-field-repeater-handle {
@@ -95,8 +292,6 @@
     cursor: move;
     margin-bottom: 10px;
     background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-    background-image: -ms-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
     background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
     background-size: 3px 3px; }
 
@@ -152,7 +347,8 @@
       right: calc(20px + 0.5em);
       top: 50%;
       color: #aaa;
-      transform: translateY(-50%); }
+      -webkit-transform: translateY(-50%);
+              transform: translateY(-50%); }
 
 .rbm-field-number input[type="text"].rbm-field-input {
   height: 40px;
@@ -182,7 +378,8 @@
     border-color: #aaa;
     box-shadow: 0 1px 0 #aaa; }
   .rbm-field-number .rbm-field-number-increase:active, .rbm-field-number .rbm-field-number-decrease:active {
-    transform: translateY(1px); }
+    -webkit-transform: translateY(1px);
+            transform: translateY(1px); }
   .rbm-field-number .rbm-field-number-increase .dashicons, .rbm-field-number .rbm-field-number-decrease .dashicons {
     font-size: inherit;
     line-height: inherit;
@@ -202,13 +399,10 @@
 .ui-datepicker {
   padding: 0;
   margin: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
   border-radius: 0;
   background-color: #fff;
   border: 1px solid #dfdfdf;
   border-top: none;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.075);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.075);
   min-width: 17em;
   width: auto; }
@@ -216,8 +410,6 @@
 .ui-datepicker * {
   padding: 0;
   font-family: "Open Sans", sans-serif;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
   border-radius: 0; }
 
 .ui-datepicker table {
@@ -369,5 +561,4 @@
   background: #dd5e44;
   color: #fff;
   padding: 0.5em; }
-
 /*# sourceMappingURL=rbm-field-helpers-admin.css.map */

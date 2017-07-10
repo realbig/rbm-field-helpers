@@ -1,5 +1,14 @@
 (function ($) {
     'use strict';
+	
+	var majorVersion = RBM_FieldHelpers.wp_version.split( '.' )[0].toString(),
+		minorVersion = RBM_FieldHelpers.wp_version.split( '.' )[1].toString();
+
+	var legacy = true;
+	if ( majorVersion == '4' && minorVersion >= '8' ||
+	   majorVersion.toString() > '4' ) {
+		legacy = false;
+	}
 
     $(function () {
 
@@ -76,7 +85,15 @@
                 toolbar2: 'formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                 toolbar3: '',
                 toolbar4: '',
+				skin: false,
             };
+			
+			// The wpembed plugin was removed in WP v4.8
+			if ( ! legacy ) {
+				
+				tinymceArgs.plugins = tinymceArgs.plugins.replace( /wpembed,?/gi, '' );
+				
+			}
 
             // Load Teeny toolbar for the WYSIWYG if the "teeny" wysiwyg_arg is set to TRUE
             if ( $( element ).hasClass( 'teeny' ) ) {
@@ -104,7 +121,19 @@
 
             // Switch to the appropriate tab per-editor and prevent weird graphical bugs if window.getUserSetting( 'editor' ) is set to 'html'
             var mode = $( element ).find( '.wp-editor-wrap' ).hasClass( 'html-active' ) ? 'html' : 'tmce';
+			
             switchEditors.go( $textarea.attr( 'id' ), mode );
+			
+			if ( ! legacy && 
+				mode == 'html' ) {
+				
+				// Wait a sec for some DOM to load, then force "Click" the tab to ensure things /fully/ switch over
+				// This is only a problem with the HTML/Text tab. The new Editor JS API additions really only made using these functions more hacky
+				setTimeout( function() {
+					$( element ).find( '.wp-switch-editor.switch-html' ).click();
+				}, 100 );
+				
+			}
 
         });
 

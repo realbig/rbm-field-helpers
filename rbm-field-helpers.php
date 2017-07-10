@@ -2,11 +2,11 @@
 /**
  * Plugin Name: RBM Field Helpers
  * Description: Provides helper functions shared among all RBM plugins.
- * Version: 1.3.5
+ * Version: 1.3.7
  * Author: Real Big Marketing
  * Author URI: http://realbigmarketing.com
  * GitHub Plugin URI: realbig/rbm-field-helpers
- * GitHub Branch: master
+ * GitHub Branch: develop
  */
 
 /**
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 	define( 'RBM_HELPER_FUNCTIONS', true );
-	define( 'RBM_FIELD_HELPERS_VER', '1.3.5' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.3.7' );
 
 	final class RBM_FieldHelpers {
 
@@ -225,10 +225,13 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		 * @access private
 		 */
 		function localize_data() {
+			
+			global $wp_version;
 
 			// Localize data
 			$data = apply_filters( 'rbm_field_helpers_admin_data', array(
 				'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
+				'wp_version' => $wp_version,
 			) );
 
 			wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
