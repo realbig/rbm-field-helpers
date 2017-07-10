@@ -16,6 +16,18 @@ defined( 'ABSPATH' ) || die();
  * @since 1.1.0
  */
 class RBM_FH_Field_Repeater extends RBM_FH_Field {
+	
+	/**
+	 * Field defaults.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'collapsable'           => false,
+		'collapsable_title'     => 'New Row',
+	);
 
 	/**
 	 * RBM_FH_Field_Repeater constructor.
@@ -56,14 +68,41 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
             </p>
 		<?php endif; ?>
 
-        <div class="rbm-field-repeater repeater">
+        <div class="rbm-field-repeater repeater <?php echo $args['collapsable'] ? 'collapsable' : ''; ?>">
             <div class="rbm-field-repeater-list" data-repeater-list="<?php echo esc_attr( $name ); ?>">
 
 				<?php for ( $i = 0; $i < $row_count; $i ++ ) : ?>
 
                     <div class="rbm-field-repeater-row <?php echo $empty ? 'dummy' : ''; ?>" data-repeater-item>
-
-                        <div class="rbm-field-repeater-handle"></div>
+						
+						<?php if ( $args['collapsable'] ) : ?>
+						
+							<div class="rbm-field-repeater-header">
+								
+								<div class="rbm-field-repeater-handle"></div>
+								
+								<div class="rbm-field-repeater-header-interior">
+								
+									<h2 data-repeater-collapsable-handle>
+										<span class="collapsable-title" data-collapsable-title-default="<?php echo $args['collapsable_title']; ?>">
+											<?php echo apply_filters( 'rbm_fh_repeater_collapsable_title', $args['collapsable_title'], $name, $values[ $i ], $fields ); ?>
+										</span>
+										<span class="collapse-icon dashicons dashicons-arrow-down-alt2">
+										</span>
+										<input data-repeater-delete type="button" class="button" value="Delete" style="float: right;" />
+									</h2>
+									
+								</div>
+								
+							</div>
+						
+							<div class="rbm-field-repeater-content">
+								
+						<?php else : ?>
+								
+							<div class="rbm-field-repeater-handle"></div>
+						
+						<?php endif; ?>
 
 						<?php foreach ( $fields as $field_name => $field ) : ?>
 							<?php
@@ -100,10 +139,22 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 							}
 							?>
 						<?php endforeach; ?>
-
-                        <div class="clearfix"></div>
-                        <hr/>
-                        <input data-repeater-delete type="button" class="button" value="Delete"/>
+								
+						<?php if ( $args['collapsable'] ) : ?>
+						
+							</div>
+						
+							<div class="clearfix"></div>
+						
+						<?php else : ?>
+						
+							<div class="clearfix"></div>
+						
+							<hr/>
+                        	<input data-repeater-delete type="button" class="button" value="Delete"/>
+						
+						<?php endif; ?>
+                        
                     </div>
 
 				<?php endfor; ?>
