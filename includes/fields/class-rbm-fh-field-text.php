@@ -44,7 +44,6 @@ class RBM_FH_Field_Text extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-
 		?>
         <p class="rbm-field-text <?php echo esc_attr( $args['wrapper_class'] ); ?>">
             <label>

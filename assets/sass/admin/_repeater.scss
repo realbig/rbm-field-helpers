@@ -1,5 +1,17 @@
 @import "global";
 
+.rbm-field-repeater {
+  &.sortable {
+    .rbm-field-repeater-handle {
+      display: block;
+    }
+  }
+
+  .rbm-field-repeater-handle {
+    display: none;
+  }
+}
+
 .rbm-field-repeater-label {
   font-weight: bold;
 }

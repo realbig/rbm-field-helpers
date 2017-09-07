@@ -258,6 +258,12 @@
 .rbm-field-list .rbm-field-list-item-handle {
   color: #bbb; }
 
+.rbm-field-repeater.sortable .rbm-field-repeater-handle {
+  display: block; }
+
+.rbm-field-repeater .rbm-field-repeater-handle {
+  display: none; }
+
 .rbm-field-repeater-label {
   font-weight: bold; }
 
