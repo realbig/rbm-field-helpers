@@ -182,7 +182,7 @@ abstract class RBM_FH_Field {
 		$input_atts = array();
 		foreach ( $args['input_atts'] as $attr_name => $attr_value ) {
 
-			$input_atts[] = esc_attr( "$attr_name=\"$attr_value\"" );
+			$input_atts[] = $attr_name . '="' . esc_attr( $attr_value ) . '"';
 		}
 
 		$input_atts = implode( ' ', $input_atts );
