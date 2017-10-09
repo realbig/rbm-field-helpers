@@ -41,7 +41,8 @@
 
                 // Function support
                 $.each(options, function (name, value ) {
-                    if (option_functions.indexOf(name) !== -1) {
+                    if ( option_functions.indexOf(name) !== -1 &&
+					   typeof options[name] !== 'function' ) {
                         options[name] = window[value];
                     }
                 });
