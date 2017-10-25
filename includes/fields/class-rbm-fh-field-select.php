@@ -31,6 +31,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 		'option_none'       => false,
 		'option_none_value' => '',
 		'multi_field'       => false,
+		'no_options_text'   => '',
 	);
 
 	/**
@@ -44,6 +45,9 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 	 * @var mixed $value
 	 */
 	function __construct( $name, $label = '', $args = array(), $value = false ) {
+
+		$args['no_options_text'] = $args['no_options_text'] ?
+			$args['no_options_text'] : __( 'No select options.', 'rbm-field-helpers' );
 
 		parent::__construct( $name, $label, $args, $value );
 	}
@@ -120,7 +124,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 
                     </select>
 				<?php else: ?>
-                    No select options.
+					<?php echo $args['no_options_text']; ?>
 				<?php endif; ?>
             </label>
 

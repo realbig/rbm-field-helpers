@@ -25,9 +25,10 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'collapsable'       => false,
-		'collapsable_title' => 'New Row',
-		'sortable'          => true,
+		'collapsable'         => false,
+		'collapsable_title'   => 'New Row',
+		'sortable'            => true,
+		'confirm_delete_text' => '',
 	);
 
 	/**
@@ -41,6 +42,10 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	 * @var mixed $values
 	 */
 	function __construct( $name, $label = '', $args = array(), $values = false ) {
+
+		wp_parse_args( $args, array(
+			'confirm_delete_text' => __( 'Are you sure you want to delete this element?', 'rbm-field-helpers' ),
+		) );
 
 		parent::__construct( $name, $label, $args, $values );
 	}
@@ -86,7 +91,8 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 		<?php endif; ?>
 
         <div class="rbm-field-repeater repeater <?php echo implode( ' ', $classes ); ?>"
-             data-is-sortable="<?php echo $args['sortable'] ? 'yes' : 'no'; ?>">
+             data-is-sortable="<?php echo $args['sortable'] ? 'yes' : 'no'; ?>"
+             data-confirm-delete-text="<?php echo esc_attr( $args['confirm_delete_text'] ); ?>">
             <div class="rbm-field-repeater-list" data-repeater-list="<?php echo esc_attr( $name ); ?>">
 
 				<?php for ( $i = 0; $i < $row_count; $i ++ ) : ?>

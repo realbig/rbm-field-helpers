@@ -5,8 +5,8 @@
 
         $('.rbm-field-repeater').each(function () {
 
-            var $list = $(this).find('.rbm-field-repeater-list'),
-                name  = $list.data('repeater-list'),
+            var $list      = $(this).find('.rbm-field-repeater-list'),
+                name       = $list.data('repeater-list'),
                 isSortable = $(this).attr('data-is-sortable') === 'yes';
 
             $(this).repeater({
@@ -32,7 +32,9 @@
                 },
                 hide: function (deleteElement) {
 
-                    if ( confirm('Are you sure you want to delete this element?') ) {
+                    var deleteText = $(this).closest('.rbm-field-repeater').attr('data-confirm-delete-text');
+
+                    if ( confirm(deleteText) ) {
 
                         $(this).slideUp(400, deleteElement);
                         $(this).trigger('delete-item', [$(this)]);
