@@ -1434,7 +1434,7 @@
 			tp_inst._limitMinMaxDateTime(inst, true);
 			was_inline = inst.inline;
 			inst.inline = inst.stay_open = true;
-			//This way the onSelect handler called from calendarpicker get the full dateTime
+			//This way the onSelect handler called from calendarpicker get the full timePicker
 			this._base_selectDate(id, dateStr);
 			inst.inline = was_inline;
 			inst.stay_open = false;

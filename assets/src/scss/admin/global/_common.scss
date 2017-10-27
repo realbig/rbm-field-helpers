@@ -1,0 +1,12 @@
+.clearfix {
+  &:before {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.fieldhelpers-fieldset {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+}

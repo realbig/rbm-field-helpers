@@ -1,15 +1,5 @@
 <?php
 /**
- * Plugin Name: RBM Field Helpers
- * Description: Provides helper functions shared among all RBM plugins.
- * Version: 1.3.9
- * Author: Real Big Marketing
- * Author URI: http://realbigmarketing.com
- * GitHub Plugin URI: realbig/rbm-field-helpers
- * GitHub Branch: develop
- */
-
-/**
  * Provides helper functions shared among all RBM plugins.
  *
  * @version 1.3.9
@@ -17,44 +7,42 @@
  * @package RBMFieldHelpers
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die;
-}
+defined( 'ABSPATH' ) || die();
 
-// Only load once
-if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
+if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
-	define( 'RBM_HELPER_FUNCTIONS', true );
 	define( 'RBM_FIELD_HELPERS_VER', '1.3.9' );
+	define( 'RBM_FIELD_HELPERS_URI', plugins_url( '', __FILE__ ) );
+	define( 'RBM_FIELD_HELPERS_DIR', plugin_dir_path( __FILE__ ) );
 
 	final class RBM_FieldHelpers {
 
 		/**
-		 * All registered fields.
+		 * Instance properties.
 		 *
-		 * @since 1.1.0
+		 * @since {{VERSION}}
 		 *
 		 * @var array
 		 */
-		public $fields = array();
+		public $instance = array();
 
 		/**
-		 * Loaded scripts.
+		 * Fields instance.
 		 *
-		 * @since 1.1.0
+		 * @since {{VERSION}}
 		 *
-		 * @var array
+		 * @var RBM_FH_Fields
 		 */
-		public $scripts = array();
+		public $fields;
 
 		/**
-		 * Loaded styles.
+		 * Field Templates instance.
 		 *
-		 * @since 1.1.0
+		 * @since {{VERSION}}
 		 *
-		 * @var array
+		 * @var RBM_FH_FieldTemplates
 		 */
-		public $styles = array();
+		public $templates;
 
 		private function __clone() {
 		}
@@ -86,16 +74,26 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		 * RBM_FieldHelpers constructor.
 		 *
 		 * @since 1.1.0
+		 *
+		 * @param array $instance Instance arugments.
 		 */
-		function __construct() {
+		function __construct( $instance = array() ) {
+
+			$this->instance = wp_parse_args( $instance, array(
+				'ID'   => 'default',
+				'l10n' => array(
+					'field_table' => array(
+						'delete_row'    => __( 'Delete Row', 'learndash-gradebook' ),
+						'delete_column' => __( 'Delete Column', 'learndash-gradebook' ),
+					),
+				),
+			) );
 
 			$this->includes();
 
 			add_action( 'admin_init', array( $this, 'register_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			add_action( 'admin_footer', array( $this, 'localize_data' ) );
-
-			add_action( 'save_post', array( $this, 'save_meta' ) );
 		}
 
 		/**
@@ -105,30 +103,12 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		 */
 		private function includes() {
 
-			// Load dependencies
-			require_once __DIR__ . '/vendor/select2/select2-load.php';
+			require_once __DIR__ . '/core/deprecated/rbm-fh-deprecated-functions.php';
+			require_once __DIR__ . '/core/class-rbm-fh-fields.php';
+			require_once __DIR__ . '/core/class-rbm-fh-field-templates.php';
 
-			// Load base files
-			require_once __DIR__ . '/includes/rbm-fh-field-functions.php';
-
-			// Load fields
-			require_once __DIR__ . '/includes/class-rbm-fh-field.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-checkbox.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-colorpicker.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-datepicker.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-timepicker.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-datetimepicker.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-list.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-media.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-radio.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-number.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-repeater.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-select.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-table.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-text.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-textarea.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-userkeys.php';
-			require_once __DIR__ . '/includes/fields/class-rbm-fh-field-wysiwyg.php';
+			$this->fields    = new RBM_FH_Fields( $this->instance );
+			$this->templates = new RBM_FH_FieldTemplates( $this->instance );
 		}
 
 		/**
@@ -141,46 +121,49 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 
 			global $wp_scripts;
 
-			// Admin styles
+			// Core Admin
 			wp_register_style(
-				'RBM-field-helpers-admin',
-				plugins_url( '/rbm-field-helpers-admin.css', __FILE__ ),
-				array( 'RBM-jquery-ui-datetimepicker' ),
-				RBM_FIELD_HELPERS_VER
-			);
-			
-			wp_register_style(
-				'RBM-jquery-ui-datetimepicker',
-				plugins_url( '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css', __FILE__ ),
+				'rbm-fh-admin',
+				RBM_FIELD_HELPERS_URI . '/assets/dist/css/rbm-field-helpers-admin.min.css',
 				array(),
 				RBM_FIELD_HELPERS_VER
 			);
 
-			// Admin script
 			wp_register_script(
-				'RBM-field-helpers-admin',
-				plugins_url( '/rbm-field-helpers-admin.js', __FILE__ ),
-				array( 'jquery', 'RBM-jquery-repeater', 'RBM-jquery-ui-datetimepicker', 'wp-color-picker', 'jquery-ui-sortable' ),
+				'rbm-fh-admin',
+				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
+				array(
+					'jquery',
+					'jquery-ui-sortable',
+					'rbm-fh-jquery-repeater',
+				),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
 
-			// Repeater
+			// jQuery Repeater
 			wp_register_script(
-				'RBM-jquery-repeater',
-				plugins_url( '/vendor/jquery-repeater/jquery.repeater.min.js', __FILE__ ),
+				'rbm-fh-jquery-repeater',
+				RBM_FIELD_HELPERS_URI . '/vendor/jquery-repeater/jquery.repeater.min.js',
 				array( 'jquery' ),
 				'0.1.4',
 				true
 			);
-			
+
 			// jQuery UI Datetimepicker
 			wp_register_script(
-				'RBM-jquery-ui-datetimepicker',
-				plugins_url( '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js', __FILE__ ),
+				'rbm-fh-jquery-ui-datetimepicker',
+				RBM_FIELD_HELPERS_URI . '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js',
 				array( 'jquery', 'jquery-ui-datepicker' ),
 				'0.1.4',
 				true
+			);
+
+			wp_register_style(
+				'rbm-fh-jquery-ui-datetimepicker',
+				RBM_FIELD_HELPERS_URI . '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css',
+				array(),
+				RBM_FIELD_HELPERS_VER
 			);
 
 			// get registered script object for jquery-ui
@@ -204,16 +187,24 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		 */
 		function enqueue_scripts() {
 
-			wp_enqueue_script( 'RBM-field-helpers-admin' );
-			wp_enqueue_script( 'RBM-jquery-repeater' );
-			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'jquery-ui-datepicker' );
-			wp_enqueue_script( 'RBM-jquery-ui-datetimepicker' );
+			wp_enqueue_script( 'rbm-fh-admin' );
+			wp_enqueue_style( 'rbm-fh-admin' );
 
-			wp_enqueue_style( 'jquery-ui-smoothness' );
-			wp_enqueue_style( 'RBM-field-helpers-admin' );
-			wp_enqueue_style( 'RBM-jquery-ui-datetimepicker' );
-			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'rbm-fh-jquery-repeater' );
+
+			/**
+			 * Load or don't load the Date/Time Picker scripts.
+			 *
+			 * @since {{VERSION}}
+			 */
+			$load_datetimepicker = apply_filters( 'rbm_fieldhelpers_load_datetimepicker', false );
+
+			if ( $load_datetimepicker ) {
+
+				// TODO Styles not working for this?
+				wp_enqueue_script( 'rbm-fh-jquery-ui-datetimepicker' );
+				wp_enqueue_style( 'rbm-fh-jquery-ui-datetimepicker' );
+			}
 		}
 
 		/**
@@ -225,87 +216,18 @@ if ( ! defined( 'RBM_HELPER_FUNCTIONS' ) ) {
 		 * @access private
 		 */
 		function localize_data() {
-			
+
 			global $wp_version;
 
 			// Localize data
-			$data = apply_filters( 'rbm_field_helpers_admin_data', array(
-				'nonce' => wp_create_nonce( 'rbm-field-helpers' ),
-				'wp_version' => $wp_version,
+			$data = apply_filters( "rbm_field_helpers_admin_data", array(
+				'nonce'       => wp_create_nonce( 'rbm-field-helpers' ),
+				'wp_version'  => $wp_version,
+				'instance_id' => $this->instance['ID'],
+				'l10n'        => $this->instance['l10n'],
 			) );
 
-			wp_localize_script( 'RBM-field-helpers-admin', 'RBM_FieldHelpers', $data );
-		}
-
-		/**
-		 * Saves the field helpers post meta.
-		 *
-		 * @since 1.1.0
-		 * @access private
-		 *
-		 * @param $post_ID
-		 */
-		function save_meta( $post_ID ) {
-
-			// Make sure we should be here!
-			if ( ! isset( $_POST['_rbm_fields'] ) ||
-			     ! wp_verify_nonce( $_POST['rbm-meta'], 'rbm-save-meta' ) ||
-			     ! current_user_can( 'edit_posts' )
-			) {
-				return;
-			}
-
-			// Ensure it only fires ONCE
-			unset( $_POST['rbm-meta'] );
-
-			/**
-			 * Filters the fields to be saved
-			 *
-			 * Passing a value to this will cancel saving entirely.
-			 *
-			 * @since 1.3.0
-			 */
-			$fields = apply_filters( 'rbm_fields_save', $_POST['_rbm_fields'], $post_ID );
-
-			foreach ( $fields as $field ) {
-
-				$value = $_POST[ $field ];
-
-				/**
-				 * Filters the value to save to the field.
-				 *
-				 * @since 1.3.0
-				 */
-				$value = apply_filters( "rbm_fields_save_field_$field", $value, $post_ID );
-
-				// If array, and told to do so, store in DB as a broken apart, non-unique meta field.
-				// Someday I'd like to remove the 3rd conditional and simply assume this, but for now, to be safe,
-				// it is manual.
-				if ( is_array( $value ) && isset( $value[0] ) && isset( $_POST["_rbm_field_{$field}_multi_field"] ) ) {
-
-					// Delete all instances of meta field first, as add_post_meta will simply continuously add, forever,
-					// even if the value already exists (like an indexed array)
-					delete_post_meta( $post_ID, $field );
-
-					foreach ( $value as $_value ) {
-						add_post_meta( $post_ID, $field, $_value );
-					}
-				} else {
-
-					update_post_meta( $post_ID, $field, $_POST[ $field ] );
-				}
-			}
-
-			/**
-			 * Fires after fields have been saved.
-			 *
-			 * @since 1.3.0
-			 */
-			do_action( 'rbm_fields_saved', $post_ID, $fields );
+			wp_localize_script( 'rbm-fh-admin', 'RBM_FieldHelpers', $data );
 		}
 	}
-
-	// Primary instantiation
-	require_once __DIR__ . '/includes/rbm-fh-functions.php';
-	RBMFH();
 }
