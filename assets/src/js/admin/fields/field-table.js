@@ -1,9 +1,11 @@
+import Field from './field.js';
+
 /**
  * Table Field functionality.
  *
  * @since {{VERSION}}
  */
-class FieldTable {
+class FieldTable extends Field {
 
     /**
      * Class constructor.
@@ -12,21 +14,37 @@ class FieldTable {
      */
     constructor($field) {
 
+        super($field, 'table');
+
+        this.initField();
+    }
+
+    /**
+     * Initializes the Table field.
+     *
+     * @since {{VERSION}}
+     */
+    initField() {
+
         this.$ui = {
-            actions: $field.find('.fieldhelpers-field-table-actions'),
-            loading: $field.find('.fieldhelpers-field-table-loading'),
-            table: $field.find('table'),
-            thead: $field.find('thead'),
-            tbody: $field.find('tbody'),
-            addRow: $field.find('[data-table-create-row]'),
-            addColumn: $field.find('[data-table-create-column]'),
+            actions: this.$field.find('.fieldhelpers-field-table-actions'),
+            loading: this.$field.find('.fieldhelpers-field-table-loading'),
+            table: this.$field.find('table'),
+            thead: this.$field.find('thead'),
+            tbody: this.$field.find('tbody'),
+            addRow: this.$field.find('[data-table-create-row]'),
+            addColumn: this.$field.find('[data-table-create-column]'),
         }
 
         this.l10n = RBM_FieldHelpers.l10n['field_table'] || {};
 
-        this.name = $field.attr('data-table-name');
+        this.name = this.$field.attr('data-table-name');
 
-        this.data = JSON.parse(this.$ui.table.attr('data-table-data'));
+        let data = JSON.parse(this.$ui.table.attr('data-table-data'));
+
+        this.data      = {};
+        this.data.head = data.head || [];
+        this.data.body = data.body || [];
 
         this.setupHandlers();
 
@@ -85,12 +103,36 @@ class FieldTable {
      */
     updateTableData() {
 
-        const api      = this;
-        let $rows      = this.$ui.table.find('tbody tr');
-        let data       = [];
+        const api = this
+
+        // Head
+        let $headCells  = this.$ui.table.find('thead th');
+        let dataHead    = [];
+        let currentCell = 0;
+
+        $headCells.each(function () {
+
+            let $input = jQuery(this).find(`input[name="${api.name}[head][${currentCell}]"]`);
+
+            if ( !$input.length ) {
+
+                console.error('Field Helpers Error: Table head data corrupted.');
+                return false;
+            }
+
+            dataHead.push($input.val());
+
+            currentCell++;
+        });
+
+        this.data.head = dataHead;
+
+        // Body
+        let $bodyRows  = this.$ui.table.find('tbody tr');
+        let dataBody   = [];
         let currentRow = 0;
 
-        $rows.each(function () {
+        $bodyRows.each(function () {
 
             // Skip delete row
             if ( jQuery(this).hasClass('fieldhelpers-field-table-delete-columns') ) {
@@ -114,7 +156,7 @@ class FieldTable {
 
                 if ( !$input.length ) {
 
-                    console.error('Field Helpers Error: Table data corrupted.');
+                    console.error('Field Helpers Error: Table body data corrupted.');
                     return false;
                 }
 
@@ -123,12 +165,12 @@ class FieldTable {
                 currentCell++;
             });
 
-            data.push(rowData);
+            dataBody.push(rowData);
 
             currentRow++;
         });
 
-        this.data = data;
+        this.data.body = dataBody;
     }
 
     /**
@@ -138,21 +180,26 @@ class FieldTable {
      */
     addRow() {
 
-        if ( !this.data.length ) {
+        if ( !this.data.head.length ) {
+
+            this.data.head.push('');
+        }
+
+        if ( !this.data.body.length ) {
 
             // Push 1 empty row with 1 empty cell
-            this.data.push(['']);
+            this.data.body.push(['']);
 
         } else {
 
-            let columns = this.data[0].length;
+            let columns = this.data.body[0].length;
             let row     = [];
 
             for ( let i = 0; i < columns; i++ ) {
                 row.push('');
             }
 
-            this.data.push(row);
+            this.data.body.push(row);
         }
 
         this.buildTable();
@@ -165,15 +212,17 @@ class FieldTable {
      */
     addColumn() {
 
-        if ( !this.data.length ) {
+        if ( !this.data.body.length ) {
 
             // Push 1 empty row with 1 empty cell
-            this.data.push(['']);
+            this.data.head.push(['']);
+            this.data.body.push(['']);
 
         } else {
 
-            this.data.map((row) => {
+            this.data.head.push('');
 
+            this.data.body.map((row) => {
                 row.push('');
             });
         }
@@ -190,13 +239,17 @@ class FieldTable {
      */
     deleteRow(index) {
 
-        if ( this.data.length === 1 ) {
+        // Decrease to compensate for "delete row" at top
+        index--;
 
-            this.data = [];
+        if ( this.data.body.length === 1 ) {
+
+            this.data.head = [];
+            this.data.body = [];
 
         } else {
 
-            this.data.splice(index, 1);
+            this.data.body.splice(index, 1);
         }
 
 
@@ -212,17 +265,18 @@ class FieldTable {
      */
     deleteColumn(index) {
 
-        if (this.data[0].length === 1 ) {
+        if ( this.data.body[0].length === 1 ) {
 
-            this.data = [];
+            this.data.head = [];
+            this.data.body = [];
 
         } else {
 
-            this.data.map((row) => {
+            this.data.head.splice(index, 1);
 
-                row.splice(index, 1);
-                return row;
-            });
+            this.data.body.map((row) =>
+                row.splice(index, 1)
+            );
         }
 
         this.buildTable();
@@ -235,15 +289,44 @@ class FieldTable {
      */
     buildTable() {
 
+        this.$ui.thead.html('');
         this.$ui.tbody.html('');
 
-        if ( !this.data.length ) {
+        if ( this.data.head.length ) {
 
-            this.$ui.tbody.html('');
+            let $row = jQuery('<tr />');
 
-        } else {
+            this.data.head.map((cell, cell_i) => {
 
-            this.data.map((row, row_i) => {
+                let $cell = jQuery('<th />');
+
+                $cell.append(`<input type="text" name="${this.name}[head][${cell_i}]" />`);
+                $cell.find('input[type="text"]').val(cell);
+
+                $row.append($cell);
+            });
+
+            this.$ui.thead.append($row);
+        }
+
+        if ( this.data.body.length ) {
+
+            let $deleteRow = jQuery('<tr class="fieldhelpers-field-table-delete-columns"></tr>');
+
+            for ( let i = 0; i < this.data.body[0].length; i++ ) {
+
+                $deleteRow.append(
+                    '<td>' +
+                    `<button type="button" data-delete-column aria-label="${this.l10n['delete_column']}">` +
+                    '<span class="dashicons dashicons-no" />' +
+                    '</button>' +
+                    '</td>'
+                );
+            }
+
+            this.$ui.tbody.append($deleteRow);
+
+            this.data.body.map((row, row_i) => {
 
                 let $row = jQuery('<tr/>');
 
@@ -252,7 +335,6 @@ class FieldTable {
                     let $cell = jQuery('<td/>');
 
                     $cell.append(`<input type="text" name="${this.name}[body][${row_i}][${cell_i}]" />`);
-
                     $cell.find('input[type="text"]').val(cell);
 
                     $row.append($cell);
@@ -268,22 +350,6 @@ class FieldTable {
 
                 this.$ui.tbody.append($row);
             });
-
-
-            let $deleteRow = jQuery('<tr class="fieldhelpers-field-table-delete-columns"></tr>');
-
-            for ( let i = 0; i < this.data[0].length; i++ ) {
-
-                $deleteRow.append(
-                    '<td>' +
-                    `<button type="button" data-delete-column aria-label="${this.l10n['delete_column']}">` +
-                    '<span class="dashicons dashicons-no" />' +
-                    '</button>' +
-                    '</td>'
-                );
-            }
-
-            this.$ui.tbody.append($deleteRow);
         }
     }
 }
@@ -299,14 +365,16 @@ class FieldTableInitialize {
      * Class constructor.
      *
      * @since {{VERSION}}
+     *
+     * @param {jQuery} $root Root element to initialize fields inside.
      */
-    constructor() {
+    constructor($root) {
 
         const api = this;
 
         this.fields = [];
 
-        let $fields = jQuery('[data-fieldhelpers-field-table]');
+        let $fields = $root.find('[data-fieldhelpers-field-table]');
 
         if ( $fields.length ) {
 

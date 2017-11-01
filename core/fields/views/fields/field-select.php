@@ -15,8 +15,10 @@ defined( 'ABSPATH' ) || die();
 <?php if ( ! empty( $args['options'] ) ) : ?>
     <select name="<?php echo esc_attr( $name . ( $args['multiple'] ? '[]' : '' ) ); ?>"
             class="<?php echo esc_attr( $args['input_class'] ); ?>"
+            data-fieldhelpers-field-select="<?php echo esc_attr( $name ); ?>"
 		<?php RBM_FH_Field::input_atts( $args ); ?>
-		<?php echo $args['multiple'] ? 'multiple' : ''; ?>>
+		<?php echo $args['multiple'] ? 'multiple' : ''; ?>
+    >
 
 		<?php if ( $args['option_none'] ) : ?>
             <option value="<?php echo esc_attr( $args['option_none_value'] ); ?>">

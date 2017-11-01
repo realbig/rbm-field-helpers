@@ -25,8 +25,10 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 	 */
 	public $defaults = array(
 		'default'         => '',
-		'format'		  => '',
-		'datepicker_args' => array(),
+		'format'          => '',
+		'datepicker_args' => array(
+			'altFormat' => 'yymmdd',
+		),
 	);
 
 	/**
@@ -42,8 +44,11 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 
 		// Cannot use function in property declaration
 		$this->defaults['format'] = get_option( 'date_format', 'F j, Y' );
-		
+
 		$args['default'] = current_time( $this->defaults['format'] );
+
+		// Default options
+		$args['datepicker_args'] = wp_parse_args( $args['datepicker_args'], $this->defaults['datepicker_args'] );
 
 		parent::__construct( $name, $args );
 	}
@@ -65,7 +70,7 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 		// Datepicker args
 		if ( $args['datepicker_args'] ) {
 
-		    add_filter( 'rbm_field_helpers_admin_data', function ( $data ) use ( $args, $name ) {
+			add_filter( 'rbm_field_helpers_admin_data', function ( $data ) use ( $args, $name ) {
 
 				$data["datepicker_args_$name"] = $args['datepicker_args'];
 

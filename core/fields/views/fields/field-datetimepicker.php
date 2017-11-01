@@ -14,15 +14,13 @@ defined( 'ABSPATH' ) || die();
 
 <input type="text"
        class="fieldhelpers-field-datetimepicker-preview"
-       value="<?php echo $args['preview']; ?>"
-       data-fieldhelpers-field-datepicker
-       data-datetimepicker
+       value="<?php echo esc_attr( $args['preview'] ); ?>"
+       data-fieldhelpers-field-datetimepicker
 />
 
 <input type="hidden"
-       name="<?php echo $name; ?>"
-       value="<?php echo $value ? $value : $args['default']; ?>"
-       id="fieldhelpers-field-datetimepicker-input-<?php echo $name; ?>"
-       class="<?php echo $args['input_class']; ?>"
+       name="<?php echo esc_attr( $name ); ?>"
+       value="<?php echo esc_attr( $value ); ?>"
+       class="<?php echo esc_attr( $args['input_class'] ); ?>"
 	<?php RBM_FH_Field::input_atts( $args ); ?>
 />

@@ -13,9 +13,8 @@ defined( 'ABSPATH' ) || die();
 ?>
 
 <input type="text"
-       name="<?php echo $name; ?>"
-       value="<?php echo $value ? $value : $args['default']; ?>"
-       class="<?php echo $args['input_class']; ?>"
+       name="<?php echo esc_attr( $name ); ?>"
+       value="<?php echo esc_attr( $value ); ?>"
+       class="<?php echo esc_attr( $args['input_class'] ); ?>"
        data-fieldhelpers-field-colorpicker
-       data-default-color="<?php echo $args['default']; ?>"
 	<?php RBM_FH_Field::input_atts( $args ); ?> />

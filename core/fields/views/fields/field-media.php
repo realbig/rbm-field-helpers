@@ -13,14 +13,8 @@ defined( 'ABSPATH' ) || die();
 ?>
 
 <div class="fieldhelpers-media-uploader"
-     data-type="<?php echo esc_attr( $args['type'] ); ?>"
-     data-title="<?php echo esc_attr( $args['window_title'] ); ?>"
-     data-button-text="<?php echo esc_attr( $args['window_button_text'] ); ?>"
-     data-preview-size="<?php echo esc_attr( $args['preview_size'] ); ?>"
      data-fieldhelpers-field-media
 >
-
-	<?php echo $args['label'] ? "<strong>{$args['label']}</strong><br/>" : ''; ?>
 
 	<?php
 	switch ( $args['type'] ) :
@@ -31,16 +25,13 @@ defined( 'ABSPATH' ) || die();
 			?>
             <img src="<?php echo $value ? esc_attr( $args['media_preview_url'] ) : esc_attr( $args['placeholder'] ); ?>"
                  data-image-preview
-                 data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"
             />
 			<?php
 			break;
 
 		default:
 			?>
-            <code data-media-preview
-                  data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"
-            >
+            <code data-media-preview>
 				<?php echo $value ? $args['media_preview_url'] : $args['placeholder']; ?>
             </code>
 			<?php

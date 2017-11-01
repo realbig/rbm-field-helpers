@@ -50,7 +50,6 @@ class RBM_FH_FieldsSave {
 
 		add_action( 'save_post', array( $this, 'save_meta_fields_hook' ) );
 
-		// TODO See if better hook for specifically options.php page saving.
 		add_action( 'admin_init', array( $this, 'save_option_fields_hook' ) );
 	}
 
@@ -178,10 +177,6 @@ class RBM_FH_FieldsSave {
 			return;
 		}
 
-		// Ensure it only fires ONCE
-		// TODO See where this is necessary? This should only hook/fire one time anyways.
-		unset( $_POST["{$this->prefix}_fieldhelpers_{$group}_nonce"] );
-
 		/**
 		 * Filters the fields to be saved
 		 *
@@ -256,10 +251,6 @@ class RBM_FH_FieldsSave {
 		) {
 			return;
 		}
-
-		// Ensure it only fires ONCE
-		// TODO See where this is necessary? This should only hook/fire one time anyways.
-		unset( $_POST["{$this->prefix}_fieldhelpers_{$group}_options_nonce"] );
 
 		/**
 		 * Filters the option fields to be saved

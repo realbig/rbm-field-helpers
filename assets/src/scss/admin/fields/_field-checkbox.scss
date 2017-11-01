@@ -1,10 +1,10 @@
-.fieldhelpers-field-radio-container {
+.fieldhelpers-field-checkbox-container {
   border-collapse: collapse;
   border: 1px solid #DFDFDF;
   background: #fff;
 }
 
-.fieldhelpers-field-radio-row {
+.fieldhelpers-field-checkbox-row {
   position: relative;
   cursor: pointer;
   transition: background 150ms;
@@ -25,19 +25,19 @@
     border-bottom: 1px solid #DFDFDF;
   }
 
-  &.fieldhelpers-field-radio-row-active {
+  &.fieldhelpers-field-checkbox-row-active {
       background: $primary-color;
 
     &:hover {
         background: darken($primary-color, 5%);
     }
 
-    .fieldhelpers-field-radio-label {
+    .fieldhelpers-field-checkbox-label {
       color: #fff;
     }
   }
 
-  input[type="radio"] {
+  input[type="checkbox"] {
     position: relative;
     float: left;
     margin: 0 0.5em;
@@ -46,7 +46,7 @@
     transform: translateY(-50%);
   }
 
-  .fieldhelpers-field-radio-label {
+  .fieldhelpers-field-checkbox-label {
     display: block;
     float: left;
     font-weight: bold;

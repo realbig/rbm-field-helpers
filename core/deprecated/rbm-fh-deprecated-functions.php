@@ -529,5 +529,7 @@ function rbm_do_field_table( $name, $label = false, $value = false, $args = arra
  */
 function rbm_do_field_wysiwyg( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_WYSIWYG( $name, $label, $args, $value );
+    $args['wysiwyg'] = true;
+
+	new RBM_FH_Field_TextArea( $name, $label, $args, $value );
 }

@@ -42,18 +42,6 @@ class RBM_FH_Field_HTML extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $label = '', $args = array() ) {
 
-		?>
-        <div class="rbm-field-html <?php echo esc_attr( $args['wrapper_class'] ); ?>">
-			<?php if ( $label ) : ?>
-                <label>
-                    <strong>
-						<?php echo $label; ?>
-                    </strong>
-                </label>
-			<?php endif; ?>
-
-			<?php echo $args['html']; ?>
-        </div>
-		<?php
+		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'html', $args, $name, $value );
 	}
 }

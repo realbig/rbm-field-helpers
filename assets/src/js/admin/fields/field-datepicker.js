@@ -1,3 +1,5 @@
+import Field from './field.js';
+
 /**
  * Date Picker Field functionality.
  *
@@ -5,7 +7,7 @@
  *
  * @since {{VERSION}}
  */
-class FieldDatePicker {
+class FieldDatePicker extends Field {
 
     /**
      * Class constructor.
@@ -14,33 +16,9 @@ class FieldDatePicker {
      */
     constructor($field) {
 
-        if ( !jQuery.isFunction(jQuery.fn.datepicker) ) {
+        super($field, 'datepicker');
 
-            console.error('Field Helpers Error: Trying to initialize Date Picker field but "jquery-ui-datepicker" ' +
-                'is not enqueued.');
-            return;
-        }
-
-        this.$field = $field;
-
-        this.timePicker     = typeof this.$field.attr('data-timepicker') !== 'undefined';
-        this.dateTimePicker = typeof this.$field.attr('data-datetimepicker') !== 'undefined';
-
-        if ( this.dateTimePicker && !jQuery.isFunction(jQuery.fn.datetimepicker) ) {
-
-            console.error('Field Helpers Error: Trying to initialize Date Picker field but ' +
-                '"rbm-fh-jquery-ui-datetimepicker" is not enqueued.');
-            return;
-        }
-
-        if ( this.timePicker && !jQuery.isFunction(jQuery.fn.timepicker) ) {
-
-            console.error('Field Helpers Error: Trying to initialize Date Picker field but ' +
-                '"jquery-ui-datetimepicker" is not enqueued.');
-            return;
-        }
-
-        this.initializeDatepicker();
+        this.initField();
     }
 
     /**
@@ -48,51 +26,38 @@ class FieldDatePicker {
      *
      * @since {{VERSION}}
      */
-    initializeDatepicker() {
+    initField() {
 
-        let name             = this.$field.find('input[type="hidden"]').attr('name');
+        this.$hiddenField = this.$field.next('input[type="hidden"]');
+
         let option_functions = ['beforeShow', 'beforeShowDay', 'calculateWeek', 'onChangeMonthYear', 'onClose', 'onSelect'];
-        let options          = {};
-
-        if ( RBM_FieldHelpers['datepicker_args_' + name] ) {
-
-            options = RBM_FieldHelpers['datepicker_args_' + name];
-        }
 
         // Function support
-        jQuery.each(options, (name, value) => {
+        jQuery.each(this.options.datepickerOptions, (name, value) => {
 
-            if ( option_functions.indexOf(name) !== -1 && typeof options[name] !== 'function' ) {
+            if ( option_functions.indexOf(name) !== -1 &&
+                !jQuery.isFunction(this.options.datepickerOptions[name]) &&
+                jQuery.isFunction(window[value]) ) {
 
-                options[name] = window[value];
+                this.options.datepickerOptions[name] = window[value];
             }
         });
 
-        options.altField  = '[name="' + name + '"]';
-        options.altFormat = 'yymmdd';
+        this.options.datepickerOptions.altField  = this.$hiddenField;
 
-        if ( this.dateTimePicker ) {
+        this.$field.datepicker(this.options.datepickerOptions);
+    }
 
-            options.altTimeFormat    = 'HH:mm';
-            options.altFieldTimeOnly = false;
-            options.timeFormat       = 'hh:mm tt';
-            options.controlType      = 'select';
+    /**
+     * Cleans up after a repeater add/init.
+     *
+     * @since {{VERSION}}
+     */
+    fieldCleanup() {
 
-            this.$field.datetimepicker(options);
-
-        } else if ( this.timePicker ) {
-
-            options.altTimeFormat = 'HH:mm';
-            options.altFieldTimeOnly = false;
-            options.timeFormat = 'hh:mm tt';
-            options.controlType = 'select';
-
-            this.$field.timepicker(options);
-
-        } else {
-
-            this.$field.datepicker(options);
-        }
+        this.$field
+            .removeClass('hasDatepicker')
+            .removeAttr('id');
     }
 }
 
@@ -107,14 +72,23 @@ class FieldDatePickerInitialize {
      * Class constructor.
      *
      * @since {{VERSION}}
+     *
+     * @param {jQuery} $root Root element to initialize fields inside.
      */
-    constructor() {
+    constructor($root) {
+
+        if ( !jQuery.isFunction(jQuery.fn.datepicker) ) {
+
+            console.error('Field Helpers Error: Trying to initialize Date Picker field but "jquery-ui-datepicker" ' +
+                'is not enqueued.');
+            return;
+        }
 
         const api = this;
 
         this.fields = [];
 
-        let $fields = jQuery('[data-fieldhelpers-field-datepicker]');
+        let $fields = $root.find('[data-fieldhelpers-field-datepicker]');
 
         if ( $fields.length ) {
 

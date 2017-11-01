@@ -4,11 +4,14 @@
 @import "global/layout";
 
 // Fields
-@import "fields/list";
-@import "fields/repeater";
-@import "fields/wysiwyg";
-@import "fields/table";
-@import "fields/number";
-@import "fields/datepicker";
-@import "fields/radio";
-@import "fields/media";
+@import "fields/field";
+@import "fields/field-checkbox";
+@import "fields/field-colorpicker";
+@import "fields/field-datepicker";
+@import "fields/field-list";
+@import "fields/field-media";
+@import "fields/field-number";
+@import "fields/field-radio";
+@import "fields/field-repeater";
+@import "fields/field-table";
+@import "fields/field-wysiwyg";

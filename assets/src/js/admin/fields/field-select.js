@@ -1,11 +1,11 @@
 import Field from './field.js';
 
 /**
- * List Field functionality.
+ * Select Field functionality.
  *
  * @since {{VERSION}}
  */
-class FieldList extends Field {
+class FieldSelect extends Field {
 
     /**
      * Class constructor.
@@ -14,66 +14,70 @@ class FieldList extends Field {
      */
     constructor($field) {
 
-        super($field);
+        super($field, 'select');
 
-        let name = this.$field.attr('data-fieldhelpers-field-list');
-
-        if ( typeof RBM_FieldHelpers[this.instance]['listFields'] === 'undefined' ) {
-
-            console.error('Field Helpers Error: Data for List fields cannot be found.');
-            return;
-        }
-
-        if ( typeof RBM_FieldHelpers[this.instance]['listFields'][name] === 'undefined' ) {
-
-            console.error(`Field Helpers Error: Cannot find field options for list field with name: ${name}.`);
-            return;
-        }
-
-        this.options = RBM_FieldHelpers[this.instance]['listFields'][name];
-
-        this.listInit();
+        this.initField();
     }
 
     /**
-     * Initializes the list.
+     * Initializes the select.
      *
      * @since {{VERSION}}
      */
-    listInit() {
+    initField() {
 
-        this.$field.sortable(this.options);
+        this.$field.select2(this.select2Options);
+    }
+
+    /**
+     * Resets the field.
+     *
+     * @since {{VERSION}}
+     */
+    fieldCleanup() {
+
+        let $oldSelect = this.$field.next('.select2');
+
+        if ( $oldSelect.length ) {
+
+            $oldSelect.remove();
+        }
+
+        this.$field
+            .removeClass('select2-hidden-accessible')
+            .removeAttr('tablindex aria-hidden')
+            .find('option:selected').prop('selected', false);
     }
 }
 
 /**
- * Finds and initializes all List fields.
+ * Finds and initializes all Select fields.
  *
  * @since {{VERSION}}
  */
-class FieldListInitialize {
+class FieldSelectInitialize {
 
     /**
      * Class constructor.
      *
      * @since {{VERSION}}
+     *
+     * @param {jQuery} $root Root element to initialize fields inside.
      */
-    constructor() {
+    constructor($root) {
 
         const api = this;
 
         this.fields = [];
 
-        let $fields = jQuery('[data-fieldhelpers-field-list]');
-
-        if ( !jQuery.isFunction(jQuery.fn.sortable) ) {
-
-            console.error('Field Helpers Error: Trying to initialize List field but "jquery-ui-sortable" ' +
-                'is not enqueued.');
-            return;
-        }
+        let $fields = $root.find('[data-fieldhelpers-field-select]');
 
         if ( $fields.length ) {
+
+            if ( !jQuery.isFunction(jQuery.fn.select2) ) {
+
+                return;
+            }
 
             $fields.each(function () {
 
@@ -93,9 +97,9 @@ class FieldListInitialize {
 
         this.fields.push({
             $field,
-            api: new FieldList($field),
+            api: new FieldSelect($field),
         });
     }
 }
 
-export default FieldListInitialize;
+export default FieldSelectInitialize;

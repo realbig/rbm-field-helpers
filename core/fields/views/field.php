@@ -11,9 +11,21 @@
  */
 
 defined( 'ABSPATH' ) || die();
+
+$classes = array_merge(
+	array(
+		'fieldhelpers-field',
+		"fieldhelpers-field-{$type}",
+		"{$args['prefix']}-fieldhelpers-field",
+	),
+	$args['wrapper_classes']
+);
 ?>
 
-<div class="<?php echo ( implode( ' ', $args['wrapper_classes'] ) ) . " {$args['prefix']}-fieldhelpers-field fieldhelpers-field-{$type}"; ?>">
+<div class="<?php echo implode( ' ', $classes ); ?>"
+     data-fieldhelpers-instance="<?php echo esc_attr( $args['prefix'] ); ?>"
+     data-fieldhelpers-name="<?php echo esc_attr( $name ); ?>"
+>
     <header class="fieldhelpers-field-header">
 		<?php
 		/**

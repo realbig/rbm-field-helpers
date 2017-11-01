@@ -1,6 +1,6 @@
 <?php
 /**
- * Field Template: Table
+ * Field Template: List
  *
  * @since {{VERSION}}
  *
@@ -10,28 +10,22 @@
  */
 
 defined( 'ABSPATH' ) || die();
-
-$value = array(
-	'head' => array( 'HOne', 'HTwo', 'HThree' ),
-	'body' => array(
-		array( 'One', 'Two', 'Three' ),
-		array( 'One2', 'Two2', 'Three2' ),
-	),
-);
 ?>
 
-<div class="fieldhelpers-field-table" data-fieldhelpers-field-table data-table-name="<?php echo $name; ?>">
-    <table data-table-data="<?php echo esc_attr( json_encode( $value ) ); ?>" style="display: none;">
-        <thead></thead>
-        <tbody></tbody>
-    </table>
+<ul class="fieldhelpers-field-list-items"
+    data-fieldhelpers-field-list="<?php echo esc_attr( $name ); ?>"
+>
+	<?php foreach ( $args['items'] as $value => $label ) : ?>
+        <li class="fieldhelpers-field-list-item">
+            <span class="fieldhelpers-field-list-item-handle dashicons dashicons-menu"></span>
 
-    <div class="fieldhelpers-field-table-loading">
-        <span class="spinner is-active"></span>
-    </div>
+			<?php echo esc_attr( $label ); ?>
 
-    <div class="fieldhelpers-field-table-actions" style="display: none;">
-        <input data-table-create-row type="button" class="button" value="Add Row"/>
-        <input data-table-create-column type="button" class="button" value="Add Column"/>
-    </div>
-</div>
+            <input type="hidden"
+                   name="<?php echo esc_attr( $name ); ?>[]"
+                   value="<?php echo esc_attr( $value ); ?>"
+				<?php RBM_FH_Field::input_atts( $args ); ?>
+            />
+        </li>
+	<?php endforeach; ?>
+</ul>

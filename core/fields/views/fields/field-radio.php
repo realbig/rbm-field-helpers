@@ -12,22 +12,29 @@
 defined( 'ABSPATH' ) || die();
 ?>
 
-<?php $i = 0; ?>
-<?php foreach ( $args['options'] as $radio_value => $radio_label ) : ?>
-	<?php $i ++; ?>
-    <input type="radio"
-           name="<?php echo $name; ?>"
-           id="<?php echo "{$name}_{$i}"; ?>"
-           value="<?php echo $radio_value; ?>"
-           class="<?php echo $args['input_class']; ?>"
-		<?php checked( $radio_value, $value ); ?>
-		<?php RBM_FH_Field::input_atts( $args ); ?>
-    />
+<div class="fieldhelpers-field-radio-container"
+     data-fieldhelpers-field-radio
+>
+	<?php $i = 0; ?>
+	<?php foreach ( $args['options'] as $radio_value => $radio_label ) : ?>
+		<?php $i ++; ?>
 
-    <label for="<?php echo "{$name}_{$i}"; ?>"
-           class="fieldhelpers-field-radio-label"
-    ><?php echo $radio_label; ?></label>
+        <div class="fieldhelpers-field-radio-row">
 
-	<?php echo $i !== count( $args['options'] ) ? '<br/>' : ''; ?>
-<?php endforeach; ?>
+            <input type="radio"
+                   name="<?php echo $name . ($args['repeater'] ? '' : '[]'); ?>"
+                   id="<?php echo "{$args['id']}_{$i}"; ?>"
+                   value="<?php echo $radio_value; ?>"
+                   class="<?php echo $args['input_class']; ?>"
+				<?php checked( $radio_value, $value ); ?>
+				<?php RBM_FH_Field::input_atts( $args ); ?>
+            />
 
+            <label for="<?php echo "{$args['id']}_{$i}"; ?>"
+                   class="fieldhelpers-field-radio-label"
+            ><?php echo $radio_label; ?></label>
+
+        </div>
+
+	<?php endforeach; ?>
+</div>

@@ -1,15 +1,3 @@
-.fieldhelpers-field-repeater {
-  &.sortable {
-    .fieldhelpers-field-repeater-handle {
-      display: block;
-    }
-  }
-
-  .fieldhelpers-field-repeater-handle {
-    display: none;
-  }
-}
-
 .fieldhelpers-field-repeater-label {
   font-weight: bold;
 }
@@ -32,24 +20,6 @@
     clear: both;
   }
 
-  &.dummy {
-    display: none;
-  }
-	
-	.fieldhelpers-field-repeater-header-interior {
-		padding: 0 0.5em 0 0.5em;
-	}
-	
-	span.collapse-icon {
-		
-		transition: all 300ms ease-in 0s;
-		
-		&:hover {
-			cursor: pointer;
-		}
-		
-	}
-
   &.ui-sortable-helper {
     opacity: 0.5;
   }
@@ -58,10 +28,42 @@
     height: 20px;
     cursor: move;
     margin-bottom: 10px;
-    background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-    background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-    background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-    background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+    background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 1px, transparent 1px, transparent 100%);
+    background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 1px, transparent 1px, transparent 100%);
+    background-image: -ms-repeating-radial-gradient(center center, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 1px, transparent 1px, transparent 100%);
+    background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 1px, transparent 1px, transparent 100%);
     background-size: 3px 3px;
+  }
+}
+
+.fieldhelpers-field-repeater-collapsable {
+  .fieldhelpers-field-repeater-content {
+    display: none;
+  }
+
+  .fieldhelpers-field-repeater-header-interior {
+    padding: 0 0.5em 0 0.5em;
+
+    .fieldhelpers-field-repeater-delete-button {
+      float: right;
+    }
+  }
+
+  .fieldhelpers-field-repeater-collapsable-handle {
+    cursor: pointer;
+  }
+
+  .fieldhelpers-field-repeater-row.opened {
+    .fieldhelpers-field-repeater-collapsable-collapse-icon{
+      transform: rotate(180deg);
+    }
+  }
+
+  .fieldhelpers-field-repeater-collapsable-collapse-icon {
+    transition: transform 300ms ease-in 0s;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

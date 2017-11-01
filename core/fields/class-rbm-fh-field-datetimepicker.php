@@ -24,9 +24,15 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'default'         => '',
-		'format'		  => '',
-		'datetimepicker_args' => array(),
+		'default'             => '',
+		'format'              => '',
+		'datetimepicker_args' => array(
+			'altFormat'        => 'yymmdd',
+			'altTimeFormat'    => 'HH:mm',
+			'altFieldTimeOnly' => false,
+			'timeFormat'       => 'hh:mm tt',
+			'controlType'      => 'select',
+		),
 	);
 
 	/**
@@ -42,8 +48,11 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 
 		// Cannot use function in property declaration
 		$this->defaults['format'] = get_option( 'date_format', 'F j, Y' ) . ' ' . get_option( 'time_format', 'g:i a' );
-		
+
 		$args['default'] = current_time( $this->defaults['format'] );
+
+		// Default options
+		$args['datetimepicker_args'] = wp_parse_args( $args['datetimepicker_args'], $this->defaults['datetimepicker_args'] );
 
 		parent::__construct( $name, $args );
 	}
@@ -65,7 +74,7 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 		// DateTimepicker args
 		if ( $args['datetimepicker_args'] ) {
 
-		    add_filter( 'rbm_field_helpers_admin_data', function ( $data ) use ( $args, $name ) {
+			add_filter( 'rbm_field_helpers_admin_data', function ( $data ) use ( $args, $name ) {
 
 				$data["datetimepicker_args_$name"] = $args['datetimepicker_args'];
 

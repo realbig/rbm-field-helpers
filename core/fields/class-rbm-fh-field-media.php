@@ -29,8 +29,7 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 		'button_remove_text' => '',
 		'type'               => 'image',
 		'window_title'       => '',
-		'window_button_text' => '',
-		'placeholder'        => '&nbsp;',
+		'placeholder'        => false,
 	);
 
 	/**
@@ -46,7 +45,6 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 		$this->defaults['button_text']        = __( 'Upload / Choose Media', 'rbm-field-helpers' );
 		$this->defaults['button_remove_text'] = __( 'Remove Media', 'rbm-field-helpers' );
 		$this->defaults['window_title']       = __( 'Choose Media', 'rbm-field-helpers' );
-		$this->defaults['window_button_text'] = __( 'Use Media', 'rbm-field-helpers' );
 
 		parent::__construct( $name, $args );
 	}

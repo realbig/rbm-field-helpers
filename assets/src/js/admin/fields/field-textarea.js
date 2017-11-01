@@ -16,21 +16,28 @@ class FieldTextArea extends Field {
 
         super($field, 'textarea');
 
-        if ( this.options.richEditor ) {
-
-            this.richEditorInit();
-        }
+        this.initField();
     }
 
     /**
-     * Initializes the select.
+     * Initializes the WYSIWYG.
      *
      * @since {{VERSION}}
      */
-    richEditorInit() {
+    initField() {
 
-        tinymce.EditorManager.execCommand('mceAddEditor', true, this.name);
-// this.$field
+        if ( this.options.wysiwyg ) {
+
+            if ( !wp.editor ) {
+
+                console.error('Field Helpers Error: Trying to initialize a WYSIWYG Text Area field but "wp_editor" ' +
+                    'is not enqueued.');
+            }
+
+            let settings = jQuery.extend(wp.editor.getDefaultSettings(), this.options.wysiwygOptions);
+
+            wp.editor.initialize(this.$field.attr('id'), settings);
+        }
     }
 
     /**
@@ -39,6 +46,67 @@ class FieldTextArea extends Field {
      * @since {{VERSION}}
      */
     fieldCleanup() {
+
+        if ( this.options.wysiwyg ) {
+
+            let id = this.$field.attr('id');
+
+            if ( window.tinymce.get(id) ) {
+
+                wp.editor.remove(id);
+
+            } else {
+
+                this.$field.appendTo(this.$wrapper.find('.fieldhelpers-field-content'));
+                this.$wrapper.find('.wp-editor-wrap').remove();
+            }
+        }
+    }
+
+    /**
+     * Fires before deleting the item from a repeater.
+     *
+     * Removes from wp.editor.
+     *
+     * @since {{VERSION}}
+     */
+    repeaterBeforeDeleteSelf() {
+
+        this.fieldCleanup();
+    }
+
+    /**
+     * Fires on Repeat delete item.
+     *
+     * Adds slight delay to field re-initialization.
+     *
+     * @since {{VERSION}}
+     */
+    repeaterOnDeleteItem() {
+
+        this.fieldCleanup();
+        this.repeaterSetID();
+
+        // Add slight delay because all repeater item WYSIWYG's must be unitialized before re-initializing to prevent
+        // ID overlap.
+        setTimeout(() => {this.initField()}, 1);
+    }
+
+    /**
+     * Fires on Repeat sort item.
+     *
+     * Adds slight delay to field re-initialization.
+     *
+     * @since {{VERSION}}
+     */
+    repeaterOnSort() {
+
+        this.fieldCleanup();
+        this.repeaterSetID();
+
+        // Add slight delay because all repeater item WYSIWYG's must be unitialized before re-initializing to prevent
+        // ID overlap.
+        setTimeout(() => {this.initField()}, 1);
     }
 }
 

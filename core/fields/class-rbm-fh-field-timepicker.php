@@ -25,8 +25,14 @@ class RBM_FH_Field_TimePicker extends RBM_FH_Field {
 	 */
 	public $defaults = array(
 		'default'         => '',
-		'format'		  => '',
-		'timepicker_args' => array(),
+		'format'          => '',
+		'timepicker_args' => array(
+			'altFormat'        => 'yymmdd',
+			'altTimeFormat'    => 'HH:mm',
+			'altFieldTimeOnly' => false,
+			'timeFormat'       => 'hh:mm tt',
+			'controlType'      => 'select',
+		),
 	);
 
 	/**
@@ -43,6 +49,9 @@ class RBM_FH_Field_TimePicker extends RBM_FH_Field {
 		$this->defaults['format'] = get_option( 'time_format', 'g:i a' );
 
 		$args['default'] = current_time( $this->defaults['format'] );
+
+		// Default options
+		$args['timepicker_args'] = wp_parse_args( $args['timepicker_args'], $this->defaults['timepicker_args'] );
 
 		parent::__construct( $name, $args );
 	}

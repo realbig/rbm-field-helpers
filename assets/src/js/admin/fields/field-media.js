@@ -1,11 +1,11 @@
+import Field from './field.js';
+
 /**
  * Media Field functionality.
  *
- * Also includes Date/Time Picker and Time Picker.
- *
  * @since {{VERSION}}
  */
-class FieldMedia {
+class FieldMedia extends Field {
 
     /**
      * Class constructor.
@@ -14,28 +14,35 @@ class FieldMedia {
      */
     constructor($field) {
 
-        if ( !wp.media ) {
+        super($field, 'media');
 
-            console.error('Field Helpers Error: Trying to initialize Date Picker field but media is not enqueued.');
-            return;
-        }
+        this.initField();
+    }
+
+    /**
+     * Initializes the Media field.
+     *
+     * @since {{VERSION}}
+     */
+    initField() {
 
         this.$ui = {
-            input: $field.find('[data-media-input]'),
-            addButton: $field.find('[data-add-media]'),
-            imagePreview: $field.find('[data-image-preview]'),
-            mediaPreview: $field.find('[data-media-preview]'),
-            removeButton: $field.find('[data-remove-media]'),
+            input: this.$field.find('[data-media-input]'),
+            addButton: this.$field.find('[data-add-media]'),
+            imagePreview: this.$field.find('[data-image-preview]'),
+            mediaPreview: this.$field.find('[data-media-preview]'),
+            removeButton: this.$field.find('[data-remove-media]'),
         }
 
         this.mediaFrame = wp.media.frames.meta_image_frame = wp.media({
-            title: 'Choose Media'
+            title: this.options.l10n['window_title'],
         });
 
-        this.type = $field.attr('data-type');
+        this.placeholder = this.options.placeholder;
+        this.type        = this.options.type
 
         this.imageProperties = {
-            previewSize: $field.attr('data-preview-size'),
+            previewSize: this.options.previewSize,
         };
 
         this.setupHandlers();
@@ -92,13 +99,13 @@ class FieldMedia {
 
             case 'image':
 
-                this.$ui.imagePreview.attr('src', this.$ui.imagePreview.data('placeholder') || '');
+                this.$ui.imagePreview.attr('src', this.placeholder || '');
 
                 break;
 
             default:
 
-                this.$ui.mediaPreview.html(this.$ui.mediaPreview.data('placeholder') || '&nbsp;');
+                this.$ui.mediaPreview.html(this.placeholder || '&nbsp;');
         }
     }
 
@@ -149,16 +156,24 @@ class FieldMediaInitialize {
      * Class constructor.
      *
      * @since {{VERSION}}
+     *
+     * @param {jQuery} $root Root element to initialize fields inside.
      */
-    constructor() {
+    constructor($root) {
 
         const api = this;
 
         this.fields = [];
 
-        let $fields = jQuery('[data-fieldhelpers-field-media]');
+        let $fields = $root.find('[data-fieldhelpers-field-media]');
 
         if ( $fields.length ) {
+
+            if ( !wp.media ) {
+
+                console.error('Field Helpers Error: Trying to initialize Media field but media is not enqueued.');
+                return;
+            }
 
             $fields.each(function () {
 

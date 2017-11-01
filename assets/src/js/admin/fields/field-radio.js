@@ -1,11 +1,11 @@
 import Field from './field.js';
 
 /**
- * Checkbox Field functionality.
+ * Radio Field functionality.
  *
  * @since {{VERSION}}
  */
-class FieldCheckbox extends Field {
+class FieldRadio extends Field {
 
     /**
      * Class constructor.
@@ -14,7 +14,9 @@ class FieldCheckbox extends Field {
      */
     constructor($field) {
 
-        super($field, 'checkbox');
+        super($field, 'radio');
+
+        this.initField();
     }
 
     /**
@@ -23,25 +25,82 @@ class FieldCheckbox extends Field {
      * @since {{VERSION}}
      */
     initField() {
+
+        this.$ui = {
+            radios: this.$field.find('input[type="radio"]'),
+        }
+
+        this.setupHandlers();
+    }
+
+    /**
+     * Sets up class handlers.
+     *
+     * @since {{VERSION}}
+     */
+    setupHandlers() {
+
+        const api = this;
+
+        this.$ui.radios.change(function () {
+            api.handleChange(jQuery(this));
+        });
+    }
+
+    /**
+     * Fires on radio change.
+     *
+     * @since {{VERSION}}
+     *
+     * @param {jQuery} $input Checkbox input.
+     */
+    handleChange($input) {
+
+        this.setInactive(this.$ui.radios.closest('.fieldhelpers-field-radio-row'));
+        this.setActive($input.closest('.fieldhelpers-field-radio-row'));
+    }
+
+    /**
+     * Sets the radio row as active.
+     *
+     * @since {{VERSION}}
+     *
+     * @param {jQuery} $row
+     */
+    setActive($row) {
+
+        $row.addClass('fieldhelpers-field-radio-row-active');
+    }
+
+    /**
+     * Sets the radio row as inactive.
+     *
+     * @since {{VERSION}}
+     *
+     * @param {jQuery} $row
+     */
+    setInactive($row) {
+
+        $row.removeClass('fieldhelpers-field-radio-row-active');
     }
 
 
     /**
      * Sets the ID to be unique, based off the repeater item index.
      *
-     * For checkboxes, there will be multiple IDs in each, and need to be set accordingly.
+     * For radios, there will be multiple IDs in each, and need to be set accordingly.
      *
      * @since {{VERSION}}
      */
     repeaterSetID() {
 
         let ID    = this.options.id;
-        let $rows = this.$field.find('.fieldhelpers-field-checkbox-row');
+        let $rows = this.$field.find('.fieldhelpers-field-radio-row');
         let index = this.$field.closest('[data-repeater-item]').index();
 
         $rows.each(function () {
 
-            let $field     = jQuery(this).find('input[type="checkbox"]');
+            let $field     = jQuery(this).find('input[type="radio"]');
             let $label     = $field.next('label');
             let fieldIndex = jQuery(this).index();
             let newID      = `${ID}_${index}_${fieldIndex}`;
@@ -53,11 +112,11 @@ class FieldCheckbox extends Field {
 }
 
 /**
- * Finds and initializes all Checkbox fields.
+ * Finds and initializes all Radio fields.
  *
  * @since {{VERSION}}
  */
-class FieldCheckboxInitialize {
+class FieldRadioInitialize {
 
     /**
      * Class constructor.
@@ -72,7 +131,7 @@ class FieldCheckboxInitialize {
 
         this.fields = [];
 
-        let $fields = $root.find('[data-fieldhelpers-field-checkbox]');
+        let $fields = $root.find('[data-fieldhelpers-field-radio]');
 
         if ( $fields.length ) {
 
@@ -94,9 +153,9 @@ class FieldCheckboxInitialize {
 
         this.fields.push({
             $field,
-            api: new FieldCheckbox($field),
+            api: new FieldRadio($field),
         });
     }
 }
 
-export default FieldCheckboxInitialize;
+export default FieldRadioInitialize;

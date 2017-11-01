@@ -61,19 +61,30 @@ abstract class RBM_FH_Field {
 		}
 
 		$this->args = wp_parse_args( $args, array(
-			'id'            => $name,
-			'value'         => false,
-			'prefix'        => '_rbm',
-			'label'         => '',
-			'default'       => '',
-			'description'   => false,
-			'wrapper_class' => '',
-			'no_init'       => false,
-			'sanitization'  => false,
-			'input_class'   => 'widefat',
-			'input_atts'    => array(),
-			'option_field'  => false,
+			'id'              => $name,
+			'value'           => false,
+			'prefix'          => '_rbm',
+			'label'           => '',
+			'default'         => '',
+			'description'     => false,
+			'wrapper_classes' => array(),
+			'no_init'         => false,
+			'sanitization'    => false,
+			'input_class'     => 'widefat',
+			'input_atts'      => array(),
+			'option_field'    => false,
+			'repeater'        => false,
+			'wrapper_class'   => '', // Legacy
 		) );
+
+		// Legacy wrapper class use
+		if ( $this->args['wrapper_class'] ) {
+
+			$this->args['wrapper_classes'] = array_merge(
+				$this->args['wrapper_classes'],
+				explode( ' ', $this->args['wrapper_class'] )
+			);
+		}
 
 		$this->name = isset( $args['no_init'] ) && $args['no_init'] ? $name : "{$this->args['prefix']}_{$name}";
 

@@ -1,11 +1,11 @@
 import Field from './field.js';
 
 /**
- * Select Field functionality.
+ * Checkbox Field functionality.
  *
  * @since {{VERSION}}
  */
-class FieldSelect extends Field {
+class FieldCheckbox extends Field {
 
     /**
      * Class constructor.
@@ -14,7 +14,7 @@ class FieldSelect extends Field {
      */
     constructor($field) {
 
-        super($field, 'select');
+        super($field, 'checkbox');
 
         this.initField();
     }
@@ -26,36 +26,102 @@ class FieldSelect extends Field {
      */
     initField() {
 
-        this.$field.select2(this.select2Options);
+        this.$ui = {
+            checkboxes: this.$field.find('input[type="checkbox"]'),
+        }
+
+        this.setupHandlers();
     }
 
     /**
-     * Resets the field.
+     * Sets up class handlers.
      *
      * @since {{VERSION}}
      */
-    fieldCleanup() {
+    setupHandlers() {
 
-        let $oldSelect = this.$field.next('.select2');
+        const api = this;
 
-        if ( $oldSelect.length ) {
+        this.$ui.checkboxes.change(function () {
+            api.handleChange(jQuery(this));
+        });
+    }
 
-            $oldSelect.remove();
+    /**
+     * Fires on checkbox change.
+     *
+     * @since {{VERSION}}
+     *
+     * @param {jQuery} $input Checkbox input.
+     */
+    handleChange($input) {
+
+        if ( $input.prop('checked') ) {
+
+            this.setActive($input.closest('.fieldhelpers-field-checkbox-row'));
+
+        } else {
+
+            this.setInactive($input.closest('.fieldhelpers-field-checkbox-row'));
         }
+    }
 
-        this.$field
-            .removeClass('select2-hidden-accessible')
-            .removeAttr('tablindex aria-hidden')
-            .find('option:selected').prop('selected', false);
+    /**
+     * Sets the checkbox row as active.
+     *
+     * @since {{VERSION}}
+     *
+     * @param {jQuery} $row
+     */
+    setActive($row) {
+
+        $row.addClass('fieldhelpers-field-checkbox-row-active');
+    }
+
+    /**
+     * Sets the checkbox row as inactive.
+     *
+     * @since {{VERSION}}
+     *
+     * @param {jQuery} $row
+     */
+    setInactive($row) {
+
+        $row.removeClass('fieldhelpers-field-checkbox-row-active');
+    }
+
+    /**
+     * Sets the ID to be unique, based off the repeater item index.
+     *
+     * For checkboxes, there will be multiple IDs in each, and need to be set accordingly.
+     *
+     * @since {{VERSION}}
+     */
+    repeaterSetID() {
+
+        let ID    = this.options.id;
+        let $rows = this.$field.find('.fieldhelpers-field-checkbox-row');
+        let index = this.$field.closest('[data-repeater-item]').index();
+
+        $rows.each(function () {
+
+            let $field     = jQuery(this).find('input[type="checkbox"]');
+            let $label     = $field.next('label');
+            let fieldIndex = jQuery(this).index();
+            let newID      = `${ID}_${index}_${fieldIndex}`;
+
+            $field.attr('id', newID);
+            $label.attr('for', newID);
+        });
     }
 }
 
 /**
- * Finds and initializes all Select fields.
+ * Finds and initializes all Checkbox fields.
  *
  * @since {{VERSION}}
  */
-class FieldSelectInitialize {
+class FieldCheckboxInitialize {
 
     /**
      * Class constructor.
@@ -70,14 +136,9 @@ class FieldSelectInitialize {
 
         this.fields = [];
 
-        let $fields = $root.find('[data-fieldhelpers-field-select]');
+        let $fields = $root.find('[data-fieldhelpers-field-checkbox]');
 
         if ( $fields.length ) {
-
-            if ( !jQuery.isFunction(jQuery.fn.select2) ) {
-
-                return;
-            }
 
             $fields.each(function () {
 
@@ -97,9 +158,9 @@ class FieldSelectInitialize {
 
         this.fields.push({
             $field,
-            api: new FieldSelect($field),
+            api: new FieldCheckbox($field),
         });
     }
 }
 
-export default FieldSelectInitialize;
+export default FieldCheckboxInitialize;

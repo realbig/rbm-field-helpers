@@ -31,6 +31,8 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 		'option_none_value' => '',
 		'multi_field'       => false,
 		'no_options_text'   => '',
+		'select2_disable'   => false,
+		'select2_options'   => array(),
 	);
 
 	/**
@@ -60,6 +62,6 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $args = array() ) {
 
-	    do_action( "{$args['prefix']}_fieldhelpers_do_field", 'select', $args, $name, $value );
+		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'select', $args, $name, $value );
 	}
 }

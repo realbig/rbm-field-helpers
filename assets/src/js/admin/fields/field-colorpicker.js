@@ -1,9 +1,11 @@
+import Field from './field.js';
+
 /**
  * Color Picker Field functionality.
  *
  * @since {{VERSION}}
  */
-class FieldColorPicker {
+class FieldColorPicker extends Field {
 
     /**
      * Class constructor.
@@ -12,14 +14,33 @@ class FieldColorPicker {
      */
     constructor($field) {
 
-        if (!jQuery.isFunction(jQuery.fn.wpColorPicker)) {
+        super($field, 'colorpicker');
 
-            console.error('Field Helpers Error: Trying to initialize Color Picker field but "wp-color-picker" is ' +
-                'not enqueued.');
-            return;
-        }
+        this.initializeColorpicker();
+    }
 
-        $field.wpColorPicker();
+    /**
+     * Initializes the Color Picker.
+     *
+     * @since {{VERSION}}
+     */
+    initializeColorpicker() {
+
+        this.$field.wpColorPicker();
+    }
+
+
+    /**
+     * Cleans up after a repeater add/init.
+     *
+     * @since {{VERSION}}
+     */
+    fieldCleanup() {
+
+        this.$wrapper.find('[data-fieldhelpers-field-colorpicker]')
+            .appendTo(this.$wrapper.find('.fieldhelpers-field-content'));
+
+        this.$wrapper.find('.wp-picker-container').remove();
     }
 }
 
@@ -34,14 +55,23 @@ class FieldColorPickerInitialize {
      * Class constructor.
      *
      * @since {{VERSION}}
+     *
+     * @param {jQuery} $root Root element to initialize fields inside.
      */
-    constructor() {
+    constructor($root) {
+
+        if (!jQuery.isFunction(jQuery.fn.wpColorPicker)) {
+
+            console.error('Field Helpers Error: Trying to initialize Color Picker field but "wp-color-picker" is ' +
+                'not enqueued.');
+            return;
+        }
 
         const api = this;
 
         this.fields = [];
 
-        let $fields = jQuery('[data-fieldhelpers-field-colorpicker]');
+        let $fields = $root.find('[data-fieldhelpers-field-colorpicker]');
 
         if ( $fields.length ) {
 

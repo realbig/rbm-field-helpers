@@ -1,9 +1,11 @@
+import Field from './field.js';
+
 /**
  * Number Field functionality.
  *
  * @since {{VERSION}}
  */
-class FieldNumber {
+class FieldNumber extends Field {
 
     /**
      * Class constructor.
@@ -12,26 +14,38 @@ class FieldNumber {
      */
     constructor($field) {
 
+        super($field, 'number');
+
+        this.initField();
+    }
+
+    /**
+     * Initializes the Number field.
+     *
+     * @since {{VERSION}}
+     */
+    initField() {
+
         this.$ui = {
-            container: $field,
-            input: $field.find('.fieldhelpers-field-input'),
-            increase: $field.find('[data-number-increase]'),
-            decrease: $field.find('[data-number-decrease]'),
+            container: this.$field,
+            input: this.$field.find('.fieldhelpers-field-input'),
+            increase: this.$field.find('[data-number-increase]'),
+            decrease: this.$field.find('[data-number-decrease]'),
         };
 
         this.intervals = {
             increase: {
-                normal: parseInt(this.$ui.increase.attr('data-number-interval')),
-                alt: parseInt(this.$ui.increase.attr('data-number-alt-interval')),
+                normal: parseInt(this.options.increaseInterval),
+                alt: parseInt(this.options.altIncreaseInterval),
             },
             decrease: {
-                normal: parseInt(this.$ui.decrease.attr('data-number-interval')),
-                alt: parseInt(this.$ui.decrease.attr('data-number-alt-interval')),
+                normal: parseInt(this.options.decreaseInterval),
+                alt: parseInt(this.options.altDecreaseInterval),
             },
         }
 
-        let constrainMax = this.$ui.increase.attr('data-number-max');
-        let constrainMin = this.$ui.decrease.attr('data-number-min');
+        let constrainMax = this.options.max;
+        let constrainMin = this.options.min
 
         this.constraints = {
             max: constrainMax !== 'none' ? parseInt(constrainMax) : false,
@@ -104,7 +118,7 @@ class FieldNumber {
      */
     increaseNumber() {
 
-        let amount = this.shiftKeyDown ? this.intervals.increase.alt : this.intervals.increase.normal;
+        let amount    = this.shiftKeyDown ? this.intervals.increase.alt : this.intervals.increase.normal;
         let newNumber = this.value + amount;
 
         this.$ui.input.val(newNumber);
@@ -118,7 +132,7 @@ class FieldNumber {
      */
     decreaseNumber() {
 
-        let amount = this.shiftKeyDown ? this.intervals.decrease.alt : this.intervals.decrease.normal;
+        let amount    = this.shiftKeyDown ? this.intervals.decrease.alt : this.intervals.decrease.normal;
         let newNumber = this.value - amount;
 
         this.$ui.input.val(newNumber);
@@ -157,6 +171,7 @@ class FieldNumber {
             number = this.constraints.min;
         }
 
+
         return {
             status,
             number,
@@ -173,7 +188,7 @@ class FieldNumber {
         let currentValue = this.$ui.input.val();
 
         // Constrain to numbers
-        let matches = currentValue.match(/\d*\.?\d+/);
+        let matches  = currentValue.match(/^-?[0-9]\d*(\.\d+)?$/);
         currentValue = (matches && parseInt(matches[0])) || 0;
 
         let constraints = this.constrainNumber(currentValue);
@@ -202,7 +217,7 @@ class FieldNumber {
         this.value = constraints.number;
         this.$ui.input.val(this.value);
 
-        if (currentValue !== this.value) {
+        if ( currentValue !== this.value ) {
 
             this.$ui.input.trigger('change');
         }
@@ -244,14 +259,16 @@ class FieldNumberInitialize {
      * Class constructor.
      *
      * @since {{VERSION}}
+     *
+     * @param {jQuery} $root Root element to initialize fields inside.
      */
-    constructor() {
+    constructor($root) {
 
         const api = this;
 
         this.fields = [];
 
-        let $fields = jQuery('[data-fieldhelpers-field-number]');
+        let $fields = $root.find('[data-fieldhelpers-field-number]');
 
         if ( $fields.length ) {
 

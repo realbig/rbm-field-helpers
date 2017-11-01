@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || die();
 
 <input type="text"
        name="<?php echo esc_attr( $name ); ?>"
-       id="<?php esc_attr( $name ); ?>"
+       id="<?php esc_attr( $args['id'] ); ?>"
        value="<?php echo $value ? esc_attr( $value ) : esc_attr( $args['default'] ); ?>"
        class="<?php echo isset( $args['input_class'] ) ? esc_attr( $args['input_class'] ) : 'regular-text'; ?>"
 	<?php RBM_FH_Field::input_atts( $args ); ?>

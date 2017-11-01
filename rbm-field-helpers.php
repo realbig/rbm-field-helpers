@@ -121,6 +121,8 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 			global $wp_scripts;
 
+			$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '';
+
 			// Core Admin
 			wp_register_style(
 				'rbm-fh-admin',
@@ -132,11 +134,23 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_register_script(
 				'rbm-fh-admin',
 				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
-				array(
-					'jquery',
-					'jquery-ui-sortable',
-					'rbm-fh-jquery-repeater',
-				),
+				array( 'jquery', 'jquery-ui-sortable', 'rbm-fh-jquery-repeater' ),
+				RBM_FIELD_HELPERS_VER,
+				true
+			);
+
+			// Select2
+			wp_register_style(
+				'rbm-fh-select2',
+				'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css',
+				array(),
+				RBM_FIELD_HELPERS_VER
+			);
+
+			wp_register_script(
+				'rbm-fh-select2',
+				"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2{$min}.js",
+				array( 'jquery' ),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
@@ -144,9 +158,9 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			// jQuery Repeater
 			wp_register_script(
 				'rbm-fh-jquery-repeater',
-				RBM_FIELD_HELPERS_URI . '/vendor/jquery-repeater/jquery.repeater.min.js',
+				RBM_FIELD_HELPERS_URI . "/vendor/jquery-repeater/jquery.repeater{$min}.js",
 				array( 'jquery' ),
-				'0.1.4',
+				'1.2.1',
 				true
 			);
 
@@ -201,9 +215,24 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 			if ( $load_datetimepicker ) {
 
-				// TODO Styles not working for this?
 				wp_enqueue_script( 'rbm-fh-jquery-ui-datetimepicker' );
 				wp_enqueue_style( 'rbm-fh-jquery-ui-datetimepicker' );
+			}
+
+			/**
+			 * Load or don't load the Select2 scripts.
+			 *
+			 * @since {{VERSION}}
+			 */
+			$load_select2 = apply_filters( 'rbm_fieldhelpers_load_select2', false );
+
+			// Legacy
+			$legacy_load_select2 = apply_filters( 'rbm_load_select2', false );
+
+			if ( $load_select2 || $legacy_load_select2 ) {
+
+				wp_enqueue_script( 'rbm-fh-select2' );
+				wp_enqueue_style( 'rbm-fh-select2' );
 			}
 		}
 
