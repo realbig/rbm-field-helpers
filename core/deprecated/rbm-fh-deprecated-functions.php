@@ -237,8 +237,6 @@ function rbm_do_field_text( $name, $label = false, $value = false, $args = array
 	$args['value'] = $value;
 
 	$rbm_fh_deprecated_support->fields->do_field_text( $name, $args );
-
-	new RBM_FH_Field_Text( $name, $label, $args, $value );
 }
 
 /**
@@ -261,8 +259,6 @@ function rbm_do_field_textarea( $name, $label = false, $value = false, $args = a
 	$args['value'] = $value;
 
 	$rbm_fh_deprecated_support->fields->do_field_textarea( $name, $args );
-
-	new RBM_FH_Field_TextArea( $name, $label, $args, $value );
 }
 
 /**
@@ -285,8 +281,6 @@ function rbm_do_field_checkbox( $name, $label = false, $value = false, $args = a
 	$args['value'] = $value;
 
 	$rbm_fh_deprecated_support->fields->do_field_checkbox( $name, $args );
-
-	new RBM_FH_Field_Checkbox( $name, $args );
 }
 
 /**
@@ -309,8 +303,6 @@ function rbm_do_field_radio( $name, $label = false, $value = false, $args = arra
 	$args['value'] = $value;
 
 	$rbm_fh_deprecated_support->fields->do_field_radio( $name, $args );
-
-	new RBM_FH_Field_Radio( $name, $label, $args, $value );
 }
 
 /**
@@ -333,8 +325,6 @@ function rbm_do_field_select( $name, $label = false, $value = false, $args = arr
 	$args['value'] = $value;
 
 	$rbm_fh_deprecated_support->fields->do_field_select( $name, $args );
-
-	new RBM_FH_Field_Select( $name, $label, $args, $value );
 }
 
 /**
@@ -357,8 +347,6 @@ function rbm_do_field_number( $name, $label = false, $value = false, $args = arr
 	$args['value'] = $value;
 
 	$rbm_fh_deprecated_support->fields->do_field_number( $name, $args );
-
-	new RBM_FH_Field_Number( $name, $args );
 }
 
 /**
@@ -381,8 +369,6 @@ function rbm_do_field_media( $name, $label = false, $value = false, $args = arra
 	$args['value'] = $value;
 
 	$rbm_fh_deprecated_support->fields->do_field_media( $name, $args );
-
-	new RBM_FH_Field_Media( $name, $label, $args, $value );
 }
 
 /**
