@@ -300,7 +300,7 @@ function rbm_do_field_textarea( $name, $label = false, $value = false, $args = a
  */
 function rbm_do_field_checkbox( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_Checkbox( $name, $label, $args, $value );
+	new RBM_FH_Field_Checkbox( $name, $args );
 }
 
 /**
@@ -351,7 +351,7 @@ function rbm_do_field_select( $name, $label = false, $value = false, $args = arr
  */
 function rbm_do_field_number( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_Number( $name, $label, $args, $value );
+	new RBM_FH_Field_Number( $name, $args );
 }
 
 /**
@@ -408,7 +408,7 @@ function rbm_do_field_image( $name, $label = false, $value = false, $args = arra
  */
 function rbm_do_field_datepicker( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_DatePicker( $name, $label, $args, $value );
+	new RBM_FH_Field_DatePicker( $name, $args );
 }
 
 /**
@@ -495,7 +495,7 @@ function rbm_do_field_repeater( $name, $label = false, $fields, $values = false 
 
 	$args = array( 'fields' => $fields );
 
-	new RBM_FH_Field_Repeater( $name, $label, $args, $values );
+	new RBM_FH_Field_Repeater( $name, $args, $values );
 }
 
 /**
