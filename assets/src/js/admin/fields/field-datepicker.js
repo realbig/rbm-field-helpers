@@ -77,13 +77,6 @@ class FieldDatePickerInitialize {
      */
     constructor($root) {
 
-        if ( !jQuery.isFunction(jQuery.fn.datepicker) ) {
-
-            console.error('Field Helpers Error: Trying to initialize Date Picker field but "jquery-ui-datepicker" ' +
-                'is not enqueued.');
-            return;
-        }
-
         const api = this;
 
         this.fields = [];
@@ -91,6 +84,13 @@ class FieldDatePickerInitialize {
         let $fields = $root.find('[data-fieldhelpers-field-datepicker]');
 
         if ( $fields.length ) {
+
+            if ( !jQuery.isFunction(jQuery.fn.datepicker) ) {
+
+                console.error('Field Helpers Error: Trying to initialize Date Picker field but "jquery-ui-datepicker" ' +
+                    'is not enqueued.');
+                return;
+            }
 
             $fields.each(function () {
 

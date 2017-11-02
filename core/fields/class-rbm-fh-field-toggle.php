@@ -1,8 +1,8 @@
 <?php
 /**
- * Field: Checkbox
+ * Field: Toggle
  *
- * @since 1.1.0
+ * @since {{VERSION}}
  *
  * @package RBMFieldHelpers
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class RBM_FH_Field_Checkbox
+ * Class RBM_FH_Field_Toggle
  *
- * @since 1.1.0
+ * @since {{VERSION}}
  */
-class RBM_FH_Field_Checkbox extends RBM_FH_Field {
+class RBM_FH_Field_Toggle extends RBM_FH_Field {
 
 	/**
 	 * Field defaults.
@@ -24,13 +24,14 @@ class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'no_options_text' => '',
+		'checked_value'   => 1,
+		'unchecked_value' => 0,
 	);
 
 	/**
-	 * RBM_FH_Field_Checkbox constructor.
+	 * RBM_FH_Field_Toggle constructor.
 	 *
-	 * @since 1.1.0
+	 * @since {{VERSION}}
 	 *
 	 * @var string $name
 	 * @var array $args
@@ -38,15 +39,13 @@ class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 	 */
 	function __construct( $name, $args = array() ) {
 
-		$this->defaults['no_options_text'] = __( 'No options available.', 'rbm-field-helpers' );
-
 		parent::__construct( $name, $args );
 	}
 
 	/**
 	 * Outputs the field.
 	 *
-	 * @since 1.1.0
+	 * @since {{VERSION}}
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
@@ -54,28 +53,6 @@ class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $args = array() ) {
 
-		// Legacy
-		if ( ! $args['options'] ) {
-
-			$args = wp_parse_args( $args, array(
-				'check_value' => 1,
-				'check_label' => $args['label'],
-			) );
-
-			$args['options'] = array(
-				$args['check_value'] => $args['check_label'],
-			);
-
-		} else {
-
-			if ( $args['options'] === false ) {
-
-				echo $args['no_options_text'];
-
-				return;
-			}
-		}
-
-		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'checkbox', $args, $name, $value );
+		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'toggle', $args, $name, $value );
 	}
 }

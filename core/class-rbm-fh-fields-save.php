@@ -93,7 +93,17 @@ class RBM_FH_FieldsSave {
 			"{$this->prefix}_fieldhelpers_{$group}_nonce"
 		);
 
+		$initialized_fields = array();
+
 		foreach ( $this->fields[ $group ] as $i => $field ) {
+
+			// Account for arrays
+			if ( $field['args']['name_base']) {
+
+			    $field['name'] = $field['args']['name_base'];
+            }
+
+			$initialized_fields[] = $field['name'];
 
 			$option = $field['option_field'] === true ? '_option' : '';
 			?>
@@ -220,7 +230,7 @@ class RBM_FH_FieldsSave {
 				}
 			} else {
 
-				update_post_meta( $post_ID, $field_db_ID, $_POST[ $field_db_ID ] );
+				update_post_meta( $post_ID, $field_db_ID, $value );
 			}
 		}
 

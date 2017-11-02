@@ -1,6 +1,6 @@
 <?php
 /**
- * Field Template: Text
+ * Field Template: Hidden
  *
  * @since {{VERSION}}
  *
@@ -12,7 +12,7 @@
 defined( 'ABSPATH' ) || die();
 ?>
 
-<input type="text"
+<input type="hidden"
        name="<?php echo esc_attr( $name ); ?>"
        id="<?php esc_attr( $args['id'] ); ?>"
        value="<?php echo $value ? esc_attr( $value ) : esc_attr( $args['default'] ); ?>"

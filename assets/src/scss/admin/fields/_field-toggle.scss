@@ -1,34 +1,48 @@
-.fieldhelpers-field-table {
+.fieldhelpers-field-toggle-container {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 
-  .fieldhelpers-field-table-loading {
-    text-align: center;
+  input[type="checkbox"] {
+    display: none;
 
-    .spinner {
-      float: none;
-      display: inline-block;
+    &:checked {
+      + .fieldhelpers-field-toggle-slider {
+        background-color: $primary-color;
+
+        &:before {
+          transform: translateX(26px);
+        }
+      }
+    }
+
+    &:focus {
+      + .fieldhelpers-field-toggle-slider {
+        box-shadow: 0 0 1px $primary-color
+      }
     }
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+  .fieldhelpers-field-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: transform 300ms;
 
-  th, td {
-    padding: 5px;
-  }
-
-  thead {
-    input[type="text"] {
-      background: #fff78a;
+    &:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: transform 300ms;
     }
-  }
-
-  input[type="text"] {
-    width: 100%;
-  }
-
-  .fieldhelpers-field-table-delete-columns {
-    text-align: center;
   }
 }

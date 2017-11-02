@@ -80,7 +80,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		function __construct( $instance = array() ) {
 
 			$this->instance = wp_parse_args( $instance, array(
-				'ID'   => 'default',
+				'ID'   => '_rbm',
 				'l10n' => array(
 					'field_table' => array(
 						'delete_row'    => __( 'Delete Row', 'learndash-gradebook' ),
@@ -149,7 +149,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 			wp_register_script(
 				'rbm-fh-select2',
-				"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2{$min}.js",
+				"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.full{$min}.js",
 				array( 'jquery' ),
 				RBM_FIELD_HELPERS_VER,
 				true
