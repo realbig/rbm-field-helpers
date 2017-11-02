@@ -1,6 +1,6 @@
 <?php
 /**
- * Field Template: Checkbox
+ * Field Template: Toggle
  *
  * @since {{VERSION}}
  *
@@ -12,29 +12,19 @@
 defined( 'ABSPATH' ) || die();
 ?>
 
-<div class="fieldhelpers-field-checkbox-container"
-     data-fieldhelpers-field-checkbox
+<div class="fieldhelpers-field-toggle-container"
+     data-fieldhelpers-field-toggle
 >
-	<?php $i = 0; ?>
-	<?php foreach ( $args['options'] as $check_value => $check_label ) : ?>
-		<?php $i ++; ?>
-
-        <div class="fieldhelpers-field-checkbox-row">
-
-            <input type="checkbox"
-                   name="<?php echo $name . ($args['repeater'] ? '' : '[]'); ?>"
-                   id="<?php echo "{$args['id']}_{$i}"; ?>"
-                   value="<?php echo $check_value; ?>"
-                   class="<?php echo $args['input_class']; ?>"
-				<?php echo in_array( $check_value, $value ) ? 'checked' : ''; ?>
-				<?php RBM_FH_Field::input_atts( $args ); ?>
-            />
-
-            <label for="<?php echo "{$args['id']}_{$i}"; ?>"
-                   class="fieldhelpers-field-checkbox-label"
-            ><?php echo $check_label; ?></label>
-
-        </div>
-
-	<?php endforeach; ?>
+    <input type="hidden"
+           name="<?php echo esc_attr( $name ); ?>"
+           value="<?php echo esc_attr( $args['unchecked_value'] ); ?>"
+    />
+    <input type="checkbox"
+           name="<?php echo esc_attr( $name ); ?>"
+           id="<?php echo esc_attr( $args['id'] ); ?>"
+           class="fieldhelpers-field-input"
+           value="<?php echo esc_attr( $args['checked_value'] ); ?>"
+		<?php checked( $value, $args['checked_value'] ); ?>
+    />
+    <span class="fieldhelpers-field-toggle-slider"></span>
 </div>

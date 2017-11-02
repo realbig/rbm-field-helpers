@@ -60,6 +60,7 @@ class RBM_FH_Fields {
 		require_once __DIR__ . '/fields/class-rbm-fh-field-datepicker.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-timepicker.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-datetimepicker.php';
+		require_once __DIR__ . '/fields/class-rbm-fh-field-html.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-list.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-media.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-radio.php';
@@ -69,6 +70,7 @@ class RBM_FH_Fields {
 		require_once __DIR__ . '/fields/class-rbm-fh-field-table.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-text.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-textarea.php';
+		require_once __DIR__ . '/fields/class-rbm-fh-field-toggle.php';
 
 		$this->save = new RBM_FH_FieldsSave( $instance['ID'] );
 
@@ -283,6 +285,25 @@ class RBM_FH_Fields {
 	}
 
 	/**
+	 * Outputs a toggle field.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param string $name
+	 * @param array $args
+	 */
+	public function do_field_toggle( $name, $args = array() ) {
+
+		$args['prefix'] = $this->instance['ID'];
+
+		$field = new RBM_FH_Field_Toggle( $name, $args );
+
+		$this->save->field_init( $name, 'toggle', $field->args );
+
+		$this->setup_data( $name, 'toggle', $field->args );
+	}
+
+	/**
 	 * Outputs a radio field.
 	 *
 	 * @since {{VERSION}}
@@ -318,7 +339,8 @@ class RBM_FH_Fields {
 		$this->save->field_init( $name, 'select', $field->args );
 
 		$this->setup_data( $name, 'select', $field->args, array(
-			'select2Options' => $field->args['select2'],
+			'select2Disabled' => $field->args['select2_disable'],
+			'select2Options'  => $field->args['select2_options'],
 		) );
 	}
 
@@ -539,5 +561,39 @@ class RBM_FH_Fields {
 				'addItemText'          => $field->args['add_item_text'],
 			),
 		) );
+	}
+
+	/**
+	 * Outputs a hidden field.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param string $name
+	 * @param array $args
+	 */
+	public function do_field_hidden( $name, $args = array() ) {
+
+		$args['prefix'] = $this->instance['ID'];
+
+		$field = new RBM_FH_Field_Hidden( $name, $args );
+
+		$this->save->field_init( $name, 'hidden', $field->args );
+	}
+
+	/**
+	 * Outputs a html field.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param string $name
+	 * @param array $args
+	 */
+	public function do_field_html( $name, $args = array() ) {
+
+		$args['prefix'] = $this->instance['ID'];
+
+		$field = new RBM_FH_Field_HTML( $name, $args );
+
+		$this->save->field_init( $name, 'html', $field->args );
 	}
 }

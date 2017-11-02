@@ -31,6 +31,8 @@ class FieldRadio extends Field {
         }
 
         this.setupHandlers();
+
+        this.$field.find('input:checked').change();
     }
 
     /**
@@ -108,6 +110,19 @@ class FieldRadio extends Field {
             $field.attr('id', newID);
             $label.attr('for', newID);
         });
+    }
+
+    /**
+     * Sets the field to default.
+     *
+     * @since {{VERSION}}
+     */
+    setDefault() {
+
+        if ( this.options.default ) {
+
+            this.$field.find(`[value="${this.options.default}"]`).prop('checked', true).change();
+        }
     }
 }
 

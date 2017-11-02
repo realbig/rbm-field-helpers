@@ -1,11 +1,11 @@
 import Field from './field.js';
 
 /**
- * Checkbox Field functionality.
+ * Toggle Field functionality.
  *
  * @since {{VERSION}}
  */
-class FieldCheckbox extends Field {
+class FieldToggle extends Field {
 
     /**
      * Class constructor.
@@ -14,7 +14,7 @@ class FieldCheckbox extends Field {
      */
     constructor($field) {
 
-        super($field, 'checkbox');
+        super($field, 'toggle');
 
         this.initField();
     }
@@ -27,7 +27,8 @@ class FieldCheckbox extends Field {
     initField() {
 
         this.$ui = {
-            checkboxes: this.$field.find('input[type="checkbox"]'),
+            slider: this.$field.find('.fieldhelpers-field-toggle-slider'),
+            input: this.$field.find('input[type="checkbox"]'),
         }
 
         this.setupHandlers();
@@ -42,86 +43,28 @@ class FieldCheckbox extends Field {
 
         const api = this;
 
-        this.$ui.checkboxes.change(function () {
-            api.handleChange(jQuery(this));
+        this.$ui.slider.click(() => {
+            api.handleClick();
         });
     }
 
     /**
-     * Fires on checkbox change.
-     *
-     * @since {{VERSION}}
-     *
-     * @param {jQuery} $input Checkbox input.
-     */
-    handleChange($input) {
-
-        if ( $input.prop('checked') ) {
-
-            this.setActive($input.closest('.fieldhelpers-field-checkbox-row'));
-
-        } else {
-
-            this.setInactive($input.closest('.fieldhelpers-field-checkbox-row'));
-        }
-    }
-
-    /**
-     * Sets the checkbox row as active.
-     *
-     * @since {{VERSION}}
-     *
-     * @param {jQuery} $row
-     */
-    setActive($row) {
-
-        $row.addClass('fieldhelpers-field-checkbox-row-active');
-    }
-
-    /**
-     * Sets the checkbox row as inactive.
-     *
-     * @since {{VERSION}}
-     *
-     * @param {jQuery} $row
-     */
-    setInactive($row) {
-
-        $row.removeClass('fieldhelpers-field-checkbox-row-active');
-    }
-
-    /**
-     * Sets the ID to be unique, based off the repeater item index.
-     *
-     * For checkboxes, there will be multiple IDs in each, and need to be set accordingly.
+     * Fires on toggle change.
      *
      * @since {{VERSION}}
      */
-    repeaterSetID() {
+    handleClick() {
 
-        let ID    = this.options.id;
-        let $rows = this.$field.find('.fieldhelpers-field-checkbox-row');
-        let index = this.$field.closest('[data-repeater-item]').index();
-
-        $rows.each(function () {
-
-            let $field     = jQuery(this).find('input[type="checkbox"]');
-            let $label     = $field.next('label');
-            let fieldIndex = jQuery(this).index();
-            let newID      = `${ID}_${index}_${fieldIndex}`;
-
-            $field.attr('id', newID);
-            $label.attr('for', newID);
-        });
+        this.$ui.input.prop('checked', !this.$ui.input.prop('checked'));
     }
 }
 
 /**
- * Finds and initializes all Checkbox fields.
+ * Finds and initializes all Toggle fields.
  *
  * @since {{VERSION}}
  */
-class FieldCheckboxInitialize {
+class FieldToggleInitialize {
 
     /**
      * Class constructor.
@@ -136,7 +79,7 @@ class FieldCheckboxInitialize {
 
         this.fields = [];
 
-        let $fields = $root.find('[data-fieldhelpers-field-checkbox]');
+        let $fields = $root.find('[data-fieldhelpers-field-toggle]');
 
         if ( $fields.length ) {
 
@@ -158,9 +101,9 @@ class FieldCheckboxInitialize {
 
         this.fields.push({
             $field,
-            api: new FieldCheckbox($field),
+            api: new FieldToggle($field),
         });
     }
 }
 
-export default FieldCheckboxInitialize;
+export default FieldToggleInitialize;

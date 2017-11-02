@@ -26,7 +26,17 @@ class FieldSelect extends Field {
      */
     initField() {
 
-        this.$field.select2(this.select2Options);
+        if ( !this.options.select2Disabled ) {
+
+            if ( !jQuery.isFunction(jQuery.fn.select2) ) {
+
+                console.error('Field Helpers Error: Trying to initialize Select field but "select2" ' +
+                    'is not enqueued.');
+                return;
+            }
+
+            this.$field.select2(this.options.select2Options);
+        }
     }
 
     /**
@@ -35,6 +45,11 @@ class FieldSelect extends Field {
      * @since {{VERSION}}
      */
     fieldCleanup() {
+
+        if ( this.options.select2Disabled ) {
+
+            return;
+        }
 
         let $oldSelect = this.$field.next('.select2');
 
@@ -73,11 +88,6 @@ class FieldSelectInitialize {
         let $fields = $root.find('[data-fieldhelpers-field-select]');
 
         if ( $fields.length ) {
-
-            if ( !jQuery.isFunction(jQuery.fn.select2) ) {
-
-                return;
-            }
 
             $fields.each(function () {
 

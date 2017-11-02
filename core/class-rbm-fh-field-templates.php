@@ -106,6 +106,13 @@ class RBM_FH_FieldTemplates {
 	 */
 	function template_description( $type, $args, $name, $value ) {
 
-		include __DIR__ . '/fields/views/field-description.php';
+		if ( $args['description_tip'] === true ) {
+
+			include __DIR__ . '/fields/views/field-description-tip.php';
+
+		} else {
+
+			include __DIR__ . '/fields/views/field-description.php';
+		}
 	}
 }

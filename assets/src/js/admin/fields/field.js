@@ -221,7 +221,7 @@ class Field {
 
         if ( this.options.default ) {
 
-            this.$field.val(this.options.default);
+            this.$field.val(this.options.default).change();
         }
     }
 }

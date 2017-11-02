@@ -27,6 +27,16 @@ abstract class RBM_FH_Field {
 	public $name;
 
 	/**
+	 * Field original name (non-prefixed).
+	 *
+	 * @since {{VERSION}}
+	 * @access private
+	 *
+	 * @var string
+	 */
+	public $_original_name;
+
+	/**
 	 * Field arguments.
 	 *
 	 * @since 1.1.0
@@ -54,6 +64,8 @@ abstract class RBM_FH_Field {
 	 */
 	function __construct( $name, $args = array() ) {
 
+		$this->_original_name = $name;
+
 		// Unique args
 		if ( isset( $this->defaults ) ) {
 
@@ -70,10 +82,12 @@ abstract class RBM_FH_Field {
 			'wrapper_classes' => array(),
 			'no_init'         => false,
 			'sanitization'    => false,
-			'input_class'     => 'widefat',
+			'input_class'     => '',
 			'input_atts'      => array(),
 			'option_field'    => false,
 			'repeater'        => false,
+			'name_base'       => false,
+			'description_tip' => true,
 			'wrapper_class'   => '', // Legacy
 		) );
 
@@ -97,9 +111,12 @@ abstract class RBM_FH_Field {
 			$this->value = $this->args['value'];
 		}
 
-		static::field( $this->name, $this->value, $this->args );
+		static::field(
+			$this->args['name_base'] !== false ? "{$this->args['prefix']}_{$this->args['name_base']}[{$name}]" : $this->name,
+			$this->value,
+			$this->args
+		);
 	}
-
 
 	/**
 	 * Gets the field value.
@@ -116,6 +133,8 @@ abstract class RBM_FH_Field {
 
 			$value = $this->get_meta_value();
 		}
+
+		$value = $value !== '' && $value !== false && $value !== null ? $value : $this->args['default'];
 
 		// Sanitize
 		if ( $this->args['sanitization'] && is_callable( $this->args['sanitization'] ) ) {
@@ -158,9 +177,16 @@ abstract class RBM_FH_Field {
 			}
 		}
 
-		$value = get_post_meta( $post->ID, $this->name, ! $this->args['multi_field'] );
+		if ( $this->args['name_base'] !== false ) {
 
-		$value = $value !== '' && $value !== false && $value !== null ? $value : $this->args['default'];
+			$base_value = get_post_meta( $post->ID, "{$this->args['prefix']}_{$this->args['name_base']}", true );
+
+			$value = isset( $base_value[ $this->_original_name ] ) ? $base_value[ $this->_original_name ] : '';
+
+		} else {
+
+			$value = get_post_meta( $post->ID, $this->name, ! $this->args['multi_field'] );
+		}
 
 		return $value;
 	}
@@ -175,9 +201,16 @@ abstract class RBM_FH_Field {
 	 */
 	private function get_option_value() {
 
-		$value = get_option( $this->name, ! $this->args['multi_field'] );
+		if ( $this->args['name_base'] !== false ) {
 
-		$value = $value !== '' && $value !== false && $value !== null ? $value : $this->args['default'];
+			$base_value = get_option( "{$this->args['prefix']}_{$this->args['name_base']}", true );
+
+			$value = isset( $base_value[ $this->name ] ) ? $base_value[ $this->_original_name ] : '';
+
+		} else {
+
+			$value = get_option( $this->name, ! $this->args['multi_field'] );
+		}
 
 		return $value;
 	}

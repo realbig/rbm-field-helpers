@@ -1,7 +1,9 @@
 .fieldhelpers-field-radio-container {
+  display: inline-block;
   border-collapse: collapse;
   border: 1px solid #DFDFDF;
   background: #fff;
+  min-width: 300px;
 }
 
 .fieldhelpers-field-radio-row {
@@ -26,10 +28,10 @@
   }
 
   &.fieldhelpers-field-radio-row-active {
-      background: $primary-color;
+    background: $primary-color;
 
     &:hover {
-        background: darken($primary-color, 5%);
+      background: darken($primary-color, 5%);
     }
 
     .fieldhelpers-field-radio-label {
@@ -37,22 +39,27 @@
     }
   }
 
-  input[type="radio"] {
-    position: relative;
+  .fieldhelpers-field-radio-input-container {
+    width: 15%;
     float: left;
-    margin: 0 0.5em;
+    box-sizing: border-box;
     line-height: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    text-align: center;
+  }
+
+  input[type="radio"] {
+    margin: 0 0.5em;
   }
 
   .fieldhelpers-field-radio-label {
     display: block;
     float: left;
+    width: 85%;
     font-weight: bold;
     padding: 0 0.5em;
     border-left: 1px solid #DFDFDF;
     height: 30px;
     line-height: 30px;
+    box-sizing: border-box;
   }
 }

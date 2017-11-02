@@ -32,7 +32,10 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 		'multi_field'       => false,
 		'no_options_text'   => '',
 		'select2_disable'   => false,
-		'select2_options'   => array(),
+		'select2_options'   => array(
+			'containerCssClass' => 'fieldhelpers-select2',
+			'dropdownCssClass'  => 'fieldhelpers-select2',
+		),
 	);
 
 	/**

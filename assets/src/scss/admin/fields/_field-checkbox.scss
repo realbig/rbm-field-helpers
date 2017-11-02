@@ -37,22 +37,27 @@
     }
   }
 
-  input[type="checkbox"] {
-    position: relative;
+  .fieldhelpers-field-checkbox-input-container {
+    width: 15%;
     float: left;
-    margin: 0 0.5em;
+    box-sizing: border-box;
     line-height: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    text-align: center;
+  }
+
+  input[type="checkbox"] {
+    margin: 0 0.5em;
   }
 
   .fieldhelpers-field-checkbox-label {
     display: block;
     float: left;
+    width: 85%;
     font-weight: bold;
     padding: 0 0.5em;
     border-left: 1px solid #DFDFDF;
     height: 30px;
     line-height: 30px;
+    box-sizing: border-box;
   }
 }

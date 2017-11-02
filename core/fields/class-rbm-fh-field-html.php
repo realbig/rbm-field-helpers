@@ -37,10 +37,9 @@ class RBM_FH_Field_HTML extends RBM_FH_Field {
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
-	 * @param string $label Field label.
 	 * @param array $args Field arguments.
 	 */
-	public static function field( $name, $value, $label = '', $args = array() ) {
+	public static function field( $name, $value, $args = array() ) {
 
 		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'html', $args, $name, $value );
 	}

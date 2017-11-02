@@ -13,12 +13,9 @@
 defined( 'ABSPATH' ) || die();
 ?>
 
-<?php if ( $args['description']) : ?>
+<?php if ( $args['description'] ) : ?>
 
-    <div class="fieldhelpers-field-description fieldhelpers-field-tip">
-        <span class="fieldhelpers-field-tip-toggle dashicons dashicons-editor-help" data-toggle-tip></span>
-        <p class="fieldhelpers-field-tip-text">
-			<?php echo $args['description']; ?>
-        </p>
+    <div class="fieldhelpers-field-description">
+		<?php echo $args['description']; ?>
     </div>
 <?php endif; ?>

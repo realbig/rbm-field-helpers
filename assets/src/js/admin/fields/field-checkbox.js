@@ -31,6 +31,8 @@ class FieldCheckbox extends Field {
         }
 
         this.setupHandlers();
+
+        this.$field.find('input:checked').change();
     }
 
     /**
@@ -113,6 +115,19 @@ class FieldCheckbox extends Field {
             $field.attr('id', newID);
             $label.attr('for', newID);
         });
+    }
+
+    /**
+     * Sets the field to default.
+     *
+     * @since {{VERSION}}
+     */
+    setDefault() {
+
+        if ( this.options.default ) {
+
+            this.$field.find(`[value="${this.options.default}"]`).prop('checked', true).change();
+        }
     }
 }
 

@@ -21,14 +21,16 @@ defined( 'ABSPATH' ) || die();
 
         <div class="fieldhelpers-field-radio-row">
 
-            <input type="radio"
-                   name="<?php echo $name . ($args['repeater'] ? '' : '[]'); ?>"
-                   id="<?php echo "{$args['id']}_{$i}"; ?>"
-                   value="<?php echo $radio_value; ?>"
-                   class="<?php echo $args['input_class']; ?>"
-				<?php checked( $radio_value, $value ); ?>
-				<?php RBM_FH_Field::input_atts( $args ); ?>
-            />
+            <div class="fieldhelpers-field-radio-input-container">
+                <input type="radio"
+                       name="<?php echo $name; ?>"
+                       id="<?php echo "{$args['id']}_{$i}"; ?>"
+                       value="<?php echo $radio_value; ?>"
+                       class="<?php echo $args['input_class']; ?>"
+					<?php checked( $radio_value, $value ); ?>
+					<?php RBM_FH_Field::input_atts( $args ); ?>
+                />
+            </div>
 
             <label for="<?php echo "{$args['id']}_{$i}"; ?>"
                    class="fieldhelpers-field-radio-label"

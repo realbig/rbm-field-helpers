@@ -1,8 +1,8 @@
 <?php
 /**
- * Field: Text
+ * Field: Hidden
  *
- * @since 1.1.0
+ * @since {{VERSION}}
  *
  * @package RBMFieldHelpers
  */
@@ -10,16 +10,16 @@
 defined( 'ABSPATH' ) || die();
 
 /**
- * Class RBM_FH_Field_Text
+ * Class RBM_FH_Field_Hidden
  *
- * @since 1.1.0
+ * @since {{VERSION}}
  */
-class RBM_FH_Field_Text extends RBM_FH_Field {
+class RBM_FH_Field_Hidden extends RBM_FH_Field {
 
 	/**
-	 * RBM_FH_Field_Text constructor.
+	 * RBM_FH_Field_Hidden constructor.
 	 *
-	 * @since 1.1.0
+	 * @since {{VERSION}}
 	 *
 	 * @var string $name
 	 * @var array $args
@@ -32,7 +32,7 @@ class RBM_FH_Field_Text extends RBM_FH_Field {
 	/**
 	 * Outputs the field.
 	 *
-	 * @since 1.1.0
+	 * @since {{VERSION}}
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
@@ -40,6 +40,6 @@ class RBM_FH_Field_Text extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $args = array() ) {
 
-		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'text', $args, $name, $value );
+		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'hidden', $args, $name, $value );
 	}
 }

@@ -11,6 +11,7 @@ import FieldSelectInitialize from "./fields/field-select";
 import FieldTextAreaInitialize from "./fields/field-textarea";
 import FieldCheckboxInitialize from "./fields/field-checkbox";
 import FieldRadioInitialize from "./fields/field-radio";
+import FieldToggleInitialize from "./fields/field-toggle";
 
 /**
  * Handles all field initializations.
@@ -30,6 +31,7 @@ class FieldsInitialize {
 
         this.fields = {
             checkbox: new FieldCheckboxInitialize($root),
+            toggle: new FieldToggleInitialize($root),
             radio: new FieldRadioInitialize($root),
             select: new FieldSelectInitialize($root),
             textarea: new FieldTextAreaInitialize($root),
