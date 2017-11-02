@@ -9,6 +9,12 @@ defined( 'ABSPATH' ) || die();
 
 add_action( 'plugins_loaded', 'rbm_fh_deprecated_support' );
 
+/**
+ * Creates a new RBM_FieldHelpers instance if the deprecated support is enabled.
+ *
+ * @since {{VERSION}}
+ * @access private
+ */
 function rbm_fh_deprecated_support() {
 
 	if ( ! defined( 'RBM_FH_DEPRECATED_SUPPORT' ) || RBM_FH_DEPRECATED_SUPPORT !== true ) {
