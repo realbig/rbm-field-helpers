@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || die();
 
         <div class="fieldhelpers-field-checkbox-row">
 
-            <div class="fieldhelpers-field-radio-input-container">
+            <div class="fieldhelpers-field-checkbox-input-container">
                 <input type="checkbox"
                        name="<?php echo $name . ( $args['repeater'] ? '' : '[]' ); ?>"
                        id="<?php echo "{$args['id']}_{$i}"; ?>"
