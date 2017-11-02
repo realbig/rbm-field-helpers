@@ -262,9 +262,3 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		}
 	}
 }
-
-global $field_helpers;
-
-$field_helpers = new RBM_FieldHelpers( array(
-	'ID' => '_rbm',
-) );
