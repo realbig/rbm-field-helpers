@@ -105,7 +105,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 */
 		private function includes() {
 
-			require_once __DIR__ . '/core/deprecated/rbm-fh-deprecated-functions.php';
 			require_once __DIR__ . '/core/class-rbm-fh-fields.php';
 			require_once __DIR__ . '/core/class-rbm-fh-field-templates.php';
 
@@ -261,4 +260,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_localize_script( 'rbm-fh-admin', 'RBM_FieldHelpers', $data );
 		}
 	}
+
+	require_once __DIR__ . '/core/deprecated/rbm-fh-deprecated-functions.php';
+	require_once __DIR__ . '/core/deprecated/rbm-fh-deprecated-support.php';
 }

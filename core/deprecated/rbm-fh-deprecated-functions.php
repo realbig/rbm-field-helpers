@@ -1,7 +1,7 @@
 <?php
 /**
  * Deprecated functionality.
- * 
+ *
  * @since {{VERSION}}
  */
 
@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || die();
  * Gets the main plugin instance.
  *
  * @since 1.1.0
- * 
+ *
  * @deprecated {{VERSION}}
  *
  * @return RBM_FieldHelpers
@@ -35,44 +35,9 @@ function RBMFH() {
  */
 function rbm_get_field( $field, $post_ID = false, $args = array() ) {
 
-	global $post;
+	global $rbm_fh_deprecated_support;
 
-	if ( $post_ID === false && ( $post instanceof WP_Post ) ) {
-		$post_ID = $post->ID;
-	} elseif ( $post_ID === false ) {
-		return false;
-	}
-
-	$args = wp_parse_args( array(
-		'sanitization' => false,
-		'single'       => true,
-	) );
-
-	$value = get_post_meta( $post_ID, "_rbm_$field", $args['single'] );
-
-	if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
-		$value = call_user_func( $args['sanitization'], $value );
-	}
-
-	/**
-	 * Allows filtering of the field value.
-	 *
-	 * @since 1.1.0
-     *
-     * @deprecated {{VERSION}}
-	 */
-	$value = apply_filters( 'rbm_get_field', $value, $field, $post_ID );
-
-	/**
-	 * Allows filtering of the specific field value.
-	 *
-	 * @since 1.1.0
-     *
-     * @deprecated {{VERSION}}
-	 */
-	$value = apply_filters( "rbm_get_field_$field", $value, $post_ID );
-
-	return $value;
+	$rbm_fh_deprecated_support->fields->get_meta_field( $field, $post_ID, $args );
 }
 
 /**
@@ -96,7 +61,7 @@ function rbm_field( $field, $post_ID = false ) {
  * This one is used for replacing the taxonomy MB content.
  *
  * @since 1.1.0
- * 
+ *
  * @deprecated {{VERSION}}
  *
  * @param $post
@@ -118,9 +83,9 @@ function rbm_do_field_taxonomy( $post, $taxonomy, $type = 'checkbox' ) {
 
 	if ( ! empty( $terms ) ) : ?>
 
-		<div id="taxonomy-<?php echo $taxonomy; ?>" class="categorydiv">
-			<ul id="<?php echo $taxonomy; ?>checklist"
-			    class="list:<?php echo $taxonomy ?> categorychecklist form-no-clear">
+        <div id="taxonomy-<?php echo $taxonomy; ?>" class="categorydiv">
+            <ul id="<?php echo $taxonomy; ?>checklist"
+                class="list:<?php echo $taxonomy ?> categorychecklist form-no-clear">
 				<?php foreach ( $terms as $term ) {
 
 					$id      = $taxonomy . '-' . $term->term_id;
@@ -131,14 +96,14 @@ function rbm_do_field_taxonomy( $post, $taxonomy, $type = 'checkbox' ) {
 					echo "<input type='$type' id='in-$id' name='{$name}'" . $checked . " {$value} />$term->name<br />";
 					echo "</label></li>";
 				} ?>
-			</ul>
-		</div>
+            </ul>
+        </div>
 
 	<?php else : ?>
-		<p>
-			No <?php echo $taxonomy_object->labels->name; ?> yet! Add some <a
-				href="<?php echo admin_url( "edit-tags.php?taxonomy=$taxonomy&post_type=$post->post_type" ); ?>">here</a>.
-		</p>
+        <p>
+            No <?php echo $taxonomy_object->labels->name; ?> yet! Add some <a
+                    href="<?php echo admin_url( "edit-tags.php?taxonomy=$taxonomy&post_type=$post->post_type" ); ?>">here</a>.
+        </p>
 	<?php endif;
 }
 
@@ -161,7 +126,7 @@ function rbm_do_helper_field_button( $name, $label = false, $args = array() ) {
  * Provides an easy to use link.
  *
  * @since 1.1.0
- * 
+ *
  * @deprecated {{VERSION}}
  *
  * @param $name
@@ -206,11 +171,11 @@ function rbm_helper_field_link( $name, $label = false, $args = array() ) {
 
 /**
  * Adds metabox for taxonomy.
- * 
+ *
  * @since 1.1.0
- * 
+ *
  * @deprecated {{VERSION}}
- * 
+ *
  * @param $taxonomy
  * @param string $post_type
  * @param string $input_type
@@ -239,11 +204,11 @@ function rbm_replace_taxonomy_mb( $taxonomy, $post_type = 'post', $input_type = 
 
 /**
  * Metabox output for taxonomy.
- * 
+ *
  * @since 1.1.0
  *
  * @deprecated {{VERSION}}
- * 
+ *
  * @param $post
  * @param $args
  */
@@ -266,6 +231,13 @@ function rbm_mb_taxonomy( $post, $args ) {
  */
 function rbm_do_field_text( $name, $label = false, $value = false, $args = array() ) {
 
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_text( $name, $args );
+
 	new RBM_FH_Field_Text( $name, $label, $args, $value );
 }
 
@@ -282,6 +254,13 @@ function rbm_do_field_text( $name, $label = false, $value = false, $args = array
  * @param array $args
  */
 function rbm_do_field_textarea( $name, $label = false, $value = false, $args = array() ) {
+
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_textarea( $name, $args );
 
 	new RBM_FH_Field_TextArea( $name, $label, $args, $value );
 }
@@ -300,6 +279,13 @@ function rbm_do_field_textarea( $name, $label = false, $value = false, $args = a
  */
 function rbm_do_field_checkbox( $name, $label = false, $value = false, $args = array() ) {
 
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_checkbox( $name, $args );
+
 	new RBM_FH_Field_Checkbox( $name, $args );
 }
 
@@ -316,6 +302,13 @@ function rbm_do_field_checkbox( $name, $label = false, $value = false, $args = a
  * @param array $args
  */
 function rbm_do_field_radio( $name, $label = false, $value = false, $args = array() ) {
+
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_radio( $name, $args );
 
 	new RBM_FH_Field_Radio( $name, $label, $args, $value );
 }
@@ -334,6 +327,13 @@ function rbm_do_field_radio( $name, $label = false, $value = false, $args = arra
  */
 function rbm_do_field_select( $name, $label = false, $value = false, $args = array() ) {
 
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_select( $name, $args );
+
 	new RBM_FH_Field_Select( $name, $label, $args, $value );
 }
 
@@ -350,6 +350,13 @@ function rbm_do_field_select( $name, $label = false, $value = false, $args = arr
  * @param array $args
  */
 function rbm_do_field_number( $name, $label = false, $value = false, $args = array() ) {
+
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_number( $name, $args );
 
 	new RBM_FH_Field_Number( $name, $args );
 }
@@ -368,6 +375,13 @@ function rbm_do_field_number( $name, $label = false, $value = false, $args = arr
  */
 function rbm_do_field_media( $name, $label = false, $value = false, $args = array() ) {
 
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_media( $name, $args );
+
 	new RBM_FH_Field_Media( $name, $label, $args, $value );
 }
 
@@ -385,13 +399,19 @@ function rbm_do_field_media( $name, $label = false, $value = false, $args = arra
  */
 function rbm_do_field_image( $name, $label = false, $value = false, $args = array() ) {
 
+	global $rbm_fh_deprecated_support;
+
 	$args['type']               = 'image';
 	$args['button_text']        = 'Upload / Choose Image';
 	$args['button_remove_text'] = 'Remove Image';
 	$args['window_title']       = 'Choose Image';
 	$args['window_button_text'] = 'Use Image';
 
-	rbm_do_field_media( $name, $label, $value, $args );
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_media( $name, $args );
 }
 
 /**
@@ -408,7 +428,12 @@ function rbm_do_field_image( $name, $label = false, $value = false, $args = arra
  */
 function rbm_do_field_datepicker( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_DatePicker( $name, $args );
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_datepicker( $name, $args );
 }
 
 /**
@@ -425,7 +450,12 @@ function rbm_do_field_datepicker( $name, $label = false, $value = false, $args =
  */
 function rbm_do_field_timepicker( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_TimePicker( $name, $label, $args, $value );
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_timepicker( $name, $args );
 }
 
 /**
@@ -442,7 +472,12 @@ function rbm_do_field_timepicker( $name, $label = false, $value = false, $args =
  */
 function rbm_do_field_datetimepicker( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_DateTimePicker( $name, $label, $args, $value );
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_datetimepicker( $name, $args );
 }
 
 /**
@@ -459,7 +494,12 @@ function rbm_do_field_datetimepicker( $name, $label = false, $value = false, $ar
  */
 function rbm_do_field_colorpicker( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_ColorPicker( $name, $label, $args, $value );
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_colorpicker( $name, $args );
 }
 
 /**
@@ -476,7 +516,12 @@ function rbm_do_field_colorpicker( $name, $label = false, $value = false, $args 
  */
 function rbm_do_field_list( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_List( $name, $label, $args, $value );
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_list( $name, $args );
 }
 
 /**
@@ -493,9 +538,13 @@ function rbm_do_field_list( $name, $label = false, $value = false, $args = array
  */
 function rbm_do_field_repeater( $name, $label = false, $fields, $values = false ) {
 
-	$args = array( 'fields' => $fields );
+	global $rbm_fh_deprecated_support;
 
-	new RBM_FH_Field_Repeater( $name, $args, $values );
+	$args['label'] = $label;
+	$args['value'] = $values;
+	$args['fields'] = $fields;
+
+	$rbm_fh_deprecated_support->fields->do_field_repeater( $name, $args );
 }
 
 /**
@@ -512,7 +561,12 @@ function rbm_do_field_repeater( $name, $label = false, $fields, $values = false 
  */
 function rbm_do_field_table( $name, $label = false, $value = false, $args = array() ) {
 
-	new RBM_FH_Field_Table( $name, $label, $args, $value );
+	global $rbm_fh_deprecated_support;
+
+	$args['label'] = $label;
+	$args['value'] = $value;
+
+	$rbm_fh_deprecated_support->fields->do_field_table( $name, $args );
 }
 
 /**
@@ -529,7 +583,11 @@ function rbm_do_field_table( $name, $label = false, $value = false, $args = arra
  */
 function rbm_do_field_wysiwyg( $name, $label = false, $value = false, $args = array() ) {
 
-    $args['wysiwyg'] = true;
+	global $rbm_fh_deprecated_support;
 
-	new RBM_FH_Field_TextArea( $name, $label, $args, $value );
+	$args['label'] = $label;
+	$args['value'] = $value;
+	$args['wysiwyg'] = true;
+
+	$rbm_fh_deprecated_support->fields->do_field_textarea( $name, $args );
 }
