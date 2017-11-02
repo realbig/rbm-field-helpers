@@ -210,7 +210,7 @@ class RBM_FH_Fields {
 	 * @param array $field_args All field args (not all will be localized).
 	 * @param array $args Field args to be localized.
 	 */
-	private function setup_data( $name, $type, $field_args, $args ) {
+	public function setup_data( $name, $type, $field_args, $args = array() ) {
 
 		// Always add some standard args
 		$args['id']      = $field_args['id'];
@@ -222,7 +222,7 @@ class RBM_FH_Fields {
 
 		} else {
 
-			$this->data[ $type ]["{$this->instance['ID']}_{$name}"] = $args;
+			$this->data[ $type ][ $name ] = $args;
 		}
 	}
 
@@ -259,7 +259,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'textarea', $field->args );
 
-		$this->setup_data( $name, 'textarea', $field->args, array(
+		$this->setup_data( $field->name, 'textarea', $field->args, array(
 			'wysiwyg'        => $field->args['wysiwyg'],
 			'wysiwygOptions' => $field->args['wysiwyg_options'],
 		) );
@@ -281,26 +281,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'checkbox', $field->args );
 
-		$this->setup_data( $name, 'checkbox', $field->args );
-	}
-
-	/**
-	 * Outputs a toggle field.
-	 *
-	 * @since {{VERSION}}
-	 *
-	 * @param string $name
-	 * @param array $args
-	 */
-	public function do_field_toggle( $name, $args = array() ) {
-
-		$args['prefix'] = $this->instance['ID'];
-
-		$field = new RBM_FH_Field_Toggle( $name, $args );
-
-		$this->save->field_init( $name, 'toggle', $field->args );
-
-		$this->setup_data( $name, 'toggle', $field->args );
+		$this->setup_data( $field->name, 'checkbox', $field->args );
 	}
 
 	/**
@@ -319,7 +300,26 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'radio', $field->args );
 
-		$this->setup_data( $name, 'radio', $field->args );
+		$this->setup_data( $field->name, 'radio', $field->args );
+	}
+
+	/**
+	 * Outputs a toggle field.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param string $name
+	 * @param array $args
+	 */
+	public function do_field_toggle( $name, $args = array() ) {
+
+		$args['prefix'] = $this->instance['ID'];
+
+		$field = new RBM_FH_Field_Toggle( $name, $args );
+
+		$this->save->field_init( $name, 'toggle', $field->args );
+
+		$this->setup_data( $field->name, 'toggle', $field->args );
 	}
 
 	/**
@@ -338,7 +338,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'select', $field->args );
 
-		$this->setup_data( $name, 'select', $field->args, array(
+		$this->setup_data( $field->name, 'select', $field->args, array(
 			'select2Disabled' => $field->args['select2_disable'],
 			'select2Options'  => $field->args['select2_options'],
 		) );
@@ -360,7 +360,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'number', $field->args );
 
-		$this->setup_data( $name, 'number', $field->args, array(
+		$this->setup_data( $field->name, 'number', $field->args, array(
 			'increaseInterval'    => $field->args['increase_interval'],
 			'decreaseInterval'    => $field->args['decrease_interval'],
 			'altIncreaseInterval' => $field->args['alt_increase_interval'],
@@ -387,7 +387,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'media', $field->args );
 
-		$this->setup_data( $name, 'media', $field->args, array(
+		$this->setup_data( $field->name, 'media', $field->args, array(
 			'placeholder' => $field->args['placeholder'],
 			'type'        => $field->args['type'],
 			'previewSize' => $field->args['preview_size'],
@@ -413,7 +413,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'datepicker', $field->args );
 
-		$this->setup_data( $name, 'datepicker', $field->args, array(
+		$this->setup_data( $field->name, 'datepicker', $field->args, array(
 			'datepickerOptions' => $field->args['datepicker_args'],
 		) );
 	}
@@ -434,7 +434,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'timepicker', $field->args );
 
-		$this->setup_data( $name, 'timepicker', $field->args, array(
+		$this->setup_data( $field->name, 'timepicker', $field->args, array(
 			'timepickerOptions' => $field->args['timepicker_args'],
 		) );
 	}
@@ -455,7 +455,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'datetimepicker', $field->args );
 
-		$this->setup_data( $name, 'datetimepicker', $field->args, array(
+		$this->setup_data( $field->name, 'datetimepicker', $field->args, array(
 			'datetimepickerOptions' => $field->args['datetimepicker_args'],
 		) );
 	}
@@ -476,7 +476,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'colorpicker', $field->args );
 
-		$this->setup_data( $name, 'colorpicker', $field->args );
+		$this->setup_data( $field->name, 'colorpicker', $field->args );
 	}
 
 	/**
@@ -495,7 +495,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'list', $field->args );
 
-		$this->setup_data( $name, 'list', $field->args );
+		$this->setup_data( $field->name, 'list', $field->args );
 	}
 
 	/**
@@ -514,7 +514,7 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'table', $field->args );
 
-		$this->setup_data( $name, 'table', $field->args );
+		$this->setup_data( $field->name, 'table', $field->args );
 	}
 
 	/**
@@ -549,7 +549,7 @@ class RBM_FH_Fields {
 			}
 		}
 
-		$this->setup_data( $name, 'repeater', $field->args, array(
+		$this->setup_data( $field->name, 'repeater', $field->args, array(
 			'values'      => $values,
 			'collapsable' => $field->args['collapsable'],
 			'sortable'    => $field->args['sortable'],
