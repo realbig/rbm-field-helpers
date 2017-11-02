@@ -216,6 +216,11 @@ class RBM_FH_Fields {
 		$args['id']      = $field_args['id'];
 		$args['default'] = $field_args['default'];
 
+		if ( $field_args['name_base']) {
+
+			$name = "{$field_args['name_base']}[{$name}]";
+		}
+
 		if ( $field_args['repeater'] ) {
 
 			$this->data['repeaterFields'][ $field_args['repeater'] ][ $name ] = $args;

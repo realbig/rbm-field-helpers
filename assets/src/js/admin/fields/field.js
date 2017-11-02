@@ -46,6 +46,8 @@ class Field {
      */
     getOptions() {
 
+        this.options = {};
+
         if ( typeof RBM_FieldHelpers[this.instance] === 'undefined' ) {
 
             console.error(`Field Helpers Error: Data for ${this.instance} instance cannot be found.`);

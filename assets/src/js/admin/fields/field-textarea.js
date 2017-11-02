@@ -32,6 +32,7 @@ class FieldTextArea extends Field {
 
                 console.error('Field Helpers Error: Trying to initialize a WYSIWYG Text Area field but "wp_editor" ' +
                     'is not enqueued.');
+                return;
             }
 
             let settings = jQuery.extend(wp.editor.getDefaultSettings(), this.options.wysiwygOptions);
