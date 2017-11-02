@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || die();
 
+define( 'RBM_HELPER_FUNCTIONS', 'fake' );
+
 if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 	define( 'RBM_FIELD_HELPERS_VER', '1.3.9' );
@@ -134,7 +136,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_register_script(
 				'rbm-fh-admin',
 				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
-				array( 'jquery', 'jquery-ui-sortable', 'rbm-fh-jquery-repeater' ),
+				array( 'jquery', 'jquery-ui-sortable', 'wp-color-picker', 'rbm-fh-jquery-repeater' ),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
@@ -260,3 +262,9 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		}
 	}
 }
+
+global $field_helpers;
+
+$field_helpers = new RBM_FieldHelpers( array(
+	'ID' => '_rbm',
+) );
