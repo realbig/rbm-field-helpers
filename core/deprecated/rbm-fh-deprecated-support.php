@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || die();
 
-add_action( 'plugins_loaded', 'rbm_fh_deprecated_support' );
+add_action( 'after_setup_theme', 'rbm_fh_deprecated_support' );
 
 /**
  * Creates a new RBM_FieldHelpers instance if the deprecated support is enabled.
