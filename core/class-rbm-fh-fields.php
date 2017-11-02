@@ -216,7 +216,7 @@ class RBM_FH_Fields {
 		$args['id']      = $field_args['id'];
 		$args['default'] = $field_args['default'];
 
-		if ( $field_args['name_base']) {
+		if ( $field_args['name_base'] ) {
 
 			$name = "{$field_args['name_base']}[{$name}]";
 		}
@@ -555,15 +555,15 @@ class RBM_FH_Fields {
 		}
 
 		$this->setup_data( $field->name, 'repeater', $field->args, array(
-			'values'      => $values,
-			'collapsable' => $field->args['collapsable'],
-			'sortable'    => $field->args['sortable'],
-			'l10n'        => array(
-				'firstItemUndeletable' => $field->args['first_item_undeletable'],
-				'collapsableTitle'     => $field->args['collapsable_title'],
-				'confirmDeleteText'    => $field->args['confirm_delete_text'],
-				'deleteItemText'       => $field->args['delete_item_text'],
-				'addItemText'          => $field->args['add_item_text'],
+			'values'                 => $values,
+			'collapsable'            => $field->args['collapsable'],
+			'sortable'               => $field->args['sortable'],
+			'isFirstItemUndeletable' => $field->args['first_item_undeletable'],
+			'l10n'                   => array(
+				'collapsable_title'   => $field->args['collapsable_title'],
+				'confirm_delete_text' => $field->args['confirm_delete_text'],
+				'delete_item_text'    => $field->args['delete_item_text'],
+				'add_item_text'       => $field->args['add_item_text'],
 			),
 		) );
 	}
