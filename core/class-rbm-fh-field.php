@@ -179,7 +179,10 @@ abstract class RBM_FH_Field {
 
 		if ( $this->args['name_base'] !== false ) {
 
-			$base_value = get_post_meta( $post->ID, "{$this->args['prefix']}_{$this->args['name_base']}", true );
+			$option_name = $this->args['no_init'] === true ?
+				$this->args['name_base'] : "{$this->args['prefix']}_{$this->args['name_base']}";
+
+			$base_value = get_post_meta( $post->ID, $option_name, true );
 
 			$value = isset( $base_value[ $this->_original_name ] ) ? $base_value[ $this->_original_name ] : '';
 
@@ -203,7 +206,10 @@ abstract class RBM_FH_Field {
 
 		if ( $this->args['name_base'] !== false ) {
 
-			$base_value = get_option( "{$this->args['prefix']}_{$this->args['name_base']}", true );
+			$option_name = $this->args['no_init'] === true ?
+				$this->args['name_base'] : "{$this->args['prefix']}_{$this->args['name_base']}";
+
+			$base_value = get_option( $option_name, true );
 
 			$value = isset( $base_value[ $this->name ] ) ? $base_value[ $this->_original_name ] : '';
 
