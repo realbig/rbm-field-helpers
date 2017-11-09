@@ -136,7 +136,7 @@ class RBM_FH_Fields {
 			'single'       => true,
 		) );
 
-		$value = get_post_meta( $post_ID, "{$this->instance['prefix']}_{$field}", $args['single'] );
+		$value = get_post_meta( $post_ID, "{$this->instance['ID']}_{$field}", $args['single'] );
 
 		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
 			$value = call_user_func( $args['sanitization'], $value );
@@ -147,14 +147,14 @@ class RBM_FH_Fields {
 		 *
 		 * @since {{VERSION}}
 		 */
-		$value = apply_filters( "{$this->instance['prefix']}_rbm_fh_get_meta_field", $value, $field, $post_ID );
+		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_meta_field", $value, $field, $post_ID );
 
 		/**
 		 * Allows filtering of the specific meta field value.
 		 *
 		 * @since {{VERSION}}
 		 */
-		$value = apply_filters( "{$this->instance['prefix']}_rbm_fh_get_meta_field_{$field}", $value, $post_ID );
+		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_meta_field_{$field}", $value, $post_ID );
 
 		return $value;
 	}
@@ -176,7 +176,7 @@ class RBM_FH_Fields {
 			'single'       => true,
 		) );
 
-		$value = get_option( "{$this->instance['prefix']}_{$field}", $args['single'] );
+		$value = get_option( "{$this->instance['ID']}_{$field}", $args['single'] );
 
 		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
 			$value = call_user_func( $args['sanitization'], $value );
@@ -187,14 +187,14 @@ class RBM_FH_Fields {
 		 *
 		 * @since {{VERSION}}
 		 */
-		$value = apply_filters( "{$this->instance['prefix']}_rbm_fh_get_option_field", $value, $field );
+		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_option_field", $value, $field );
 
 		/**
 		 * Allows filtering of the specific option field value.
 		 *
 		 * @since {{VERSION}}
 		 */
-		$value = apply_filters( "{$this->instance['prefix']}_rbm_fh_get_option_field_{$field}", $value );
+		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_option_field_{$field}", $value );
 
 		return $value;
 	}
