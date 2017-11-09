@@ -9,8 +9,6 @@
 
 defined( 'ABSPATH' ) || die();
 
-define( 'RBM_HELPER_FUNCTIONS', 'fake' );
-
 if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 	define( 'RBM_FIELD_HELPERS_VER', '1.3.9' );
@@ -135,7 +133,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_register_script(
 				'rbm-fh-admin',
 				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
-				array( 'jquery', 'jquery-ui-sortable', 'wp-color-picker', 'rbm-fh-jquery-repeater' ),
+				array( 'jquery' ),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
@@ -202,9 +200,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 */
 		function enqueue_scripts() {
 
-			wp_enqueue_script( 'rbm-fh-admin' );
-			wp_enqueue_style( 'rbm-fh-admin' );
-
 			wp_enqueue_script( 'rbm-fh-jquery-repeater' );
 
 			/**
@@ -235,6 +230,9 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 				wp_enqueue_script( 'rbm-fh-select2' );
 				wp_enqueue_style( 'rbm-fh-select2' );
 			}
+
+			wp_enqueue_script( 'rbm-fh-admin' );
+			wp_enqueue_style( 'rbm-fh-admin' );
 		}
 
 		/**

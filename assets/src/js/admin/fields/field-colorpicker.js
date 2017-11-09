@@ -60,13 +60,6 @@ class FieldColorPickerInitialize {
      */
     constructor($root) {
 
-        if (!jQuery.isFunction(jQuery.fn.wpColorPicker)) {
-
-            console.error('Field Helpers Error: Trying to initialize Color Picker field but "wp-color-picker" is ' +
-                'not enqueued.');
-            return;
-        }
-
         const api = this;
 
         this.fields = [];
@@ -74,6 +67,13 @@ class FieldColorPickerInitialize {
         let $fields = $root.find('[data-fieldhelpers-field-colorpicker]');
 
         if ( $fields.length ) {
+
+            if (!jQuery.isFunction(jQuery.fn.wpColorPicker)) {
+
+                console.error('Field Helpers Error: Trying to initialize Color Picker field but "wp-color-picker" is ' +
+                    'not enqueued.');
+                return;
+            }
 
             $fields.each(function () {
 
