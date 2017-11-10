@@ -58,7 +58,16 @@ class FieldRepeater extends Field {
 
         if ( this.options.sortable ) {
 
-            this.initSortable();
+            if ( !jQuery.isFunction(jQuery.fn.sortable) ) {
+
+                console.error('Field Helpers Error: Trying to initialize sortable Repeater field but "jquery-ui-sortable" ' +
+                    'is not enqueued.');
+                return;
+
+            } else {
+
+                this.initSortable();
+            }
         }
 
         this.$field.trigger('repeater-init', [this.$field]);
@@ -206,13 +215,6 @@ class FieldRepeaterInitialize {
         let $fields = $root.find('[data-fieldhelpers-field-repeater]');
 
         if ( $fields.length ) {
-
-            if ( !jQuery.isFunction(jQuery.fn.sortable) ) {
-
-                console.error('Field Helpers Error: Trying to initialize Repeater field but "rbm-fh-jquery-repeater" ' +
-                    'is not enqueued.');
-                return;
-            }
 
             $fields.each(function () {
 

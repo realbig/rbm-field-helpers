@@ -133,7 +133,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_register_script(
 				'rbm-fh-admin',
 				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
-				array( 'jquery' ),
+				array( 'jquery', 'rbm-fh-jquery-repeater' ),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
