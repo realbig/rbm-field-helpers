@@ -39,6 +39,7 @@
     border: 1px solid darken($primary-color, 5%);
     box-shadow: 0 1px 0 darken($primary-color, 5%);
     outline: none;
+    border-radius: 0;
     cursor: pointer;
 
     &:hover {
