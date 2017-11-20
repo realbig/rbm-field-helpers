@@ -33,6 +33,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 		'no_options_text'   => '',
 		'select2_disable'   => false,
 		'select2_options'   => array(
+			'placeholder'       => '',
 			'containerCssClass' => 'fieldhelpers-select2',
 			'dropdownCssClass'  => 'fieldhelpers-select2',
 		),
@@ -51,10 +52,13 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 		$args['no_options_text'] = $args['no_options_text'] ?
 			$args['no_options_text'] : __( 'No select options.', 'rbm-field-helpers' );
 
-		// Placeholder must go in select2 options, if in use
+		// Select2 Options defaults
 		if ( ! isset( $args['select2_disable'] ) || $args['select2_disable'] !== true ) {
 
-			$args['select2_options'] = isset( $args['select2_options'] ) ? $args['select2_options'] : array();
+			$args['select2_options'] = wp_parse_args(
+				isset( $args['select2_options'] ) ? $args['select2_options'] : array(),
+				$this->defaults['select2_options']
+			);
 
 			if ( isset( $args['placeholder'] ) ) {
 

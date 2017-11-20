@@ -35,7 +35,6 @@ class FieldSelect extends Field {
                 return;
             }
 
-
             this.$field.select2(this.options.select2Options);
         }
     }
@@ -71,7 +70,6 @@ class FieldSelect extends Field {
      */
     setDefault() {
 
-        console.log('setDefault');
         this.$field.find('option:selected').prop('selected', false);
         this.$field.trigger('change');
     }
