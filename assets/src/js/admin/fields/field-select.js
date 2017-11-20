@@ -35,6 +35,7 @@ class FieldSelect extends Field {
                 return;
             }
 
+
             this.$field.select2(this.options.select2Options);
         }
     }
@@ -60,8 +61,19 @@ class FieldSelect extends Field {
 
         this.$field
             .removeClass('select2-hidden-accessible')
-            .removeAttr('tablindex aria-hidden')
-            .find('option:selected').prop('selected', false);
+            .removeAttr('tablindex aria-hidden');
+    }
+
+    /**
+     * Sets the field to default. Override in child class if need different method.
+     *
+     * @since {{VERSION}}
+     */
+    setDefault() {
+
+        console.log('setDefault');
+        this.$field.find('option:selected').prop('selected', false);
+        this.$field.trigger('change');
     }
 }
 

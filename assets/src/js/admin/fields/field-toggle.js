@@ -28,8 +28,13 @@ class FieldToggle extends Field {
 
         this.$ui = {
             slider: this.$field.find('.fieldhelpers-field-toggle-slider'),
-            input: this.$field.find('input[type="checkbox"]'),
+            input: this.$field.find('input[type="hidden"]'),
         }
+
+        // Initial change trigger to help other plugins
+        setTimeout(() => {
+            this.$field.trigger('change', [this.$ui.input.val()]);
+        }, 1);
 
         this.setupHandlers();
     }
@@ -49,13 +54,36 @@ class FieldToggle extends Field {
     }
 
     /**
+     * Return if field is checked or not.
+     *
+     * @since {{VERSION}}
+     *
+     * @returns {*}
+     */
+    isChecked() {
+
+        return this.$field.hasClass('checked');
+    }
+
+    /**
      * Fires on toggle change.
      *
      * @since {{VERSION}}
      */
     handleClick() {
 
-        this.$ui.input.prop('checked', !this.$ui.input.prop('checked'));
+        if ( this.isChecked()) {
+
+            this.$ui.input.val(this.options.uncheckedValue);
+            this.$field.removeClass('checked');
+
+        } else {
+
+            this.$ui.input.val(this.options.checkedValue);
+            this.$field.addClass('checked');
+        }
+
+        this.$field.trigger('change', [this.$ui.input.val()]);
     }
 }
 

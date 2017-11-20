@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || die();
 
+// TODO Output values properly. Apparently "Default Values" doesn't work.
+
 /**
  * Class RBM_FH_Field_Repeater
  *
@@ -60,10 +62,10 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	 * @since 1.1.0
 	 *
 	 * @param string $name Name of the field.
-	 * @param mixed $values Value of the field.
+	 * @param mixed $value Value of the field.
 	 * @param array $args Args.
 	 */
-	public static function field( $name, $values, $args = array() ) {
+	public static function field( $name, $value, $args = array() ) {
 
 		if ( $args['collapsable'] ) {
 
@@ -75,7 +77,15 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 			$args['wrapper_classes'][] = 'fieldhelpers-field-repeater-sortable';
 		}
 
-		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'repeater', $args, $name, $values );
+		if ( ! $value ) {
+
+			// Default empty row
+			$value = array(
+				array_fill_keys( array_keys( $args['fields'] ), '' ),
+			);
+		}
+
+		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'repeater', $args, $name, $value );
 	}
 
 	/**
@@ -84,9 +94,10 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	 * @since {{VERSION}}
 	 *
 	 * @param string $name Field name.
+	 * @param array $value Field value.
 	 * @param array $args Field arguments.
 	 */
-	public static function do_fields( $name, $args ) {
+	public static function do_fields( $name, $value, $args ) {
 
 		foreach ( $args['fields'] as $field_name => $field ) {
 
@@ -113,6 +124,7 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 				$field['args']['repeater'] = $name;
 				$field['args']['no_init']  = true;
 				$field['args']['id']       = "{$name}_{$field_name}";
+				$field['args']['value']    = isset( $value[ $field_name ] ) ? $value[ $field_name ] : '';
 
 				call_user_func(
 					array(

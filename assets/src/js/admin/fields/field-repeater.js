@@ -42,7 +42,6 @@ class FieldRepeater extends Field {
                 api.$repeaterList.on('sortupdate', setIndexes);
             },
             isFirstItemUndeletable: api.options.isFirstItemUndeletable,
-            defaultValues: api.options.values,
         });
 
         // Delete first item if allowed and empty
@@ -70,7 +69,10 @@ class FieldRepeater extends Field {
             }
         }
 
-        this.$field.trigger('repeater-init', [this.$field]);
+        // Delay for other plugins
+        setTimeout(() => {
+            this.$field.trigger('repeater-init', [this.$field]);
+        }, 1);
     }
 
     /**

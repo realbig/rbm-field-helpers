@@ -24,8 +24,8 @@ class RBM_FH_Field_Toggle extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'checked_value'   => 1,
-		'unchecked_value' => 0,
+		'checked_value'   => '1',
+		'unchecked_value' => '0',
 	);
 
 	/**

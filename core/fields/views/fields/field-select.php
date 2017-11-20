@@ -10,10 +10,15 @@
  */
 
 defined( 'ABSPATH' ) || die();
+
+if ( $args['multiple'] && ! $args['repeater'] ) {
+
+	$name = "{$name}[]";
+}
 ?>
 
 <?php if ( ! empty( $args['options'] ) ) : ?>
-    <select name="<?php echo esc_attr( $name . ( $args['multiple'] ? '[]' : '' ) ); ?>"
+    <select name="<?php echo esc_attr( $name ); ?>"
             class="<?php echo esc_attr( $args['input_class'] ); ?>"
             data-fieldhelpers-field-select="<?php echo esc_attr( $name ); ?>"
 		<?php RBM_FH_Field::input_atts( $args ); ?>

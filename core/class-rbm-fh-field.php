@@ -73,22 +73,23 @@ abstract class RBM_FH_Field {
 		}
 
 		$this->args = wp_parse_args( $args, array(
-			'id'              => $name,
-			'value'           => false,
-			'prefix'          => '_rbm',
-			'label'           => '',
-			'default'         => '',
-			'description'     => false,
-			'wrapper_classes' => array(),
-			'no_init'         => false,
-			'sanitization'    => false,
-			'input_class'     => '',
-			'input_atts'      => array(),
-			'option_field'    => false,
-			'repeater'        => false,
-			'name_base'       => false,
-			'description_tip' => true,
-			'wrapper_class'   => '', // Legacy
+			'id'                    => $name,
+			'value'                 => false,
+			'prefix'                => '_rbm',
+			'label'                 => '',
+			'default'               => '',
+			'description'           => false,
+			'description_placement' => 'beneath',
+			'wrapper_classes'       => array(),
+			'no_init'               => false,
+			'sanitization'          => false,
+			'input_class'           => '',
+			'input_atts'            => array(),
+			'option_field'          => false,
+			'repeater'              => false,
+			'name_base'             => false,
+			'description_tip'       => true,
+			'wrapper_class'         => '', // Legacy
 		) );
 
 		// Legacy wrapper class use
@@ -208,13 +209,13 @@ abstract class RBM_FH_Field {
 
 		if ( $this->args['name_base'] !== false ) {
 
-			$base_value = get_option( $this->args['name_base'], true );
+			$base_value = get_option( $this->args['name_base'] );
 
 			$value = isset( $base_value[ $this->name ] ) ? $base_value[ $this->_original_name ] : '';
 
 		} else {
 
-			$value = get_option( $this->name, ! $this->args['multi_field'] );
+			$value = get_option( $this->name );
 		}
 
 		return $value;

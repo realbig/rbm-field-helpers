@@ -324,7 +324,10 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'toggle', $field->args );
 
-		$this->setup_data( $field->name, 'toggle', $field->args );
+		$this->setup_data( $field->name, 'toggle', $field->args, array(
+			'checkedValue'   => $field->args['checked_value'],
+			'uncheckedValue' => $field->args['unchecked_value'],
+		) );
 	}
 
 	/**

@@ -13,6 +13,8 @@ defined( 'ABSPATH' ) || die();
 
 $empty     = ! $value;
 $row_count = count( $value ) >= 1 ? count( $value ) : 1;
+
+// TODO test layout with collapsable
 ?>
 
 <div class="fielhelpers-field-repeater-container"
@@ -23,69 +25,66 @@ $row_count = count( $value ) >= 1 ? count( $value ) : 1;
          data-repeater-list="<?php echo esc_attr( $name ); ?>"
     >
 
-        <div class="fieldhelpers-field-repeater-row" data-repeater-item>
+		<?php foreach ( $value as $field_value ) : ?>
 
-			<?php if ( $args['collapsable'] ) : ?>
+            <div class="fieldhelpers-field-repeater-row" data-repeater-item>
 
-                <div class="fieldhelpers-field-repeater-header">
+				<?php if ( $args['collapsable'] ) : ?>
 
-					<?php if ( $args['sortable'] ) : ?>
-                        <div class="fieldhelpers-field-repeater-handle"></div>
-					<?php endif; ?>
+                    <div class="fieldhelpers-field-repeater-header">
 
-                    <div class="fieldhelpers-field-repeater-header-interior">
+						<?php if ( $args['sortable'] ) : ?>
+                            <div class="fieldhelpers-field-repeater-handle"></div>
+						<?php endif; ?>
 
-                        <h2 class="fieldhelpers-field-repeater-collapsable-handle"
-                            data-repeater-collapsable-handle
-                        >
+                        <div class="fieldhelpers-field-repeater-header-interior">
+
+                            <h2 class="fieldhelpers-field-repeater-collapsable-handle"
+                                data-repeater-collapsable-handle
+                            >
                             <span class="collapsable-title"
                                   data-collapsable-title-default="<?php echo $args['collapsable_title']; ?>"
                             >
                                 <?php echo $args['collapsable_title']; ?>
                             </span>
-                            <span class="fieldhelpers-field-repeater-collapsable-collapse-icon dashicons dashicons-arrow-down-alt2"></span>
-                            <input data-repeater-delete
-                                   type="button"
-                                   class="fieldhelpers-field-repeater-delete-button button"
-                                   value="<?php echo $args['delete_item_text']; ?>"
-                            />
-                        </h2>
+                                <span class="fieldhelpers-field-repeater-collapsable-collapse-icon dashicons dashicons-arrow-down-alt2"></span>
+                                <input data-repeater-delete
+                                       type="button"
+                                       class="fieldhelpers-field-repeater-delete-button button"
+                                       value="<?php echo $args['delete_item_text']; ?>"
+                                />
+                            </h2>
+
+                        </div>
 
                     </div>
 
+
+				<?php elseif ( $args['sortable'] ) : ?>
+
+                    <div class="fieldhelpers-field-repeater-handle"></div>
+
+				<?php endif; ?>
+
+                <div class="fieldhelpers-field-repeater-content">
+
+					<?php RBM_FH_Field_Repeater::do_fields( $name, $field_value, $args ); ?>
+
                 </div>
 
+				<?php if ( ! $args['collapsable'] ) : ?>
 
-			<?php elseif ( $args['sortable'] ) : ?>
+                    <input data-repeater-delete
+                           type="button"
+                           class="fieldhelpers-field-repeater-delete-button button"
+                           value="<?php echo $args['delete_item_text']; ?>"
+                    />
 
-                <div class="fieldhelpers-field-repeater-handle"></div>
-
-			<?php endif; ?>
-
-            <div class="fieldhelpers-field-repeater-content">
-
-				<?php RBM_FH_Field_Repeater::do_fields( $name, $args ); ?>
+				<?php endif; ?>
 
             </div>
 
-			<?php if ( $args['collapsable'] ) : ?>
-
-                <div class="clearfix"></div>
-
-			<?php else : ?>
-
-                <div class="clearfix"></div>
-
-                <hr/>
-                <input data-repeater-delete
-                       type="button"
-                       class="fieldhelpers-field-repeater-delete-button button"
-                       value="<?php echo $args['delete_item_text']; ?>"
-                />
-
-			<?php endif; ?>
-
-        </div>
+        <?php endforeach; ?>
 
     </div>
 

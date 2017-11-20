@@ -18,4 +18,5 @@ defined( 'ABSPATH' ) || die();
     <div class="fieldhelpers-field-description">
 		<?php echo $args['description']; ?>
     </div>
+
 <?php endif; ?>

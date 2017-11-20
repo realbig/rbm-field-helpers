@@ -4,22 +4,12 @@
   width: 60px;
   height: 34px;
 
-  input[type="checkbox"] {
-    display: none;
+  &.checked {
+    .fieldhelpers-field-toggle-slider {
+      background-color: $primary-color;
 
-    &:checked {
-      + .fieldhelpers-field-toggle-slider {
-        background-color: $primary-color;
-
-        &:before {
-          transform: translateX(26px);
-        }
-      }
-    }
-
-    &:focus {
-      + .fieldhelpers-field-toggle-slider {
-        box-shadow: 0 0 1px $primary-color
+      &:before {
+        transform: translateX(26px);
       }
     }
   }

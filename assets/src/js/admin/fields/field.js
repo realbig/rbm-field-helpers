@@ -134,7 +134,6 @@ class Field {
 
         this.repeaterSetID();
         this.fieldCleanup();
-        this.setDefault();
     }
 
     /**
