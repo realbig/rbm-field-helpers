@@ -60,6 +60,7 @@ class RBM_FH_Fields {
 		require_once __DIR__ . '/fields/class-rbm-fh-field-datepicker.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-timepicker.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-datetimepicker.php';
+		require_once __DIR__ . '/fields/class-rbm-fh-field-hidden.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-html.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-list.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-media.php';
