@@ -73,23 +73,24 @@ abstract class RBM_FH_Field {
 		}
 
 		$this->args = wp_parse_args( $args, array(
-			'id'                    => $name,
-			'value'                 => false,
-			'prefix'                => '_rbm',
-			'label'                 => '',
-			'default'               => '',
-			'description'           => false,
-			'description_placement' => 'beneath',
-			'wrapper_classes'       => array(),
-			'no_init'               => false,
-			'sanitization'          => false,
-			'input_class'           => '',
-			'input_atts'            => array(),
-			'option_field'          => false,
-			'repeater'              => false,
-			'name_base'             => false,
-			'description_tip'       => true,
-			'wrapper_class'         => '', // Legacy
+			'id'                        => $name,
+			'value'                     => false,
+			'prefix'                    => '_rbm',
+			'label'                     => '',
+			'default'                   => '',
+			'description'               => false,
+			'description_placement'     => 'beneath',
+			'description_tip_alignment' => 'left',
+			'wrapper_classes'           => array(),
+			'no_init'                   => false,
+			'sanitization'              => false,
+			'input_class'               => '',
+			'input_atts'                => array(),
+			'option_field'              => false,
+			'repeater'                  => false,
+			'name_base'                 => false,
+			'description_tip'           => true,
+			'wrapper_class'             => '', // Legacy
 		) );
 
 		// Legacy wrapper class use
