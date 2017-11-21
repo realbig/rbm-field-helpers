@@ -45,13 +45,18 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	 */
 	function __construct( $name, $args = array(), $values = false ) {
 
-		// L10n args
-		$args = wp_parse_args( $args, array(
-			'collapsable_title'   => __( 'New Row', 'rbm-field-helpers' ),
-			'confirm_delete_text' => __( 'Are you sure you want to delete this element?', 'rbm-field-helpers' ),
-			'delete_item_text'    => __( 'Delete', 'rbm-field-helpers' ),
-			'add_item_text'       => __( 'Add', 'rbm-field-helpers' ),
-		) );
+		// Legacy
+		$args['l10n']['collapsable_title'] = isset( $args['collapsable_title'] ) ?
+			$args['collapsable_title'] : $args['l10n']['collapsable_title'];
+
+		$args['l10n']['confirm_delete'] = isset( $args['confirm_delete_text'] ) ?
+			$args['confirm_delete_text'] : $args['l10n']['confirm_delete'];
+
+		$args['l10n']['delete_item'] = isset( $args['delete_item_text'] ) ?
+			$args['delete_item_text'] : $args['l10n']['delete_item'];
+
+		$args['l10n']['add_item'] = isset( $args['add_item_text'] ) ?
+			$args['add_item_text'] : $args['l10n']['add_item'];
 
 		parent::__construct( $name, $args, $values );
 	}

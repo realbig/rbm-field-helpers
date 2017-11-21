@@ -182,7 +182,6 @@ class FieldRepeater extends Field {
 
         if ( confirm(this.options.l10n['confirm_delete_text']) ) {
 
-            $item.trigger('repeater-before-delete-item');
             this.$field.trigger('repeater-before-delete-item', [$item]);
 
             $item.slideUp(400, () => {

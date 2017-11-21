@@ -42,13 +42,13 @@ defined( 'ABSPATH' ) || die();
 
     <input type="button"
            class="button"
-           value="<?php echo esc_attr( $args['button_text'] ); ?>"
+           value="<?php echo esc_attr( $args['l10n']['button_text'] ); ?>"
            data-add-media
 		<?php echo $value ? 'style="display: none;"' : ''; ?>
     />
     <input type="button"
            class="button"
-           value="<?php echo esc_attr( $args['button_remove_text'] ); ?>"
+           value="<?php echo esc_attr( $args['l10n']['button_remove_text'] ); ?>"
            data-remove-media
 		<?php echo ! $value ? 'style="display: none;"' : ''; ?>
     />

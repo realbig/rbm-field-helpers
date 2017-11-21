@@ -24,12 +24,9 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
-		'preview_size'       => 'medium',
-		'button_text'        => '',
-		'button_remove_text' => '',
-		'type'               => 'image',
-		'window_title'       => '',
-		'placeholder'        => false,
+		'preview_size' => 'medium',
+		'type'         => 'image',
+		'placeholder'  => false,
 	);
 
 	/**
@@ -42,9 +39,15 @@ class RBM_FH_Field_Media extends RBM_FH_Field {
 	 */
 	function __construct( $name, $args = array() ) {
 
-		$this->defaults['button_text']        = __( 'Upload / Choose Media', 'rbm-field-helpers' );
-		$this->defaults['button_remove_text'] = __( 'Remove Media', 'rbm-field-helpers' );
-		$this->defaults['window_title']       = __( 'Choose Media', 'rbm-field-helpers' );
+		// Legacy
+		$args['l10n']['button_text'] = isset( $args['button_text'] ) ?
+			$args['button_text'] : $args['l10n']['button_text'];
+
+		$args['l10n']['button_remove_text'] = isset( $args['button_remove_text'] ) ?
+			$args['button_remove_text'] : $args['l10n']['button_remove_text'];
+
+		$args['l10n']['window_title'] = isset( $args['window_title'] ) ?
+			$args['window_title'] : $args['l10n']['window_title'];
 
 		parent::__construct( $name, $args );
 	}

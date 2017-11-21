@@ -43,15 +43,15 @@ $row_count = count( $value ) >= 1 ? count( $value ) : 1;
                                 data-repeater-collapsable-handle
                             >
                             <span class="collapsable-title"
-                                  data-collapsable-title-default="<?php echo $args['collapsable_title']; ?>"
+                                  data-collapsable-title-default="<?php echo $args['l10n']['collapsable_title']; ?>"
                             >
-                                <?php echo $args['collapsable_title']; ?>
+                                <?php echo $args['l10n']['collapsable_title']; ?>
                             </span>
                                 <span class="fieldhelpers-field-repeater-collapsable-collapse-icon dashicons dashicons-arrow-down-alt2"></span>
                                 <input data-repeater-delete
                                        type="button"
                                        class="fieldhelpers-field-repeater-delete-button button"
-                                       value="<?php echo $args['delete_item_text']; ?>"
+                                       value="<?php echo $args['l10n']['delete_item']; ?>"
                                 />
                             </h2>
 
@@ -77,7 +77,7 @@ $row_count = count( $value ) >= 1 ? count( $value ) : 1;
                     <input data-repeater-delete
                            type="button"
                            class="fieldhelpers-field-repeater-delete-button button"
-                           value="<?php echo $args['delete_item_text']; ?>"
+                           value="<?php echo $args['l10n']['delete_item']; ?>"
                     />
 
 				<?php endif; ?>
@@ -91,6 +91,6 @@ $row_count = count( $value ) >= 1 ? count( $value ) : 1;
     <input data-repeater-create
            type="button"
            class="fieldhelpers-field-repeater-add-button button button-primary"
-           value="<?php echo $args['add_item_text']; ?>"
+           value="<?php echo $args['l10n']['add_item']; ?>"
     />
 </div>

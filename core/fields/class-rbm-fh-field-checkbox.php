@@ -17,17 +17,6 @@ defined( 'ABSPATH' ) || die();
 class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 
 	/**
-	 * Field defaults.
-	 *
-	 * @since {{VERSION}}
-	 *
-	 * @var array
-	 */
-	public $defaults = array(
-		'no_options_text' => '',
-	);
-
-	/**
 	 * RBM_FH_Field_Checkbox constructor.
 	 *
 	 * @since 1.1.0
@@ -38,7 +27,9 @@ class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 	 */
 	function __construct( $name, $args = array() ) {
 
-		$this->defaults['no_options_text'] = __( 'No options available.', 'rbm-field-helpers' );
+		// Legacy
+		$args['l10n']['no_options_text'] = isset( $args['no_options_text'] ) ?
+			$args['no_options_text'] : $args['l10n']['no_options_text'];
 
 		parent::__construct( $name, $args );
 	}

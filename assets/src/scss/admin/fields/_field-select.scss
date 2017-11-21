@@ -17,6 +17,14 @@
       padding: 3px 5px;
       font-size: 14px;
     }
+
+    .select2-search {
+      margin-bottom: 0;
+    }
+
+    .select2-selection__choice {
+      border-radius: 0;
+    }
   }
 
   &.select2-dropdown {
@@ -26,6 +34,10 @@
 
     .select2-results__option--highlighted[aria-selected] {
       background-color: $primary-color;
+    }
+
+    .select2-results__option {
+      margin-bottom: 0;
     }
   }
 }

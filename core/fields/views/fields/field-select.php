@@ -17,7 +17,7 @@ if ( $args['multiple'] && ! $args['repeater'] ) {
 }
 ?>
 
-<?php if ( ! empty( $args['options'] ) ) : ?>
+<?php if ( ! empty( $args['options'] ) || $args['show_empty_select'] === true ) : ?>
     <select name="<?php echo esc_attr( $name ); ?>"
             class="<?php echo esc_attr( $args['input_class'] ); ?>"
             data-fieldhelpers-field-select="<?php echo esc_attr( $name ); ?>"
@@ -31,47 +31,46 @@ if ( $args['multiple'] && ! $args['repeater'] ) {
             </option>
 		<?php endif; ?>
 
-		<?php if ( $args['opt_groups'] ) : ?>
+		<?php if ( ! empty( $args['options'] ) ) : ?>
+			<?php if ( $args['opt_groups'] ) : ?>
 
-			<?php foreach ( $args['options'] as $opt_group_label => $options ) : ?>
-                <optgroup label="<?php echo esc_attr( $opt_group_label ); ?>">
+				<?php foreach ( $args['options'] as $opt_group_label => $options ) : ?>
+                    <optgroup label="<?php echo esc_attr( $opt_group_label ); ?>">
 
-					<?php
-					foreach ( $options as $option_value => $option_label ) :
+						<?php
+						foreach ( $options as $option_value => $option_label ) :
 
-						if ( $args['multiple'] ) {
-							$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
-						} else {
-							$selected = selected( $option_value, $value, false ) ? 'selected' : '';
-						}
-						?>
-                        <option value="<?php echo esc_attr( $option_value ); ?>" <?php echo $selected; ?>>
-							<?php echo esc_attr( $option_label ); ?>
-                        </option>
-					<?php endforeach; ?>
+							if ( $args['multiple'] ) {
+								$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
+							} else {
+								$selected = selected( $option_value, $value, false ) ? 'selected' : '';
+							}
+							?>
+                            <option value="<?php echo esc_attr( $option_value ); ?>" <?php echo $selected; ?>>
+								<?php echo esc_attr( $option_label ); ?>
+                            </option>
+						<?php endforeach; ?>
 
-                </optgroup>
-				<?php
-			endforeach;
+                    </optgroup>
+				<?php endforeach; ?>
 
-		else:
+			<?php else : ?>
 
-			foreach ( $args['options'] as $option_value => $option_label ) :
+				<?php foreach ( $args['options'] as $option_value => $option_label ) :
 
-				if ( $args['multiple'] ) {
-					$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
-				} else {
-					$selected = selected( $option_value, $value, false ) ? 'selected' : '';
-				}
-				?>
-                <option value="<?php echo esc_attr( $option_value ); ?>" <?php echo $selected; ?>>
-					<?php echo esc_attr( $option_label ); ?>
-                </option>
+					if ( $args['multiple'] ) {
+						$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
+					} else {
+						$selected = selected( $option_value, $value, false ) ? 'selected' : '';
+					}
+					?>
+                    <option value="<?php echo esc_attr( $option_value ); ?>" <?php echo $selected; ?>>
+						<?php echo esc_attr( $option_label ); ?>
+                    </option>
 
-				<?php
-			endforeach;
-		endif;
-		?>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		<?php endif; ?>
 
     </select>
 <?php else: ?>

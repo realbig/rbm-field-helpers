@@ -35,7 +35,61 @@ class FieldSelect extends Field {
                 return;
             }
 
+            this.setupL10n();
+
             this.$field.select2(this.options.select2Options);
+        }
+    }
+
+    /**
+     * Sets up languages.
+     *
+     * @since {{VERSION}}
+     */
+    setupL10n() {
+
+        if ( Object.keys(this.options.select2Options.language).length > 0 ) {
+
+            Object.keys(this.options.select2Options.language).map((id) => {
+
+                let text = this.options.select2Options.language[id];
+
+                // All languages must be functions, because some are dynamic. Turn all into functions.
+                this.options.select2Options.language[id] = (args) => {
+
+                    // Some translations are dynamic
+                    switch ( id ) {
+                        case 'inputTooLong':
+
+                            let overChars = args.input.length - args.maximum;
+
+                            text = text.replace('%d', overChars);
+
+                            if ( overChars !== 1 ) {
+                                text += 's';
+                            }
+                            break;
+
+                        case 'inputTooShort':
+
+                            let remainingChars = args.minimum - args.input.length
+
+                            text = text.replace('%d', remainingChars);
+                            break;
+
+                        case 'maximumSelected':
+
+                            text = text.replace('%d', args.maximum);
+
+                            if ( args.maximum !== 1 ) {
+                                text += 's';
+                            }
+                            break;
+                    }
+
+                    return text;
+                }
+            });
         }
     }
 

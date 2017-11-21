@@ -82,9 +82,36 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			$this->instance = wp_parse_args( $instance, array(
 				'ID'   => '_rbm',
 				'l10n' => array(
-					'field_table' => array(
-						'delete_row'    => __( 'Delete Row', 'learndash-gradebook' ),
-						'delete_column' => __( 'Delete Column', 'learndash-gradebook' ),
+					'field_table'    => array(
+						'delete_row'    => __( 'Delete Row', 'rbm-field-helpers' ),
+						'delete_column' => __( 'Delete Column', 'rbm-field-helpers' ),
+					),
+					'field_select'   => array(
+						'no_options_text'  => __( 'No select options.', 'rbm-field-helpers' ),
+						'error_loading'    => __( 'The results could not be loaded', 'rbm-field-helpers' ),
+						/* translators: %d is number of characters over input limit */
+						'input_too_long'   => __( 'Please delete %d character', 'rbm-field-helpers' ),
+						/* translators: %d is number of characters under input limit */
+						'input_too_short'  => __( 'Please enter %d or more characters', 'rbm-field-helpers' ),
+						'loading_more'     => __( 'Loading more results...', 'rbm-field-helpers' ),
+						/* translators: %d is maximum number items selectable */
+						'maximum_selected' => __( 'You can only select %d item', 'rbm-field-helpers' ),
+						'no_results'       => __( 'No results found', 'rbm-field-helpers' ),
+						'searching'        => __( 'Searching...', 'rbm-field-helpers' ),
+					),
+					'field_repeater' => array(
+						'collapsable_title'   => __( 'New Row', 'rbm-field-helpers' ),
+						'confirm_delete_text' => __( 'Are you sure you want to delete this element?', 'rbm-field-helpers' ),
+						'delete_item_text'    => __( 'Delete', 'rbm-field-helpers' ),
+						'add_item_text'       => __( 'Add', 'rbm-field-helpers' ),
+					),
+					'field_media'    => array(
+						'button_text'        => __( 'Upload / Choose Media', 'rbm-field-helpers' ),
+						'button_remove_text' => __( 'Remove Media', 'rbm-field-helpers' ),
+						'window_title'       => __( 'Choose Media', 'rbm-field-helpers' ),
+					),
+					'field_checkbox' => array(
+						'no_options_text' => __( 'No options available.', 'rbm-field-helpers' ),
 					),
 				),
 			) );

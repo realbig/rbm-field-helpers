@@ -17,6 +17,17 @@ defined( 'ABSPATH' ) || die();
 class RBM_FH_Field_Table extends RBM_FH_Field {
 
 	/**
+	 * Field defaults.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @var array
+	 */
+	public $defaults = array(
+		'l10n' => array(),
+	);
+
+	/**
 	 * RBM_FH_Field_Table constructor.
 	 *
 	 * @since 1.1.0

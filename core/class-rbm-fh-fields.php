@@ -232,6 +232,31 @@ class RBM_FH_Fields {
 	}
 
 	/**
+	 * Imports instance translations.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param array $args Field args.
+	 * @param string $type Field type.
+	 *
+	 * @return array Field args with default translations.
+	 */
+	public function setup_translations( $args, $type ) {
+
+		if ( ! isset( $this->instance['l10n']["field_{$type}"] ) ) {
+
+			return $args;
+		}
+
+		$args['l10n'] = wp_parse_args(
+			isset( $args['l10n'] ) ? $args['l10n'] : array(),
+			$this->instance['l10n']["field_{$type}"]
+		);
+
+		return $args;
+	}
+
+	/**
 	 * Outputs a text field.
 	 *
 	 * @since {{VERSION}}
@@ -241,6 +266,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_text( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'text' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Text( $name, $args );
@@ -258,6 +284,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_textarea( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'textarea' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_TextArea( $name, $args );
@@ -280,6 +307,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_checkbox( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'checkbox' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Checkbox( $name, $args );
@@ -299,6 +327,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_radio( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'radio' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Radio( $name, $args );
@@ -318,6 +347,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_toggle( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'toggle' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Toggle( $name, $args );
@@ -340,6 +370,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_select( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'select' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Select( $name, $args );
@@ -362,6 +393,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_number( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'number' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Number( $name, $args );
@@ -389,6 +421,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_media( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'media' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Media( $name, $args );
@@ -415,6 +448,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_datepicker( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'datepicker' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_DatePicker( $name, $args );
@@ -436,6 +470,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_timepicker( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'timepicker' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_TimePicker( $name, $args );
@@ -457,6 +492,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_datetimepicker( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'datetimepicker' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_DateTimePicker( $name, $args );
@@ -478,6 +514,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_colorpicker( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'colorpicker' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_ColorPicker( $name, $args );
@@ -497,6 +534,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_list( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'list' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_List( $name, $args );
@@ -516,6 +554,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_table( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'table' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Table( $name, $args );
@@ -535,6 +574,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_repeater( $name, $args = array() ) {
 
+		$args                    = $this->setup_translations( $args, 'repeater' );
 		$args['prefix']          = $this->instance['ID'];
 		$args['fields_instance'] = $this;
 
@@ -581,6 +621,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_hidden( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'hidden' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_Hidden( $name, $args );
@@ -598,6 +639,7 @@ class RBM_FH_Fields {
 	 */
 	public function do_field_html( $name, $args = array() ) {
 
+		$args           = $this->setup_translations( $args, 'html' );
 		$args['prefix'] = $this->instance['ID'];
 
 		$field = new RBM_FH_Field_HTML( $name, $args );

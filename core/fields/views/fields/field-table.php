@@ -23,7 +23,9 @@ defined( 'ABSPATH' ) || die();
     </div>
 
     <div class="fieldhelpers-field-table-actions" style="display: none;">
-        <input data-table-create-row type="button" class="button" value="Add Row"/>
-        <input data-table-create-column type="button" class="button" value="Add Column"/>
+        <input data-table-create-row type="button" class="button"
+               value="<?php echo esc_attr( $args['l10n']['add_row'] ); ?>"/>
+        <input data-table-create-column type="button" class="button"
+               value="<?php echo esc_attr( $args['l10n']['add_column'] ); ?>"/>
     </div>
 </div>
