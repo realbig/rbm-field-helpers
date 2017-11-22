@@ -19,6 +19,7 @@ if ( $args['multiple'] && ! $args['repeater'] ) {
 
 <?php if ( ! empty( $args['options'] ) || $args['show_empty_select'] === true ) : ?>
     <select name="<?php echo esc_attr( $name ); ?>"
+            id="<?php echo esc_attr( $args['id'] ); ?>"
             class="<?php echo esc_attr( $args['input_class'] ); ?>"
             data-fieldhelpers-field-select="<?php echo esc_attr( $name ); ?>"
 		<?php RBM_FH_Field::input_atts( $args ); ?>
@@ -74,5 +75,5 @@ if ( $args['multiple'] && ! $args['repeater'] ) {
 
     </select>
 <?php else: ?>
-	<?php echo $args['no_options_text']; ?>
+	<?php echo $args['l10n']['no_options']; ?>
 <?php endif; ?>

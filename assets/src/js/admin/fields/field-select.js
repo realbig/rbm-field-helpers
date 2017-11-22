@@ -54,41 +54,8 @@ class FieldSelect extends Field {
 
                 let text = this.options.select2Options.language[id];
 
-                // All languages must be functions, because some are dynamic. Turn all into functions.
-                this.options.select2Options.language[id] = (args) => {
-
-                    // Some translations are dynamic
-                    switch ( id ) {
-                        case 'inputTooLong':
-
-                            let overChars = args.input.length - args.maximum;
-
-                            text = text.replace('%d', overChars);
-
-                            if ( overChars !== 1 ) {
-                                text += 's';
-                            }
-                            break;
-
-                        case 'inputTooShort':
-
-                            let remainingChars = args.minimum - args.input.length
-
-                            text = text.replace('%d', remainingChars);
-                            break;
-
-                        case 'maximumSelected':
-
-                            text = text.replace('%d', args.maximum);
-
-                            if ( args.maximum !== 1 ) {
-                                text += 's';
-                            }
-                            break;
-                    }
-
-                    return text;
-                }
+                // All languages must be functions. Turn all into functions.
+                this.options.select2Options.language[id] = (args) => text;
             });
         }
     }

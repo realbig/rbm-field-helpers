@@ -583,23 +583,8 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'repeater', $field->args );
 
-		$values = $field->value;
-
-		// Make sure saved values line up with fields (if repeater fields change, this will break)
-		if ( $values ) {
-
-			foreach ( array_keys( $values[0] ) as $field_name ) {
-
-				if ( ! isset( $args['fields'][ $field_name ] ) ) {
-
-					$values = array();
-					break;
-				}
-			}
-		}
-
 		$this->setup_data( $field->name, 'repeater', $field->args, array(
-			'values'                 => $values,
+			'empty'                  => ! $field->value,
 			'collapsable'            => $field->args['collapsable'],
 			'sortable'               => $field->args['sortable'],
 			'isFirstItemUndeletable' => $field->args['first_item_undeletable'],

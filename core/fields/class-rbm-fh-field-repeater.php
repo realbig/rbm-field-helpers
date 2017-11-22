@@ -9,8 +9,6 @@
 
 defined( 'ABSPATH' ) || die();
 
-// TODO Output values properly. Apparently "Default Values" doesn't work.
-
 /**
  * Class RBM_FH_Field_Repeater
  *
@@ -29,10 +27,6 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 		'collapsable'            => false,
 		'sortable'               => true,
 		'first_item_undeletable' => false,
-		'collapsable_title'      => '',
-		'confirm_delete_text'    => '',
-		'delete_item_text'       => '',
-		'add_item_text'          => '',
 	);
 
 	/**
@@ -45,7 +39,23 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	 */
 	function __construct( $name, $args = array(), $values = false ) {
 
-		// Legacy
+		// Legacy translations
+		if ( ! isset( $args['l10n'] ) ) {
+
+			$args['collapsable_title'] = isset( $args['collapsable_title'] ) ?
+				$args['collapsable_title'] : 'New Row';
+
+			$args['confirm_delete_text'] = isset( $args['confirm_delete_text'] ) ?
+				$args['confirm_delete_text'] : 'Are you sure you want to delete this element?';
+
+			$args['delete_item_text'] = isset( $args['delete_item_text'] ) ?
+				$args['delete_item_text'] : 'Delete';
+
+			$args['add_item_text'] = isset( $args['add_item_text'] ) ?
+				$args['add_item_text'] : 'Add';
+		}
+
+		// More legacy translations
 		$args['l10n']['collapsable_title'] = isset( $args['collapsable_title'] ) ?
 			$args['collapsable_title'] : $args['l10n']['collapsable_title'];
 

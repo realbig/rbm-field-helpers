@@ -87,7 +87,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 						'delete_column' => __( 'Delete Column', 'rbm-field-helpers' ),
 					),
 					'field_select'   => array(
-						'no_options_text'  => __( 'No select options.', 'rbm-field-helpers' ),
+						'no_options'       => __( 'No select options.', 'rbm-field-helpers' ),
 						'error_loading'    => __( 'The results could not be loaded', 'rbm-field-helpers' ),
 						/* translators: %d is number of characters over input limit */
 						'input_too_long'   => __( 'Please delete %d character', 'rbm-field-helpers' ),

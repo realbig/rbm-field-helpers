@@ -45,7 +45,7 @@ class FieldRepeater extends Field {
         });
 
         // Delete first item if allowed and empty
-        if ( !this.options.isFirstItemUndeletable && !this.options.values ) {
+        if ( !this.options.isFirstItemUndeletable && this.options.empty ) {
 
             this.$repeaterList.find('.fieldhelpers-field-repeater-row').remove();
         }
