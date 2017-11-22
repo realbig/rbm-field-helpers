@@ -26,10 +26,7 @@ class FieldToggle extends Field {
      */
     initField() {
 
-        this.$ui = {
-            slider: this.$field.find('.fieldhelpers-field-toggle-slider'),
-            input: this.$field.find('input[type="hidden"]'),
-        }
+        this.getUI();
 
         // Initial change trigger to help other plugins
         setTimeout(() => {
@@ -37,6 +34,19 @@ class FieldToggle extends Field {
         }, 1);
 
         this.setupHandlers();
+    }
+
+    /**
+     * Retrieves the UI.
+     *
+     * @since {{VERSION}}
+     */
+    getUI() {
+
+        this.$ui = {
+            slider: this.$field.find('.fieldhelpers-field-toggle-slider'),
+            input: this.$field.find('input[type="hidden"]'),
+        }
     }
 
     /**
@@ -72,7 +82,7 @@ class FieldToggle extends Field {
      */
     handleClick() {
 
-        if ( this.isChecked()) {
+        if ( this.isChecked() ) {
 
             this.$ui.input.val(this.options.uncheckedValue);
             this.$field.removeClass('checked');
