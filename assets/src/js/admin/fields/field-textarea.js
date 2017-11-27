@@ -35,8 +35,9 @@ class FieldTextArea extends Field {
                 return;
             }
 
-            let settings = jQuery.extend(wp.editor.getDefaultSettings(), this.options.wysiwygOptions);
+            let settings = jQuery.extend(this.getDefaultEditorSettings(), this.options.wysiwygOptions);
 
+            console.log(settings);
             wp.editor.initialize(this.$field.attr('id'), settings);
         }
     }
@@ -108,6 +109,25 @@ class FieldTextArea extends Field {
         // Add slight delay because all repeater item WYSIWYG's must be unitialized before re-initializing to prevent
         // ID overlap.
         setTimeout(() => {this.initField()}, 1);
+    }
+
+    /**
+     * Tries to get default editor settings.
+     *
+     * @since {{VERSION}}
+     *
+     * @return {{}}
+     */
+    getDefaultEditorSettings() {
+
+        if ( ! jQuery.isFunction(wp.editor.getDefaultSettings) ) {
+
+            return {};
+
+        } else {
+
+            return wp.editor.getDefaultSettings();
+        }
     }
 }
 

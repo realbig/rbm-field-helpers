@@ -10,7 +10,7 @@
   position: relative;
   cursor: pointer;
   transition: background 150ms;
-  height: 30px;
+  line-height: 30px;
 
   &:hover {
     background: darken(#fff, 5%);
@@ -58,7 +58,6 @@
     font-weight: bold;
     padding: 0 0.5em;
     border-left: 1px solid #DFDFDF;
-    height: 30px;
     line-height: 30px;
     box-sizing: border-box;
   }

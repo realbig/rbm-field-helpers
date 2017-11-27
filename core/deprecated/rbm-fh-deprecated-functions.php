@@ -526,8 +526,18 @@ function rbm_do_field_repeater( $name, $label = false, $fields, $values = false 
 
 	global $rbm_fh_deprecated_support;
 
-	$args['label'] = $label;
-	$args['value'] = $values;
+	// WYSIWYG support
+	foreach ( $fields as &$field ) {
+
+		if ( $field['type'] === 'wysiwyg' ) {
+
+			$field['type']            = 'textarea';
+			$field['args']['wysiwyg'] = true;
+		}
+	}
+
+	$args['label']  = $label;
+	$args['value']  = $values;
 	$args['fields'] = $fields;
 
 	$rbm_fh_deprecated_support->fields->do_field_repeater( $name, $args );
@@ -571,8 +581,8 @@ function rbm_do_field_wysiwyg( $name, $label = false, $value = false, $args = ar
 
 	global $rbm_fh_deprecated_support;
 
-	$args['label'] = $label;
-	$args['value'] = $value;
+	$args['label']   = $label;
+	$args['value']   = $value;
 	$args['wysiwyg'] = true;
 
 	$rbm_fh_deprecated_support->fields->do_field_textarea( $name, $args );

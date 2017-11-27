@@ -101,9 +101,9 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 					),
 					'field_repeater' => array(
 						'collapsable_title'   => __( 'New Row', 'rbm-field-helpers' ),
-						'confirm_delete_text' => __( 'Are you sure you want to delete this element?', 'rbm-field-helpers' ),
-						'delete_item_text'    => __( 'Delete', 'rbm-field-helpers' ),
-						'add_item_text'       => __( 'Add', 'rbm-field-helpers' ),
+						'confirm_delete' => __( 'Are you sure you want to delete this element?', 'rbm-field-helpers' ),
+						'delete_item'    => __( 'Delete', 'rbm-field-helpers' ),
+						'add_item'       => __( 'Add', 'rbm-field-helpers' ),
 					),
 					'field_media'    => array(
 						'button_text'        => __( 'Upload / Choose Media', 'rbm-field-helpers' ),
