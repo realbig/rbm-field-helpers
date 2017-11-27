@@ -65,9 +65,7 @@ class RBM_FH_FieldsSave {
 	 */
 	public function field_init( $name, $type, $args ) {
 
-		$group = $args['group'] !== false ? $args['group'] : 'default';
-
-		$this->fields[ $group ][] = array(
+		$this->fields[ $args['group'] ][] = array(
 			'name' => $name,
 			'type' => $type,
 			'args' => $args,
