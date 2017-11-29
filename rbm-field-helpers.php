@@ -2,8 +2,6 @@
 /**
  * Provides helper functions shared among all RBM plugins.
  *
- * @version 1.3.9
- *
  * @package RBMFieldHelpers
  */
 

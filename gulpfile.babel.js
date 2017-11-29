@@ -134,13 +134,8 @@ function version() {
     ], {base: './'})
     //     Doc block versions
         .pipe($.replace(/\{\{VERSION}}/g, packageFile.version))
-        // Plugin header
-        .pipe($.replace(/(\* Version: )\d\.\d\.\d/, "$1" + packageFile.version))
         // Version constant
-        .pipe($.replace(/(define\( 'LEARNDASH_GRADEBOOK_VERSION', ')\d\.\d\.\d/, "$1" + packageFile.version))
-        // readme.txt
-        .pipe($.replace((/(Stable tag: )\d\.\d\.\d/, "$1" + packageFile.version))
-        )
+        .pipe($.replace(/(define\( 'RBM_FIELD_HELPERS_VER', ')\d\.\d\.\d/, "$1" + packageFile.version))
         .pipe(gulp.dest('./'));
 }
 
