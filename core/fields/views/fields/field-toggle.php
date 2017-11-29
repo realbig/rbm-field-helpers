@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || die();
            id="<?php echo esc_attr( $args['id'] ); ?>"
            class="fieldhelpers-field-input"
            value="<?php echo esc_attr( $value ); ?>"
+	    <?php RBM_FH_Field::input_atts( $args ); ?>
     />
 
     <span class="fieldhelpers-field-toggle-slider"></span>
