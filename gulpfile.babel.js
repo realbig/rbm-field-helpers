@@ -11,6 +11,8 @@ import webpackStream from 'webpack-stream';
 import webpack2 from 'webpack';
 import named from 'vinyl-named';
 
+const packageFile = require('./package.json');
+
 // Load all Gulp plugins into one variable
 const $ = plugins();
 
@@ -31,7 +33,9 @@ var URL = 'http://src.wordpress-develop.dev';
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
-    gulp.series(SassAdmin, JavaScriptAdmin, copy));
+    PRODUCTION ?
+        gulp.series(version, SassAdmin, JavaScriptAdmin, copy, packageFiles) :
+        gulp.series(SassAdmin, JavaScriptAdmin, copy));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -119,6 +123,36 @@ function server(done) {
 function reload(done) {
     browser.reload();
     done();
+}
+
+function version() {
+    return gulp.src([
+        'assets/src/**/*',
+        'vendor/**/*',
+        'core/**/*',
+        'rbm-field-helpers.php'
+    ], {base: './'})
+    //     Doc block versions
+        .pipe($.replace(/\{\{VERSION}}/g, packageFile.version))
+        // Plugin header
+        .pipe($.replace(/(\* Version: )\d\.\d\.\d/, "$1" + packageFile.version))
+        // Version constant
+        .pipe($.replace(/(define\( 'LEARNDASH_GRADEBOOK_VERSION', ')\d\.\d\.\d/, "$1" + packageFile.version))
+        // readme.txt
+        .pipe($.replace((/(Stable tag: )\d\.\d\.\d/, "$1" + packageFile.version))
+        )
+        .pipe(gulp.dest('./'));
+}
+
+function packageFiles() {
+    return gulp.src([
+        'assets/dist/**/*',
+        'vendor/**/*',
+        'core/**/*',
+        'rbm-field-helpers.php'
+    ], {base: './'})
+        .pipe($.zip(`rbm-field-helpers-${packageFile.version}.zip`))
+        .pipe(gulp.dest('./'));
 }
 
 // Watch for changes to Sass, and JavaScript
