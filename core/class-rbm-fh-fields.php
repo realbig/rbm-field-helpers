@@ -2,7 +2,7 @@
 /**
  * Handles all fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 
 defined( 'ABSPATH' ) || die();
@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || die();
  *
  * Handles all fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class RBM_FH_Fields {
 
 	/**
 	 * Instance properties.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var array
 	 */
@@ -28,7 +28,7 @@ class RBM_FH_Fields {
 	/**
 	 * Handles field saving.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var RBM_FH_FieldsSave
 	 */
@@ -37,7 +37,7 @@ class RBM_FH_Fields {
 	/**
 	 * Data to localize.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var array
 	 */
@@ -46,7 +46,7 @@ class RBM_FH_Fields {
 	/**
 	 * RBM_FH_Fields constructor.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 */
 	function __construct( $instance = array() ) {
 
@@ -98,7 +98,7 @@ class RBM_FH_Fields {
 	/**
 	 * Alias for get_meta_field().
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $field The fieldname to get.
 	 * @param bool|false $post_ID Supply post ID to get field from different post.
@@ -114,7 +114,7 @@ class RBM_FH_Fields {
 	/**
 	 * Gets a meta field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $field The fieldname to get.
 	 * @param bool|false $post_ID Supply post ID to get field from different post.
@@ -146,14 +146,14 @@ class RBM_FH_Fields {
 		/**
 		 * Allows filtering of the meta field value.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_meta_field", $value, $field, $post_ID );
 
 		/**
 		 * Allows filtering of the specific meta field value.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_meta_field_{$field}", $value, $post_ID );
 
@@ -163,7 +163,7 @@ class RBM_FH_Fields {
 	/**
 	 * Gets an option field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $field The fieldname to get.
 	 * @param array $args Arguments.
@@ -186,14 +186,14 @@ class RBM_FH_Fields {
 		/**
 		 * Allows filtering of the option field value.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_option_field", $value, $field );
 
 		/**
 		 * Allows filtering of the specific option field value.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		$value = apply_filters( "{$this->instance['ID']}_rbm_fh_get_option_field_{$field}", $value );
 
@@ -203,7 +203,7 @@ class RBM_FH_Fields {
 	/**
 	 * Sets up field data to be localized.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $name Field name.
@@ -235,7 +235,7 @@ class RBM_FH_Fields {
 	/**
 	 * Imports instance translations.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param array $args Field args.
 	 * @param string $type Field type.
@@ -260,7 +260,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a text field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -278,7 +278,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a textarea field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -301,7 +301,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a checkbox field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -321,7 +321,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a radio field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -341,7 +341,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a toggle field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -364,7 +364,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a select field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -387,7 +387,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a number field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -415,7 +415,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs an image field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -442,7 +442,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a datepicker field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -464,7 +464,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a timepicker field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -486,7 +486,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a datetimepicker field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -508,7 +508,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a colorpicker field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -528,7 +528,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a list field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -548,7 +548,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a table field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -568,7 +568,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a repeater field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param mixed $values
@@ -600,7 +600,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a hidden field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -618,7 +618,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a html field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name
 	 * @param array $args

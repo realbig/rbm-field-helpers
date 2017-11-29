@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Radio Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldRadio extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldRadio extends Field {
     /**
      * Initializes the select.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -38,7 +38,7 @@ class FieldRadio extends Field {
     /**
      * Sets up class handlers.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setupHandlers() {
 
@@ -52,7 +52,7 @@ class FieldRadio extends Field {
     /**
      * Fires on radio change.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $input Checkbox input.
      */
@@ -65,7 +65,7 @@ class FieldRadio extends Field {
     /**
      * Sets the radio row as active.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $row
      */
@@ -77,7 +77,7 @@ class FieldRadio extends Field {
     /**
      * Sets the radio row as inactive.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $row
      */
@@ -92,7 +92,7 @@ class FieldRadio extends Field {
      *
      * For radios, there will be multiple IDs in each, and need to be set accordingly.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterSetID() {
 
@@ -115,7 +115,7 @@ class FieldRadio extends Field {
     /**
      * Sets the field to default.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setDefault() {
 
@@ -129,14 +129,14 @@ class FieldRadio extends Field {
 /**
  * Finds and initializes all Radio fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldRadioInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -160,7 +160,7 @@ class FieldRadioInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

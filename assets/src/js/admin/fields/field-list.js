@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * List Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldList extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldList extends Field {
     /**
      * Initializes the list.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -33,14 +33,14 @@ class FieldList extends Field {
 /**
  * Finds and initializes all List fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldListInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -71,7 +71,7 @@ class FieldListInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

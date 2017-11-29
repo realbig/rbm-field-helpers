@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Color Picker Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldColorPicker extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldColorPicker extends Field {
     /**
      * Initializes the Color Picker.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initializeColorpicker() {
 
@@ -33,7 +33,7 @@ class FieldColorPicker extends Field {
     /**
      * Cleans up after a repeater add/init.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     fieldCleanup() {
 
@@ -47,14 +47,14 @@ class FieldColorPicker extends Field {
 /**
  * Finds and initializes all Color Picker fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldColorPickerInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -85,7 +85,7 @@ class FieldColorPickerInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

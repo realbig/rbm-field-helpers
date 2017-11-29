@@ -2,7 +2,7 @@
 /**
  * Field Template: Media
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  *
  * @var array $args Field arguments.
  * @var string $name Field name.

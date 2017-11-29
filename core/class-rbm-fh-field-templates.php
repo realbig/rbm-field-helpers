@@ -2,7 +2,7 @@
 /**
  * Applies templates to fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 
 defined( 'ABSPATH' ) || die();
@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || die();
  *
  * Applies templates to fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class RBM_FH_FieldTemplates {
 
 	/**
 	 * Instance properties.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var array
 	 */
@@ -28,7 +28,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * RBM_FH_FieldTemplates constructor.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param array $instance Instance properties.
 	 */
@@ -55,7 +55,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * Outputs a field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $type Field type.
@@ -71,7 +71,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * Outputs the field content.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $type Field type.
@@ -87,7 +87,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * Outputs the field label.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $type Field type.
@@ -103,7 +103,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * Outputs the field description.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $type Field type.
@@ -122,7 +122,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * Outputs the field description.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $type Field type.
@@ -141,7 +141,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * Outputs the field description.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $type Field type.

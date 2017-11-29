@@ -2,7 +2,7 @@
 /**
  * Sets up deprecated support.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 
 defined( 'ABSPATH' ) || die();
@@ -12,7 +12,7 @@ add_action( 'after_setup_theme', 'rbm_fh_deprecated_support' );
 /**
  * Creates a new RBM_FieldHelpers instance if the deprecated support is enabled.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  * @access private
  */
 function rbm_fh_deprecated_support() {

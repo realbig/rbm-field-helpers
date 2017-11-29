@@ -16,14 +16,14 @@ import FieldToggleInitialize from "./fields/field-toggle";
 /**
  * Handles all field initializations.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldsInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */

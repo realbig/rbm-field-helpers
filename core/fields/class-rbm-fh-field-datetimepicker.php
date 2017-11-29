@@ -2,7 +2,7 @@
 /**
  * Field: DateTime Picker
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  *
  * @package RBMFieldHelpers
  */
@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || die();
 /**
  * Class RBM_FH_Field_DateTimePicker
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 
 	/**
 	 * Field defaults.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var array
 	 */
@@ -38,7 +38,7 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	/**
 	 * RBM_FH_Field_DateTimePicker constructor.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var string $name
 	 * @var array $args
@@ -60,7 +60,7 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	/**
 	 * Outputs the field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.

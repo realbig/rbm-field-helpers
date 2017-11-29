@@ -106,7 +106,7 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	/**
 	 * Loops through and executes each field in the repeater.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $name Field name.
 	 * @param array $value Field value.

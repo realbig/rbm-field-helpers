@@ -2,7 +2,7 @@
 /**
  * Deprecated functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 
 defined( 'ABSPATH' ) || die();
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || die();
  *
  * @since 1.1.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @return RBM_FieldHelpers
  */
@@ -25,7 +25,7 @@ function RBMFH() {
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $field The fieldname to get.
  * @param bool|false $post_ID Supply post ID to get field from different post.
@@ -45,7 +45,7 @@ function rbm_get_field( $field, $post_ID = false, $args = array() ) {
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $field The fieldname to get.
  * @param bool|false $post_ID Supply post ID to get field from different post.
@@ -62,7 +62,7 @@ function rbm_field( $field, $post_ID = false ) {
  *
  * @since 1.1.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param $post
  * @param $taxonomy
@@ -112,7 +112,7 @@ function rbm_do_field_taxonomy( $post, $taxonomy, $type = 'checkbox' ) {
  *
  * @since 1.1.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param $name
  * @param bool $label
@@ -127,7 +127,7 @@ function rbm_do_helper_field_button( $name, $label = false, $args = array() ) {
  *
  * @since 1.1.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param $name
  * @param bool $label
@@ -174,7 +174,7 @@ function rbm_helper_field_link( $name, $label = false, $args = array() ) {
  *
  * @since 1.1.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param $taxonomy
  * @param string $post_type
@@ -207,7 +207,7 @@ function rbm_replace_taxonomy_mb( $taxonomy, $post_type = 'post', $input_type = 
  *
  * @since 1.1.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param $post
  * @param $args
@@ -222,7 +222,7 @@ function rbm_mb_taxonomy( $post, $args ) {
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -244,7 +244,7 @@ function rbm_do_field_text( $name, $label = false, $value = false, $args = array
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -266,7 +266,7 @@ function rbm_do_field_textarea( $name, $label = false, $value = false, $args = a
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -288,7 +288,7 @@ function rbm_do_field_checkbox( $name, $label = false, $value = false, $args = a
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -310,7 +310,7 @@ function rbm_do_field_radio( $name, $label = false, $value = false, $args = arra
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -332,7 +332,7 @@ function rbm_do_field_select( $name, $label = false, $value = false, $args = arr
  *
  * @since 1.3.2
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -354,7 +354,7 @@ function rbm_do_field_number( $name, $label = false, $value = false, $args = arr
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -376,7 +376,7 @@ function rbm_do_field_media( $name, $label = false, $value = false, $args = arra
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -405,7 +405,7 @@ function rbm_do_field_image( $name, $label = false, $value = false, $args = arra
  *
  * @since 1.1.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -425,9 +425,9 @@ function rbm_do_field_datepicker( $name, $label = false, $value = false, $args =
 /**
  * Outputs a timepicker field.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -447,9 +447,9 @@ function rbm_do_field_timepicker( $name, $label = false, $value = false, $args =
 /**
  * Outputs a datetimepicker field.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -471,7 +471,7 @@ function rbm_do_field_datetimepicker( $name, $label = false, $value = false, $ar
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -493,7 +493,7 @@ function rbm_do_field_colorpicker( $name, $label = false, $value = false, $args 
  *
  * @since 1.3.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -515,7 +515,7 @@ function rbm_do_field_list( $name, $label = false, $value = false, $args = array
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -548,7 +548,7 @@ function rbm_do_field_repeater( $name, $label = false, $fields, $values = false 
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label
@@ -570,7 +570,7 @@ function rbm_do_field_table( $name, $label = false, $value = false, $args = arra
  *
  * @since 1.2.0
  *
- * @deprecated {{VERSION}}
+ * @deprecated 1.4.0
  *
  * @param string $name
  * @param string|bool $label

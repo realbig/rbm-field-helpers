@@ -2,7 +2,7 @@
 /**
  * Main field view.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  *
  * @var string $type
  * @var array $args
@@ -31,7 +31,7 @@ $classes = array_merge(
 		/**
 		 * Outputs the field header.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		do_action( "{$args['prefix']}_fieldhelpers_field_template_header", $type, $args, $name, $value );
 		?>
@@ -42,7 +42,7 @@ $classes = array_merge(
 		/**
 		 * Outputs the field content.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		do_action( "{$args['prefix']}_fieldhelpers_field_template_content", $type, $args, $name, $value );
 		?>

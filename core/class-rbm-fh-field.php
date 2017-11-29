@@ -29,7 +29,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Field original name (non-prefixed).
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @var string
@@ -161,7 +161,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Gets post meta field value.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @return mixed
@@ -202,7 +202,7 @@ abstract class RBM_FH_Field {
 	/**
 	 * Gets option field value.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @return mixed

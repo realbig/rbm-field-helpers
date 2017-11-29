@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Toggle Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldToggle extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldToggle extends Field {
     /**
      * Initializes the select.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -39,7 +39,7 @@ class FieldToggle extends Field {
     /**
      * Retrieves the UI.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     getUI() {
 
@@ -52,7 +52,7 @@ class FieldToggle extends Field {
     /**
      * Sets up class handlers.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setupHandlers() {
 
@@ -66,7 +66,7 @@ class FieldToggle extends Field {
     /**
      * Return if field is checked or not.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @returns {*}
      */
@@ -78,7 +78,7 @@ class FieldToggle extends Field {
     /**
      * Fires on toggle change.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     handleClick() {
 
@@ -100,14 +100,14 @@ class FieldToggle extends Field {
 /**
  * Finds and initializes all Toggle fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldToggleInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -131,7 +131,7 @@ class FieldToggleInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

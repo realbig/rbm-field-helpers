@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Media Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldMedia extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldMedia extends Field {
     /**
      * Initializes the Media field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -51,7 +51,7 @@ class FieldMedia extends Field {
     /**
      * Sets up the class handlers.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setupHandlers() {
 
@@ -76,7 +76,7 @@ class FieldMedia extends Field {
     /**
      * Opens the media frame to add media.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     addMedia() {
 
@@ -86,7 +86,7 @@ class FieldMedia extends Field {
     /**
      * Removes the currently selected media.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     removeMedia() {
 
@@ -112,7 +112,7 @@ class FieldMedia extends Field {
     /**
      * Fires on selecting a piece of media.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     selectMedia() {
 
@@ -148,14 +148,14 @@ class FieldMedia extends Field {
 /**
  * Finds and initializes all Media fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldMediaInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -185,7 +185,7 @@ class FieldMediaInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Checkbox Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldCheckbox extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldCheckbox extends Field {
     /**
      * Initializes the select.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -38,7 +38,7 @@ class FieldCheckbox extends Field {
     /**
      * Sets up class handlers.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setupHandlers() {
 
@@ -52,7 +52,7 @@ class FieldCheckbox extends Field {
     /**
      * Fires on checkbox change.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $input Checkbox input.
      */
@@ -71,7 +71,7 @@ class FieldCheckbox extends Field {
     /**
      * Sets the checkbox row as active.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $row
      */
@@ -83,7 +83,7 @@ class FieldCheckbox extends Field {
     /**
      * Sets the checkbox row as inactive.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $row
      */
@@ -97,7 +97,7 @@ class FieldCheckbox extends Field {
      *
      * For checkboxes, there will be multiple IDs in each, and need to be set accordingly.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterSetID() {
 
@@ -120,7 +120,7 @@ class FieldCheckbox extends Field {
     /**
      * Sets the field to default.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setDefault() {
 
@@ -134,14 +134,14 @@ class FieldCheckbox extends Field {
 /**
  * Finds and initializes all Checkbox fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldCheckboxInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -165,7 +165,7 @@ class FieldCheckboxInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

@@ -2,7 +2,7 @@
 /**
  * Handles all automatic field saving.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 
 defined( 'ABSPATH' ) || die();
@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || die();
  *
  * Handles all automatic field saving.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class RBM_FH_FieldsSave {
 
 	/**
 	 * Prefix for saving to the database.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * All used fields on the current page divided by sections.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @var array
 	 */
@@ -37,7 +37,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * RBM_FH_FieldsSave constructor.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $prefix Prefix for saving to the database.
 	 */
@@ -56,7 +56,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * Initializes a field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $name Field name.
@@ -75,7 +75,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * Initializes all used fields on this page for automatic saving.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 *
 	 * @param string $group Field group.
 	 */
@@ -123,7 +123,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * Hook for saving the post meta fields.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param int $post_ID Current post ID being saved.
@@ -146,7 +146,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * Hook for saving the option fields.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 */
 	function save_option_fields_hook() {
@@ -167,7 +167,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * Saves the meta fields.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $group
@@ -243,7 +243,7 @@ class RBM_FH_FieldsSave {
 	/**
 	 * Saves all option fields.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.0
 	 * @access private
 	 *
 	 * @param string $group Field group.
@@ -265,7 +265,7 @@ class RBM_FH_FieldsSave {
 		 *
 		 * Passing a value to this will cancel saving entirely.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		$fields = apply_filters(
 			"{$this->prefix}_fieldhelpers_{$group}_option_fields_save",
@@ -281,7 +281,7 @@ class RBM_FH_FieldsSave {
 			/**
 			 * Filters the value to save to the field.
 			 *
-			 * @since {{VERSION}}
+			 * @since 1.4.0
 			 */
 			$value = apply_filters( "{$this->prefix}_fieldhelpers_{$group}_save_option_field_$field", $value );
 
@@ -309,7 +309,7 @@ class RBM_FH_FieldsSave {
 		/**
 		 * Fires after fields have been saved.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 */
 		do_action( "{$this->prefix}_fieldhelpers_{$group}_option_fields_saved", $fields );
 	}

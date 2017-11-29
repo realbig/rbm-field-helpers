@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Select Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldSelect extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldSelect extends Field {
     /**
      * Initializes the select.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -44,7 +44,7 @@ class FieldSelect extends Field {
     /**
      * Sets up languages.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setupL10n() {
 
@@ -63,7 +63,7 @@ class FieldSelect extends Field {
     /**
      * Resets the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     fieldCleanup() {
 
@@ -87,7 +87,7 @@ class FieldSelect extends Field {
     /**
      * Sets the field to default. Override in child class if need different method.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setDefault() {
 
@@ -99,14 +99,14 @@ class FieldSelect extends Field {
 /**
  * Finds and initializes all Select fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldSelectInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -130,7 +130,7 @@ class FieldSelectInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

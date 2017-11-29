@@ -1,14 +1,14 @@
 /**
  * Main field class.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      * @param {string} type
@@ -34,7 +34,7 @@ class Field {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
     }
@@ -42,7 +42,7 @@ class Field {
     /**
      * Gets field options.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     getOptions() {
 
@@ -91,7 +91,7 @@ class Field {
     /**
      * If field is in a Repeater, it will need support.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     getRepeater() {
 
@@ -105,7 +105,7 @@ class Field {
     /**
      * Runs some functions if inside a Repeater.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterSupport() {
 
@@ -139,7 +139,7 @@ class Field {
     /**
      * Fires on Repeater init.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterOnInit() {
     }
@@ -147,7 +147,7 @@ class Field {
     /**
      * Fires before Repeater add item.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterBeforeAddItem() {
     }
@@ -155,7 +155,7 @@ class Field {
     /**
      * Fires on Repeater add item.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterOnAddItem() {
     }
@@ -163,7 +163,7 @@ class Field {
     /**
      * Fires before Repeater delete item (localized to self).
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterBeforeDeleteSelf() {
     }
@@ -171,7 +171,7 @@ class Field {
     /**
      * Fires before Repeater delete item.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterBeforeDeleteItem() {
     }
@@ -179,7 +179,7 @@ class Field {
     /**
      * Fires on Repeater delete item.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterOnDeleteItem() {
     }
@@ -187,7 +187,7 @@ class Field {
     /**
      * Fires on Repeat sort item.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterOnSort() {
     }
@@ -195,7 +195,7 @@ class Field {
     /**
      * Sets the ID to be unique, based off the repeater item index.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterSetID() {
 
@@ -208,7 +208,7 @@ class Field {
     /**
      * Cleans up after a repeater add/init.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     fieldCleanup() {
     }
@@ -216,7 +216,7 @@ class Field {
     /**
      * Sets the field to default. Override in child class if need different method.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setDefault() {
 

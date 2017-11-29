@@ -4,14 +4,14 @@ import FieldsInitialize from '../fields-init';
 /**
  * Repeater Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldRepeater extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -23,7 +23,7 @@ class FieldRepeater extends Field {
     /**
      * Initializes the Repeater.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -78,7 +78,7 @@ class FieldRepeater extends Field {
     /**
      * Initializes the Collapsable feature, if enabled.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initCollapsable() {
 
@@ -93,7 +93,7 @@ class FieldRepeater extends Field {
     /**
      * Initializes the Sortable feature, if enabled.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initSortable() {
 
@@ -117,7 +117,7 @@ class FieldRepeater extends Field {
     /**
      * Toggles a repeater item collapse.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $item
      */
@@ -143,7 +143,7 @@ class FieldRepeater extends Field {
     /**
      * Shows a new repeater item.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $item Repeater item row.
      */
@@ -173,7 +173,7 @@ class FieldRepeater extends Field {
     /**
      * Removes a repeater item.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $item Repeater item row.
      * @param {function} deleteItem Callback for deleting the item.
@@ -196,14 +196,14 @@ class FieldRepeater extends Field {
 /**
  * Finds and initializes all Repeater fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldRepeaterInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -227,7 +227,7 @@ class FieldRepeaterInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

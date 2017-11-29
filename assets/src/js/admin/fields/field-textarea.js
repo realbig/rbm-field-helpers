@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * TextArea Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldTextArea extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldTextArea extends Field {
     /**
      * Initializes the WYSIWYG.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -45,7 +45,7 @@ class FieldTextArea extends Field {
     /**
      * Resets the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     fieldCleanup() {
 
@@ -70,7 +70,7 @@ class FieldTextArea extends Field {
      *
      * Removes from wp.editor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterBeforeDeleteSelf() {
 
@@ -82,7 +82,7 @@ class FieldTextArea extends Field {
      *
      * Adds slight delay to field re-initialization.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterOnDeleteItem() {
 
@@ -99,7 +99,7 @@ class FieldTextArea extends Field {
      *
      * Adds slight delay to field re-initialization.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     repeaterOnSort() {
 
@@ -114,7 +114,7 @@ class FieldTextArea extends Field {
     /**
      * Tries to get default editor settings.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @return {{}}
      */
@@ -134,14 +134,14 @@ class FieldTextArea extends Field {
 /**
  * Finds and initializes all TextArea fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldTextAreaInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -165,7 +165,7 @@ class FieldTextAreaInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || die();
 
 if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
-	define( 'RBM_FIELD_HELPERS_VER', '1.3.9' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.4.0' );
 	define( 'RBM_FIELD_HELPERS_URI', plugins_url( '', __FILE__ ) );
 	define( 'RBM_FIELD_HELPERS_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -18,7 +18,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		/**
 		 * Instance properties.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 *
 		 * @var array
 		 */
@@ -27,7 +27,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		/**
 		 * Fields instance.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 *
 		 * @var RBM_FH_Fields
 		 */
@@ -36,7 +36,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		/**
 		 * Field Templates instance.
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.0
 		 *
 		 * @var RBM_FH_FieldTemplates
 		 */
@@ -230,7 +230,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			/**
 			 * Load or don't load the Date/Time Picker scripts.
 			 *
-			 * @since {{VERSION}}
+			 * @since 1.4.0
 			 */
 			$load_datetimepicker = apply_filters( 'rbm_fieldhelpers_load_datetimepicker', false );
 
@@ -243,7 +243,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			/**
 			 * Load or don't load the Select2 scripts.
 			 *
-			 * @since {{VERSION}}
+			 * @since 1.4.0
 			 */
 			$load_select2 = apply_filters( 'rbm_fieldhelpers_load_select2', false );
 

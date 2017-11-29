@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Table Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldTable extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldTable extends Field {
     /**
      * Initializes the Table field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -60,7 +60,7 @@ class FieldTable extends Field {
     /**
      * Sets up the class handlers.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setupHandlers() {
 
@@ -176,7 +176,7 @@ class FieldTable extends Field {
     /**
      * Adds a row to the table.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     addRow() {
 
@@ -208,7 +208,7 @@ class FieldTable extends Field {
     /**
      * Adds a column to the table.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     addColumn() {
 
@@ -233,7 +233,7 @@ class FieldTable extends Field {
     /**
      * Deletes a row from the table.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {int} index Index of row to delete.
      */
@@ -259,7 +259,7 @@ class FieldTable extends Field {
     /**
      * Deletes a column from the table.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {int} index Index of column to delete.
      */
@@ -285,7 +285,7 @@ class FieldTable extends Field {
     /**
      * Builds the table based on the table data.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     buildTable() {
 
@@ -357,14 +357,14 @@ class FieldTable extends Field {
 /**
  * Finds and initializes all Table fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldTableInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -388,7 +388,7 @@ class FieldTableInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

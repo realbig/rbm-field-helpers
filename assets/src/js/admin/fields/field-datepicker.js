@@ -5,14 +5,14 @@ import Field from './field.js';
  *
  * Also includes Date/Time Picker and Time Picker.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldDatePicker extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -24,7 +24,7 @@ class FieldDatePicker extends Field {
     /**
      * Initializes the Date Picker.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -51,7 +51,7 @@ class FieldDatePicker extends Field {
     /**
      * Cleans up after a repeater add/init.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     fieldCleanup() {
 
@@ -64,14 +64,14 @@ class FieldDatePicker extends Field {
 /**
  * Finds and initializes all Date Picker fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldDatePickerInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -102,7 +102,7 @@ class FieldDatePickerInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

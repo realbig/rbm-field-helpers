@@ -3,14 +3,14 @@ import Field from './field.js';
 /**
  * Number Field functionality.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldNumber extends Field {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     constructor($field) {
 
@@ -22,7 +22,7 @@ class FieldNumber extends Field {
     /**
      * Initializes the Number field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     initField() {
 
@@ -65,7 +65,7 @@ class FieldNumber extends Field {
     /**
      * Helps determine shift key press status.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     shiftKeyUtility() {
 
@@ -91,7 +91,7 @@ class FieldNumber extends Field {
     /**
      * Sets up the class handlers.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     setupHandlers() {
 
@@ -114,7 +114,7 @@ class FieldNumber extends Field {
     /**
      * Increases the input number.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     increaseNumber() {
 
@@ -128,7 +128,7 @@ class FieldNumber extends Field {
     /**
      * Decreases the input number.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     decreaseNumber() {
 
@@ -142,7 +142,7 @@ class FieldNumber extends Field {
     /**
      * Fires on the input change. Typically from user typing or other scripts modifying.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     inputExternalChange() {
 
@@ -181,7 +181,7 @@ class FieldNumber extends Field {
     /**
      * Runs input value through constraints to ensure it is accurate.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      */
     validateInput() {
 
@@ -226,7 +226,7 @@ class FieldNumber extends Field {
     /**
      * Disables/Enables the increase button.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {bool} enable True to set to enabled, false to set to disabled
      */
@@ -238,7 +238,7 @@ class FieldNumber extends Field {
     /**
      * Disables/Enables the decrease button.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {bool} enable True to set to enabled, false to set to disabled
      */
@@ -251,14 +251,14 @@ class FieldNumber extends Field {
 /**
  * Finds and initializes all Number fields.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  */
 class FieldNumberInitialize {
 
     /**
      * Class constructor.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $root Root element to initialize fields inside.
      */
@@ -282,7 +282,7 @@ class FieldNumberInitialize {
     /**
      * Initializes the field.
      *
-     * @since {{VERSION}}
+     * @since 1.4.0
      *
      * @param {jQuery} $field
      */

@@ -2,7 +2,7 @@
 /**
  * Field Label.
  *
- * @since {{VERSION}}
+ * @since 1.4.0
  *
  * @var string $type
  * @var array $args
