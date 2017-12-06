@@ -108,7 +108,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 	/**
 	 * Supports old option formatting.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.2
 	 * @access private
 	 *
 	 * @param array $options

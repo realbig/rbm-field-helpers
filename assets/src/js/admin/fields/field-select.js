@@ -63,7 +63,7 @@ class FieldSelect extends Field {
     /**
      * Sets up Select2 arguments, allowing for callback arguments.
      *
-     * @since {{VERSION}}
+     * @since 1.4.2
      */
     setupSelect2Options() {
 

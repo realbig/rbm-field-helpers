@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || die();
 
 if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
-	define( 'RBM_FIELD_HELPERS_VER', '1.4.1' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.4.2' );
 	define( 'RBM_FIELD_HELPERS_URI', plugins_url( '', __FILE__ ) );
 	define( 'RBM_FIELD_HELPERS_DIR', plugin_dir_path( __FILE__ ) );
 
