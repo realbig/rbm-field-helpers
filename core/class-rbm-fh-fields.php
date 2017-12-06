@@ -379,8 +379,10 @@ class RBM_FH_Fields {
 		$this->save->field_init( $name, 'select', $field->args );
 
 		$this->setup_data( $field->name, 'select', $field->args, array(
-			'select2Disabled' => $field->args['select2_disable'],
-			'select2Options'  => $field->args['select2_options'],
+			'select2Disabled'         => $field->args['select2_disable'],
+			'select2Options'          => $field->args['select2_options'],
+			'optGroups'               => $field->args['opt_groups'],
+			'optGroupSelectionPrefix' => $field->args['opt_group_selection_prefix'],
 		) );
 	}
 

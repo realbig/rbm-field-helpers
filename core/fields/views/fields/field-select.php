@@ -39,16 +39,18 @@ if ( $args['multiple'] && ! $args['repeater'] ) {
                     <optgroup label="<?php echo esc_attr( $opt_group_label ); ?>">
 
 						<?php
-						foreach ( $options as $option_value => $option_label ) :
+						foreach ( $options as $option ) :
 
 							if ( $args['multiple'] ) {
-								$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
+								$selected = in_array( $option['value'], (array) $value ) ? 'selected' : '';
 							} else {
-								$selected = selected( $option_value, $value, false ) ? 'selected' : '';
+								$selected = selected( $option['value'], $value, false ) ? 'selected' : '';
 							}
 							?>
-                            <option value="<?php echo esc_attr( $option_value ); ?>" <?php echo $selected; ?>>
-								<?php echo esc_attr( $option_label ); ?>
+                            <option value="<?php echo esc_attr( $option['value'] ); ?>"
+								<?php echo $selected; ?>
+								<?php echo $option['disabled'] === true ? 'disabled' : '' ?>>
+								<?php echo esc_attr( $option['text'] ); ?>
                             </option>
 						<?php endforeach; ?>
 
@@ -57,16 +59,18 @@ if ( $args['multiple'] && ! $args['repeater'] ) {
 
 			<?php else : ?>
 
-				<?php foreach ( $args['options'] as $option_value => $option_label ) :
+				<?php foreach ( $args['options'] as $option ) :
 
 					if ( $args['multiple'] ) {
-						$selected = in_array( $option_value, (array) $value ) ? 'selected' : '';
+						$selected = in_array( $option['value'], (array) $value ) ? 'selected' : '';
 					} else {
-						$selected = selected( $option_value, $value, false ) ? 'selected' : '';
+						$selected = selected( $option['value'], $value, false ) ? 'selected' : '';
 					}
 					?>
-                    <option value="<?php echo esc_attr( $option_value ); ?>" <?php echo $selected; ?>>
-						<?php echo esc_attr( $option_label ); ?>
+                    <option value="<?php echo esc_attr( $option['value'] ); ?>"
+						<?php echo $selected; ?>
+						<?php echo $option['disabled'] === true ? 'disabled' : '' ?>>
+						<?php echo esc_attr( $option['text'] ); ?>
                     </option>
 
 				<?php endforeach; ?>

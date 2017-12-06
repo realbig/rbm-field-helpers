@@ -19,6 +19,9 @@ const $ = plugins();
 // Check for --production flag
 const PRODUCTION = !!(yargs.argv.production);
 
+// Check for --noserver flag
+const SERVER = !(yargs.argv.noserver);
+
 // Load settings from settings.yml
 const {COMPATIBILITY, PATHS} = loadConfig();
 
@@ -39,7 +42,9 @@ gulp.task('build',
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
-    gulp.series('build', server, watch));
+    SERVER ?
+        gulp.series('build', server, watch) :
+        gulp.series('build', watch));
 
 // Delete the "dist" folder
 // This happens every time a build starts

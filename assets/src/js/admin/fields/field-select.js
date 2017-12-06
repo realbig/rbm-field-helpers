@@ -35,7 +35,7 @@ class FieldSelect extends Field {
                 return;
             }
 
-            this.setupL10n();
+            this.setupSelect2Options();
 
             this.$field.select2(this.options.select2Options);
         }
@@ -57,6 +57,54 @@ class FieldSelect extends Field {
                 // All languages must be functions. Turn all into functions.
                 this.options.select2Options.language[id] = (args) => text;
             });
+        }
+    }
+
+    /**
+     * Sets up Select2 arguments, allowing for callback arguments.
+     *
+     * @since {{VERSION}}
+     */
+    setupSelect2Options() {
+
+        this.setupL10n();
+
+        // List of available Select2 options that are callbacks
+        let callbackOptions = [
+            'escapeMarkup',
+            'initSelection',
+            'matcher',
+            'query',
+            'sorter',
+            'templateResult',
+            'templateSelection',
+            'tokenizer'
+        ];
+
+        Object.keys(this.options.select2Options).map((name) => {
+
+            if ( callbackOptions.indexOf(name) !== -1 ) {
+
+                let callbackName = this.options.select2Options[name];
+
+                if ( typeof window[callbackName] === 'function' ) {
+
+                    this.options.select2Options[name] = window[callbackName];
+                }
+            }
+        });
+
+        // Automatically prefix selected items with optgroup label, if using optgroups
+        if ( this.options.optGroups &&
+            this.options.optGroupSelectionPrefix &&
+            typeof this.options.select2Options.templateSelection === 'undefined' ) {
+
+            this.options.select2Options.templateSelection = (item) => {
+
+                let optGroup = jQuery(item.element).closest('optgroup').attr('label').trim();
+
+                return optGroup + ': ' + item.text;
+            }
         }
     }
 

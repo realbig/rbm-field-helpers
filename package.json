@@ -13,6 +13,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
+    "start_noserver": "gulp --noserver",
     "build": "gulp build --production"
   },
   "dependencies": {
