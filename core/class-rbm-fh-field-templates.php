@@ -64,8 +64,15 @@ class RBM_FH_FieldTemplates {
 	 * @param mixed $value Field value.
 	 */
 	function do_field( $type, $args, $name, $value ) {
-
-		include __DIR__ . '/fields/views/field.php';
+		
+		if ( isset( $this->instance['file'] ) && 
+			is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field.php' ) ) {
+			include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field.php';
+		}
+		else {
+			include __DIR__ . '/fields/views/field.php';
+		}
+		
 	}
 
 	/**
@@ -80,8 +87,15 @@ class RBM_FH_FieldTemplates {
 	 * @param mixed $value Field value.
 	 */
 	function template_field( $type, $args, $name, $value ) {
-
-		include __DIR__ . "/fields/views/fields/field-{$type}.php";
+		
+		if ( isset( $this->instance['file'] ) && 
+			is_file( dirname( $this->instance['file'] ) . "/rbm-field-helpers/field-{$type}.php" ) ) {
+			include dirname( $this->instance['file'] ) . "/rbm-field-helpers/field-{$type}.php";
+		}
+		else {
+			include __DIR__ . "/fields/views/fields/field-{$type}.php";
+		}
+		
 	}
 
 	/**
@@ -96,8 +110,15 @@ class RBM_FH_FieldTemplates {
 	 * @param mixed $value Field value.
 	 */
 	function template_label( $type, $args, $name, $value ) {
-
-		include __DIR__ . '/fields/views/field-label.php';
+		
+		if ( isset( $this->instance['file'] ) && 
+			is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-label.php' ) ) {
+			include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-label.php';
+		}
+		else {
+			include __DIR__ . '/fields/views/field-label.php';
+		}
+		
 	}
 
 	/**
@@ -152,12 +173,25 @@ class RBM_FH_FieldTemplates {
 	function template_description( $type, $args, $name, $value ) {
 
 		if ( $args['description_tip'] === true ) {
-
-			include __DIR__ . '/fields/views/field-description-tip.php';
+			
+			if ( isset( $this->instance['file'] ) && 
+				is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description-tip.php' ) ) {
+				include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description-tip.php';
+			}
+			else {
+				include __DIR__ . '/fields/views/field-description-tip.php';
+			}
 
 		} else {
-
-			include __DIR__ . '/fields/views/field-description.php';
+			
+			if ( isset( $this->instance['file'] ) && 
+				is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description.php' ) ) {
+				include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description.php';
+			}
+			else {
+				include __DIR__ . '/fields/views/field-description.php';
+			}
+			
 		}
 	}
 }
