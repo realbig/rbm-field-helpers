@@ -172,27 +172,51 @@ class RBM_FH_FieldTemplates {
 	 * @access private
 	 * 
 	 * @param  string $template_file Relative File Path to the Template File
+	 * @param string $type Field type.
+	 * @param array $args Field arguments.
+	 * @param string $name Field name.
+	 * @param mixed $value Field value.
 	 * @return string Absolute File Path to the Template File
 	 */
-	function maybe_override_template( $template_file ) {
+	function maybe_override_template( $template_file, $type, $args, $name, $value ) {
 		
 		$prefix = $this->instance['ID'];
 		
 		/**
 		 * Allows changing the Directory that Field Template Overrides in your Theme/Plugin should be loaded from
 		 * 
-		 * @param string Relative Directory Path to the inclusion of your 
+		 * @param string Relative Directory Path to the inclusion of your Field Template Overrides
+		 * @param string Relative File Path to the Template File
+		 * @param string Field type.
+	 	 * @param array Field arguments.
+	 	 * @param string Field name.
+	 	 * @param mixed Field value.
 		 * @since {{VERSION}}
 		 */
-		$override_directory = trailingslashit( apply_filters( "{$prefix}_fieldhelpers_field_template_override_directory", '/rbm-field-helpers' ) );
+		$override_directory = trailingslashit( apply_filters( "{$prefix}_fieldhelpers_field_template_override_directory", '/rbm-field-helpers', $template_file, $type, $args, $name, $value ) );
+		
+		$result = '';
 		
 		if ( isset( $this->instance['file'] ) && 
 			is_file( dirname( $this->instance['file'] ) . $override_directory . $template_file ) ) {
-			return dirname( $this->instance['file'] ) . $override_directory . $template_file;
+			$result = dirname( $this->instance['file'] ) . $override_directory . $template_file;
 		}
 		else {
-			return __DIR__ . $template_file;
+			$result = __DIR__ . $template_file;
 		}
+		
+		/**
+		 * Allows changing the loaded Template File per-Field. This occurs after the override has been applied.
+		 * 
+		 * @param string Relative Directory Path to the inclusion of your Field Template Overrides
+		 * @param string Relative File Path to the Template File
+		 * @param string Field type.
+	 	 * @param array Field arguments.
+	 	 * @param string Field name.
+	 	 * @param mixed Field value.
+	 	 * @since {{VERSION}}
+		 */
+		return apply_filters( "{$prefix}_fieldhelpers_after_override_field_template_path", $result, $template_file, $type, $args, $name, $value );
 		
 	}
 	
