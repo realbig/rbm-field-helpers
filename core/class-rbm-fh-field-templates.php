@@ -65,13 +65,7 @@ class RBM_FH_FieldTemplates {
 	 */
 	function do_field( $type, $args, $name, $value ) {
 		
-		if ( isset( $this->instance['file'] ) && 
-			is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field.php' ) ) {
-			include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field.php';
-		}
-		else {
-			include __DIR__ . '/fields/views/field.php';
-		}
+		include $this->maybe_override_template( '/fields/views/field.php' );
 		
 	}
 
@@ -88,13 +82,7 @@ class RBM_FH_FieldTemplates {
 	 */
 	function template_field( $type, $args, $name, $value ) {
 		
-		if ( isset( $this->instance['file'] ) && 
-			is_file( dirname( $this->instance['file'] ) . "/rbm-field-helpers/field-{$type}.php" ) ) {
-			include dirname( $this->instance['file'] ) . "/rbm-field-helpers/field-{$type}.php";
-		}
-		else {
-			include __DIR__ . "/fields/views/fields/field-{$type}.php";
-		}
+		include $this->maybe_override_template( "/fields/views/fields/field-{$type}.php" );
 		
 	}
 
@@ -111,13 +99,7 @@ class RBM_FH_FieldTemplates {
 	 */
 	function template_label( $type, $args, $name, $value ) {
 		
-		if ( isset( $this->instance['file'] ) && 
-			is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-label.php' ) ) {
-			include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-label.php';
-		}
-		else {
-			include __DIR__ . '/fields/views/field-label.php';
-		}
+		include $this->maybe_override_template( '/fields/views/field-label.php' );
 		
 	}
 
@@ -174,24 +156,44 @@ class RBM_FH_FieldTemplates {
 
 		if ( $args['description_tip'] === true ) {
 			
-			if ( isset( $this->instance['file'] ) && 
-				is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description-tip.php' ) ) {
-				include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description-tip.php';
-			}
-			else {
-				include __DIR__ . '/fields/views/field-description-tip.php';
-			}
+			include $this->maybe_override_template( '/fields/views/field-description-tip.php' );
 
 		} else {
 			
-			if ( isset( $this->instance['file'] ) && 
-				is_file( dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description.php' ) ) {
-				include dirname( $this->instance['file'] ) . '/rbm-field-helpers/field-description.php';
-			}
-			else {
-				include __DIR__ . '/fields/views/field-description.php';
-			}
+			include $this->maybe_override_template( '/fields/views/field-description.php' );
 			
 		}
 	}
+	
+	/**
+	 * Load an alternate Field Template if one exists in your Theme/Plugin
+	 * 
+	 * @since {{VERSION}}
+	 * @access private
+	 * 
+	 * @param  string $template_file Relative File Path to the Template File
+	 * @return string Absolute File Path to the Template File
+	 */
+	function maybe_override_template( $template_file ) {
+		
+		$prefix = $this->instance['ID'];
+		
+		/**
+		 * Allows changing the Directory that Field Template Overrides in your Theme/Plugin should be loaded from
+		 * 
+		 * @param string Relative Directory Path to the inclusion of your 
+		 * @since {{VERSION}}
+		 */
+		$override_directory = trailingslashit( apply_filters( "{$prefix}_fieldhelpers_field_template_override_directory", '/rbm-field-helpers' ) );
+		
+		if ( isset( $this->instance['file'] ) && 
+			is_file( dirname( $this->instance['file'] ) . $override_directory . $template_file ) ) {
+			return dirname( $this->instance['file'] ) . $override_directory . $template_file;
+		}
+		else {
+			return __DIR__ . $template_file;
+		}
+		
+	}
+	
 }
