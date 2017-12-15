@@ -37,7 +37,7 @@ function rbm_get_field( $field, $post_ID = false, $args = array() ) {
 
 	global $rbm_fh_deprecated_support;
 
-	$rbm_fh_deprecated_support->fields->get_meta_field( $field, $post_ID, $args );
+	return $rbm_fh_deprecated_support->fields->get_meta_field( $field, $post_ID, $args );
 }
 
 /**
