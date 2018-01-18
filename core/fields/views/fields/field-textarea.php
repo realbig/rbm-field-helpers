@@ -11,9 +11,6 @@
 
 defined( 'ABSPATH' ) || die();
 
-// This will only run once, so no worries
-if ( $args['wysiwyg'] ) wp_enqueue_editor();
-
 ?>
 
 <textarea name="<?php echo esc_attr( $name ); ?>"
