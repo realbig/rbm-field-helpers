@@ -91,6 +91,8 @@ abstract class RBM_FH_Field {
 			'repeater'                  => false,
 			'name_base'                 => false,
 			'description_tip'           => true,
+			'multi_field'               => false,
+			'option_field'              => false,
 			'wrapper_class'             => '', // Legacy
 		) );
 
