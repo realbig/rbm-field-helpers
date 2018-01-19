@@ -103,7 +103,7 @@ abstract class RBM_FH_Field {
 			);
 		}
 
-		$this->name = $args['no_init'] === true ? $name : "{$this->args['prefix']}_{$name}";
+		$this->name = $this->args['no_init'] === true ? $name : "{$this->args['prefix']}_{$name}";
 
 		if ( $this->args['name_base'] !== false && $args['no_init'] !== true ) {
 
