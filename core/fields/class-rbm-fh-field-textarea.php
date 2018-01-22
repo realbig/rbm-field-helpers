@@ -60,6 +60,12 @@ class RBM_FH_Field_TextArea extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $args = array() ) {
+		
+		// This will only run once, so no worries
+		if ( $args['wysiwyg'] ) {
+			
+			wp_enqueue_editor();
+		}
 
 		do_action( "{$args['prefix']}_fieldhelpers_do_field", 'textarea', $args, $name, $value );
 	}

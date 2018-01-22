@@ -88,6 +88,33 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 			isset( $args['opt_groups'] ) && $args['opt_groups'] === true
 		);
 
+		// Set option defaults
+		if ( isset( $args['opt_groups'] ) && $args['opt_groups'] === true ) {
+
+			foreach ( $args['options'] as $opt_group => $options ) {
+
+				foreach ( $options as $i => $option ) {
+
+					$args['options'][ $opt_group ][ $i ] = wp_parse_args( $option, array(
+						'text'     => '',
+						'value'    => '',
+						'disabled' => false,
+					) );
+				}
+			}
+
+		} else {
+
+			foreach ( $args['options'] as $i => $option ) {
+
+				$args['options'][ $i ] = wp_parse_args( $option, array(
+					'text'     => '',
+					'value'    => '',
+					'disabled' => false,
+				) );
+			}
+		}
+
 		parent::__construct( $name, $args );
 	}
 

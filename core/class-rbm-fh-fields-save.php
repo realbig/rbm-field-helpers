@@ -103,7 +103,7 @@ class RBM_FH_FieldsSave {
 
 			$initialized_fields[] = $field['name'];
 
-			$option = $field['option_field'] === true ? '_option' : '';
+			$option = $field['args']['option_field'] === true ? '_option' : '';
 			?>
             <input type="hidden"
                    name="<?php echo "{$this->prefix}_fieldhelpers{$option}_fields[{$group}][{$i}]"; ?>"
@@ -251,7 +251,8 @@ class RBM_FH_FieldsSave {
 	private function save_option_fields( $group ) {
 
 		// Make sure we should be here!
-		if ( ! wp_verify_nonce(
+		if ( ! isset( $_POST["{$this->prefix}_fieldhelpers_{$group}_option_fields"] ) ||
+             ! wp_verify_nonce(
 				$_POST["{$this->prefix}_fieldhelpers_{$group}_nonce"],
 				"{$this->prefix}_fieldhelpers_{$group}_save_fields"
 			) ||

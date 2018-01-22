@@ -91,6 +91,8 @@ abstract class RBM_FH_Field {
 			'repeater'                  => false,
 			'name_base'                 => false,
 			'description_tip'           => true,
+			'multi_field'               => false,
+			'option_field'              => false,
 			'wrapper_class'             => '', // Legacy
 		) );
 
@@ -103,7 +105,7 @@ abstract class RBM_FH_Field {
 			);
 		}
 
-		$this->name = $args['no_init'] === true ? $name : "{$this->args['prefix']}_{$name}";
+		$this->name = $this->args['no_init'] === true ? $name : "{$this->args['prefix']}_{$name}";
 
 		if ( $this->args['name_base'] !== false && $args['no_init'] !== true ) {
 

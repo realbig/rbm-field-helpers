@@ -10,6 +10,7 @@
  */
 
 defined( 'ABSPATH' ) || die();
+
 ?>
 
 <textarea name="<?php echo esc_attr( $name ); ?>"
