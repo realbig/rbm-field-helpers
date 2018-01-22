@@ -167,7 +167,7 @@ class RBM_FH_FieldTemplates {
 	/**
 	 * Load an alternate Field Template if one exists in your Theme/Plugin
 	 *
-	 * @since {{VERSION}}
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param  string $template_file Relative File Path to the Template File
@@ -192,7 +192,7 @@ class RBM_FH_FieldTemplates {
 		 * @param string $name Field name.
 		 * @param mixed $value Field value.
 		 *
-		 * @since {{VERSION}}
+		 * @since 2.0.0
 		 */
 		$override_directory = trailingslashit( apply_filters(
 			"{$prefix}_fieldhelpers_field_template_override_directory",
@@ -223,7 +223,7 @@ class RBM_FH_FieldTemplates {
 		 * @param string $name Field name.
 		 * @param mixed $value Field value.
 		 *
-		 * @since {{VERSION}}
+		 * @since 2.0.0
 		 */
 		return apply_filters(
 			"{$prefix}_fieldhelpers_after_override_field_template_path",
