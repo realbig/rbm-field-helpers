@@ -83,6 +83,11 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 			);
 		}
 
+		if ( ! isset( $args['options'])) {
+
+			$args['options'] = array();
+		}
+
 		$args['options'] = $this->legacy_options_support(
 			$args['options'],
 			isset( $args['opt_groups'] ) && $args['opt_groups'] === true
