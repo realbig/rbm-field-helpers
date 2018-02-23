@@ -436,7 +436,7 @@ class RBM_FH_Fields {
 			'type'        => $field->args['type'],
 			'previewSize' => $field->args['preview_size'],
 			'l10n'        => array(
-				'window_title' => $field->args['window_title'],
+				'window_title' => $field->args['l10n']['window_title'],
 			),
 		) );
 	}
@@ -591,10 +591,10 @@ class RBM_FH_Fields {
 			'sortable'               => $field->args['sortable'],
 			'isFirstItemUndeletable' => $field->args['first_item_undeletable'],
 			'l10n'                   => array(
-				'collapsable_title'   => $field->args['collapsable_title'],
-				'confirm_delete_text' => $field->args['confirm_delete_text'],
-				'delete_item_text'    => $field->args['delete_item_text'],
-				'add_item_text'       => $field->args['add_item_text'],
+				'collapsable_title'   => $field->args['l10n']['collapsable_title'],
+				'confirm_delete_text' => $field->args['l10n']['confirm_delete'],
+				'delete_item_text'    => $field->args['l10n']['delete_item'],
+				'add_item_text'       => $field->args['l10n']['add_item'],
 			),
 		) );
 	}
