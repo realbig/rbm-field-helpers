@@ -45,7 +45,7 @@ class FieldDateTimePicker extends Field {
 
         this.options.datetimepickerOptions.altField = this.$hiddenField;
 
-        this.$field.datetimepicker(this.options);
+        this.$field.datetimepicker(this.options.datetimepickerOptions);
     }
 
     /**
