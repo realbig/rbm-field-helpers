@@ -246,19 +246,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_enqueue_script( 'rbm-fh-jquery-repeater' );
 
 			/**
-			 * Load or don't load the Date/Time Picker scripts.
-			 *
-			 * @since 1.4.0
-			 */
-			$load_datetimepicker = apply_filters( 'rbm_fieldhelpers_load_datetimepicker', false );
-
-			if ( $load_datetimepicker ) {
-
-				wp_enqueue_script( 'rbm-fh-jquery-ui-datetimepicker' );
-				wp_enqueue_style( 'rbm-fh-jquery-ui-datetimepicker' );
-			}
-
-			/**
 			 * Load or don't load the Select2 scripts.
 			 *
 			 * @since 1.4.0

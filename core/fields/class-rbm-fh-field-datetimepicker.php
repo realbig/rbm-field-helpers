@@ -79,6 +79,9 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $args = array() ) {
+		
+		wp_enqueue_script( 'rbm-fh-jquery-ui-datetimepicker' );
+		wp_enqueue_style( 'rbm-fh-jquery-ui-datetimepicker' );
 
 		// Get preview format
 		$args['preview'] = date( $args['format'], strtotime( $value ? $value : $args['default'] ) );
