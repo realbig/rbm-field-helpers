@@ -104,7 +104,7 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	 * Converts a PHP Date/Time Format to jQuery UI Date/Time
 	 * Cleaned up variant of http://stackoverflow.com/a/16725290
 	 * 
-	 * @since {{VERSION}}
+	 * @since 1.4.5
 	 * 
 	 * @param string $php_format PHP Date Format
 	 * @return string jQuery UI Date Format
