@@ -24,6 +24,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 	 * @var array
 	 */
 	public $defaults = array(
+		'input_class'                => 'regular-text',
 		'options'                    => array(),
 		'opt_groups'                 => false,
 		'multiple'                   => false,
@@ -83,7 +84,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 			);
 		}
 
-		if ( ! isset( $args['options'])) {
+		if ( ! isset( $args['options'] ) ) {
 
 			$args['options'] = array();
 		}
