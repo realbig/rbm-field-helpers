@@ -19,7 +19,7 @@ class RBM_FH_Field_Text extends RBM_FH_Field {
 	/**
 	 * Field defaults.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.6
 	 *
 	 * @var array
 	 */
