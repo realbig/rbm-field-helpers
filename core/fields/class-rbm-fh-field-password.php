@@ -1,6 +1,6 @@
 <?php
 /**
- * Field: Text
+ * Field: Password
  *
  * @since {{VERSION}}
  *
