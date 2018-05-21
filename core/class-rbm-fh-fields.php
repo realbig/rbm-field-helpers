@@ -279,7 +279,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a password field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.7
 	 *
 	 * @param string $name
 	 * @param array $args

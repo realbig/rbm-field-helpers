@@ -2,7 +2,7 @@
 /**
  * Field: Password
  *
- * @since {{VERSION}}
+ * @since 1.4.7
  *
  * @package RBMFieldHelpers
  */
@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || die();
 /**
  * Class RBM_FH_Field_Password
  *
- * @since {{VERSION}}
+ * @since 1.4.7
  */
 class RBM_FH_Field_Password extends RBM_FH_Field_Text {
 
 	/**
 	 * Field defaults.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.7
 	 *
 	 * @var array
 	 */
@@ -30,7 +30,7 @@ class RBM_FH_Field_Password extends RBM_FH_Field_Text {
 	/**
 	 * RBM_FH_Field_Password constructor.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.7
 	 *
 	 * @var string $name
 	 * @var array $args
@@ -43,7 +43,7 @@ class RBM_FH_Field_Password extends RBM_FH_Field_Text {
 	/**
 	 * Outputs the field.
 	 *
-	 * @since {{VERSION}}
+	 * @since 1.4.7
 	 *
 	 * @param string $name Name of the field.
 	 * @param mixed $value Value of the field.
