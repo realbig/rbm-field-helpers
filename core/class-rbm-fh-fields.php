@@ -70,6 +70,7 @@ class RBM_FH_Fields {
 		require_once __DIR__ . '/fields/class-rbm-fh-field-select.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-table.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-text.php';
+		require_once __DIR__ . '/fields/class-rbm-fh-field-password.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-textarea.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-toggle.php';
 
@@ -273,6 +274,24 @@ class RBM_FH_Fields {
 		$field = new RBM_FH_Field_Text( $name, $args );
 
 		$this->save->field_init( $name, 'text', $field->args );
+	}
+	
+	/**
+	 * Outputs a password field.
+	 *
+	 * @since {{VERSION}}
+	 *
+	 * @param string $name
+	 * @param array $args
+	 */
+	public function do_field_password( $name, $args = array() ) {
+
+		$args           = $this->setup_translations( $args, 'password' );
+		$args['prefix'] = $this->instance['ID'];
+
+		$field = new RBM_FH_Field_Password( $name, $args );
+
+		$this->save->field_init( $name, 'password', $field->args );
 	}
 
 	/**
