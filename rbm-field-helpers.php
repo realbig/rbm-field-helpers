@@ -278,15 +278,30 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			global $wp_version;
 
 			// Localize data
-			$data = apply_filters( "rbm_field_helpers_admin_data", array(
+			$data = $this->get_localized_data();
+
+			wp_localize_script( 'rbm-fh-admin', 'RBM_FieldHelpers', $data );
+		}
+		
+		/**
+		 * Returns the localized data
+		 *
+		 * This is useful if you need to return the localized data in a non-WP standard way
+		 *
+		 * @since {{VERSION}}
+		 * @access public
+		 */
+		function get_localized_data() {
+			
+			return apply_filters( "rbm_field_helpers_admin_data", array(
 				'nonce'       => wp_create_nonce( 'rbm-field-helpers' ),
 				'wp_version'  => $wp_version,
 				'instance_id' => $this->instance['ID'],
 				'l10n'        => $this->instance['l10n'],
 			) );
-
-			wp_localize_script( 'rbm-fh-admin', 'RBM_FieldHelpers', $data );
+			
 		}
+		
 	}
 
 	require_once __DIR__ . '/core/deprecated/rbm-fh-deprecated-functions.php';
