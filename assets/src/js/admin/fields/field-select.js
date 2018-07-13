@@ -28,7 +28,7 @@ class FieldSelect extends Field {
 
         if ( !this.options.select2Disabled ) {
 
-            if ( !jQuery.isFunction(jQuery.fn.select2) ) {
+            if ( !jQuery.isFunction(jQuery.fn.rbmfhselect2) ) {
 
                 console.error('Field Helpers Error: Trying to initialize Select field but "select2" ' +
                     'is not enqueued.');
@@ -37,7 +37,7 @@ class FieldSelect extends Field {
 
             this.setupSelect2Options();
 
-            this.$field.select2(this.options.select2Options);
+            this.$field.rbmfhselect2(this.options.select2Options);
         }
     }
 
