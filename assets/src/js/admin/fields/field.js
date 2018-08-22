@@ -29,6 +29,18 @@ class Field {
 
             this.repeaterSupport();
         }
+		
+		// Put in global scope for other methods to interact with it
+		if ( typeof RBM_FieldHelpers[ this.instance ]['fieldObjects'] == 'undefined' ) {
+			RBM_FieldHelpers[ this.instance ]['fieldObjects'] = {};
+		}
+		
+		if ( typeof RBM_FieldHelpers[ this.instance ]['fieldObjects'][ this.type ] == 'undefined' ) {
+			RBM_FieldHelpers[ this.instance ]['fieldObjects'][ this.type ] = {};
+		}
+			
+		RBM_FieldHelpers[ this.instance ]['fieldObjects'][ this.type ][ this.name ] = this;
+		
     }
 
     /**
