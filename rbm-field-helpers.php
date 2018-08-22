@@ -275,8 +275,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 */
 		function localize_data() {
 
-			global $wp_version;
-
 			// Localize data
 			$data = $this->get_localized_data();
 
@@ -292,6 +290,8 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 * @access public
 		 */
 		function get_localized_data() {
+			
+			global $wp_version;
 			
 			return apply_filters( "rbm_field_helpers_admin_data", array(
 				'nonce'       => wp_create_nonce( 'rbm-field-helpers' ),
