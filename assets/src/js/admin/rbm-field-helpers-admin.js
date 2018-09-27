@@ -1,3 +1,4 @@
+import 'jquery.repeater';
 import FieldsInitialize from "./fields-init";
 
 // Initialize app on jQuery Ready.

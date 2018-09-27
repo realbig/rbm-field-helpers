@@ -23,3 +23,4 @@ PATHS:
       - "assets/src/js/admin/rbm-field-helpers-admin.js"
   licenses:
     - "node_modules/select2/LICENSE.md"
+    - "node_modules/jquery.repeater/LICENSE.md"

@@ -176,7 +176,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_register_script(
 				'rbm-fh-admin',
 				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
-				array( 'jquery', 'rbm-fh-jquery-repeater' ),
+				array( 'jquery' ),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
@@ -194,15 +194,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 				RBM_FIELD_HELPERS_URI . "/assets/dist/js/rbm-fh-select2.js",
 				array( 'jquery' ),
 				RBM_FIELD_HELPERS_VER,
-				true
-			);
-
-			// jQuery Repeater
-			wp_register_script(
-				'rbm-fh-jquery-repeater',
-				RBM_FIELD_HELPERS_URI . "/vendor/jquery-repeater/jquery.repeater{$min}.js",
-				array( 'jquery' ),
-				'1.2.1',
 				true
 			);
 
@@ -242,8 +233,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 * @access private
 		 */
 		function enqueue_scripts() {
-
-			wp_enqueue_script( 'rbm-fh-jquery-repeater' );
 
 			/**
 			 * Load or don't load the Select2 scripts.
