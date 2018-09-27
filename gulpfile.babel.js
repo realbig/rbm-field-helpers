@@ -95,7 +95,11 @@ let webpackConfig = {
                 ]
             }
         ]
-    }
+    },
+	externals: {
+		'jquery': 'jQuery',
+		'jquery-ui': 'jQuery.ui',
+	},
 }
 
 // Combine JavaScript into one file

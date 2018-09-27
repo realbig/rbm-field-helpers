@@ -176,7 +176,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			wp_register_script(
 				'rbm-fh-admin',
 				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
-				array( 'jquery' ),
+				array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ),
 				RBM_FIELD_HELPERS_VER,
 				true
 			);
@@ -195,22 +195,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 				array( 'jquery' ),
 				RBM_FIELD_HELPERS_VER,
 				true
-			);
-
-			// jQuery UI Datetimepicker
-			wp_register_script(
-				'rbm-fh-jquery-ui-datetimepicker',
-				RBM_FIELD_HELPERS_URI . '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js',
-				array( 'jquery', 'jquery-ui-datepicker' ),
-				'0.1.4',
-				true
-			);
-
-			wp_register_style(
-				'rbm-fh-jquery-ui-datetimepicker',
-				RBM_FIELD_HELPERS_URI . '/vendor/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css',
-				array(),
-				RBM_FIELD_HELPERS_VER
 			);
 
 			// get registered script object for jquery-ui
@@ -249,6 +233,8 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 				wp_enqueue_script( 'rbm-fh-select2' );
 				wp_enqueue_style( 'rbm-fh-select2' );
 			}
+			
+			wp_enqueue_script( 'jquery-ui-datepicker' );
 
 			wp_enqueue_script( 'rbm-fh-admin' );
 			wp_enqueue_style( 'rbm-fh-admin' );
