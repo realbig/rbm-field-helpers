@@ -184,14 +184,14 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			// Select2
 			wp_register_style(
 				'rbm-fh-select2',
-				RBM_FIELD_HELPERS_URI . "/vendor/select2/select2.css",
+				RBM_FIELD_HELPERS_URI . "/assets/dist/css/rbm-fh-select2.min.css",
 				array(),
 				RBM_FIELD_HELPERS_VER
 			);
 
 			wp_register_script(
 				'rbm-fh-select2',
-				RBM_FIELD_HELPERS_URI . "/vendor/select2/select2.full.js",
+				RBM_FIELD_HELPERS_URI . "/assets/dist/js/rbm-fh-select2.js",
 				array( 'jquery' ),
 				RBM_FIELD_HELPERS_VER,
 				true

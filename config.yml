@@ -13,6 +13,13 @@ PATHS:
     - "src/assets/**/*"
   # Paths to Sass libraries, which can then be loaded with @import
   sass:
-  # Paths to JavaScript entry points for webpack to bundle modules
+    - "node_modules/select2/dist/css"
+  # Paths to file entry points for webpack/gulp-sass to bundle files
   entries:
-    admin: "assets/src/js/admin/app.js"
+    scss:
+      - "assets/src/scss/admin/rbm-field-helpers-admin.scss"
+      - "assets/src/scss/admin/rbm-fh-select2.scss"
+    js: 
+      - "assets/src/js/admin/rbm-field-helpers-admin.js"
+  licenses:
+    - "node_modules/select2/LICENSE.md"
