@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || die();
 
 if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
-	define( 'RBM_FIELD_HELPERS_VER', '1.4.8' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.4.9' );
 	
 	if ( strpos( __FILE__, WP_PLUGIN_DIR ) !== false ) {
 	
@@ -261,7 +261,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 *
 		 * This is useful if you need to return the localized data in a non-WP standard way
 		 *
-		 * @since {{VERSION}}
+		 * @since 1.4.9
 		 * @access public
 		 */
 		function get_localized_data() {
