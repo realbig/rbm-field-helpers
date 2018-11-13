@@ -26,7 +26,7 @@ class FieldColorPicker extends Field {
      */
     initializeColorpicker() {
 
-        this.$field.wpColorPicker();
+        this.$field.wpColorPicker( this.options.colorpickerOptions );
     }
 
 

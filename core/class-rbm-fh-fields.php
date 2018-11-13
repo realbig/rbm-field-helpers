@@ -543,7 +543,9 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'colorpicker', $field->args );
 
-		$this->setup_data( $field->name, 'colorpicker', $field->args );
+		$this->setup_data( $field->name, 'colorpicker', $field->args, array(
+			'colorpickerOptions' => $field->args['colorpicker_options'],
+		) );
 	}
 
 	/**

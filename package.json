@@ -27,7 +27,7 @@
     "babel-register": "^6.7.2",
     "browser-sync": "^2.23.3",
     "browser-sync-webpack-plugin": "^1.2.0",
-    "gulp": "gulpjs/gulp#4.0",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.0",
     "gulp-clean-css": "^3.3.1",
