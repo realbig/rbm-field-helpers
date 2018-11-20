@@ -182,7 +182,7 @@ function version() {
     //     Doc block versions
         .pipe($.replace(/\{\{VERSION}}/g, packageFile.version))
         // Version constant
-        .pipe($.replace(/(define\( 'RBM_FIELD_HELPERS_VER', ')\d\.\d\.\d/, "$1" + packageFile.version))
+        .pipe($.replace(/(define\( 'RBM_FIELD_HELPERS_VER', ')\d+\.\d+\.\d+/, "$1" + packageFile.version))
         .pipe(gulp.dest('./'));
 }
 
