@@ -5,3 +5,11 @@
 .fieldhelpers-field-header {
   margin-bottom: 0.5em;
 }
+
+.fieldhelpers-field-content {
+	
+	& > *, [data-image-preview] {
+		max-width: 100%;
+	}
+	
+}
