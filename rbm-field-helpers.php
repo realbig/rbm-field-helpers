@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || die();
 
 if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
-	define( 'RBM_FIELD_HELPERS_VER', '1.4.10' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.4.11' );
 	
 	if ( strpos( __FILE__, WP_PLUGIN_DIR ) !== false ) {
 	
