@@ -35,12 +35,12 @@ class FieldNumber extends Field {
 
         this.intervals = {
             increase: {
-                normal: parseInt(this.options.increaseInterval),
-                alt: parseInt(this.options.altIncreaseInterval),
+                normal: parseFloat(this.options.increaseInterval),
+                alt: parseFloat(this.options.altIncreaseInterval),
             },
             decrease: {
-                normal: parseInt(this.options.decreaseInterval),
-                alt: parseInt(this.options.altDecreaseInterval),
+                normal: parseFloat(this.options.decreaseInterval),
+                alt: parseFloat(this.options.altDecreaseInterval),
             },
         }
 
@@ -48,15 +48,15 @@ class FieldNumber extends Field {
         let constrainMin = this.options.min
 
         this.constraints = {
-            max: constrainMax !== 'none' ? parseInt(constrainMax) : false,
-            min: constrainMin !== 'none' ? parseInt(constrainMin) : false,
+            max: constrainMax !== 'none' ? parseFloat(constrainMax) : false,
+            min: constrainMin !== 'none' ? parseFloat(constrainMin) : false,
         }
 
         this.shiftKeyUtility();
         this.setupHandlers();
 
         let initialValue = this.$ui.input.val();
-        this.value       = !initialValue ? 0 : parseInt(initialValue);
+        this.value       = !initialValue ? 0 : parseFloat(initialValue);
 
         // Initializes the field
         this.validateInput();
@@ -189,7 +189,7 @@ class FieldNumber extends Field {
 
         // Constrain to numbers
         let matches  = currentValue.match(/^-?[0-9]\d*(\.\d+)?$/);
-        currentValue = (matches && parseInt(matches[0])) || 0;
+        currentValue = (matches && parseFloat(matches[0])) || 0;
 
         let constraints = this.constrainNumber(currentValue);
 
