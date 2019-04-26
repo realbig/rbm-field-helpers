@@ -11,15 +11,19 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 	define( 'RBM_FIELD_HELPERS_VER', '1.4.11' );
 	
-	if ( strpos( __FILE__, WP_PLUGIN_DIR ) !== false ) {
+	if ( strpos( wp_normalize_path( __FILE__ ), wp_normalize_path( WP_PLUGIN_DIR ) ) !== false ) {
 	
 		define( 'RBM_FIELD_HELPERS_URI', plugins_url( '', __FILE__ ) );
 		define( 'RBM_FIELD_HELPERS_DIR', plugin_dir_path( __FILE__ ) );
 		
 	}
 	else {
+
+		$theme_dir = get_template_directory();
 		
-		$theme_dir = get_stylesheet_directory();
+		if ( strpos( wp_normalize_path( dirname( __FILE__ ) ), get_stylesheet_directory() ) !== false ) {
+			$theme_dir = get_stylesheet_directory();
+		}
 		
 		// Relative path from the Theme Directory to the directory holding RBM FH
 		$relative_from_theme_dir = dirname( str_replace( $theme_dir, '', __FILE__ ) );
@@ -27,7 +31,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		// Build out our Constants for DIR and URI
 		// DIR could have been made using just dirname( __FILE__ ), but we needed the difference to create the URI anyway
 		define( 'RBM_FIELD_HELPERS_URI', get_stylesheet_directory_uri() . $relative_from_theme_dir );
-		define( 'RBM_FIELD_HELPERS_DIR', $theme_dir . $relative_from_theme_dir );
+		define( 'RBM_FIELD_HELPERS_DIR', wp_normalize_path( $theme_dir . $relative_from_theme_dir ) );
 		
 	}
 
