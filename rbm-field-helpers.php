@@ -24,14 +24,13 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		$theme_dir = get_template_directory();
 		
 		// Load from Child Theme if appropriate
-		if ( strpos( wp_normalize_path( dirname( __FILE__ ) ), get_stylesheet_directory() ) !== false ) {
+		if ( strpos( wp_normalize_path( dirname( __FILE__ ) ), wp_normalize_path( get_stylesheet_directory() ) ) !== false ) {
 			$theme_uri = get_stylesheet_directory_uri();
 			$theme_dir = get_stylesheet_directory();
 		}
 		
 		// Relative path from the Theme Directory to the directory holding RBM FH
-		// We'll normalize the whole path when setting the Constant
-		$relative_from_theme_dir = dirname( str_replace( $theme_dir, '', __FILE__ ) );
+		$relative_from_theme_dir = dirname( str_replace( wp_normalize_path( $theme_dir ), '', wp_normalize_path( __FILE__ ) ) );
 		
 		// Build out our Constants for DIR and URI
 		// DIR could have been made using just dirname( __FILE__ ), but we needed the difference to create the URI anyway
