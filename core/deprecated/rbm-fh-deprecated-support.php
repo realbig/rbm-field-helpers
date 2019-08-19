@@ -33,7 +33,7 @@ function rbm_fh_deprecated_support() {
 /**
  * Ensure any deprecated Post Meta fields are saved properly
  * 
- * @since {{VERSION}}
+ * @since 1.4.13
  * @access private
  */
 function rbm_fh_deprecated_save_meta() {
