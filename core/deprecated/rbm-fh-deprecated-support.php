@@ -25,4 +25,19 @@ function rbm_fh_deprecated_support() {
 	global $rbm_fh_deprecated_support;
 
 	$rbm_fh_deprecated_support = new RBM_FieldHelpers();
+	
+	add_action( 'dbx_post_sidebar', 'rbm_fh_deprecated_save_meta' );
+	
+}
+
+/**
+ * Ensure any deprecated Post Meta fields are saved properly
+ * 
+ * @since {{VERSION}}
+ * @access private
+ */
+function rbm_fh_deprecated_save_meta() {
+	
+	rbm_fh_init_field_group( 'default' );
+	
 }
