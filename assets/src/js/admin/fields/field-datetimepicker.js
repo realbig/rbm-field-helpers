@@ -28,9 +28,7 @@ class FieldDateTimePicker extends Field {
      */
     initField() {
 
-        this.$hiddenField = this.$field.next('input[type="hidden"]');
-
-        let option_functions = ['beforeShow', 'beforeShowDay', 'calculateWeek', 'onChangeMonthYear', 'onClose', 'onSelect'];
+        let option_functions = ['onChange', 'onOpen', 'onClose', 'onMonthChange', 'onYearChange', 'onReady', 'onValueUpdate', 'onDayCreate'];
 
         // Function support
         jQuery.each(this.options.datetimepickerOptions, (name, value) => {
@@ -43,9 +41,7 @@ class FieldDateTimePicker extends Field {
             }
         });
 
-        this.options.datetimepickerOptions.altField = this.$hiddenField;
-
-        this.$field.datetimepicker(this.options.datetimepickerOptions);
+        this.flatpickr = this.$field.flatpickr( this.options.datetimepickerOptions );
     }
 
     /**
@@ -55,10 +51,23 @@ class FieldDateTimePicker extends Field {
      */
     fieldCleanup() {
 
-        this.$field
-            .removeClass('hasDatepicker')
-            .removeAttr('id');
+        if ( typeof this.flatpickr !== 'undefined' ) {
+
+            this.flatpickr.destroy();
+
+        }
+
     }
+
+    /**
+     * Runs cleanup before the Repeater inits to ensure we do not get weird double inputs
+     *
+     * @since {{VERSION}}
+     */
+    repeaterBeforeInit() {
+        this.fieldCleanup();
+    }
+
 }
 
 /**
@@ -85,10 +94,10 @@ class FieldDateTimePickerInitialize {
 
         if ( $fields.length ) {
 
-            if ( !jQuery.isFunction(jQuery.fn.datetimepicker) ) {
+            if ( !jQuery.isFunction(jQuery.fn.flatpickr) ) {
 
                 console.error('Field Helpers Error: Trying to initialize Date Time Picker field but ' +
-                    '"rbm-fh-jquery-ui-datetimepicker" is not enqueued.');
+                    '"flatpickr" is not enqueued.');
                 return;
             }
 

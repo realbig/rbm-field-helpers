@@ -27,11 +27,11 @@ class RBM_FH_Field_TimePicker extends RBM_FH_Field {
 		'default'         => '',
 		'format'          => '',
 		'timepicker_args' => array(
-			'altFormat'        => 'yymmdd',
-			'altTimeFormat'    => 'HH:mm',
-			'altFieldTimeOnly' => false,
-			'timeFormat'       => 'hh:mm tt',
-			'controlType'      => 'select',
+			'enableTime'       => true,
+			'noCalendar'       => true,
+			'altInput'         => true,
+			'dateFormat'       => 'H:i', // Saved format
+			'altFormat'        => 'h:i K', // Display format
 		),
 	);
 
@@ -48,8 +48,14 @@ class RBM_FH_Field_TimePicker extends RBM_FH_Field {
 		// Cannot use function in property declaration
 		$this->defaults['format'] = get_option( 'time_format', 'g:i a' );
 		
-		$this->defaults['timepicker_args']['timeFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_jquery_ui( $this->defaults['format'] );
+		// Ensure the Time Format matches the stored format in WordPress
+		$this->defaults['timepicker_args']['altFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_flatpickr( $this->defaults['format'] );
 
+		// Flatpickr likes to know the default for things like Repeater instantiations
+		// This must be the PHP version of the dateFormat used for saving
+		$this->defaults['timepicker_args']['defaultDate'] = current_time( 'G:i' );
+
+		// This is used when creating the field HTML
 		$args['default'] = current_time( $this->defaults['format'] );
 		
 		if ( ! isset( $args['timepicker_args'] ) ) {
@@ -72,9 +78,6 @@ class RBM_FH_Field_TimePicker extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $args = array() ) {
-		
-		wp_enqueue_script( 'rbm-fh-jquery-ui-datetimepicker' );
-		wp_enqueue_style( 'rbm-fh-jquery-ui-datetimepicker' );
 
 		// Get preview format
 		$args['preview'] = date( $args['format'], strtotime( $value ? $value : $args['default'] ) );
