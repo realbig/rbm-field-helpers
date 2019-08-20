@@ -122,6 +122,9 @@ class Field {
     repeaterSupport() {
 
         // Triggers fields can utilize. Wrapped in anonymous to utilize self access.
+        this.$repeater.on('repeater-before-init', () => {
+            this.repeaterBeforeInit();
+        });
         this.$repeater.on('repeater-init', () => {
             this.repeaterOnInit();
         });
@@ -146,6 +149,14 @@ class Field {
 
         this.repeaterSetID();
         this.fieldCleanup();
+    }
+
+    /**
+     * Fires before Repeater init.
+     *
+     * @since {{VERSION}}
+     */
+    repeaterBeforeInit() {
     }
 
     /**

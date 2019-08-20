@@ -28,15 +28,7 @@ class FieldTimePicker extends Field {
      */
     initField() {
 
-        this.$hiddenField = this.$field.next('input[type="hidden"]');
-
-        let option_functions = ['beforeShow', 'beforeShowDay', 'calculateWeek', 'onChangeMonthYear', 'onClose', 'onSelect'];
-        let options          = {};
-
-        if ( RBM_FieldHelpers['datepicker_args_' + name] ) {
-
-            options = RBM_FieldHelpers['datepicker_args_' + name];
-        }
+        let option_functions = ['onChange', 'onOpen', 'onClose', 'onMonthChange', 'onYearChange', 'onReady', 'onValueUpdate', 'onDayCreate'];
 
         // Function support
         jQuery.each(this.options.timepickerOptions, (name, value) => {
@@ -49,9 +41,7 @@ class FieldTimePicker extends Field {
             }
         });
 
-        options.altField  = this.$hiddenField;
-
-        this.$field.timepicker(this.options.timepickerOptions);
+        this.flatpickr = this.$field.flatpickr(this.options.timepickerOptions);
     }
 
     /**
@@ -61,10 +51,23 @@ class FieldTimePicker extends Field {
      */
     fieldCleanup() {
 
-        this.$field
-            .removeClass('hasDatepicker')
-            .removeAttr('id');
+        if ( typeof this.flatpickr !== 'undefined' ) {
+
+            this.flatpickr.destroy();
+
+        }
+
     }
+
+    /**
+     * Runs cleanup before the Repeater inits to ensure we do not get weird double inputs
+     *
+     * @since {{VERSION}}
+     */
+    repeaterBeforeInit() {
+        this.fieldCleanup();
+    }
+
 }
 
 /**

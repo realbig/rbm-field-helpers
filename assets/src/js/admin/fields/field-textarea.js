@@ -37,7 +37,6 @@ class FieldTextArea extends Field {
 
             let settings = jQuery.extend(this.getDefaultEditorSettings(), this.options.wysiwygOptions);
 
-            console.log(settings);
             wp.editor.initialize(this.$field.attr('id'), settings);
         }
     }

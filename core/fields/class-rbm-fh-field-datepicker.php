@@ -27,7 +27,9 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 		'default'         => '',
 		'format'          => '',
 		'datepicker_args' => array(
-			'altFormat' => 'yymmdd',
+			'altInput'         => true,
+			'dateFormat'       => 'Ymd', // Saved format
+			'altFormat'        => 'F j, Y', // Display format
 		),
 	);
 
@@ -45,8 +47,14 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 		// Cannot use function in property declaration
 		$this->defaults['format'] = get_option( 'date_format', 'F j, Y' );
 		
-		$this->defaults['datepicker_args']['dateFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_jquery_ui( $this->defaults['format'] );
+		// Ensure the Date/Time Format matches the stored format in WordPress
+		$this->defaults['datepicker_args']['altFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_flatpickr( $this->defaults['format'] );
 
+		// Flatpickr likes to know the default for things like Repeater instantiations
+		// This must be the PHP version of the dateFormat used for saving
+		$this->defaults['datepicker_args']['defaultDate'] = current_time( 'Ymd' );
+
+		// This is used when creating the field HTML
 		$args['default'] = current_time( $this->defaults['format'] );
 		
 		if ( ! isset( $args['datepicker_args'] ) ) {

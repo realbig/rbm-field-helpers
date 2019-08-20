@@ -31,6 +31,8 @@ class FieldRepeater extends Field {
 
         const api = this;
 
+        this.$field.trigger('repeater-before-init', [this.$field]);
+
         this.repeater = this.$field.repeater({
             show: function () {
                 api.repeaterShow(jQuery(this));

@@ -1,5 +1,5 @@
 import 'jquery.repeater';
-import 'jquery-ui-timepicker-addon';
+import 'flatpickr';
 import FieldsInitialize from "./fields-init";
 
 // Initialize app on jQuery Ready.

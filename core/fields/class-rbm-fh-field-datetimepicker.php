@@ -27,12 +27,10 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 		'default'             => '',
 		'format'              => '',
 		'datetimepicker_args' => array(
-			'altFormat'        => 'yymmdd',
-			'altTimeFormat'    => 'HH:mm',
-			'altFieldTimeOnly' => false,
-			'dateFormat'       => 'MM d, yy',
-			'timeFormat'       => 'h:mm tt',
-			'controlType'      => 'select',
+			'enableTime'       => true,
+			'altInput'         => true,
+			'dateFormat'       => 'Ymd H:i', // Saved format
+			'altFormat'        => 'F j, Y h:i K', // Display format
 		),
 	);
 
@@ -54,9 +52,13 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 		$this->defaults['format'] = $date_format_php . ' ' . $time_format_php;
 		
 		// Ensure the Date/Time Format matches the stored format in WordPress
-		$this->defaults['datetimepicker_args']['dateFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_jquery_ui( $date_format_php );
-		$this->defaults['datetimepicker_args']['timeFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_jquery_ui( $time_format_php );
+		$this->defaults['datetimepicker_args']['altFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_flatpickr( $this->defaults['format'] );
 
+		// Flatpickr likes to know the default for things like Repeater instantiations
+		// This must be the PHP version of the dateFormat used for saving
+		$this->defaults['datetimepicker_args']['defaultDate'] = current_time( 'Ymd G:i' );
+
+		// This is used when creating the field HTML
 		$args['default'] = current_time( $this->defaults['format'] );
 		
 		if ( ! isset( $args['datetimepicker_args'] ) ) {
@@ -79,9 +81,6 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $args = array() ) {
-		
-		wp_enqueue_script( 'rbm-fh-jquery-ui-datetimepicker' );
-		wp_enqueue_style( 'rbm-fh-jquery-ui-datetimepicker' );
 
 		// Get preview format
 		$args['preview'] = date( $args['format'], strtotime( $value ? $value : $args['default'] ) );
@@ -101,50 +100,52 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	}
 	
 	/**
-	 * Converts a PHP Date/Time Format to jQuery UI Date/Time
+	 * Converts a PHP Date/Time Format to what Flatpickr expects
+	 * In most cases, it is identical. This function helps with some edge-cases.
+	 * 
 	 * Cleaned up variant of http://stackoverflow.com/a/16725290
 	 * 
-	 * @since 1.4.5
+	 * @since {{VERSION}}
 	 * 
 	 * @param string $php_format PHP Date Format
 	 * @return string jQuery UI Date Format
 	 */
-	public static function php_date_to_jquery_ui( $php_format ) {
+	public static function php_date_to_flatpickr( $php_format ) {
 		
 		$format_map = array(
 			// Day
-			'd' => 'dd',
+			'd' => 'd',
 			'D' => 'D',
-			'j' => 'd',
-			'l' => 'DD',
+			'j' => 'j',
+			'l' => 'l',
 			'N' => '',
 			'S' => '',
-			'w' => '',
+			'w' => 'w',
 			'z' => 'o',
 			// Week
-			'W' => '',
+			'W' => 'W',
 			// Month
-			'F' => 'MM',
-			'm' => 'mm',
+			'F' => 'F',
+			'm' => 'm',
 			'M' => 'M',
-			'n' => 'm',
+			'n' => 'n',
 			't' => '',
 			// Year
 			'L' => '',
 			'o' => '',
-			'Y' => 'yy',
+			'Y' => 'Y',
 			'y' => 'y',
 			// Time
-			'a' => 'tt',
-			'A' => 'TT',
+			'a' => 'K',
+			'A' => 'K',
 			'B' => '',
 			'g' => 'h',
 			'G' => 'H',
-			'h' => 'hh',
-			'H' => 'HH',
-			'i' => 'mm',
-			's' => 'ss',
-			'u' => 'c'
+			'h' => 'G',
+			'H' => 'H',
+			'i' => 'i',
+			's' => 'S',
+			'u' => ''
 		);
 
 		$jqueryui_format = '';
