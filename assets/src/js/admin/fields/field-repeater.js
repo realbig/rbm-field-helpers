@@ -31,7 +31,7 @@ class FieldRepeater extends Field {
 
         const api = this;
 
-        this.$field.trigger('repeater-before-init', [this.$field]);
+        this.$field.trigger('repeater-before-init', [this.$field, this.options]);
 
         this.repeater = this.$field.repeater({
             show: function () {
@@ -48,7 +48,6 @@ class FieldRepeater extends Field {
 
         // Delete first item if allowed and empty
         if ( !this.options.isFirstItemUndeletable && this.options.empty ) {
-
             this.$repeaterList.find('.fieldhelpers-field-repeater-row').remove();
         }
 
