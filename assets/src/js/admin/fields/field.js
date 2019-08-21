@@ -122,11 +122,11 @@ class Field {
     repeaterSupport() {
 
         // Triggers fields can utilize. Wrapped in anonymous to utilize self access.
-        this.$repeater.on('repeater-before-init', ( event, repeater, options ) => {
-            this.repeaterBeforeInit( repeater, options );
+        this.$repeater.on('repeater-before-init', ( event, $repeater, options ) => {
+            this.repeaterBeforeInit( $repeater, options );
         });
-        this.$repeater.on('repeater-init', () => {
-            this.repeaterOnInit();
+        this.$repeater.on('repeater-init', ( event, $repeater, options ) => {
+            this.repeaterOnInit( $repeater, options );
         });
         this.$repeater.on('repeater-before-add-item', () => {
             this.repeaterBeforeAddItem();
@@ -156,7 +156,7 @@ class Field {
      *
      * @since {{VERSION}}
      */
-    repeaterBeforeInit( repeater, options ) {
+    repeaterBeforeInit( $repeater, options ) {
     }
 
     /**
@@ -164,7 +164,7 @@ class Field {
      *
      * @since 1.4.0
      */
-    repeaterOnInit() {
+    repeaterOnInit( $repeater, options ) {
     }
 
     /**

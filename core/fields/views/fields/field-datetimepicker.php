@@ -15,7 +15,8 @@ defined( 'ABSPATH' ) || die();
 <input type="text"
        name="<?php echo esc_attr( $name ); ?>"
        class="fieldhelpers-field-datetimepicker-preview"
-       value="<?php echo esc_attr( $args['preview'] ); ?>"
+       value="<?php echo esc_attr( $value ); ?>"
 	   <?php RBM_FH_Field::input_atts( $args ); ?>
        data-fieldhelpers-field-datetimepicker
+       data-defaultDate="<?php echo esc_attr( ( $value ) ? $value : $args['default'] ); ?>"
 />

@@ -53,13 +53,6 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 		
 		// Ensure the Date/Time Format matches the stored format in WordPress
 		$this->defaults['datetimepicker_args']['altFormat'] = RBM_FH_Field_DateTimePicker::php_date_to_flatpickr( $this->defaults['format'] );
-
-		// Flatpickr likes to know the default for things like Repeater instantiations
-		// This must be the PHP version of the dateFormat used for saving
-		$this->defaults['datetimepicker_args']['defaultDate'] = current_time( 'Ymd G:i' );
-
-		// This is used when creating the field HTML
-		$args['default'] = current_time( $this->defaults['format'] );
 		
 		if ( ! isset( $args['datetimepicker_args'] ) ) {
 			$args['datetimepicker_args'] = array();
@@ -67,6 +60,9 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 
 		// Default options
 		$args['datetimepicker_args'] = wp_parse_args( $args['datetimepicker_args'], $this->defaults['datetimepicker_args'] );
+
+		// This is used when creating the field HTML
+		$args['default'] = current_time( $args['datetimepicker_args']['dateFormat'] );
 
 		parent::__construct( $name, $args );
 	}
@@ -81,9 +77,6 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	 * @param array $args Field arguments.
 	 */
 	public static function field( $name, $value, $args = array() ) {
-
-		// Get preview format
-		$args['preview'] = date( $args['format'], strtotime( $value ? $value : $args['default'] ) );
 
 		// DateTimepicker args
 		if ( $args['datetimepicker_args'] ) {
