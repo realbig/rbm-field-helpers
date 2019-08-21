@@ -60,12 +60,16 @@ class FieldTimePicker extends Field {
     }
 
     /**
-     * Runs cleanup before the Repeater inits to ensure we do not get weird double inputs
+     * Runs cleanup before the Repeater creates a dummy row to ensure we do not get weird double inputs
      *
      * @since {{VERSION}}
      */
-    repeaterBeforeInit() {
-        this.fieldCleanup();
+    repeaterBeforeInit( repeater, options ) {
+
+        if ( ! options.isFirstItemUndeletable && options.empty ) {
+            this.fieldCleanup();
+        }
+
     }
 
 }
@@ -94,10 +98,10 @@ class FieldTimePickerInitialize {
 
         if ( $fields.length ) {
 
-            if ( !jQuery.isFunction(jQuery.fn.timepicker) ) {
+            if ( !jQuery.isFunction(jQuery.fn.flatpickr) ) {
 
                 console.error('Field Helpers Error: Trying to initialize Time Picker field but ' +
-                    '"jquery-ui-datetimepicker" is not enqueued.');
+                    '"flatpickr" is not enqueued.');
                 return;
             }
 

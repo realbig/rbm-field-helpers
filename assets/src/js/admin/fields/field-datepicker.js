@@ -60,12 +60,16 @@ class FieldDatePicker extends Field {
     }
 
     /**
-     * Runs cleanup before the Repeater inits to ensure we do not get weird double inputs
+     * Runs cleanup before the Repeater creates a dummy row to ensure we do not get weird double inputs
      *
      * @since {{VERSION}}
      */
-    repeaterBeforeInit() {
-        this.fieldCleanup();
+    repeaterBeforeInit( repeater, options ) {
+
+        if ( ! options.isFirstItemUndeletable && options.empty ) {
+            this.fieldCleanup();
+        }
+
     }
 }
 
