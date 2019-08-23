@@ -25,7 +25,7 @@ $row_count = count( $value ) >= 1 ? count( $value ) : 1;
          data-repeater-list="<?php echo esc_attr( $name ); ?>"
     >
 
-		<?php foreach ( $value as $field_value ) : ?>
+		<?php foreach ( $value as $index => $field_value ) : ?>
 
             <div class="fieldhelpers-field-repeater-row" data-repeater-item>
 
@@ -68,7 +68,7 @@ $row_count = count( $value ) >= 1 ? count( $value ) : 1;
 
                 <div class="fieldhelpers-field-repeater-content">
 
-					<?php RBM_FH_Field_Repeater::do_fields( $name, $field_value, $args ); ?>
+					<?php RBM_FH_Field_Repeater::do_fields( $name, $field_value, $args, $index, $value ); ?>
 
                 </div>
 
