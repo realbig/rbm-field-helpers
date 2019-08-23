@@ -73,6 +73,7 @@ class RBM_FH_Fields {
 		require_once __DIR__ . '/fields/class-rbm-fh-field-password.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-textarea.php';
 		require_once __DIR__ . '/fields/class-rbm-fh-field-toggle.php';
+		require_once __DIR__ . '/fields/class-rbm-fh-field-hook.php';
 
 		$this->save = new RBM_FH_FieldsSave( $instance['ID'] );
 
@@ -655,4 +656,23 @@ class RBM_FH_Fields {
 
 		$this->save->field_init( $name, 'html', $field->args );
 	}
+
+	/**
+	 * Outputs a do_action() hook by name. Useful for custom content within a Repeater.
+	 *
+	 * @since {{VERSON}}
+	 *
+	 * @param string $name
+	 * @param array $args
+	 */
+	public function do_field_hook( $name, $args = array() ) {
+
+		$args                    = $this->setup_translations( $args, 'hook' );
+		$args['prefix']          = $this->instance['ID'];
+		$args['fields_instance'] = $this;
+
+		$field = new RBM_FH_Field_Hook( $name, $args );
+
+	}
+
 }

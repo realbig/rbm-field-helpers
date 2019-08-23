@@ -3,9 +3,19 @@
 }
 
 .fieldhelpers-field-repeater-list {
+
   .fieldhelpers-sortable-placeholder {
     border: 3px dashed #ddd;
   }
+
+  .fieldhelpers-field-repeater-content{
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+
 }
 
 .fieldhelpers-field-repeater-row {

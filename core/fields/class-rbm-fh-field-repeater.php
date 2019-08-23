@@ -114,8 +114,10 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 	 * @param string $name Field name.
 	 * @param array $value Field value.
 	 * @param array $args Field arguments.
+	 * @param integer $index Index of the currently rendering Repeater Row
+	 * @param array $values All saved Repeater Values
 	 */
-	public static function do_fields( $name, $value, $args ) {
+	public static function do_fields( $name, $value, $args, $index, $values ) {
 
 		foreach ( $args['fields'] as $field_name => $field ) {
 
@@ -142,7 +144,13 @@ class RBM_FH_Field_Repeater extends RBM_FH_Field {
 				$field['args']['repeater'] = $name;
 				$field['args']['no_init']  = true;
 				$field['args']['id']       = "{$name}_{$field_name}";
-				$field['args']['value']    = isset( $value[ $field_name ] ) ? $value[ $field_name ] : '';
+
+				if ( $field['type'] !== 'hook' ) {
+					$field['args']['value'] = isset( $value[ $field_name ] ) ? $value[ $field_name ] : '';
+				}
+				else {
+					$field['args']['value'] = isset( $values[ $index ] ) ? $values[ $index ] : array();
+				}
 
 				call_user_func(
 					array(
