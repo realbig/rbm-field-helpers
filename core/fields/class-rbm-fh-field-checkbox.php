@@ -45,6 +45,11 @@ class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 	 */
 	public static function field( $name, $value, $args = array() ) {
 
+		if ( ! is_array( $value ) && 
+			( $value !== '' && $value !== false && $value !== null ) ) {
+			$value = array( $value );
+		}
+
 		// Legacy
 		if ( ! $args['options'] ) {
 
