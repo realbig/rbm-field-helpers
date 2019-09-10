@@ -58,8 +58,12 @@ class RBM_FH_Field_TimePicker extends RBM_FH_Field {
 		// Default options
 		$args['timepicker_args'] = wp_parse_args( $args['timepicker_args'], $this->defaults['timepicker_args'] );
 
-		// This is used when creating the field HTML
-		$args['default'] = current_time( $args['timepicker_args']['dateFormat'] );
+		if ( ! isset( $args['default'] ) ) {
+
+			// This is used when creating the field HTML
+			$args['default'] = current_time( $args['timepicker_args']['dateFormat'] );
+
+		}
 
 		parent::__construct( $name, $args );
 	}

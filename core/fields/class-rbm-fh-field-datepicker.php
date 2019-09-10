@@ -57,8 +57,12 @@ class RBM_FH_Field_DatePicker extends RBM_FH_Field {
 		// Default options
 		$args['datepicker_args'] = wp_parse_args( $args['datepicker_args'], $this->defaults['datepicker_args'] );
 
-		// This is used when creating the field HTML
-		$args['default'] = current_time( $args['datepicker_args']['dateFormat'] );
+		if ( ! isset( $args['default'] ) ) {
+
+			// This is used when creating the field HTML
+			$args['default'] = current_time( $args['datepicker_args']['dateFormat'] );
+
+		}
 
 		parent::__construct( $name, $args );
 	}
