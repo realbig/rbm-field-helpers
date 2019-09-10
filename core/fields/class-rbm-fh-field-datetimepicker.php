@@ -98,7 +98,7 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 	 * 
 	 * Cleaned up variant of http://stackoverflow.com/a/16725290
 	 * 
-	 * @since {{VERSION}}
+	 * @since 1.5.0
 	 * 
 	 * @param string $php_format PHP Date Format
 	 * @return string jQuery UI Date Format
@@ -141,7 +141,7 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 			'u' => ''
 		);
 
-		$jqueryui_format = '';
+		$flatpickr_format = '';
 		$escaped = false;
 
 		for ( $index = 0; $index < strlen( $php_format ); $index++ ) {
@@ -155,14 +155,14 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 				// If we haven't already escaped a character, output it alongside the next character
 				if ( ! $escaped ) {
 
-					$jqueryui_format .= '\'' . $php_format[ $index ];
+					$flatpickr_format .= '\'' . $php_format[ $index ];
 					$escaped = true;
 
 				}
 				else  {
 
 					// Ignore, we've already escaped it
-					$jqueryui_format .= $php_format[ $index ];
+					$flatpickr_format .= $php_format[ $index ];
 
 				}
 
@@ -172,24 +172,24 @@ class RBM_FH_Field_DateTimePicker extends RBM_FH_Field {
 				// Reset Escaped Status for next loop
 				if ( $escaped ) {
 
-					$jqueryui_format .= "'";
+					$flatpickr_format .= "'";
 					$escaped = false;
 
 				}
 
 				// Make necessary replacements via our PHP->jQuery UI Format Map
 				if ( isset( $format_map[ $char ] ) ) {
-					$jqueryui_format .= $format_map[ $char ];
+					$flatpickr_format .= $format_map[ $char ];
 				}
 				else {
-					$jqueryui_format .= $char;
+					$flatpickr_format .= $char;
 				}
 
 			}
 
 		}
 
-		return $jqueryui_format;	
+		return $flatpickr_format;	
 	}
 	
 }

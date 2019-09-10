@@ -38,7 +38,7 @@ var URL = 'http://src.wordpress-develop.dev';
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
     PRODUCTION ?
-        gulp.series(version, sass, buildSelect2, javascript, copy, copyVendorLicenses, packageFiles) :
+        gulp.series('version', sass, buildSelect2, javascript, copy, copyVendorLicenses, packageFiles) :
         gulp.series(sass, buildSelect2, javascript, copy, copyVendorLicenses));
 
 // Build the site and watch for file changes
@@ -171,6 +171,8 @@ function reload(done) {
     browser.reload();
     done();
 }
+
+gulp.task( 'version', version );
 
 function version() {
     return gulp.src([

@@ -69,7 +69,7 @@ class FieldTimePicker extends Field {
      * @param   {object}  $repeater  jQuery DOM Object
      * @param   {array}  options     Array of Field Options
      *
-     * @since   {{VERSION}}
+     * @since   1.5.0
      * @return  void
      */
     repeaterBeforeInit( $repeater, options ) {
@@ -85,7 +85,7 @@ class FieldTimePicker extends Field {
      * @param   {object}  $repeater  jQuery DOM Object
      * @param   {array}  options     Array of Field Options
      *
-     * @since   {{VERSION}}
+     * @since   1.5.0
      * @return  void
      */
     repeaterOnInit( $repeater, options ) {

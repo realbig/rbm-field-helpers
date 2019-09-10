@@ -2,7 +2,7 @@
 /**
  * Field Template: Hook
  *
- * @since {{VERSION}}
+ * @since 1.5.0
  *
  * @var array $args Field arguments.
  * @var string $name Field name.

@@ -154,7 +154,7 @@ class Field {
     /**
      * Fires before Repeater init.
      *
-     * @since {{VERSION}}
+     * @since 1.5.0
      */
     repeaterBeforeInit( $repeater, options ) {
     }
