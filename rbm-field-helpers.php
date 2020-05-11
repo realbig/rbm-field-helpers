@@ -209,7 +209,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 			$ui = $wp_scripts->query( 'jquery-ui-core' );
 
 			// tell WordPress to load the Smoothness theme from Google CDN
-			$url = "http://ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/smoothness/jquery-ui.min.css";
+			$url = "//ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/smoothness/jquery-ui.min.css";
 			wp_register_style(
 				'jquery-ui-smoothness',
 				$url,
