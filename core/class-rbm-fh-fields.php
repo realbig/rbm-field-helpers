@@ -176,10 +176,9 @@ class RBM_FH_Fields {
 
 		$args = wp_parse_args( array(
 			'sanitization' => false,
-			'single'       => true,
 		) );
 
-		$value = get_option( "{$this->instance['ID']}_{$field}", $args['single'] );
+		$value = get_option( "{$this->instance['ID']}_{$field}" );
 
 		if ( $args['sanitization'] && is_callable( $args['sanitization'] ) ) {
 			$value = call_user_func( $args['sanitization'], $value );
