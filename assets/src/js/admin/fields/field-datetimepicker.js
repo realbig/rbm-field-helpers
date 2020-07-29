@@ -42,7 +42,7 @@ class FieldDateTimePicker extends Field {
         });
 
         // We need to ensure that the field instance for our specific field loads its default date in properly
-        this.options.datetimepickerOptions.defaultDate = this.$field.data( 'defaultdate' );
+        this.options.datetimepickerOptions.defaultDate = this.$field.data( 'defaultDate' );
 
         this.flatpickr = this.$field.flatpickr( this.options.datetimepickerOptions );
     }
