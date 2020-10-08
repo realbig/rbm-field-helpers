@@ -180,7 +180,7 @@ class RBM_FH_FieldsSave {
 				$_POST["{$this->prefix}_fieldhelpers_{$group}_nonce"],
 				"{$this->prefix}_fieldhelpers_{$group}_save_fields"
 			) ||
-		     ! current_user_can( 'edit_posts' )
+		     ! current_user_can( 'edit_post', $post_ID )
 		) {
 			return;
 		}
