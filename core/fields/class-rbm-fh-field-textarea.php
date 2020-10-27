@@ -65,6 +65,12 @@ class RBM_FH_Field_TextArea extends RBM_FH_Field {
 		// This will only run once, so no worries
 		if ( $args['wysiwyg'] ) {
 
+			if ( ! did_action( 'before_wp_tiny_mce' ) && class_exists( '_WP_Editors' ) ) {
+
+				_WP_Editors::editor_js();
+
+			}
+
 			wp_enqueue_editor();
 			$args['input_class'] = trim( $args['input_class'] . ' wp-editor-area' ); // Fixes sizing problems on the Text Tab
 		}
