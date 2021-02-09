@@ -659,7 +659,7 @@ class RBM_FH_Fields {
 	/**
 	 * Outputs a do_action() hook by name. Useful for custom content within a Repeater.
 	 *
-	 * @since {{VERSON}}
+	 * @since 1.5.0
 	 *
 	 * @param string $name
 	 * @param array $args
