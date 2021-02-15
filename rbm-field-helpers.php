@@ -238,14 +238,27 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 			if ( $load_select2 || $legacy_load_select2 ) {
 
-				wp_enqueue_script( 'rbm-fh-select2' );
-				wp_enqueue_style( 'rbm-fh-select2' );
+				if ( ! wp_script_is( 'rbm-fh-select2' ) ) {
+					wp_enqueue_script( 'rbm-fh-select2' );
+				}
+
+				if ( ! wp_style_is( 'rbm-fh-select2' ) ) {
+					wp_enqueue_style( 'rbm-fh-select2' );
+				}
+
 			}
 			
-			wp_enqueue_script( 'jquery-ui-datepicker' );
+			if ( ! wp_script_is( 'jquery-ui-datepicker' ) ) {
+				wp_enqueue_script( 'jquery-ui-datepicker' );
+			}
 
-			wp_enqueue_script( 'rbm-fh-admin' );
-			wp_enqueue_style( 'rbm-fh-admin' );
+			if ( ! wp_script_is( 'rbm-fh-admin' ) ) {
+				wp_enqueue_script( 'rbm-fh-admin' );
+			}
+
+			if ( ! wp_style_is( 'rbm-fh-admin' ) ) {
+				wp_enqueue_style( 'rbm-fh-admin' );
+			}
 		}
 
 		/**
