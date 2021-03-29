@@ -51,7 +51,7 @@ class RBM_FH_Field_Checkbox extends RBM_FH_Field {
 		}
 
 		// Legacy
-		if ( ! $args['options'] ) {
+		if ( ! isset( $args['options'] ) || ! $args['options'] ) {
 
 			$args = wp_parse_args( $args, array(
 				'check_value' => 1,
