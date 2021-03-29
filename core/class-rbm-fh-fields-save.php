@@ -202,6 +202,8 @@ class RBM_FH_FieldsSave {
 
 			$field_db_ID = "{$this->prefix}_{$field}";
 
+			if ( ! isset( $_POST[ $field_db_ID ] ) ) $_POST[ $field_db_ID ] = false;
+
 			$value = $_POST[ $field_db_ID ];
 
 			/**
