@@ -120,7 +120,7 @@ class FieldCheckbox extends Field {
     /**
      * Cleans up after a repeater add/init.
      *
-     * @since {{VERSION}}
+     * @since 1.5.8
      */
      fieldCleanup() {
 
@@ -138,7 +138,7 @@ class FieldCheckbox extends Field {
      * @param   {object}  $repeater  jQuery DOM Object
      * @param   {array}  options     Array of Field Options
      *
-     * @since   {{VERSION}}
+     * @since   1.5.8
      * @return  void
      */
      repeaterOnInit( $repeater, options ) {
@@ -153,7 +153,7 @@ class FieldCheckbox extends Field {
      * @param   {object}  $repeater  jQuery DOM Object
      * @param   {array}  options     Array of Field Options
      *
-     * @since   {{VERSION}}
+     * @since   1.5.8
      * @return  void
      */
     repeaterBeforeInit( $repeater, options ) {
