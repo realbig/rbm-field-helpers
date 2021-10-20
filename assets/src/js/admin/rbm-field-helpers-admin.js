@@ -6,6 +6,7 @@ import FieldsInitialize from "./fields-init";
 jQuery(() => {
 
     const Fields = new FieldsInitialize(jQuery(document));
+	jQuery( document ).trigger( 'rbm-field-helpers-ready' );
 });
 
 // Re-init any fields within a container
