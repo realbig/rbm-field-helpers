@@ -42,9 +42,15 @@ class FieldDatePicker extends Field {
         });
 
         // We need to ensure that the field instance for our specific field loads its default date in properly
-        this.options.datepickerOptions.defaultDate = this.$field.data( 'defaultDate' );
+        this.options.datepickerOptions.defaultDate = this.$field.data( 'defaultdate' );
+
+        let value = this.$field.val();
+
+        if ( ! value ) value = this.options.datepickerOptions.defaultDate;
 
         this.flatpickr = this.$field.flatpickr( this.options.datepickerOptions );
+
+        this.flatpickr.setDate( value, true );
     }
 
     /**
@@ -54,11 +60,17 @@ class FieldDatePicker extends Field {
      */
     fieldCleanup() {
 
+        let value = this.$field.val();
+
+        if ( ! value ) value = this.options.datepickerOptions.defaultDate;
+
         if ( typeof this.flatpickr !== 'undefined' ) {
 
             this.flatpickr.destroy();
 
         }
+
+        this.$field.val( value );
 
     }
 
@@ -79,7 +91,6 @@ class FieldDatePicker extends Field {
 
     /**
      * Ensure that the purposefully unloaded Flatpickr reloads
-     * This technically re-inits all items in the Repeater, but it should be fine
      *
      * @param   {object}  $repeater  jQuery DOM Object
      * @param   {array}  options     Array of Field Options
@@ -89,7 +100,7 @@ class FieldDatePicker extends Field {
      */
     repeaterOnInit( $repeater, options ) {
 
-        new FieldsInitialize( $repeater );
+        this.initField();
 
     }
 }
