@@ -18,5 +18,5 @@ defined( 'ABSPATH' ) || die();
        value="<?php echo esc_attr( $value ); ?>"
 	   <?php RBM_FH_Field::input_atts( $args ); ?>
        data-fieldhelpers-field-timepicker
-       data-defaultDate="<?php echo esc_attr( ( $value ) ? $value : $args['default'] ); ?>"
+       data-defaultDate="<?php echo esc_attr( $args['default'] ); ?>"
 />
