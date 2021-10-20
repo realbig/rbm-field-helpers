@@ -71,7 +71,7 @@ function sass() {
         }))
 
         .pipe($.if(PRODUCTION, $.cleanCss({compatibility: 'ie9'})))
-        .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+        .pipe($.if(!PRODUCTION, $.sourcemaps.write( '.' )))
         .pipe($.rename(function (file) {
 
 			if ( file.extname.indexOf( '.min' ) < 0 ) {
@@ -102,19 +102,22 @@ let webpackConfig = {
 	},
 }
 
+if ( ! PRODUCTION ) {
+    webpackConfig.devtool = 'inline-source-map';
+}
+
 // Combine JavaScript into one file
 // In production, the file is minified
 function javascript() {
     return gulp.src(PATHS.entries.js)
         .pipe(named())
-        .pipe($.sourcemaps.init())
         .pipe(webpackStream(webpackConfig, webpack2))
-        .pipe($.if(PRODUCTION, $.uglify()
+        .pipe($.sourcemaps.init( { loadMaps: true }))
+        .pipe($.uglify()
             .on('error', e => {
                 console.log(e);
             })
-        ))
-        .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+        )
         .pipe($.rename(function (file) {
 
 			if ( file.extname.indexOf( '.min' ) < 0 ) {
@@ -122,6 +125,7 @@ function javascript() {
 			}
 		  
 		}))
+        .pipe($.if(!PRODUCTION, $.sourcemaps.write('.' )))
         .pipe(gulp.dest(PATHS.dist + '/js'));
 }
 
