@@ -49,7 +49,11 @@ window.rbmFHgetFieldObject = function( name, instance = null, fieldType = null )
 		
 		if ( instance === null || 
 		   fieldType === null || 
-		   RBM_FieldHelpers[ instance ]['fieldObjects'][ fieldType ][ name ].length < 0 ) {
+		   typeof RBM_FieldHelpers[ instance ] == 'undefined' || 
+		   typeof RBM_FieldHelpers[ instance ]['fieldObjects'] == 'undefined' ||
+		   typeof RBM_FieldHelpers[ instance ]['fieldObjects'][ fieldType ] == 'undefined' || 
+		   typeof RBM_FieldHelpers[ instance ]['fieldObjects'][ fieldType ][ name ] == 'undefined' || 
+		   typeof RBM_FieldHelpers[ instance ]['fieldObjects'][ fieldType ][ name ].length < 0 ) {
 			console.error( 'Field Helpers Error: Field Object for "' + name + '" Not Found' );
 		}
 		
