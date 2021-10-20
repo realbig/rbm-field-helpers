@@ -32,7 +32,7 @@ class FieldRadio extends Field {
 
         this.setupHandlers();
 
-        this.$field.find('input:checked').change();
+        this.$field.find('input:checked').trigger( 'change' );
     }
 
     /**
@@ -110,6 +110,51 @@ class FieldRadio extends Field {
             $field.attr('id', newID);
             $label.attr('for', newID);
         });
+    }
+
+    /**
+     * Cleans up after a repeater add/init.
+     *
+     * @since {{VERSION}}
+     */
+    fieldCleanup() {
+
+        let api = this;
+
+        this.$field.find( 'input' ).each( function( index, input ) {
+            api.setInactive( jQuery( input ).closest( '.fieldhelpers-field-radio-row' ) );
+        } );
+
+    }
+
+    /**
+     * Ensure that our styling is reapplied
+     *
+     * @param   {object}  $repeater  jQuery DOM Object
+     * @param   {array}  options     Array of Field Options
+     *
+     * @since   {{VERSION}}
+     * @return  void
+     */
+     repeaterOnInit( $repeater, options ) {
+
+        this.initField();
+
+    }
+    
+    /**
+     * Runs cleanup before the Repeater creates a dummy row to clear out selected items
+     *
+     * @param   {object}  $repeater  jQuery DOM Object
+     * @param   {array}  options     Array of Field Options
+     *
+     * @since   {{VERSION}}
+     * @return  void
+     */
+    repeaterBeforeInit( $repeater, options ) {
+
+        this.fieldCleanup();
+
     }
 
     /**
