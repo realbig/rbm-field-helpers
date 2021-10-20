@@ -195,6 +195,7 @@ function version() {
 function packageFiles() {
     return gulp.src([
         'assets/dist/**/*',
+        '!assets/dist/**/*.map',
         'vendor/**/*',
         'core/**/*',
         'rbm-field-helpers.php'
