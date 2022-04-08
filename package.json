@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "flatpickr": "^4.6.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "rangeslider.js": "^2.3.1"
   },
   "devDependencies": {
