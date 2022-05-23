@@ -103,7 +103,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 */
 		function __construct( $instance = array() ) {
 
-			$this->instance = wp_parse_args( $instance, array(
+			$this->instance = self::wp_parse_args_recursive( $instance, array(
 				'ID'   => '_rbm',
 				'l10n' => array(
 					'field_table'    => array(
@@ -122,6 +122,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 						'maximum_selected' => __( 'You can only select %d item', 'rbm-field-helpers' ),
 						'no_results'       => __( 'No results found', 'rbm-field-helpers' ),
 						'searching'        => __( 'Searching...', 'rbm-field-helpers' ),
+						'placeholder'      => __( 'Select an option', 'rbm-field-helpers' ),
 					),
 					'field_repeater' => array(
 						'collapsable_title'   => __( 'New Row', 'rbm-field-helpers' ),
@@ -282,6 +283,46 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 				'instance_id' => $this->instance['ID'],
 				'l10n'        => $this->instance['l10n'],
 			) );
+			
+		}
+
+		/**
+		 * Basically wp_parse_args(), but it can go multiple levels deep
+		 * https://mekshq.com/recursive-wp-parse-args-wordpress-function/
+		 * 
+		 * @param		array $a Array you're using
+		 * @param		array $b Array of Defaults
+		 *
+		 * @access		private
+		 * @since		{{VERSION}}
+		 * @return		array Array with defaults filled in
+		 */
+		public static function wp_parse_args_recursive( $a, $b ) {
+
+			$a = (array) $a;
+			$b = (array) $b;
+			
+			// Result is pre-filled with Defaults from the start
+			$result = $b;
+			
+			foreach ( $a as $key => &$value ) {
+			
+				// If $value is an Array and we already have the $key within our $result, start parsing args for $value
+				if ( is_array( $value ) && 
+				   isset( $result[ $key ] ) ) {
+			
+					$result[ $key ] = RBM_FieldHelpers::wp_parse_args_recursive( $value, $result[ $key ] );
+			
+				}
+				else {
+					
+					$result[ $key ] = $value;
+					
+				}
+				
+			}
+			
+			return $result;
 			
 		}
 		

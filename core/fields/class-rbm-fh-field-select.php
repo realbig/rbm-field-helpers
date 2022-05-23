@@ -42,6 +42,7 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 			'containerCssClass' => 'fieldhelpers-select2',
 			'dropdownCssClass'  => 'fieldhelpers-select2',
 			'language'          => array(),
+			'allowClear'        => true,
 		),
 	);
 
@@ -70,6 +71,12 @@ class RBM_FH_Field_Select extends RBM_FH_Field {
 			if ( isset( $args['placeholder'] ) ) {
 
 				$args['select2_options']['placeholder'] = $args['placeholder'];
+			}
+
+			if ( ! isset( $args['select2_options']['placeholder'] ) || empty( $args['select2_options']['placeholder'] ) ) {
+
+				$args['select2_options']['placeholder'] = $args['l10n']['placeholder'];
+
 			}
 
 			// Languages
