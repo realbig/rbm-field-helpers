@@ -101,9 +101,11 @@ class FieldSelect extends Field {
 
             this.options.select2Options.templateSelection = (item) => {
 
-                let optGroup = jQuery(item.element).closest('optgroup').attr('label').trim();
+                let $optgroup = jQuery(item.element).closest('optgroup');
 
-                return optGroup + ': ' + item.text;
+                if ( $optgroup.length <= 0 ) return item.text;
+
+                return $optgroup.attr('label').trim() + ': ' + item.text;
             }
         }
     }
