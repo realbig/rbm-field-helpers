@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || die();
 
 if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
-	define( 'RBM_FIELD_HELPERS_VER', '1.5.9' );
+	define( 'RBM_FIELD_HELPERS_VER', '1.5.10' );
 	
 	if ( strpos( wp_normalize_path( __FILE__ ), wp_normalize_path( WP_PLUGIN_DIR ) ) !== false ) {
 	
@@ -294,7 +294,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 		 * @param		array $b Array of Defaults
 		 *
 		 * @access		private
-		 * @since		{{VERSION}}
+		 * @since		1.5.10
 		 * @return		array Array with defaults filled in
 		 */
 		public static function wp_parse_args_recursive( $a, $b ) {
