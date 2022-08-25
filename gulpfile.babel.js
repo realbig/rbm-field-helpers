@@ -97,7 +97,11 @@ function sassMin() {
 
 function rtl() {
 
-    return gulp.src( [ PATHS.dist + '/css/**/*.css', '!' + PATHS.dist + '/css/**/*-rtl.css' ], { allowEmpty: true } )
+    return gulp.src( [ 
+        PATHS.dist + '/css/**/*.css', 
+        '!' + PATHS.dist + '/css/**/*-rtl.css',
+        '!' + PATHS.dist + '/css/**/rbm-fh-select2*.css',
+    ], { allowEmpty: true } )
       .pipe( named() )
       .pipe( $.rename( function( file ) {
         if ( file.basename.indexOf( '.min' ) >= 0 ) {

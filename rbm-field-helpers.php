@@ -241,7 +241,6 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 				wp_enqueue_script( 'rbm-fh-select2' );
 				wp_enqueue_style( 'rbm-fh-select2' );
-				wp_style_add_data( 'rbm-fh-select2', 'rtl', 'replace' );
 			}
 			
 			wp_enqueue_script( 'jquery-ui-datepicker' );

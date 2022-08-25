@@ -37,7 +37,7 @@ class FieldSelect extends Field {
 
             this.setupSelect2Options();
 
-            this.$field.rbmfhselect2(this.options.select2Options);
+            this.$field.select2(this.options.select2Options);
         }
     }
 
