@@ -171,37 +171,37 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 			global $wp_scripts;
 
-			$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '';
+			$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			// Core Admin
 			wp_register_style(
 				'rbm-fh-admin',
-				RBM_FIELD_HELPERS_URI . '/assets/dist/css/rbm-field-helpers-admin.min.css',
+				RBM_FIELD_HELPERS_URI . "/assets/dist/css/rbm-field-helpers-admin{$min}.css",
 				array(),
-				RBM_FIELD_HELPERS_VER
+				( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? RBM_FIELD_HELPERS_VER : time()
 			);
 
 			wp_register_script(
 				'rbm-fh-admin',
-				RBM_FIELD_HELPERS_URI . '/assets/dist/js/rbm-field-helpers-admin.min.js',
+				RBM_FIELD_HELPERS_URI . "/assets/dist/js/rbm-field-helpers-admin{$min}.js",
 				array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ),
-				RBM_FIELD_HELPERS_VER,
+				( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? RBM_FIELD_HELPERS_VER : time(),
 				true
 			);
 
 			// Select2
 			wp_register_style(
 				'rbm-fh-select2',
-				RBM_FIELD_HELPERS_URI . "/assets/dist/css/rbm-fh-select2.min.css",
+				RBM_FIELD_HELPERS_URI . "/assets/dist/css/rbm-fh-select2{$min}.css",
 				array(),
-				RBM_FIELD_HELPERS_VER
+				( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? RBM_FIELD_HELPERS_VER : time()
 			);
 
 			wp_register_script(
 				'rbm-fh-select2',
-				RBM_FIELD_HELPERS_URI . "/assets/dist/js/rbm-fh-select2.js",
+				RBM_FIELD_HELPERS_URI . "/assets/dist/js/rbm-fh-select2{$min}.js",
 				array( 'jquery' ),
-				RBM_FIELD_HELPERS_VER,
+				( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? RBM_FIELD_HELPERS_VER : time(),
 				true
 			);
 
@@ -216,6 +216,7 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 				false,
 				null
 			);
+			
 		}
 
 		/**
@@ -240,12 +241,14 @@ if ( ! class_exists( 'RBM_FieldHelpers' ) ) {
 
 				wp_enqueue_script( 'rbm-fh-select2' );
 				wp_enqueue_style( 'rbm-fh-select2' );
+				wp_style_add_data( 'rbm-fh-select2', 'rtl', 'replace' );
 			}
 			
 			wp_enqueue_script( 'jquery-ui-datepicker' );
 
 			wp_enqueue_script( 'rbm-fh-admin' );
 			wp_enqueue_style( 'rbm-fh-admin' );
+			wp_style_add_data( 'rbm-fh-admin', 'rtl', 'replace' );
 		}
 
 		/**

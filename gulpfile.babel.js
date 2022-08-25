@@ -38,8 +38,8 @@ var URL = 'http://src.wordpress-develop.dev';
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
     PRODUCTION ?
-        gulp.series(version, sass, buildSelect2, javascript, copy, copyVendorLicenses, packageFiles) :
-        gulp.series(sass, buildSelect2, javascript, copy, copyVendorLicenses));
+        gulp.series(clean, version, sass, sassMin, rtl, javascript, javascriptMin, buildSelect2, copy, copyVendorLicenses, packageFiles) :
+        gulp.series(clean, sass, sassMin, rtl, javascript, javascriptMin, buildSelect2, copy, copyVendorLicenses));
 
 // Build the site and watch for file changes
 gulp.task('default', gulp.series('build', watch) );
@@ -69,9 +69,19 @@ function sass() {
         .pipe($.autoprefixer({
             browsers: COMPATIBILITY
         }))
-
-        .pipe($.if(PRODUCTION, $.cleanCss({compatibility: 'ie9'})))
         .pipe($.if(!PRODUCTION, $.sourcemaps.write( '.' )))
+        .pipe(gulp.dest(PATHS.dist + '/css'))
+        .pipe(browser.reload({stream: true}));
+}
+
+function sassMin() {
+
+    return gulp.src( PATHS.entries.scss, { allowEmpty: true } )
+        .pipe($.sourcemaps.init())
+        .pipe($.sass({
+            includePaths: PATHS.sass,
+            outputStyle: 'compressed'
+        }).on('error', $.sass.logError))
         .pipe($.rename(function (file) {
 
 			if ( file.extname.indexOf( '.min' ) < 0 ) {
@@ -79,8 +89,35 @@ function sass() {
 			}
 		  
 		}))
+        .pipe($.if(!PRODUCTION, $.sourcemaps.write( '.' )))
         .pipe(gulp.dest(PATHS.dist + '/css'))
         .pipe(browser.reload({stream: true}));
+
+}
+
+function rtl() {
+
+    return gulp.src( [ PATHS.dist + '/css/**/*.css', '!' + PATHS.dist + '/css/**/*-rtl.css' ], { allowEmpty: true } )
+      .pipe( named() )
+      .pipe( $.rename( function( file ) {
+        if ( file.basename.indexOf( '.min' ) >= 0 ) {
+            file.basename = file.basename.replace( '.min', '.min-rtl' );
+        }
+        else {
+            file.basename = file.basename + '-rtl';
+        }
+        return file;
+      } ) )
+      .pipe(
+        $.rtlcss()
+      )
+      .pipe(
+        $.replace( /\/\*# sourceMappingURL.*$/, '' )
+      )
+      .pipe(
+        gulp.dest( PATHS.dist + '/css' )
+      );
+
 }
 
 let webpackConfig = {
@@ -113,6 +150,15 @@ function javascript() {
         .pipe(named())
         .pipe(webpackStream(webpackConfig, webpack2))
         .pipe($.sourcemaps.init( { loadMaps: true }))
+        .pipe($.if(!PRODUCTION, $.sourcemaps.write('.' )))
+        .pipe(gulp.dest(PATHS.dist + '/js'));
+}
+
+function javascriptMin() {
+    return gulp.src(PATHS.entries.js)
+        .pipe(named())
+        .pipe(webpackStream(webpackConfig, webpack2))
+        .pipe($.sourcemaps.init( { loadMaps: true }))
         .pipe($.uglify()
             .on('error', e => {
                 console.log(e);
@@ -141,8 +187,22 @@ function buildSelect2( done ) {
 	// Append to our own Factory
 	let rbmselect2code = fs.readFileSync( __dirname + '/assets/src/js/admin/rbm-fh-select2.js', 'utf8' );
 	fs.writeFileSync( __dirname + '/assets/dist/js/rbm-fh-select2.js', rbmselect2code + ' ' + select2code, 'utf8' );
-	
-	done();
+
+    return gulp.src( 'assets/dist/js/rbm-fh-select2.js', { allowEmpty: true } )
+        .pipe(named())
+        .pipe($.uglify()
+            .on('error', e => {
+                console.log(e);
+            })
+        )
+        .pipe($.rename(function (file) {
+            console.log( file );
+			if ( file.extname.indexOf( '.min' ) < 0 ) {
+				file.extname = '.min' + file.extname;
+			}
+		  
+		}))
+        .pipe(gulp.dest(PATHS.dist + '/js'));
 	
 }
 
@@ -207,6 +267,6 @@ function packageFiles() {
 // Watch for changes to Sass, and JavaScript
 function watch() {
     gulp.watch(PATHS.assets, copy);
-    gulp.watch('assets/src/scss/admin/**/*.scss').on('all', sass);
-    gulp.watch('assets/src/js/admin/**/*.js').on('all', javascript);
+    gulp.watch('assets/src/scss/admin/**/*.scss').on('all', gulp.series( sass, sassMin, rtl ) );
+    gulp.watch('assets/src/js/admin/**/*.js').on('all', javascript, javascriptMin );
 }
