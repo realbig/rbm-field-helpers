@@ -522,7 +522,7 @@ function rbm_do_field_list( $name, $label = false, $value = false, $args = array
  * @param array $fields
  * @param mixed $values
  */
-function rbm_do_field_repeater( $name, $label = false, $fields, $values = false ) {
+function rbm_do_field_repeater( $name, $label, $fields, $values = false ) {
 
 	global $rbm_fh_deprecated_support;
 
