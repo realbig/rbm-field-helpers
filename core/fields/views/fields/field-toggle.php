@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || die();
     <input type="hidden"
            name="<?php echo esc_attr( $name ); ?>"
            id="<?php echo esc_attr( $args['id'] ); ?>"
-           class="fieldhelpers-field-input"
+           class="fieldhelpers-field-input <?php echo esc_attr( $args['input_class'] ); ?>"
            value="<?php echo esc_attr( $value ); ?>"
 	    <?php RBM_FH_Field::input_atts( $args ); ?>
     />

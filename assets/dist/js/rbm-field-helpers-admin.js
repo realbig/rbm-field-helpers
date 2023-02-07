@@ -5741,6 +5741,8 @@ var FieldRepeater = function (_Field) {
         value: function initField() {
             var _this2 = this;
 
+            if (this.$field.data('rbmFHeventListenersCreated')) return;
+
             this.$repeaterList = this.$field.find('.fieldhelpers-field-repeater-list');
 
             var api = this;
@@ -5781,6 +5783,8 @@ var FieldRepeater = function (_Field) {
                     this.initSortable();
                 }
             }
+
+            this.$field.data('rbmFHeventListenersCreated', true);
 
             // Delay for other plugins
             setTimeout(function () {
@@ -7139,11 +7143,15 @@ var FieldToggle = function (_Field) {
         key: 'setupHandlers',
         value: function setupHandlers() {
 
+            if (this.$field.data('rbmFHeventListenersCreated')) return;
+
             var api = this;
 
             this.$ui.slider.click(function () {
                 api.handleClick();
             });
+
+            this.$field.data('rbmFHeventListenersCreated', true);
         }
 
         /**
@@ -7249,3 +7257,4 @@ exports.default = FieldToggleInitialize;
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=rbm-field-helpers-admin.js.map

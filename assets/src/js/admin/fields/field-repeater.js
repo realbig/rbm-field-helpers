@@ -27,6 +27,8 @@ class FieldRepeater extends Field {
      */
     initField() {
 
+        if ( this.$field.data( 'rbmFHeventListenersCreated' ) ) return;
+
         this.$repeaterList = this.$field.find('.fieldhelpers-field-repeater-list');
 
         const api = this;
@@ -69,6 +71,8 @@ class FieldRepeater extends Field {
                 this.initSortable();
             }
         }
+
+        this.$field.data( 'rbmFHeventListenersCreated', true );
 
         // Delay for other plugins
         setTimeout(() => {

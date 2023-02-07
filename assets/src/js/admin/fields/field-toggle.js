@@ -56,11 +56,16 @@ class FieldToggle extends Field {
      */
     setupHandlers() {
 
+        if ( this.$field.data( 'rbmFHeventListenersCreated' ) ) return;
+
         const api = this;
 
         this.$ui.slider.click(() => {
             api.handleClick();
         });
+
+        this.$field.data( 'rbmFHeventListenersCreated', true );
+
     }
 
     /**

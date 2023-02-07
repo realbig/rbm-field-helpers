@@ -17,7 +17,7 @@ $row_count = count( $value ) >= 1 ? count( $value ) : 1;
 // TODO test layout with collapsable
 ?>
 
-<div class="fielhelpers-field-repeater-container"
+<div class="fielhelpers-field-repeater-container <?php echo esc_attr( $args['input_class'] ); ?>"
      data-fieldhelpers-field-repeater="<?php echo esc_attr( $name ); ?>"
 >
 
