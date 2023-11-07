@@ -119,7 +119,7 @@ class RBM_FH_Fields {
 	 * @since 1.4.0
 	 *
 	 * @param string $field The fieldname to get.
-	 * @param bool|false $post_ID Supply post ID to get field from different post.
+	 * @param int|false $post_ID Supply post ID to get field from different post.
 	 * @param array $args Arguments.
 	 *
 	 * @return bool|mixed|void
