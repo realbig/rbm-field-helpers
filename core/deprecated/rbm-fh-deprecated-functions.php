@@ -153,16 +153,16 @@ function rbm_helper_field_link( $name, $label = false, $args = array() ) {
 		}
 	}
 
-	rbm_do_field_text( "${name}_text", 'Button Text' );
+	rbm_do_field_text( "{$name}_text", 'Button Text' );
 	rbm_do_field_select( "{$name}_post_link", 'Post Link', false, array(
 		'options'     => $select_options,
 		'input_class' => 'rbm-select2',
 	) );
-	rbm_do_field_text( "${name}_external_link", 'Link (external)', false, array(
+	rbm_do_field_text( "{$name}_external_link", 'Link (external)', false, array(
 		'description'  => 'Overrides the Post Link',
 		'sanitization' => 'esc_url_raw',
 	) );
-	rbm_do_field_checkbox( "${name}_new_tab", false, false, array(
+	rbm_do_field_checkbox( "{$name}_new_tab", false, false, array(
 		'check_label' => 'Open in New Tab',
 	) );
 
